@@ -1,0 +1,25 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { ProjectDetail } from "../components/project-detail";
+import { allProjects, allSources, allThresholds } from "../data";
+import type { Track } from "./types";
+
+export function projectParams(track: Track) {
+  return allProjects.filter((project) => project.track === track).map((project) => ({ slug: project.slug }));
+}
+
+export async function projectMetadata(params: Promise<{ slug: string }>, track: Track): Promise<Metadata> {
+  const { slug } = await params;
+  const project = allProjects.find((item) => item.track === track && item.slug === slug);
+  if (!project) return {};
+  return { title: `${project.title.zh} / ${project.title.en}`, description: `${project.summary.zh} ${project.summary.en}` };
+}
+
+export async function ProjectPage({ params, track }: { params: Promise<{ slug: string }>; track: Track }) {
+  const { slug } = await params;
+  const project = allProjects.find((item) => item.track === track && item.slug === slug);
+  if (!project) notFound();
+  const related = (project.relatedIds ?? []).map((id) => allProjects.find((item) => item.id === id)).filter((item): item is NonNullable<typeof item> => Boolean(item));
+  return <ProjectDetail project={project} sources={allSources} thresholds={allThresholds} related={related} />;
+}
+
