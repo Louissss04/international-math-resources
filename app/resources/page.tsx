@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: "集中查阅数学竞赛、课程和考试的考纲、真题、分数线档案、官网与资料来源。",
 };
 
-const LAST_UPDATED = "2026-08-05";
+const LAST_UPDATED = "2026-08-06";
 
 const projectById = new Map(allProjects.map((project) => [project.id, project]));
 const groups = trackOrder
@@ -60,10 +60,8 @@ export default function Page() {
         <div className="page-title-row">
           <div>
             <h1><span className="lang-zh">资料中心</span><span className="lang-en">Resources</span></h1>
-            <p><span className="lang-zh">考纲、真题、分数线、官网和引用来源集中入口。</span><span className="lang-en">Central access to syllabi, papers, score archives, official sites and cited sources.</span></p>
             <p className="page-updated"><span className="lang-zh">最后更新：</span><span className="lang-en">Last updated: </span>{LAST_UPDATED}</p>
           </div>
-          <b>{allLearningResources.length}</b>
         </div>
       </header>
 
@@ -103,7 +101,7 @@ export default function Page() {
 
         <aside className="resource-note" id="copyright">
           <strong><span className="lang-zh">版权与使用</span><span className="lang-en">Copyright and use</span></strong>
-          <p><span className="lang-zh">下载、打印、课堂使用或转载前，请查看原页面的版权和使用条款。CAT4、MAP Growth、UKiset 等测评不公开完整官方真题，页面只列主办方允许使用的熟悉材料。</span><span className="lang-en">Check the source page’s copyright and use terms before downloading, printing, classroom use or republication. Assessments such as CAT4, MAP Growth and UKiset do not publish full official past papers; only organiser-authorised familiarisation material is listed.</span></p>
+          <p><span className="lang-zh">使用或转载前请遵守来源页版权条款。CAT4、MAP Growth、UKiset 等不公开完整官方真题，本站仅列官方熟悉材料。</span><span className="lang-en">Follow the source page’s copyright terms. CAT4, MAP Growth and UKiset do not publish full official papers; only official familiarisation materials are listed.</span></p>
         </aside>
       </div>
     </main>

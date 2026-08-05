@@ -42,8 +42,8 @@ export default function Page() {
   return <TrackDirectory
       title={t("数学课程与统考", "Mathematics curricula and subject exams")}
       description={t(
-        "AP、Cambridge International、Pearson Edexcel International 与 IB 数学课程单独收录；入学考试与竞赛另列。",
-        "AP, Cambridge International, Pearson Edexcel International and IB mathematics curricula are listed separately from admissions tests and competitions.",
+        "AP、Cambridge International、Pearson Edexcel International 与 IB 数学考纲、考试形式、成绩和官方资料。",
+        "Specifications, exam formats, results and official resources for AP, Cambridge International, Pearson Edexcel International and IB mathematics.",
       )}
       track="curriculum"
       projects={projects}

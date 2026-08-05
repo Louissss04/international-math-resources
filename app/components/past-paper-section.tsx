@@ -7,8 +7,8 @@ export function PastPaperCopyright() {
     <aside className="past-paper-copyright">
       <strong><span className="lang-zh">版权与链接说明</span><span className="lang-en">Copyright and linking notice</span></strong>
       <p>
-        <span className="lang-zh">本站只整理网络公开页面的入口，不复制、上传或重新托管试题文件。版权归主办方、作者或发布平台所有。第三方整理仅作为索引，不代表主办方认可；下载、打印和传播前请查看原站条款。如权利人要求移除，将删除相应链接。</span>
-        <span className="lang-en">This site only indexes publicly accessible web pages and does not copy, upload or rehost test files. Copyright remains with the organiser, author or publishing platform. A third-party index does not imply organiser endorsement. Check the source terms before downloading, printing or sharing. Links will be removed upon a valid rights-holder request.</span>
+        <span className="lang-zh">本站只链接公开来源，不复制或托管试题文件。版权归原权利人；使用前请查看原站条款。</span>
+        <span className="lang-en">This site links to public sources and does not copy or host test files. Copyright remains with the rights holder; check the source terms before use.</span>
       </p>
     </aside>
   );
@@ -45,10 +45,9 @@ export function PastPaperSection({ archive, showCopyright = true }: { archive?: 
             </div>
           ) : (
             <div className="past-paper-empty">
-              <p><span className="lang-zh">截至 {archive.lastVerified}，暂未找到可核验的公开真题或样卷入口。主办方发布后再补录；不使用来源不明的文件替代。</span><span className="lang-en">As of {archive.lastVerified}, no verifiable public past-paper or sample source has been found. A source will be added after publication by the organiser; files of unclear origin are not substituted.</span></p>
+              <p><span className="lang-zh">暂未找到可核验的公开真题或样卷入口。</span><span className="lang-en">No verifiable public past-paper or sample source has been found.</span></p>
             </div>
           )}
-          <p className="past-paper-verified"><span className="lang-zh">链接检查：{archive.lastVerified}</span><span className="lang-en">Links checked: {archive.lastVerified}</span></p>
         </>
       ) : (
         <div className="past-paper-empty">

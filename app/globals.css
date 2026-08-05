@@ -89,7 +89,6 @@ html[data-language="en"] .lang-en { display: inline; }
 .home-entry-list a:last-child { border-bottom: 0; }
 .home-entry-list a:hover { background: rgba(255,255,255,.05); }
 .home-entry-list strong { color: #fff; }
-.home-entry-list span:last-child { color: #b8c5ca; font-size: .78rem; }
 .home-stats { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #45545b; border-radius: var(--radius); overflow: hidden; }
 .home-stats div { padding: 20px; border-right: 1px solid #45545b; border-bottom: 1px solid #45545b; }
 .home-stats div:nth-child(even) { border-right: 0; }

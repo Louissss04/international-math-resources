@@ -23,7 +23,7 @@ export default function Page() {
         <div className="page-title-row">
           <div>
             <h1><span className="lang-zh">中学生数学研究项目</span><span className="lang-en">Mathematics research programs for secondary students</span></h1>
-            <p><span className="lang-zh">分别标明原创研究、研究训练、成果竞赛和商业导师项目；申请资格以当届官网为准。</span><span className="lang-en">Records distinguish original research, research training, research competitions and commercial mentorship. Eligibility follows each current official notice.</span></p>
+            <p><span className="lang-zh">原创研究、研究训练、成果竞赛与商业导师项目分别标注。</span><span className="lang-en">Original research, research training, research competitions and commercial mentorship are labelled separately.</span></p>
           </div>
           <b>{programs.length}</b>
         </div>
@@ -32,7 +32,7 @@ export default function Page() {
       <section className="page-container research-access-table">
         <div className="table-scroll">
           <table>
-            <thead><tr><th><span className="lang-zh">分类</span><span className="lang-en">Category</span></th><th><span className="lang-zh">页面采用的标准</span><span className="lang-en">How it is classified</span></th></tr></thead>
+            <thead><tr><th><span className="lang-zh">分类</span><span className="lang-en">Category</span></th><th><span className="lang-zh">说明</span><span className="lang-en">Definition</span></th></tr></thead>
             <tbody>
               <tr><td><span className="lang-zh">研究项目</span><span className="lang-en">Research program</span></td><td><span className="lang-zh">有明确研究问题、导师或协作机制，并形成报告、展示或论文；不等于保证发表。</span><span className="lang-en">A defined research question and mentoring or collaboration process, with a report, presentation or paper; publication is not guaranteed.</span></td></tr>
               <tr><td><span className="lang-zh">研究训练</span><span className="lang-en">Research training</span></td><td><span className="lang-zh">以高阶课程、证明训练和探索性项目为主，不标作正式原创研究。</span><span className="lang-en">Advanced coursework, proof training and guided exploration rather than a formal original-research placement.</span></td></tr>
@@ -44,7 +44,7 @@ export default function Page() {
       </section>
 
       <section className="page-container directory-section">
-        <div className="section-heading"><h2><span className="lang-zh">项目档案</span><span className="lang-en">Program records</span></h2><p><span className="lang-zh">可按年级、地区、费用和信息状态筛选。</span><span className="lang-en">Filter by grade, region, cost and information status.</span></p></div>
+        <div className="section-heading"><h2><span className="lang-zh">项目档案</span><span className="lang-en">Program records</span></h2></div>
         <CatalogClient projects={programs} fixedTrack="research" />
       </section>
 

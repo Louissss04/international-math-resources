@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description: "数学竞赛、建模、科研项目、夏校、国际数学课程、数学考试和大学本科申请的官方入口。",
 };
 
-const LAST_UPDATED = "2026-08-05";
+const LAST_UPDATED = "2026-08-06";
 const sourceById = new Map(allSources.map((source) => [source.id, source]));
 
 const primarySourceOverrides: Record<string, string[]> = {
@@ -194,10 +194,9 @@ export default function Page() {
         <div className="page-title-row">
           <div>
             <h1><span className="lang-zh">官网导航</span><span className="lang-en">Official website directory</span></h1>
-            <p><span className="lang-zh">数学竞赛、建模、科研项目、夏校、课程统考、入学考试及大学本科申请的官方页面。第三方资料不在本页收录。</span><span className="lang-en">Official pages for mathematics competitions, modeling, research programs, summer programs, curricula, admissions tests and undergraduate applications. Third-party sources are excluded.</span></p>
+            <p><span className="lang-zh">数学竞赛、课程、考试、项目与大学申请的官方入口。</span><span className="lang-en">Official sites for mathematics competitions, curricula, tests, programs and university applications.</span></p>
             <p className="page-updated"><span className="lang-zh">最后更新：</span><span className="lang-en">Last updated: </span>{LAST_UPDATED}</p>
           </div>
-          <b>{linkCount}</b>
         </div>
       </header>
 

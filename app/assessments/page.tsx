@@ -47,8 +47,8 @@ export default function Page() {
   return <TrackDirectory
       title={t("数学入学考试与定量测评", "Mathematics admissions tests and quantitative assessments")}
       description={t(
-        "本页收录大学和私校入学考试的数学部分，以及学校组织的定量或数学测评；课程统考与数学竞赛分别另列。",
-        "This directory contains mathematics components of university and independent-school admissions tests, plus school-administered quantitative or mathematics assessments. Subject qualifications and competitions are listed separately.",
+        "大学和中学入学考试的数学部分，以及学校组织的数学与定量测评。",
+        "Mathematics components of university and school admissions tests, plus school-administered mathematics and quantitative assessments.",
       )}
       track="assessment"
       projects={projects}

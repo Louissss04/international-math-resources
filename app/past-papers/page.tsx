@@ -4,7 +4,6 @@ import { Breadcrumbs } from "../components/breadcrumbs";
 import { Localized } from "../components/localized";
 import { PastPaperCopyright } from "../components/past-paper-section";
 import { allPastPaperArchives, allProjects } from "../data";
-import { trackLabel } from "../lib/display-labels";
 import { pastPaperAccessLabels, pastPaperAuthorityLabels, pastPaperAvailabilityLabels, pastPaperKindLabels } from "../lib/past-paper-labels";
 import { projectHref } from "../lib/paths";
 import { t, type ProjectRecord, type Track } from "../lib/types";
@@ -25,6 +24,7 @@ export default function Page() {
   const records = allPastPaperArchives
     .map((archive) => ({ archive, project: allProjects.find((project) => project.id === archive.projectId) }))
     .filter((record): record is { archive: (typeof allPastPaperArchives)[number]; project: ProjectRecord } => Boolean(record.project));
+  const lastUpdated = records.map(({ archive }) => archive.lastVerified).sort().at(-1) ?? "";
 
   return (
     <main>
@@ -34,6 +34,7 @@ export default function Page() {
           <div>
             <h1><span className="lang-zh">数学真题、样卷与答案入口</span><span className="lang-en">Mathematics past papers, samples and solutions</span></h1>
             <p><span className="lang-zh">官方档案优先；考试机构未公开完整真题时，列官方样卷、受限入口或明确标注的第三方公开索引。仅收录数学内容。</span><span className="lang-en">Official archives come first. Where an awarding body does not publish full past papers, official samples, restricted portals or clearly labelled public third-party indexes are listed. Mathematics content only.</span></p>
+            <p className="page-updated"><span className="lang-zh">最后更新：</span><span className="lang-en">Last updated: </span>{lastUpdated}</p>
           </div>
           <b>{records.length}</b>
         </div>
@@ -55,7 +56,6 @@ export default function Page() {
             <section className="past-paper-directory-group" id={group.track} key={group.track}>
               <div className="section-heading">
                 <h2><Localized text={group.title} /></h2>
-                <p><Localized text={trackLabel(group.track)} /> · {groupRecords.length}</p>
               </div>
               <div className="past-paper-directory-list">
                 {groupRecords.map(({ archive, project }) => (
@@ -80,7 +80,7 @@ export default function Page() {
                     ) : (
                       <div className="past-paper-empty"><span className="lang-zh">暂未找到可核验的公开入口。</span><span className="lang-en">No verifiable public source has been found.</span></div>
                     )}
-                    <footer><span className="lang-zh">链接检查：{archive.lastVerified}</span><span className="lang-en">Links checked: {archive.lastVerified}</span><Link href={`${projectHref(project)}#past-papers`}><span className="lang-zh">查看项目说明</span><span className="lang-en">View project notes</span></Link></footer>
+                    <footer><Link href={`${projectHref(project)}#past-papers`}><span className="lang-zh">查看项目说明</span><span className="lang-en">View project notes</span></Link></footer>
                   </article>
                 ))}
               </div>

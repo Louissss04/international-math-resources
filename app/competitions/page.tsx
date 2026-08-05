@@ -13,8 +13,8 @@ export default function Page() {
     <TrackDirectory
       title={t("数学竞赛", "Mathematics competitions")}
       description={t(
-        "本页只收录以竞赛成绩、奖项或晋级为结果的数学赛事，可查询报名、赛程、规则、奖项和历年分数线；入学考试与学校测评另见考试目录。",
-        "This directory contains mathematics competitions whose outcomes are rankings, awards or qualification. Registration, schedules, rules, awards and historical thresholds are included; admissions tests and school assessments are listed separately.",
+        "赛制、报名、赛程、奖项、晋级线与历年题。",
+        "Formats, registration, schedules, awards, qualification thresholds and past papers.",
       )}
       track="competition"
       projects={allProjects.filter((item) => item.track === "competition")}

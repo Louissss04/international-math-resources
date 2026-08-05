@@ -32,7 +32,6 @@ export function CategoryGateway({
             <b>{item.count}</b>
             <h2><Localized text={item.title} /></h2>
             <p><Localized text={item.description} /></p>
-            <span><span className="lang-zh">进入</span><span className="lang-en">Open</span></span>
           </Link>
         ))}
       </section>

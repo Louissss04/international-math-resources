@@ -40,13 +40,13 @@ const thresholdColumnLabels: Record<Track, { sitting: ReturnType<typeof t>; metr
   assessment: { sitting: t("考试场次", "Test sitting"), metric: t("成绩指标", "Score metric"), value: t("分数／等级", "Score / level") },
 };
 
-const resourceSectionLabels: Record<Track, { title: ReturnType<typeof t>; intro: ReturnType<typeof t> }> = {
-  competition: { title: t("官方样卷、试题与练习资料", "Official samples, papers and practice resources"), intro: t("以下链接均来自赛事主办方、大学主办单位或官方赛区；优先列样卷、样题、答案、评分材料和专题练习。", "These links are published by the organiser, host university or official regional partner and cover specimen papers, samples, solutions, marking materials and topic practice.") },
-  modeling: { title: t("官方题目与优秀作品", "Official problems and exemplars"), intro: t("包括主办方公布的历年题目、规则、结果和优秀论文。", "Official problem archives, rules, results and selected papers published by the organiser.") },
-  research: { title: t("官方研究与规范资料", "Official research and standards resources"), intro: t("包括研究检索、过程记录、引用、伦理与竞赛规则的官方说明。", "Official guidance for research discovery, record keeping, citation, ethics and competition rules.") },
-  summer: { title: t("官方课程与申请材料", "Official program and application materials"), intro: t("包括项目课程说明、申请题、入学测试或官方申请指南；未公开样题的项目会明确标注。", "Program descriptions, application problems, qualifying assessments or official application guides; programs without public samples are identified clearly.") },
-  curriculum: { title: t("官方考纲、样卷与课程资料", "Official specifications, specimens and course resources"), intro: t("优先列考试机构发布的现行考纲、样卷、评分方案、公式表和公开教学资料。", "Current specifications, specimen papers, marking schemes, formula sheets and public teaching resources from the awarding body are listed first.") },
-  assessment: { title: t("官方样卷与备考资料", "Official specimen and preparation resources"), intro: t("以下入口来自考试主办方或官方考试机构；优先列样卷、样题和机考练习，再列考纲、教材、评分量尺与送分指南。", "Official organiser or testing-agency links; specimen papers, samples and computer-based practice appear before specifications, textbooks, score scales and score-reporting guidance.") },
+const resourceSectionLabels: Record<Track, { title: ReturnType<typeof t> }> = {
+  competition: { title: t("官方样卷、试题与练习资料", "Official samples, papers and practice resources") },
+  modeling: { title: t("官方题目与优秀作品", "Official problems and exemplars") },
+  research: { title: t("官方研究与规范资料", "Official research and standards resources") },
+  summer: { title: t("官方课程与申请材料", "Official program and application materials") },
+  curriculum: { title: t("官方考纲、样卷与课程资料", "Official specifications, specimens and course resources") },
+  assessment: { title: t("官方样卷与备考资料", "Official specimen and preparation resources") },
 };
 
 const sourceKinds: Record<SourceKind, ReturnType<typeof t>> = {
@@ -127,7 +127,7 @@ export function ProjectDetail({
         <div className="record-heading">
           <div>
             <div className="record-kicker">
-              <StatusBadge status={project.status} />
+              {project.status !== "confirmed" && <StatusBadge status={project.status} />}
               <span><Localized text={project.organizer} /></span>
             </div>
             <h1><Localized text={project.title} /></h1>
@@ -136,10 +136,6 @@ export function ProjectDetail({
           <div className="record-actions">
             <AddToPlan project={project} />
             {syllabus && <Link className="secondary-button" href={syllabusHref(syllabus.slug)}><Localized text={syllabusClassificationLabels[syllabus.classification]} /></Link>}
-            {hasPastPaperSection && <a className="secondary-button" href="#past-papers"><span className="lang-zh">真题与样卷</span><span className="lang-en">Past papers</span></a>}
-            {learningResources.length > 0 && <a className="secondary-button" href="#official-learning-resources"><span className="lang-zh">官方资料</span><span className="lang-en">Official resources</span></a>}
-            {videoResources.length > 0 && <a className="secondary-button" href="#video-resources"><span className="lang-zh">视频课程</span><span className="lang-en">Video lessons</span></a>}
-            {bookResources.length > 0 && <a className="secondary-button" href="#books"><span className="lang-zh">教材与参考书</span><span className="lang-en">Books</span></a>}
             <a className="secondary-button" href={projectSources[0]?.url ?? "/sources"} target="_blank" rel="noreferrer">
               <span className="lang-zh">官方页面</span>
               <span className="lang-en">Official page</span>
@@ -230,7 +226,6 @@ export function ProjectDetail({
               <p className="section-intro"><Localized text={syllabus.summary} /></p>
               <dl className="fact-grid syllabus-entry-facts">
                 <div><dt><span className="lang-zh">适用版本</span><span className="lang-en">Applicable version</span></dt><dd><Localized text={syllabus.applicableCycle} /></dd></div>
-                <div><dt><span className="lang-zh">官方原文</span><span className="lang-en">Official sources</span></dt><dd>{syllabus.sources.length}</dd></div>
               </dl>
               <Link className="primary-button syllabus-entry-link" href={syllabusHref(syllabus.slug)}><Localized text={syllabusCtaLabels[syllabus.classification]} /></Link>
             </section>
@@ -241,7 +236,6 @@ export function ProjectDetail({
           {learningResources.length > 0 && (
             <section id="official-learning-resources" className="record-section">
               <h2><Localized text={resourceSection.title} /></h2>
-              <p className="section-intro"><Localized text={resourceSection.intro} /></p>
               <LearningResourceList resources={learningResources} />
             </section>
           )}
@@ -249,7 +243,7 @@ export function ProjectDetail({
           {videoResources.length > 0 && (
             <section id="video-resources" className="record-section">
               <h2><span className="lang-zh">公开视频课程与讲解</span><span className="lang-en">Public video courses and walkthroughs</span></h2>
-              <p className="section-intro"><span className="lang-zh">按来源标明官方、官方合作或第三方；第三方内容不代表主办方立场，考试范围与规则以官网为准。YouTube 等海外平台在中国大陆的可访问性取决于当地网络环境。</span><span className="lang-en">Each resource is labelled as official, official partner or third-party. Third-party content is not endorsed by the organiser; use the official site for the current syllabus and rules. Access to overseas platforms such as YouTube varies by region.</span></p>
+              <p className="section-intro"><span className="lang-zh">YouTube 等海外平台在中国大陆可能无法直接访问。</span><span className="lang-en">Access to YouTube and other overseas platforms varies by region.</span></p>
               <VideoResourceList resources={videoResources} />
             </section>
           )}
@@ -257,7 +251,6 @@ export function ProjectDetail({
           {bookResources.length > 0 && (
             <section id="books" className="record-section">
               <h2><span className="lang-zh">教材、习题集与参考书</span><span className="lang-en">Textbooks, problem books and references</span></h2>
-              <p className="section-intro"><span className="lang-zh">按官方出版、官方认可或第三方常用书标注。链接指向主办方、出版社或作者的公开页面；本站不提供盗版电子书。</span><span className="lang-en">Entries are labelled as official, officially endorsed or common third-party books. Links go to organiser, publisher or author pages; this site does not provide unauthorised copies.</span></p>
               <BookResourceList resources={bookResources} />
             </section>
           )}
@@ -266,7 +259,7 @@ export function ProjectDetail({
             <section id="thresholds" className="record-section">
               <div className="section-title-row">
                 <h2><Localized text={thresholdSectionLabel} /></h2>
-                <Link href={archiveHref}><span className="lang-zh">打开本类数据档案</span><span className="lang-en">Open this category archive</span></Link>
+                <Link href={archiveHref}><span className="lang-zh">完整档案</span><span className="lang-en">Full archive</span></Link>
               </div>
               <div className="threshold-years">
                 {thresholdYears.map(([year, records], yearIndex) => (

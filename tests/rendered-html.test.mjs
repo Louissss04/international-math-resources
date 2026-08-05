@@ -78,13 +78,13 @@ test("renders track directories and category-specific archives, calendars and co
 test("keeps subject curricula separate from admissions assessments", async () => {
   const courseHtml = await renderHtml("/courses");
   assert.match(courseHtml, /Mathematics curricula and subject exams/);
-  assert.match(courseHtml, /AP、Cambridge International、Pearson Edexcel International 与 IB 数学课程单独收录/);
+  assert.match(courseHtml, /AP、Cambridge International、Pearson Edexcel International 与 IB 数学考纲、考试形式、成绩和官方资料/);
   assert.match(courseHtml, /href="\/courses\/ap-calculus-ab"/);
   assert.match(courseHtml, /href="\/courses\/ap-calculus-bc"/);
 
   const assessmentHtml = await renderHtml("/assessments");
   assert.match(assessmentHtml, /Mathematics admissions tests and quantitative assessments/);
-  assert.match(assessmentHtml, /课程统考与数学竞赛分别另列/);
+  assert.match(assessmentHtml, /大学和中学入学考试的数学部分，以及学校组织的数学与定量测评/);
   assert.match(assessmentHtml, /href="\/assessments\/tmua"/);
 
   for (const [path, pattern] of [
@@ -100,7 +100,7 @@ test("keeps subject curricula separate from admissions assessments", async () =>
 
 test("renders destination guides with mathematics-only scope and official sources", async () => {
   const directoryHtml = await renderHtml("/destinations");
-  assert.match(directoryHtml, /Language tests are outside this section/);
+  assert.match(directoryHtml, /高中数学资格、专业先修要求、额外数学入学考试和中国学生报名方式/);
 
   const requiredGuides = new Map([
     ["/destinations/united-states-undergraduate-mathematics-requirements", /美国本科申请：数学课程与考试要求/],
@@ -223,7 +223,7 @@ test("renders past-paper sources, empty states and copyright notices", async () 
   assert.match(directoryHtml, /官方来源/);
   assert.match(directoryHtml, /第三方整理/);
   assert.match(directoryHtml, /暂未找到可核验的公开入口/);
-  assert.match(directoryHtml, /does not copy, upload or rehost test files/);
+  assert.match(directoryHtml, /does not copy or host test files/);
 
   for (const path of [
     "/competitions/amc-12",
@@ -236,7 +236,7 @@ test("renders past-paper sources, empty states and copyright notices", async () 
     const html = await renderHtml(path);
     assert.match(html, /id="past-papers"/, path);
     assert.match(html, /版权与链接说明/, path);
-    assert.match(html, /does not copy, upload or rehost test files/, path);
+    assert.match(html, /does not copy or host test files/, path);
   }
 });
 

@@ -62,7 +62,7 @@ export default function Page() {
         <Breadcrumbs items={[{ label: t("按留学地区查询", "Study destinations") }]} />
         <div className="page-title-row"><div>
           <h1><span className="lang-zh">按留学地区查询数学要求</span><span className="lang-en">Mathematics requirements by study destination</span></h1>
-          <p><span className="lang-zh">分开列出高中数学资格、专业先修要求、额外数学入学考试和中国学生报名方式。语言考试不在本栏目内。</span><span className="lang-en">School mathematics qualifications, programme prerequisites, additional mathematics admissions tests and routes for applicants in China are listed separately. Language tests are outside this section.</span></p>
+          <p><span className="lang-zh">高中数学资格、专业先修要求、额外数学入学考试和中国学生报名方式。</span><span className="lang-en">School mathematics qualifications, programme prerequisites, additional mathematics admissions tests and routes for applicants in China.</span></p>
         </div><b>{destinationGuides.length}</b></div>
       </header>
       <section className="page-container destination-system-section" aria-labelledby="destination-system-heading">
@@ -86,7 +86,6 @@ export default function Page() {
         <div className="destination-grid">
           {destinationGuides.map((guide) => (
             <Link className="destination-card" href={`/destinations/${guide.slug}`} key={guide.id}>
-              <p className="label"><span className="lang-zh">地区指南</span><span className="lang-en">Destination guide</span></p>
               <h2><Localized text={guide.shortTitle} /></h2>
               <p><Localized text={guide.summary} /></p>
               <dl>{guide.facts.slice(0, 3).map((fact) => <div key={fact.label.en}><dt><Localized text={fact.label} /></dt><dd><Localized text={fact.value} /></dd></div>)}</dl>

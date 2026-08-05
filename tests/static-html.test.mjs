@@ -465,13 +465,13 @@ test("every internal link resolves inside the export", async () => {
   assert.ok(checkedLinks >= Object.keys(data.routeMap).length, `site navigation is unexpectedly sparse: checked ${checkedLinks} internal links`);
 });
 
-test("keeps bilingual home copy and official learning-material links", async () => {
+test("keeps bilingual content without a redundant bilingual label and includes official learning-material links", async () => {
   const data = await loadStaticData();
   const homeText = visibleText(await readRoute("/", data));
   assert.ok(homeText.includes("数学竞赛") && homeText.includes("国际课程"), "home page is missing the Chinese database scope");
   assert.match(homeText, /Mathematics competitions/i, "home page is missing its English mathematics scope");
   assert.match(homeText, /international curricula/i, "home page is missing its English curriculum scope");
-  assert.ok(homeText.includes("中英双语") && homeText.includes("Bilingual"), "home page is missing the bilingual label");
+  assert.doesNotMatch(homeText, /中英双语|Bilingual/, "home page shows a redundant bilingual label");
 
   for (const project of data.projects) {
     const file = path.join(outputDirectory, projectFile(project));
@@ -597,7 +597,7 @@ test("indexes translated syllabi and mathematics past-paper sources without reho
   assert.equal(new Set(archiveIds).size, archiveIds.length, "past-papers.html contains duplicate records");
   assert.ok(papersText.includes("官方来源") && papersText.includes("Official source"), "past-papers.html is missing official-source labels");
   assert.ok(papersText.includes("第三方整理") && papersText.includes("Third-party index"), "past-papers.html is missing secondary-source labels");
-  assert.match(papersText, /本站只整理网络公开页面的入口|does not copy, upload or rehost test files/i, "past-papers.html is missing the copyright and linking notice");
+  assert.match(papersText, /本站只链接公开来源|does not copy or host test files/i, "past-papers.html is missing the copyright and linking notice");
 
   for (const project of data.projects.filter((project) => ["competition", "modeling", "curriculum", "assessment"].includes(project.track))) {
     const html = await readFile(path.join(outputDirectory, projectFile(project)), "utf8");

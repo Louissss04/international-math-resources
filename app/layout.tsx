@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "localhost:3000";
   const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
   const origin = `${protocol}://${host}`;
-  const description = "面向中国中学生与升学规划师的中英双语数学资料库：竞赛、建模、科研、夏校、国际课程、数学入学考试及各留学地区要求。";
+  const description = "面向中国中学生与升学规划师的数学资料库：竞赛、建模、科研、夏校、国际课程、数学入学考试及各留学地区要求。";
 
   return {
     metadataBase: new URL(origin),

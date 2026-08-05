@@ -24,7 +24,7 @@ export function SyllabusDetail({ syllabus, project, learningResources, pastPaper
         <div className="record-heading">
           <div>
             <div className="record-kicker">
-              <StatusBadge status={syllabus.status} />
+              {syllabus.status !== "confirmed" && <StatusBadge status={syllabus.status} />}
               <span className={`syllabus-classification syllabus-${syllabus.classification}`}><Localized text={classification} /></span>
             </div>
             <h1><Localized text={syllabus.title} /></h1>
@@ -41,12 +41,10 @@ export function SyllabusDetail({ syllabus, project, learningResources, pastPaper
               )}
             </Link>
             <a className="secondary-button" href={syllabus.sources[0]?.url ?? projectHref(project)} target="_blank" rel="noreferrer"><span className="lang-zh">打开官方原文</span><span className="lang-en">Open official source</span></a>
-            <a className="secondary-button" href="#past-papers"><span className="lang-zh">真题与样卷</span><span className="lang-en">Past papers</span></a>
           </div>
         </div>
 
         <div className="syllabus-definition">
-          <strong><Localized text={classification} /></strong>
           <p><Localized text={classificationDescription} /></p>
         </div>
 
@@ -100,7 +98,6 @@ export function SyllabusDetail({ syllabus, project, learningResources, pastPaper
           {learningResources.length > 0 && (
             <section className="record-section" id="official-syllabus-materials">
               <h2><span className="lang-zh">官方样卷、教材与配套资料</span><span className="lang-en">Official specimen papers, textbooks and supporting materials</span></h2>
-              <p className="section-intro"><span className="lang-zh">优先列出主办方提供的样卷、样题、答案与机考练习，再列官方教材、课程、题库和历年材料。</span><span className="lang-en">Organiser specimen papers, sample questions, answers and computer-based practice are listed first, followed by official textbooks, courses, question banks and archives.</span></p>
               <LearningResourceList resources={learningResources} />
             </section>
           )}
