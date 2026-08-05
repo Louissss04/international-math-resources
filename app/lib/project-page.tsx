@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProjectDetail } from "../components/project-detail";
-import { allBookResources, allLearningResources, allOfficialSyllabi, allPastPaperArchives, allProjects, allSources, allThresholds, allVideoResources } from "../data";
+import { admissionRequirements, allBookResources, allLearningResources, allOfficialSyllabi, allPastPaperArchives, allProjects, allSources, allThresholds, allVideoResources } from "../data";
 import type { Track } from "./types";
 
 export function projectParams(track: Track) {
@@ -27,5 +27,6 @@ export async function ProjectPage({ params, track }: { params: Promise<{ slug: s
   const bookResources = allBookResources.filter((resource) => resource.projectIds.includes(project.id));
   const syllabus = allOfficialSyllabi.find((record) => record.projectId === project.id);
   const pastPaperArchive = allPastPaperArchives.find((record) => record.projectId === project.id);
-  return <ProjectDetail project={project} sources={allSources} thresholds={allThresholds} related={related} learningResources={learningResources} videoResources={videoResources} bookResources={bookResources} syllabus={syllabus} pastPaperArchive={pastPaperArchive} />;
+  const projectAdmissionRequirements = admissionRequirements.filter((record) => record.projectIds.includes(project.id));
+  return <ProjectDetail project={project} sources={allSources} thresholds={allThresholds} related={related} learningResources={learningResources} videoResources={videoResources} bookResources={bookResources} syllabus={syllabus} pastPaperArchive={pastPaperArchive} admissionRequirements={projectAdmissionRequirements} />;
 }

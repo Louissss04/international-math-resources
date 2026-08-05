@@ -63,6 +63,7 @@ export default function Page() {
         <div className="page-title-row"><div>
           <h1><span className="lang-zh">按留学地区查询数学要求</span><span className="lang-en">Mathematics requirements by study destination</span></h1>
           <p><span className="lang-zh">高中数学资格、专业先修要求、额外数学入学考试和中国学生报名方式。</span><span className="lang-en">School mathematics qualifications, programme prerequisites, additional mathematics admissions tests and routes for applicants in China.</span></p>
+          <p className="gateway-secondary"><Link href="/universities"><span className="lang-zh">查询学校与专业的明确考试要求</span><span className="lang-en">Search test requirements by institution and programme</span> →</Link></p>
         </div><b>{destinationGuides.length}</b></div>
       </header>
       <section className="page-container destination-system-section" aria-labelledby="destination-system-heading">

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { t, type AssessmentSyllabusRecord, type BookResourceRecord, type LearningResourceRecord, type PastPaperArchiveRecord, type ProjectRecord, type SourceKind, type SourceRecord, type SyllabusClassification, type ThresholdRecord, type Track, type VideoResourceRecord } from "../lib/types";
+import { t, type AdmissionRequirementRecord, type AdmissionRequirementType, type AssessmentSyllabusRecord, type BookResourceRecord, type LearningResourceRecord, type PastPaperArchiveRecord, type ProjectRecord, type SourceKind, type SourceRecord, type SyllabusClassification, type ThresholdRecord, type Track, type VideoResourceRecord } from "../lib/types";
 import { trackLabel } from "../lib/display-labels";
 import { projectHref, syllabusHref, trackPath } from "../lib/paths";
 import { syllabusClassificationLabels } from "../lib/syllabus-labels";
@@ -62,6 +62,14 @@ const syllabusCtaLabels: Record<SyllabusClassification, ReturnType<typeof t>> = 
   "structure-only": t("查看中文范围与结构", "Open translated scope and structure"),
 };
 
+const admissionRequirementLabels: Record<AdmissionRequirementType, ReturnType<typeof t>> = {
+  required: t("必须参加", "Required"),
+  "required-alternative": t("指定替代路径", "Required alternative"),
+  "offer-condition": t("录取条件", "Offer condition"),
+  recommended: t("官方推荐", "Recommended"),
+  considered: t("会参考", "Considered"),
+};
+
 export function ProjectDetail({
   project,
   sources,
@@ -72,6 +80,7 @@ export function ProjectDetail({
   bookResources,
   syllabus,
   pastPaperArchive,
+  admissionRequirements,
 }: {
   project: ProjectRecord;
   sources: SourceRecord[];
@@ -82,6 +91,7 @@ export function ProjectDetail({
   bookResources: BookResourceRecord[];
   syllabus?: AssessmentSyllabusRecord;
   pastPaperArchive?: PastPaperArchiveRecord;
+  admissionRequirements: AdmissionRequirementRecord[];
 }) {
   const track = trackLabel(project.track);
   const dateSectionLabel = dateSectionLabels[project.track];
@@ -104,6 +114,7 @@ export function ProjectDetail({
     ...bookResources.map((resource) => resource.verifiedAt),
     syllabus?.lastVerified,
     pastPaperArchive?.lastVerified,
+    ...admissionRequirements.map((record) => record.lastVerified),
   ].filter((date): date is string => Boolean(date)).sort().at(-1) ?? project.lastVerified;
   const projectSources = project.sourceIds
     .map((id) => sources.find((source) => source.id === id))
@@ -170,6 +181,7 @@ export function ProjectDetail({
           {videoResources.length > 0 && <a href="#video-resources"><span className="lang-zh">公开视频课程与讲解</span><span className="lang-en">Public video courses and walkthroughs</span></a>}
           {bookResources.length > 0 && <a href="#books"><span className="lang-zh">教材、习题集与参考书</span><span className="lang-en">Textbooks, problem books and references</span></a>}
           {projectThresholds.length > 0 && <a href="#thresholds"><Localized text={thresholdSectionLabel} /></a>}
+          {admissionRequirements.length > 0 && <a href="#admission-requirements"><span className="lang-zh">学校与专业要求</span><span className="lang-en">School and programme requirements</span></a>}
           <a href="#sources"><span className="lang-zh">来源</span><span className="lang-en">Sources</span></a>
         </aside>
 
@@ -286,6 +298,30 @@ export function ProjectDetail({
                   </details>
                 ))}
               </div>
+            </section>
+          )}
+
+          {admissionRequirements.length > 0 && (
+            <section id="admission-requirements" className="record-section">
+              <div className="section-title-row">
+                <h2><span className="lang-zh">明确使用本考试的学校与专业</span><span className="lang-en">Schools and programmes that explicitly use this test</span></h2>
+                <Link href={`/universities?project=${project.id}`}><span className="lang-zh">查看全部</span><span className="lang-en">View all</span></Link>
+              </div>
+              <div className="project-requirement-list">
+                {admissionRequirements.slice(0, 8).map((record) => (
+                  <article key={record.id}>
+                    <div>
+                      <h3><Localized text={record.institution} /></h3>
+                      <span className={`requirement-type requirement-${record.requirementType}`}><Localized text={admissionRequirementLabels[record.requirementType]} /></span>
+                    </div>
+                    <p><span className="lang-zh">{record.programs.length} 个专业／课程</span><span className="lang-en">{record.programs.length} {record.programs.length === 1 ? "programme" : "programmes"}</span></p>
+                    <small><Localized text={record.applicableCycle} /></small>
+                  </article>
+                ))}
+              </div>
+              {admissionRequirements.length > 8 && (
+                <p className="table-note"><span className="lang-zh">另有 {admissionRequirements.length - 8} 组课程要求，见完整目录。</span><span className="lang-en">{admissionRequirements.length - 8} more grouped requirements are listed in the full directory.</span></p>
+              )}
             </section>
           )}
 

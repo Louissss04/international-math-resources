@@ -862,6 +862,85 @@
     render();
   }
 
+  function initAdmissionRequirements() {
+    var root = document.querySelector('[data-static-component="admission-requirements"]');
+    if (!root) return;
+    var filters = root.querySelector(".admission-requirement-filters");
+    var groupsContainer = root.querySelector(".admission-requirement-groups");
+    var toolbar = root.querySelector(".result-toolbar");
+    if (!filters || !groupsContainer || !toolbar) return;
+    var query = filters.querySelector('[data-filter="q"]');
+    var country = filters.querySelector('[data-filter="country"]');
+    var project = filters.querySelector('[data-filter="project"]');
+    var type = filters.querySelector('[data-filter="type"]');
+    var cards = Array.prototype.slice.call(root.querySelectorAll("[data-requirement-id]"));
+    var groups = Array.prototype.slice.call(root.querySelectorAll("[data-requirement-group]"));
+
+    function applyParam(control, value) {
+      if (!control || !value) return;
+      if (control.tagName === "SELECT" && !Array.prototype.some.call(control.options, function (option) { return option.value === value; })) return;
+      control.value = value;
+    }
+
+    try {
+      var params = new URLSearchParams(window.location.search);
+      applyParam(query, params.get("q"));
+      applyParam(country, params.get("country"));
+      applyParam(project, params.get("project"));
+      applyParam(type, params.get("type"));
+    } catch {}
+
+    function render() {
+      var needle = query ? query.value.trim().toLowerCase() : "";
+      var countryValue = country ? country.value : "all";
+      var projectValue = project ? project.value : "all";
+      var typeValue = type ? type.value : "all";
+      var visibleCount = 0;
+
+      cards.forEach(function (card) {
+        var projects = String(card.dataset.projects || "").split(/\s+/);
+        var matches = (!needle || String(card.dataset.search || card.textContent || "").toLowerCase().indexOf(needle) !== -1)
+          && (countryValue === "all" || card.dataset.country === countryValue)
+          && (projectValue === "all" || projects.indexOf(projectValue) !== -1)
+          && (typeValue === "all" || card.dataset.type === typeValue);
+        card.hidden = !matches;
+        if (matches) visibleCount += 1;
+      });
+
+      groups.forEach(function (group) {
+        var visibleCards = Array.prototype.filter.call(group.querySelectorAll("[data-requirement-id]"), function (card) { return !card.hidden; });
+        group.hidden = visibleCards.length === 0;
+        var count = group.querySelector(".section-title-row > b");
+        if (count) count.textContent = String(visibleCards.length);
+      });
+
+      var countText = toolbar.querySelector("p");
+      if (countText) countText.innerHTML = "<b>" + visibleCount + '</b> <span class="lang-zh">组要求</span><span class="lang-en">requirement groups</span>';
+      groupsContainer.hidden = visibleCount === 0;
+      var empty = root.querySelector('[data-static-empty="admission-requirements"]');
+      if (!visibleCount && !empty) {
+        empty = document.createElement("p");
+        empty.className = "empty-state";
+        empty.dataset.staticEmpty = "admission-requirements";
+        empty.innerHTML = '<span class="lang-zh">没有匹配记录。</span><span class="lang-en">No matching records.</span>';
+        groupsContainer.after(empty);
+      }
+      if (empty) empty.hidden = visibleCount > 0;
+    }
+
+    filters.addEventListener("input", render);
+    filters.addEventListener("change", render);
+    var reset = toolbar.querySelector("button");
+    if (reset) reset.addEventListener("click", function () {
+      if (query) query.value = "";
+      if (country) country.value = "all";
+      if (project) project.value = "all";
+      if (type) type.value = "all";
+      render();
+    });
+    render();
+  }
+
   function boot() {
     initLanguage();
     initMenu();
@@ -873,6 +952,7 @@
     initPlanner();
     initAddToPlanner();
     initOfficialSites();
+    initAdmissionRequirements();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });

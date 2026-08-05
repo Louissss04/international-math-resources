@@ -35,7 +35,8 @@ import { europeAssessmentLearningResources, europeAssessmentPastPaperArchives, e
 import { australiaEuropeDestinationGuides, australiaEuropeDestinationSources } from "./destination-data-australia-europe";
 import { northAmericaDestinationGuides, northAmericaDestinationSources } from "./destination-data-north-america";
 import { ukSingaporeDestinationGuides, ukSingaporeDestinationSources } from "./destination-data-uk-singapore";
-import type { AssessmentSyllabusRecord, BookResourceRecord, DestinationGuideRecord, LearningResourceRecord, PastPaperArchiveRecord, ProjectRecord, SourceRecord, ThresholdRecord, UniversityPolicyRecord, VideoResourceRecord } from "../lib/types";
+import { admissionRequirementRecords, admissionRequirementSources } from "./admission-requirements";
+import type { AdmissionRequirementRecord, AssessmentSyllabusRecord, BookResourceRecord, DestinationGuideRecord, LearningResourceRecord, PastPaperArchiveRecord, ProjectRecord, SourceRecord, ThresholdRecord, UniversityPolicyRecord, VideoResourceRecord } from "../lib/types";
 
 function uniqueById<T extends { id: string }>(records: T[]): T[] {
   const seen = new Set<string>();
@@ -72,6 +73,7 @@ export const allSources: SourceRecord[] = uniqueById([
   ...australiaEuropeDestinationSources,
   ...northAmericaDestinationSources,
   ...ukSingaporeDestinationSources,
+  ...admissionRequirementSources,
   ...assessmentSources.filter((source) => !source.id.startsWith("toefl-") && !source.id.startsWith("ielts-")),
 ]);
 
@@ -190,6 +192,8 @@ export const allPastPaperArchives: PastPaperArchiveRecord[] = uniqueById([
 ]).filter((archive) => projectIds.has(archive.projectId));
 
 export const universityPolicies: UniversityPolicyRecord[] = uniqueById(policies);
+
+export const admissionRequirements: AdmissionRequirementRecord[] = uniqueById(admissionRequirementRecords);
 
 export const destinationGuides: DestinationGuideRecord[] = uniqueById([
   ...northAmericaDestinationGuides,

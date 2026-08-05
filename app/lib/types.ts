@@ -288,4 +288,43 @@ export interface UniversityPolicyRecord {
   lastVerified: string;
 }
 
+export type AdmissionRequirementType =
+  | "required"
+  | "required-alternative"
+  | "offer-condition"
+  | "recommended"
+  | "considered";
+
+export type AdmissionRequirementStage =
+  | "application"
+  | "shortlisting"
+  | "offer"
+  | "qualification";
+
+export interface AdmissionRequirementProgram {
+  name: LocalizedText;
+  code?: string;
+  note?: LocalizedText;
+}
+
+export interface AdmissionRequirementRecord {
+  id: string;
+  institution: LocalizedText;
+  countryCode: string;
+  country: LocalizedText;
+  programs: AdmissionRequirementProgram[];
+  projectIds: string[];
+  examLabels?: LocalizedText[];
+  requirementType: AdmissionRequirementType;
+  stage: AdmissionRequirementStage;
+  requirement: LocalizedText;
+  scoreCondition?: LocalizedText;
+  exception?: LocalizedText;
+  applicableCycle: LocalizedText;
+  status: InformationStatus;
+  sourceIds: string[];
+  lastVerified: string;
+  searchTerms?: string[];
+}
+
 export const t = (zh: string, en: string): LocalizedText => ({ zh, en });

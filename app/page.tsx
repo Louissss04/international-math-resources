@@ -65,7 +65,10 @@ export default function Home() {
 
       <section className="home-section page-container">
         <div className="section-heading"><h2><span className="lang-zh">按留学地区查询</span><span className="lang-en">Study destinations</span></h2><Link href="/destinations"><span className="lang-zh">全部地区</span><span className="lang-en">All destinations</span></Link></div>
-        <div className="destination-home-grid">{destinationGuides.map((guide) => <Link key={guide.id} href={`/destinations/${guide.slug}`}><strong><Localized text={guide.shortTitle} /></strong><span><Localized text={guide.facts[0].value} /></span></Link>)}</div>
+        <div className="destination-home-grid">
+          <Link href="/universities"><strong><span className="lang-zh">学校与专业考试要求</span><span className="lang-en">School and programme test requirements</span></strong><span><span className="lang-zh">按学校、专业或考试查询官网规定</span><span className="lang-en">Search published rules by institution, programme or test</span></span></Link>
+          {destinationGuides.map((guide) => <Link key={guide.id} href={`/destinations/${guide.slug}`}><strong><Localized text={guide.shortTitle} /></strong><span><Localized text={guide.facts[0].value} /></span></Link>)}
+        </div>
       </section>
 
       <section className="home-section page-container">

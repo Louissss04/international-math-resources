@@ -43,6 +43,7 @@ const requiredCoreRoutes = [
   "/courses",
   "/assessments",
   "/destinations",
+  "/universities",
   "/official-sites",
   "/syllabi",
   "/past-papers",
@@ -163,7 +164,7 @@ async function loadStaticData() {
       assert.fail(`assets/data.js does not contain valid JSON: ${error.message}`);
     }
 
-    for (const key of ["projects", "sources", "thresholds", "syllabi", "destinationGuides"]) {
+    for (const key of ["projects", "sources", "thresholds", "syllabi", "destinationGuides", "admissionRequirements"]) {
       assert.ok(Array.isArray(data[key]), `static payload is missing the ${key} array`);
     }
     assert.ok(data.routeMap && typeof data.routeMap === "object" && !Array.isArray(data.routeMap), "static payload is missing routeMap");
@@ -185,11 +186,13 @@ test("static payload has valid IDs, references and route records", async () => {
 
   assert.ok(data.projects.length > 0, "static payload has no project records");
   assert.ok(data.destinationGuides.length > 0, "static payload has no destination guides");
+  assert.ok(data.admissionRequirements.length > 0, "static payload has no admission requirement records");
   assertUniqueIds(data.projects, "projects");
   assertUniqueIds(data.sources, "sources");
   assertUniqueIds(data.thresholds, "thresholds");
   assertUniqueIds(data.syllabi, "syllabi");
   assertUniqueIds(data.destinationGuides, "destination guides");
+  assertUniqueIds(data.admissionRequirements, "admission requirements");
   assert.equal(new Set(data.projects.map((project) => project.slug)).size, data.projects.length, "project slugs must be unique");
   assert.equal(new Set(data.syllabi.map((syllabus) => syllabus.slug)).size, data.syllabi.length, "syllabus slugs must be unique");
   assert.equal(new Set(data.destinationGuides.map((guide) => guide.slug)).size, data.destinationGuides.length, "destination slugs must be unique");
@@ -225,6 +228,23 @@ test("static payload has valid IDs, references and route records", async () => {
     }
     for (const projectId of guide.relatedProjectIds) {
       assert.ok(projectIds.has(projectId), `${guide.id} refers to missing related project ${projectId}`);
+    }
+  }
+
+  for (const requirement of data.admissionRequirements) {
+    assert.ok(requirement.institution?.zh && requirement.institution?.en, `${requirement.id} has no bilingual institution name`);
+    assert.ok(requirement.countryCode, `${requirement.id} has no country code`);
+    assert.ok(Array.isArray(requirement.programs) && requirement.programs.length > 0, `${requirement.id} has no programme`);
+    assert.ok(requirement.applicableCycle?.zh && requirement.applicableCycle?.en, `${requirement.id} has no bilingual applicable cycle`);
+    assert.ok(requirement.sourceIds.length > 0, `${requirement.id} has no source`);
+    assert.ok(requirement.projectIds.length > 0 || requirement.examLabels?.length > 0, `${requirement.id} identifies neither a project nor an examination`);
+    for (const projectId of requirement.projectIds) {
+      assert.ok(projectIds.has(projectId), `${requirement.id} refers to missing project ${projectId}`);
+    }
+    for (const sourceId of requirement.sourceIds) {
+      assert.ok(sourceIds.has(sourceId), `${requirement.id} refers to missing source ${sourceId}`);
+      const source = data.sources.find((record) => record.id === sourceId);
+      assert.notEqual(source?.kind, "secondary-archive", `${requirement.id} relies on a secondary archive instead of an official source`);
     }
   }
 
@@ -403,6 +423,41 @@ test("destination directory covers the requested study systems and links every g
     assert.ok(directoryText.includes(guide.shortTitle.en), `destinations.html is missing ${guide.shortTitle.en}`);
     const file = `destination-${guide.slug}.html`;
     assert.ok(attributeValues(directoryHtml, "a", "href").some((href) => referencePath(href) === file), `destinations.html does not link to ${file}`);
+  }
+});
+
+test("exports the school and programme requirement directory and reverse links", async () => {
+  const data = await loadStaticData();
+  const html = await readRoute("/universities", data);
+  const text = visibleText(html);
+
+  assert.ok(text.includes("学校与专业考试要求") && text.includes("School and programme test requirements"), "universities.html is not bilingual");
+  assert.match(html, /data-static-component=["']admission-requirements["']/, "universities.html has no static requirement directory marker");
+  for (const filter of ["q", "country", "project", "type"]) {
+    assert.match(html, new RegExp(`data-filter=["']${filter}["']`), `universities.html is missing the ${filter} filter`);
+  }
+
+  const requirementIds = attributeValues(html, "article", "data-requirement-id");
+  assert.deepEqual(new Set(requirementIds), new Set(data.admissionRequirements.map((record) => record.id)), "universities.html does not render every requirement exactly once");
+  assert.equal(requirementIds.length, data.admissionRequirements.length, "universities.html repeats a requirement record");
+  for (const pattern of [/University of Cambridge/, /G100/, /TMUA/, /STEP/, /London School of Economics and Political Science/, /L101/, /Massachusetts Institute of Technology/, /SAT/, /ACT/, /University of Waterloo/, /Euclid/, /CSMC/]) {
+    assert.match(html, pattern, `universities.html is missing ${pattern}`);
+  }
+
+  for (const [projectId, expectedFile] of [
+    ["tmua", "assessment-tmua.html"],
+    ["step", "assessment-step.html"],
+    ["sat", "assessment-sat.html"],
+    ["act", "assessment-act.html"],
+    ["euclid", "competition-euclid.html"],
+    ["csmc", "competition-csmc.html"],
+  ]) {
+    const projectHtml = await readFile(path.join(outputDirectory, expectedFile), "utf8");
+    assert.match(projectHtml, /id=["']admission-requirements["']/, `${expectedFile} is missing its school-requirement section`);
+    assert.ok(
+      attributeValues(projectHtml, "a", "href").includes(`universities.html?project=${projectId}`),
+      `${expectedFile} does not link to universities.html?project=${projectId}`,
+    );
   }
 });
 

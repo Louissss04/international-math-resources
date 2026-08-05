@@ -30,6 +30,13 @@ function childRoutes(html, directoryPath) {
   )].sort();
 }
 
+function requirementCard(html, id) {
+  const escapedId = id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const card = html.match(new RegExp(`<article\\b[^>]*data-requirement-id="${escapedId}"[^>]*>[\\s\\S]*?<\\/article>`))?.[0];
+  assert.ok(card, `missing admission requirement ${id}`);
+  return card;
+}
+
 test("renders the current international mathematics resource library home", async () => {
   const html = await renderHtml();
   assert.match(html, /国际升学数学资料库/);
@@ -69,6 +76,7 @@ test("renders track directories and category-specific archives, calendars and co
     ["/syllabi", /官方考纲、范围、样卷与教材/],
     ["/maintenance", /信息更新清单/],
     ["/destinations", /按留学地区查询数学要求/],
+    ["/universities", /学校与专业考试要求/],
     ["/official-sites", /官网导航/],
   ]) {
     assert.match(await renderHtml(path), pattern, path);
@@ -124,6 +132,48 @@ test("renders destination guides with mathematics-only scope and official source
     assert.match(html, /最后更新/);
     assert.match(html, /id="sources"/);
     assert.match(html, /Official sources/);
+  }
+});
+
+test("renders searchable school and programme test requirements with official evidence", async () => {
+  const html = await renderHtml("/universities");
+
+  assert.match(html, /学校与专业考试要求/);
+  assert.match(html, /School and programme test requirements/);
+  assert.match(html, /data-static-component="admission-requirements"/);
+  for (const filter of ["q", "country", "project", "type"]) {
+    assert.match(html, new RegExp(`data-filter="${filter}"`), `missing ${filter} requirement filter`);
+  }
+
+  for (const [id, patterns] of [
+    ["cambridge-tmua-2027", [/University of Cambridge/, /G100/, /TMUA/]],
+    ["cambridge-mathematics-step-2027", [/University of Cambridge/, /G100/, /STEP/]],
+    ["lse-tmua-required-2027", [/London School of Economics and Political Science/, /L101/, /TMUA/]],
+    ["us-mit-sat-act-required", [/Massachusetts Institute of Technology/, /SAT/, /ACT/]],
+    ["ca-waterloo-euclid-csmc-considered", [/University of Waterloo/, /Euclid/, /CSMC/]],
+  ]) {
+    const card = requirementCard(html, id);
+    for (const pattern of patterns) assert.match(card, pattern, `${id} is missing ${pattern}`);
+  }
+
+  const requirementIds = [...html.matchAll(/data-requirement-id="([^"]+)"/g)].map((match) => match[1]);
+  assert.ok(requirementIds.length > 0, "the university requirement directory has no records");
+  assert.equal(new Set(requirementIds).size, requirementIds.length, "the university requirement directory repeats a record");
+  assert.match(html, /href="https:\/\//i, "the university requirement directory has no direct official source");
+});
+
+test("links test and competition detail pages back to matching school requirements", async () => {
+  for (const [path, projectId] of [
+    ["/assessments/tmua", "tmua"],
+    ["/assessments/step", "step"],
+    ["/assessments/sat", "sat"],
+    ["/assessments/act", "act"],
+    ["/competitions/euclid", "euclid"],
+    ["/competitions/csmc", "csmc"],
+  ]) {
+    const html = await renderHtml(path);
+    assert.match(html, /id="admission-requirements"/, `${path} is missing its school-requirement section`);
+    assert.match(html, new RegExp(`href="/universities\\?project=${projectId}"`), `${path} does not link to its filtered school requirements`);
   }
 });
 

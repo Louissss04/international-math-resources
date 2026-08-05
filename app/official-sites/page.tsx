@@ -6,7 +6,7 @@ import {
   type OfficialSiteDirectoryGroup,
   type OfficialSiteDirectoryLink,
 } from "../components/official-sites-client";
-import { allProjects, allSources, universityPolicies } from "../data";
+import { admissionRequirements, allProjects, allSources, universityPolicies } from "../data";
 import { destinationOfficialSiteGroups, projectTrackGroups } from "../data/official-site-groups";
 import { projectHref } from "../lib/paths";
 import { t, type ProjectRecord, type SourceRecord, type Track } from "../lib/types";
@@ -168,12 +168,22 @@ const destinationSlugs: Record<string, string> = {
 };
 
 const policyRegions: Record<string, string> = { US: "united-states", UK: "united-kingdom", CA: "canada" };
+const requirementRegions: Record<string, string> = {
+  US: "united-states",
+  GB: "united-kingdom",
+  SG: "singapore",
+  AU: "australia",
+  CA: "canada",
+};
 
 const destinationGroups: OfficialSiteDirectoryGroup[] = destinationOfficialSiteGroups.map((group) => {
   const policySourceIds = universityPolicies
     .filter((policy) => policyRegions[policy.region] === group.id)
     .flatMap((policy) => policy.sourceIds);
-  const sources = officialSources([...group.sourceIds, ...policySourceIds]);
+  const requirementSourceIds = admissionRequirements
+    .filter((record) => requirementRegions[record.countryCode] === group.id)
+    .flatMap((record) => record.sourceIds);
+  const sources = officialSources([...group.sourceIds, ...policySourceIds, ...requirementSourceIds]);
   return {
     id: `university-${group.id}`,
     title: group.title,

@@ -339,6 +339,51 @@ td small { display: block; margin-top: 4px; color: var(--muted); }
 .policy-card h2 { font-size: 1rem; margin-bottom: 4px; }
 .policy-card p { margin: 0; color: var(--muted); font-size: .83rem; }
 .evidence-level { width: fit-content; font-size: .72rem; font-weight: 800; color: var(--blue); }
+.requirement-key { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 14px; color: var(--muted); font-size: .78rem; }
+.requirement-key p { margin: 0; }
+.requirement-key b { color: var(--ink); }
+.requirement-key .requirement-competition-note { flex-basis: 100%; padding-top: 7px; border-top: 1px solid var(--line); }
+.admission-requirement-filters { display: grid; grid-template-columns: minmax(260px, 1.4fr) repeat(3, minmax(150px, .7fr)); gap: 10px; margin-bottom: 12px; padding: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.admission-requirement-filters label { display: grid; gap: 6px; color: var(--muted); font-size: .72rem; font-weight: 700; }
+.admission-requirement-filters input, .admission-requirement-filters select { width: 100%; min-height: 42px; padding: 9px 11px; background: #fff; border: 1px solid var(--line-dark); border-radius: 5px; color: var(--ink); font: inherit; }
+.admission-requirement-groups { display: grid; gap: 48px; margin-top: 34px; }
+.admission-requirement-group { scroll-margin-top: 88px; }
+.admission-requirement-group + .admission-requirement-group { padding-top: 44px; border-top: 1px solid var(--line); }
+.admission-requirement-list { display: grid; gap: 11px; }
+.admission-requirement-card { min-width: 0; border: 1px solid var(--line); border-left: 4px solid var(--blue); border-radius: var(--radius); background: var(--surface); padding: 17px 18px; }
+.admission-requirement-card.requirement-required, .admission-requirement-card.requirement-required-alternative { border-left-color: var(--red); }
+.admission-requirement-card.requirement-offer-condition { border-left-color: var(--amber); }
+.admission-requirement-card.requirement-recommended, .admission-requirement-card.requirement-considered { border-left-color: var(--green); }
+.admission-requirement-card > header { display: flex; justify-content: space-between; align-items: start; gap: 18px; padding-bottom: 13px; border-bottom: 1px solid var(--line); }
+.admission-requirement-card h3 { margin: 0 0 4px; font-size: 1.04rem; }
+.admission-requirement-card header p { margin: 0; color: var(--muted); font-size: .75rem; }
+.requirement-type { flex: none; border-radius: 3px; padding: 4px 7px; color: var(--blue); background: var(--blue-soft); font-size: .69rem; font-weight: 800; }
+.requirement-required .requirement-type, .requirement-required-alternative .requirement-type { color: var(--red); background: var(--red-soft); }
+.requirement-offer-condition .requirement-type { color: #77540d; background: var(--amber-soft); }
+.requirement-recommended .requirement-type, .requirement-considered .requirement-type { color: var(--green); background: var(--green-soft); }
+.requirement-type.requirement-required, .requirement-type.requirement-required-alternative { color: var(--red); background: var(--red-soft); }
+.requirement-type.requirement-offer-condition { color: #77540d; background: var(--amber-soft); }
+.requirement-type.requirement-recommended, .requirement-type.requirement-considered { color: var(--green); background: var(--green-soft); }
+.requirement-tests { display: flex; flex-wrap: wrap; gap: 6px; margin: 13px 0; }
+.requirement-tests a, .requirement-tests > span { border-radius: 3px; padding: 3px 7px; background: var(--blue-soft); color: var(--blue); font-size: .72rem; font-weight: 800; }
+.requirement-tests a:hover { text-decoration: underline; text-underline-offset: 2px; }
+.requirement-programs { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 14px; padding: 12px 0; }
+.requirement-programs > strong { font-size: .75rem; }
+.requirement-programs ul { display: flex; flex-wrap: wrap; gap: 5px 18px; list-style: none; margin: 0; padding: 0; }
+.requirement-programs li { color: var(--ink); font-size: .81rem; }
+.requirement-programs code { margin-left: 6px; color: var(--muted); font-family: inherit; font-size: .68rem; }
+.requirement-programs small { display: block; margin-top: 2px; color: var(--muted); font-size: .69rem; }
+.requirement-details { margin: 0; border-top: 1px solid var(--line); }
+.requirement-details > div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 14px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.requirement-details dt { color: var(--muted); font-size: .73rem; font-weight: 700; }
+.requirement-details dd { margin: 0; font-size: .81rem; }
+.admission-requirement-card > footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; color: var(--muted); font-size: .69rem; }
+.project-requirement-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+.project-requirement-list article { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 14px 15px; }
+.project-requirement-list article > div { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+.project-requirement-list h3 { margin: 0; font-size: .91rem; }
+.project-requirement-list p { margin: 11px 0 6px; color: var(--ink); font-size: .77rem; }
+.project-requirement-list small { color: var(--muted); font-size: .68rem; }
 
 /* Resources and maintenance */
 .resource-layout, .maintenance-layout { padding-top: 48px; padding-bottom: 30px; }
@@ -541,6 +586,7 @@ td small { display: block; margin-top: 4px; color: var(--muted); }
   .main-nav.open { display: grid; }
   .track-grid-four { grid-template-columns: repeat(2, 1fr); }
   .resource-hub-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .admission-requirement-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 800px) {
@@ -581,13 +627,14 @@ td small { display: block; margin-top: 4px; color: var(--muted); }
   .planner-note { grid-column: 1 / -1; }
   .source-directory article { grid-template-columns: 80px 1fr; }
   .resource-card { grid-template-columns: 1fr; gap: 10px; }
-  .official-site-filters { grid-template-columns: 1fr; }
-  .learning-resource-grid, .video-resource-grid, .book-resource-grid, .syllabus-source-grid, .syllabus-index-grid, .syllabus-classification-legend, .past-paper-links, .past-paper-directory-list { grid-template-columns: 1fr; }
+  .official-site-filters, .admission-requirement-filters { grid-template-columns: 1fr; }
+  .learning-resource-grid, .video-resource-grid, .book-resource-grid, .syllabus-source-grid, .syllabus-index-grid, .syllabus-classification-legend, .past-paper-links, .past-paper-directory-list, .project-requirement-list { grid-template-columns: 1fr; }
   .resource-card > b { grid-column: auto; }
   .resource-hub-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .update-schedule { grid-template-columns: 1fr; }
   .policy-card { grid-template-columns: 1fr 130px; }
   .policy-card > p { grid-column: 1 / -1; }
+  .requirement-programs, .requirement-details > div { grid-template-columns: 100px minmax(0, 1fr); }
   .footer-inner { grid-template-columns: 1fr; padding: 28px 0; gap: 14px; }
   .footer-inner p { text-align: left; }
 }
@@ -614,6 +661,8 @@ td small { display: block; margin-top: 4px; color: var(--muted); }
   .planner-note { grid-column: 1; }
   .policy-card { grid-template-columns: 1fr; }
   .policy-card > p { grid-column: 1; }
+  .admission-requirement-card > header, .admission-requirement-card > footer { align-items: start; flex-direction: column; }
+  .requirement-programs, .requirement-details > div { grid-template-columns: 1fr; gap: 4px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -622,7 +671,7 @@ td small { display: block; margin-top: 4px; color: var(--muted); }
 }
 
 @media print {
-  .site-header, .site-footer, .record-actions, .section-index, .catalog-filters, .archive-filters, .calendar-filters, .official-site-filters, .planner-profiles, .planner-add, .planner-export { display: none !important; }
+  .site-header, .site-footer, .record-actions, .section-index, .catalog-filters, .archive-filters, .calendar-filters, .official-site-filters, .admission-requirement-filters, .planner-profiles, .planner-add, .planner-export { display: none !important; }
   body { background: #fff; color: #000; font-size: 10pt; }
   .page-container { width: 100%; }
   .record-layout { display: block; }

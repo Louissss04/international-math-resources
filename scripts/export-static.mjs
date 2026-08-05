@@ -93,6 +93,7 @@ async function loadSiteData() {
       syllabi: plainData(dataModule.allOfficialSyllabi ?? []),
       destinationGuides: plainData(dataModule.destinationGuides ?? []),
       universityPolicies: plainData(dataModule.universityPolicies ?? []),
+      admissionRequirements: plainData(dataModule.admissionRequirements ?? []),
     };
     if (!data.projects.length) throw new Error("app/data/index.ts returned no project records.");
     return data;
@@ -278,7 +279,7 @@ async function copyClientAssets() {
 function browserRuntime() {
   "use strict";
 
-  const DATA = window.MATHPATH_DATA || { projects: [], sources: [], thresholds: [], universityPolicies: [] };
+  const DATA = window.MATHPATH_DATA || { projects: [], sources: [], thresholds: [], universityPolicies: [], admissionRequirements: [] };
   const LANGUAGE_KEY = "mathpath-language";
   const PLANNER_KEY = "mathpath-planner-v2";
   const TRACK_PREFIX = { competition: "competition", modeling: "modeling", research: "research", summer: "summer", curriculum: "course", assessment: "assessment" };

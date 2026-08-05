@@ -26,6 +26,11 @@ const groups = trackOrder
 
 const resourceSections = [
   {
+    href: "/universities",
+    title: t("学校与专业要求", "School & programme requirements"),
+    description: t("查询官网明确规定的必考、替代考试和录取条件。", "Published required tests, alternatives and offer conditions."),
+  },
+  {
     href: "/syllabi",
     title: t("考纲与范围", "Syllabi & scope"),
     description: t("官方考纲、竞赛范围及中文整理。", "Official specifications, competition scope and Chinese summaries."),
