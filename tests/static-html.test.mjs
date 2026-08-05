@@ -97,6 +97,32 @@ function attributeValues(html, element, attribute) {
   return values;
 }
 
+function tagAttribute(tag, name) {
+  const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = tag.match(new RegExp(`\\b${escapedName}\\s*=\\s*(["'])(.*?)\\1`, "i"));
+  return match ? decodeEntities(match[2].trim()) : undefined;
+}
+
+function calendarEntries(html) {
+  return [...html.matchAll(/<article\b[^>]*>/gi)]
+    .map((match) => match[0])
+    .filter((tag) => tagAttribute(tag, "data-event-id"))
+    .map((tag) => ({
+      eventId: tagAttribute(tag, "data-event-id"),
+      projectId: tagAttribute(tag, "data-project-id"),
+      track: tagAttribute(tag, "data-track"),
+      status: tagAttribute(tag, "data-status"),
+      date: tagAttribute(tag, "data-date"),
+      endDate: tagAttribute(tag, "data-end-date"),
+      period: tagAttribute(tag, "data-calendar-period"),
+    }));
+}
+
+function localDateString(value = new Date()) {
+  const local = new Date(value.getTime() - value.getTimezoneOffset() * 60_000);
+  return local.toISOString().slice(0, 10);
+}
+
 function isExternalReference(reference) {
   return /^[a-z][a-z\d+.-]*:/i.test(reference) || reference.startsWith("//");
 }
@@ -399,6 +425,67 @@ test("curricula, admissions tests and competitions remain separate", async () =>
   }
 
   assert.ok(!Object.values(data.routeMap).includes("assessment-ap-calculus.html"), "obsolete combined AP assessment page is still exported");
+});
+
+test("calendar exports begin in 2026 and archive elapsed milestones by end date", async () => {
+  const data = await loadStaticData();
+  const calendarStart = "2026-01-01";
+  const isoDate = /^\d{4}-\d{2}-\d{2}$/;
+  const today = localDateString();
+  const routeTracks = new Map([
+    ["/calendar", null],
+    ["/competition-calendar", "competition"],
+    ["/course-calendar", "curriculum"],
+    ["/assessment-calendar", "assessment"],
+  ]);
+  const entriesByRoute = new Map();
+  let confirmedHistoryCount = 0;
+
+  for (const [route, fixedTrack] of routeTracks) {
+    const html = await readRoute(route, data);
+    const rootTag = html.match(/<div\b[^>]*data-static-component=(["'])calendar\1[^>]*>/i)?.[0];
+    assert.ok(rootTag, `${route} has no calendar root`);
+    assert.equal(tagAttribute(rootTag, "data-calendar-start"), calendarStart, `${route} has the wrong calendar start`);
+    assert.equal(tagAttribute(rootTag, "data-fixed-track") ?? "", fixedTrack ?? "", `${route} has the wrong fixed track`);
+    assert.match(html, /data-calendar-group=["']current["']/, `${route} has no current calendar group`);
+    assert.match(html, /data-calendar-group=["']history["']/, `${route} has no history calendar group`);
+    assert.match(html, /data-calendar-filter=["']period["']/, `${route} has no period filter`);
+
+    const entries = calendarEntries(html);
+    assert.ok(entries.length > 0, `${route} has no calendar entries`);
+    const actualKeys = entries.map((entry) => `${entry.projectId}:${entry.eventId}`).sort();
+    assert.equal(new Set(actualKeys).size, actualKeys.length, `${route} repeats a calendar event`);
+
+    const expected = data.projects
+      .filter((project) => !fixedTrack || project.track === fixedTrack)
+      .flatMap((project) => project.dates
+        .filter((record) => record.date >= calendarStart)
+        .map((record) => ({ project, record })));
+    const expectedKeys = expected.map(({ project, record }) => `${project.id}:${record.id}`).sort();
+    assert.deepEqual(actualKeys, expectedKeys, `${route} does not contain exactly the calendar records from 2026 onward`);
+
+    for (const entry of entries) {
+      assert.ok(entry.eventId && entry.projectId && entry.track && entry.status && entry.date && entry.endDate, `${route} has an incomplete calendar entry`);
+      if (fixedTrack) assert.equal(entry.track, fixedTrack, `${route} contains ${entry.track}`);
+      if (isoDate.test(entry.date)) {
+        assert.ok(entry.date >= calendarStart, `${route} shows a pre-2026 date: ${entry.date}`);
+        assert.match(entry.endDate, isoDate, `${route} has an invalid end date for ${entry.eventId}`);
+        assert.equal(entry.period, entry.endDate < today ? "history" : "current", `${route} files ${entry.projectId}:${entry.eventId} under the wrong period`);
+      } else {
+        assert.equal(entry.period, "current", `${route} archives undated milestone ${entry.projectId}:${entry.eventId}`);
+      }
+      if (entry.period === "history" && entry.status === "confirmed") confirmedHistoryCount += 1;
+    }
+    entriesByRoute.set(route, entries);
+  }
+
+  const mainEntries = entriesByRoute.get("/calendar");
+  for (const [route, track] of [...routeTracks].slice(1)) {
+    const expected = mainEntries.filter((entry) => entry.track === track).map((entry) => `${entry.projectId}:${entry.eventId}:${entry.period}`).sort();
+    const actual = entriesByRoute.get(route).map((entry) => `${entry.projectId}:${entry.eventId}:${entry.period}`).sort();
+    assert.deepEqual(actual, expected, `${route} differs from the ${track} subset of /calendar`);
+  }
+  assert.ok(confirmedHistoryCount > 0, "past confirmed milestones are not archived under History");
 });
 
 test("destination directory covers the requested study systems and links every guide", async () => {

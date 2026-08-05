@@ -37,6 +37,31 @@ function requirementCard(html, id) {
   return card;
 }
 
+function tagAttribute(tag, name) {
+  const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return tag.match(new RegExp(`\\b${escapedName}\\s*=\\s*(["'])(.*?)\\1`, "i"))?.[2];
+}
+
+function calendarEntries(html) {
+  return [...html.matchAll(/<article\b[^>]*>/gi)]
+    .map((match) => match[0])
+    .filter((tag) => tagAttribute(tag, "data-event-id"))
+    .map((tag) => ({
+      eventId: tagAttribute(tag, "data-event-id"),
+      projectId: tagAttribute(tag, "data-project-id"),
+      track: tagAttribute(tag, "data-track"),
+      status: tagAttribute(tag, "data-status"),
+      date: tagAttribute(tag, "data-date"),
+      endDate: tagAttribute(tag, "data-end-date"),
+      period: tagAttribute(tag, "data-calendar-period"),
+    }));
+}
+
+function localDateString(value = new Date()) {
+  const local = new Date(value.getTime() - value.getTimezoneOffset() * 60_000);
+  return local.toISOString().slice(0, 10);
+}
+
 test("renders the current international mathematics resource library home", async () => {
   const html = await renderHtml();
   assert.match(html, /国际升学数学资料库/);
@@ -81,6 +106,58 @@ test("renders track directories and category-specific archives, calendars and co
   ]) {
     assert.match(await renderHtml(path), pattern, path);
   }
+});
+
+test("renders calendars from 2026 with past milestones archived consistently", async () => {
+  const calendarStart = "2026-01-01";
+  const isoDate = /^\d{4}-\d{2}-\d{2}$/;
+  const today = localDateString();
+  const routeTracks = new Map([
+    ["/calendar", null],
+    ["/competition-calendar", "competition"],
+    ["/course-calendar", "curriculum"],
+    ["/assessment-calendar", "assessment"],
+  ]);
+  const entriesByRoute = new Map();
+  let confirmedHistoryCount = 0;
+
+  for (const [path, fixedTrack] of routeTracks) {
+    const html = await renderHtml(path);
+    const rootTag = html.match(/<div\b[^>]*data-static-component=(['"])calendar\1[^>]*>/i)?.[0];
+    assert.ok(rootTag, `${path} has no calendar root`);
+    assert.equal(tagAttribute(rootTag, "data-calendar-start"), calendarStart, `${path} has the wrong calendar start`);
+    assert.equal(tagAttribute(rootTag, "data-fixed-track") ?? "", fixedTrack ?? "", `${path} has the wrong fixed track`);
+    assert.match(html, /data-calendar-group=["']current["']/, `${path} has no current calendar group`);
+    assert.match(html, /data-calendar-group=["']history["']/, `${path} has no history calendar group`);
+
+    const entries = calendarEntries(html);
+    assert.ok(entries.length > 0, `${path} has no calendar entries`);
+    const keys = entries.map((entry) => `${entry.projectId}:${entry.eventId}`);
+    assert.equal(new Set(keys).size, keys.length, `${path} repeats a calendar event`);
+
+    for (const entry of entries) {
+      assert.ok(entry.eventId && entry.projectId && entry.track && entry.status && entry.date && entry.endDate, `${path} has an incomplete calendar entry`);
+      if (fixedTrack) assert.equal(entry.track, fixedTrack, `${path} contains ${entry.track}`);
+      if (isoDate.test(entry.date)) {
+        assert.ok(entry.date >= calendarStart, `${path} shows a pre-2026 date: ${entry.date}`);
+        assert.match(entry.endDate, isoDate, `${path} has an invalid end date for ${entry.eventId}`);
+        const expectedPeriod = entry.endDate < today ? "history" : "current";
+        assert.equal(entry.period, expectedPeriod, `${path} files ${entry.projectId}:${entry.eventId} under the wrong period`);
+      } else {
+        assert.equal(entry.period, "current", `${path} archives undated milestone ${entry.projectId}:${entry.eventId}`);
+      }
+      if (entry.period === "history" && entry.status === "confirmed") confirmedHistoryCount += 1;
+    }
+    entriesByRoute.set(path, entries);
+  }
+
+  const mainEntries = entriesByRoute.get("/calendar");
+  for (const [path, track] of [...routeTracks].slice(1)) {
+    const expected = mainEntries.filter((entry) => entry.track === track).map((entry) => `${entry.projectId}:${entry.eventId}:${entry.period}`).sort();
+    const actual = entriesByRoute.get(path).map((entry) => `${entry.projectId}:${entry.eventId}:${entry.period}`).sort();
+    assert.deepEqual(actual, expected, `${path} differs from the ${track} subset of /calendar`);
+  }
+  assert.ok(confirmedHistoryCount > 0, "past confirmed milestones are not archived under History");
 });
 
 test("keeps subject curricula separate from admissions assessments", async () => {

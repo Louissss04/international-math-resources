@@ -375,7 +375,11 @@ function browserRuntime() {
     setTimeout(() => URL.revokeObjectURL(url), 0);
   }
   function csvCell(value) { return `"${String(value == null ? "" : value).replaceAll('"', '""')}"`; }
-  function today() { return new Date().toISOString().slice(0, 10); }
+  function today() {
+    const value = new Date();
+    value.setMinutes(value.getMinutes() - value.getTimezoneOffset());
+    return value.toISOString().slice(0, 10);
+  }
   function nextDay(date) {
     const value = new Date(`${date}T00:00:00Z`);
     value.setUTCDate(value.getUTCDate() + 1);
@@ -538,38 +542,58 @@ function browserRuntime() {
     if (!filters || !list) return;
     const root = filters.closest('[data-static-component="calendar"]');
     const fixedTrack = root && root.dataset.fixedTrack || "";
-    const queryInput = select('input[type="search"]', filters);
-    const selects = selectAll("select", filters);
-    const trackSelect = fixedTrack ? null : selects[0];
-    const statusSelect = fixedTrack ? selects[0] : selects[1];
-    const futureInput = select('input[type="checkbox"]', filters);
+    const calendarStart = root && root.dataset.calendarStart || "2026-01-01";
+    const queryInput = select('[data-calendar-filter="query"]', filters);
+    const trackSelect = select('[data-calendar-filter="track"]', filters);
+    const periodSelect = select('[data-calendar-filter="period"]', filters);
+    const statusSelect = select('[data-calendar-filter="status"]', filters);
     const exportButton = select("button", filters);
     const count = select(".result-count b");
+    let exportRows = [];
 
-    const visibleRows = () => {
+    const matchedRows = () => {
       const query = (queryInput && queryInput.value || "").trim().toLowerCase();
       return allCalendarRows().filter((item) => {
         const haystack = `${item.project.title.zh} ${item.project.title.en} ${item.project.shortTitle} ${item.label.zh} ${item.label.en} ${item.region ? item.region.zh : ""}`.toLowerCase();
-        return (!query || haystack.includes(query))
+        return item.date >= calendarStart
+          && (!query || haystack.includes(query))
           && (!fixedTrack || item.project.track === fixedTrack)
           && (!trackSelect || trackSelect.value === "all" || item.project.track === trackSelect.value)
-          && (!statusSelect || statusSelect.value === "all" || item.status === statusSelect.value)
-          && (!futureInput || !futureInput.checked || item.date >= today());
-      }).sort((a, b) => String(a.date).localeCompare(String(b.date)));
+          && (!statusSelect || statusSelect.value === "all" || item.status === statusSelect.value);
+      });
+    };
+
+    const rowHtml = (item, period) => {
+      const haystack = `${item.project.title.zh} ${item.project.title.en} ${item.project.shortTitle} ${item.label.zh} ${item.label.en} ${item.region ? `${item.region.zh} ${item.region.en}` : ""}`.toLowerCase();
+      return `<article class="calendar-row" data-event-id="${escapeHtml(item.id)}" data-project-id="${escapeHtml(item.project.id)}" data-track="${escapeHtml(item.project.track)}" data-status="${escapeHtml(item.status)}" data-date="${escapeHtml(item.date)}" data-end-date="${escapeHtml(item.endDate || item.date)}" data-calendar-period="${period}" data-search="${escapeHtml(haystack)}"><time datetime="${escapeHtml(item.date)}">${escapeHtml(item.date)}${item.endDate ? ` — ${escapeHtml(item.endDate)}` : ""}<small>${escapeHtml(item.time || "")} ${escapeHtml(item.timezone || "")}</small></time><div>${statusBadge(item.status)}<h2><a href="${staticProjectHref(item.project)}">${escapeHtml(item.project.shortTitle)}</a></h2><p>${localised(item.label)}</p></div><div>${item.region ? `<p>${localised(item.region)}</p>` : ""}${item.note ? `<p>${localised(item.note)}</p>` : ""}${sourceLinks(item.sourceIds)}</div></article>`;
+    };
+
+    const groupHtml = (rows, period) => {
+      if (!rows.length) return "";
+      const title = period === "history" ? { zh: "历史记录（2026 年起）", en: "History from 2026" } : { zh: "当前与未来节点", en: "Current and upcoming" };
+      return `<section class="calendar-group${period === "history" ? " calendar-history" : ""}" data-calendar-group="${period}"><div class="calendar-group-heading"><h2>${localised(title)}</h2><b>${rows.length}</b></div><div>${rows.map((item) => rowHtml(item, period)).join("")}</div></section>`;
     };
 
     const render = () => {
-      const rows = visibleRows();
-      list.innerHTML = rows.map((item) => `<article class="calendar-row"><time datetime="${escapeHtml(item.date)}">${escapeHtml(item.date)}${item.endDate ? ` — ${escapeHtml(item.endDate)}` : ""}<small>${escapeHtml(item.time || "")} ${escapeHtml(item.timezone || "")}</small></time><div>${statusBadge(item.status)}<h2><a href="${staticProjectHref(item.project)}">${escapeHtml(item.project.shortTitle)}</a></h2><p>${localised(item.label)}</p></div><div>${item.region ? `<p>${localised(item.region)}</p>` : ""}${item.note ? `<p>${localised(item.note)}</p>` : ""}${sourceLinks(item.sourceIds)}</div></article>`).join("");
-      if (count) count.textContent = String(rows.length);
-      if (exportButton) exportButton.disabled = rows.length === 0;
+      const matched = matchedRows();
+      const currentRows = matched.filter((item) => (item.endDate || item.date) >= today()).sort((a, b) => String(a.date).localeCompare(String(b.date)) || a.project.shortTitle.localeCompare(b.project.shortTitle, undefined, { numeric: true }));
+      const historyRows = matched.filter((item) => (item.endDate || item.date) < today()).sort((a, b) => String(b.date).localeCompare(String(a.date)) || a.project.shortTitle.localeCompare(b.project.shortTitle, undefined, { numeric: true }));
+      const period = periodSelect ? periodSelect.value : "current";
+      exportRows = period === "history" ? historyRows : period === "all" ? [...currentRows, ...historyRows] : currentRows;
+      list.innerHTML = (period !== "history" ? groupHtml(currentRows, "current") : "")
+        + (period !== "current" ? groupHtml(historyRows, "history") : "")
+        + (!exportRows.length ? `<p class="empty-state" data-calendar-empty>${localised({ zh: "没有符合条件的日期。", en: "No matching dates." })}</p>` : "");
+      if (count) count.textContent = String(exportRows.length);
+      const summary = select(".calendar-summary > p:last-child", root);
+      if (summary) summary.innerHTML = `<span class="lang-zh">当前与未来 ${currentRows.length} · 历史 ${historyRows.length}</span><span class="lang-en">Current &amp; upcoming ${currentRows.length} · History ${historyRows.length}</span>`;
+      if (exportButton) exportButton.disabled = exportRows.length === 0;
     };
 
-    [trackSelect, statusSelect, futureInput].filter(Boolean).forEach((control) => control.addEventListener("change", render));
+    [trackSelect, periodSelect, statusSelect].filter(Boolean).forEach((control) => control.addEventListener("change", render));
     if (queryInput) queryInput.addEventListener("input", render);
     if (exportButton) exportButton.addEventListener("click", () => {
       const stamp = new Date().toISOString().replaceAll(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
-      const events = visibleRows().filter((item) => /^\d{4}-\d{2}-\d{2}$/.test(item.date)).map((item) => {
+      const events = exportRows.filter((item) => /^\d{4}-\d{2}-\d{2}$/.test(item.date)).map((item) => {
         const source = (item.sourceIds || []).map(sourceById).find(Boolean);
         return ["BEGIN:VEVENT", `UID:${item.project.id}-${item.id}@international-math-library`, `DTSTAMP:${stamp}`, `DTSTART;VALUE=DATE:${item.date.replaceAll("-", "")}`, `DTEND;VALUE=DATE:${nextDay(item.endDate || item.date).replaceAll("-", "")}`, `SUMMARY:${icsEscape(`${item.project.shortTitle} — ${item.label.zh}`)}`, `DESCRIPTION:${icsEscape(`${item.label.en}${item.note ? ` | ${item.note.zh}` : ""}`)}`, source ? `URL:${source.url}` : "", "END:VEVENT"].filter(Boolean).join("\r\n");
       });

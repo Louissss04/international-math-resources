@@ -185,7 +185,11 @@
     return '"' + String(value === null || value === undefined ? "" : value).replace(/"/g, '""') + '"';
   }
 
-  function today() { return new Date().toISOString().slice(0, 10); }
+  function today() {
+    var value = new Date();
+    value.setMinutes(value.getMinutes() - value.getTimezoneOffset());
+    return value.toISOString().slice(0, 10);
+  }
 
   function nextDay(date) {
     var value = new Date(date + "T00:00:00Z");
@@ -461,37 +465,64 @@
     var list = document.querySelector(".calendar-list");
     var root = filters && filters.closest('[data-static-component="calendar"]');
     var fixedTrack = root && root.dataset.fixedTrack || "";
-    var rows = calendarRows().filter(function (row) { return !fixedTrack || row.project.track === fixedTrack; });
+    var calendarStart = root && root.dataset.calendarStart || "2026-01-01";
+    var rows = calendarRows().filter(function (row) {
+      return (!fixedTrack || row.project.track === fixedTrack) && row.dateRecord.date >= calendarStart;
+    });
     if (!filters || !list || !rows.length) return;
-    var input = filters.querySelector('input[type="search"]');
-    var selects = Array.prototype.slice.call(filters.querySelectorAll("select"));
-    var trackSelect = fixedTrack ? null : selects[0];
-    var statusSelect = fixedTrack ? selects[0] : selects[1];
-    var futureCheckbox = filters.querySelector('input[type="checkbox"]');
+    var input = filters.querySelector('[data-calendar-filter="query"]');
+    var trackSelect = filters.querySelector('[data-calendar-filter="track"]');
+    var periodSelect = filters.querySelector('[data-calendar-filter="period"]');
+    var statusSelect = filters.querySelector('[data-calendar-filter="status"]');
     var exportButton = filters.querySelector("button");
     var visible = [];
 
+    function isHistory(item) {
+      return (item.endDate || item.date) < today();
+    }
+
+    function calendarRowHtml(row, period) {
+      var item = row.dateRecord;
+      var project = row.project;
+      var haystack = [project.title && project.title.zh, project.title && project.title.en, project.shortTitle, item.label && item.label.zh, item.label && item.label.en, item.region && item.region.zh, item.region && item.region.en, item.note && item.note.zh, item.note && item.note.en].join(" ").toLowerCase();
+      return '<article class="calendar-row" data-event-id="' + escapeHtml(item.id) + '" data-project-id="' + escapeHtml(project.id) + '" data-track="' + escapeHtml(project.track) + '" data-status="' + escapeHtml(item.status) + '" data-date="' + escapeHtml(item.date) + '" data-end-date="' + escapeHtml(item.endDate || item.date) + '" data-calendar-period="' + period + '" data-search="' + escapeHtml(haystack) + '">' +
+        '<time datetime="' + escapeHtml(item.date) + '">' + escapeHtml(item.date) + (item.endDate ? " — " + escapeHtml(item.endDate) : "") + "<small>" + escapeHtml([item.time, item.timezone].filter(Boolean).join(" ")) + "</small></time>" +
+        "<div>" + badge(item.status) + '<h2><a href="' + escapeHtml(projectHref(project)) + '">' + escapeHtml(project.shortTitle) + "</a></h2><p>" + localized(item.label) + "</p></div>" +
+        "<div>" + (item.region ? "<p>" + localized(item.region) + "</p>" : "") + (item.note ? "<p>" + localized(item.note) + "</p>" : "") + sourceCitations(item.sourceIds) + "</div></article>";
+    }
+
+    function calendarGroupHtml(groupRows, period) {
+      if (!groupRows.length) return "";
+      var title = period === "history"
+        ? { zh: "历史记录（2026 年起）", en: "History from 2026" }
+        : { zh: "当前与未来节点", en: "Current and upcoming" };
+      return '<section class="calendar-group' + (period === "history" ? " calendar-history" : "") + '" data-calendar-group="' + period + '">' +
+        '<div class="calendar-group-heading"><h2>' + localized(title) + "</h2><b>" + groupRows.length + "</b></div><div>" +
+        groupRows.map(function (row) { return calendarRowHtml(row, period); }).join("") +
+        "</div></section>";
+    }
+
     function render() {
       var needle = input ? input.value.trim().toLowerCase() : "";
-      visible = rows.filter(function (row) {
+      var matched = rows.filter(function (row) {
         var item = row.dateRecord;
         var project = row.project;
         var haystack = [project.title && project.title.zh, project.title && project.title.en, project.shortTitle, item.label && item.label.zh, item.label && item.label.en, item.region && item.region.zh, item.region && item.region.en, item.note && item.note.zh, item.note && item.note.en].join(" ").toLowerCase();
         return (!needle || haystack.indexOf(needle) !== -1) &&
           (!trackSelect || trackSelect.value === "all" || project.track === trackSelect.value) &&
-          (statusSelect.value === "all" || item.status === statusSelect.value) &&
-          (!futureCheckbox.checked || item.date >= today());
-      }).sort(function (a, b) { return a.dateRecord.date.localeCompare(b.dateRecord.date) || a.project.shortTitle.localeCompare(b.project.shortTitle, undefined, { numeric: true }); });
-      list.innerHTML = visible.map(function (row) {
-        var item = row.dateRecord;
-        var project = row.project;
-        return '<article class="calendar-row" data-project-id="' + escapeHtml(project.id) + '" data-date="' + escapeHtml(item.date) + '">' +
-          '<time datetime="' + escapeHtml(item.date) + '">' + escapeHtml(item.date) + (item.endDate ? " — " + escapeHtml(item.endDate) : "") + "<small>" + escapeHtml([item.time, item.timezone].filter(Boolean).join(" ")) + "</small></time>" +
-          "<div>" + badge(item.status) + '<h2><a href="' + escapeHtml(projectHref(project)) + '">' + escapeHtml(project.shortTitle) + "</a></h2><p>" + localized(item.label) + "</p></div>" +
-          "<div>" + (item.region ? "<p>" + localized(item.region) + "</p>" : "") + (item.note ? "<p>" + localized(item.note) + "</p>" : "") + sourceCitations(item.sourceIds) + "</div></article>";
-      }).join("");
-      var count = document.querySelector(".result-count");
+          (!statusSelect || statusSelect.value === "all" || item.status === statusSelect.value);
+      });
+      var currentRows = matched.filter(function (row) { return !isHistory(row.dateRecord); }).sort(function (a, b) { return a.dateRecord.date.localeCompare(b.dateRecord.date) || a.project.shortTitle.localeCompare(b.project.shortTitle, undefined, { numeric: true }); });
+      var historyRows = matched.filter(function (row) { return isHistory(row.dateRecord); }).sort(function (a, b) { return b.dateRecord.date.localeCompare(a.dateRecord.date) || a.project.shortTitle.localeCompare(b.project.shortTitle, undefined, { numeric: true }); });
+      var period = periodSelect ? periodSelect.value : "current";
+      visible = period === "history" ? historyRows : period === "all" ? currentRows.concat(historyRows) : currentRows;
+      list.innerHTML = (period !== "history" ? calendarGroupHtml(currentRows, "current") : "") +
+        (period !== "current" ? calendarGroupHtml(historyRows, "history") : "") +
+        (!visible.length ? '<p class="empty-state" data-calendar-empty><span class="lang-zh">没有符合条件的日期。</span><span class="lang-en">No matching dates.</span></p>' : "");
+      var count = root.querySelector(".result-count");
       if (count) count.innerHTML = "<b>" + visible.length + '</b> <span class="lang-zh">个日期</span><span class="lang-en">dates</span>';
+      var summary = root.querySelector(".calendar-summary > p:last-child");
+      if (summary) summary.innerHTML = '<span class="lang-zh">当前与未来 ' + currentRows.length + " · 历史 " + historyRows.length + '</span><span class="lang-en">Current &amp; upcoming ' + currentRows.length + " · History " + historyRows.length + "</span>";
       exportButton.disabled = !visible.length;
     }
 
