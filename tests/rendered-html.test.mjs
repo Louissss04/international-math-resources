@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
+const staleDemoCopy = /codex-preview|Your site is taking shape|这是一个演示型规则引擎|正式版本可接入/i;
+
 async function render(path = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${path}`);
@@ -10,73 +12,278 @@ async function render(path = "/") {
   }, { waitUntil() {}, passThroughOnException() {} });
 }
 
-test("renders the MathPath database home", async () => {
-  const response = await render();
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
-  const html = await response.text();
-  assert.match(html, /MathPath/);
-  assert.match(html, /数学竞赛、建模、科研、夏校与考试数据库/);
-  assert.match(html, /Mathematics competitions, modeling, research, summer programs and assessments/);
-  assert.match(html, /href="\/catalog"/);
-  assert.match(html, /href="\/archive"/);
-  assert.doesNotMatch(html, /codex-preview|Your site is taking shape|这是一个演示型规则引擎/i);
+async function renderHtml(path = "/") {
+  const response = await render(path);
+  assert.equal(response.status, 200, path);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i, path);
+  return response.text();
+}
+
+function childRoutes(html, directoryPath) {
+  const prefix = `${directoryPath}/`;
+  return [...new Set(
+    [...html.matchAll(/href="([^"]+)"/g)]
+      .map((match) => match[1].replaceAll("&amp;", "&"))
+      .filter((href) => href.startsWith(prefix))
+      .map((href) => new URL(href, "http://localhost").pathname)
+      .filter((pathname) => !pathname.slice(prefix.length).includes("/")),
+  )].sort();
+}
+
+test("renders the current international mathematics resource library home", async () => {
+  const html = await renderHtml();
+  assert.match(html, /国际升学数学资料库/);
+  assert.match(html, /面向中国中学生的数学竞赛、建模、科研、夏校、国际课程与入学考试资料/);
+  assert.match(html, /Mathematics competitions, modeling, research, summer programs, international curricula and admissions tests/);
+  for (const href of ["/programs", "/courses-tests", "/destinations", "/calendar", "/resources"]) {
+    assert.match(html, new RegExp(`href="${href}"`), href);
+  }
+  assert.doesNotMatch(html, staleDemoCopy);
 });
 
-test("renders directory, archive and project routes", async () => {
+test("renders track directories and category-specific archives, calendars and comparisons", async () => {
   for (const [path, pattern] of [
-    ["/catalog", /项目库/],
-    ["/archive", /历年分数线与奖项档案/],
+    ["/catalog", /全部条目/],
+    ["/programs", /竞赛与项目/],
+    ["/courses-tests", /课程与考试/],
+    ["/archive", /分类数据档案/],
+    ["/competitions", /数学竞赛/],
+    ["/modeling", /数学建模/],
+    ["/research", /数学科研/],
+    ["/summer", /夏校与夏令营/],
+    ["/courses", /数学课程与统考/],
+    ["/assessments", /数学入学考试与定量测评/],
+    ["/competition-results", /竞赛奖项与分数线/],
+    ["/course-scores", /数学课程成绩与等级档案/],
+    ["/assessment-scores", /数学入学考试与定量测评成绩档案/],
     ["/calendar", /日期与报名日历/],
-    ["/competitions/amc-8", /AMC 8/],
-    ["/summer/promys", /PROMYS/],
+    ["/competition-calendar", /竞赛日历/],
+    ["/course-calendar", /数学课程统考日历/],
+    ["/assessment-calendar", /数学入学考试与定量测评日历/],
+    ["/compare", /分类比较/],
+    ["/competition-compare", /竞赛比较/],
+    ["/course-compare", /数学课程体系比较/],
+    ["/assessment-compare", /数学入学考试与定量测评比较/],
+    ["/past-papers", /数学真题、样卷与答案入口/],
+    ["/resources", /资料中心/],
+    ["/syllabi", /官方考纲、范围、样卷与教材/],
+    ["/maintenance", /信息更新清单/],
+    ["/destinations", /按留学地区查询数学要求/],
+    ["/official-sites", /官网导航/],
   ]) {
-    const response = await render(path);
-    assert.equal(response.status, 200, path);
-    assert.match(await response.text(), pattern, path);
+    assert.match(await renderHtml(path), pattern, path);
   }
 });
 
-test("renders every project record", async () => {
-  const records = [
-    ["/competitions/amc-8", /AMC 8/],
-    ["/competitions/amc-10", /AMC 10/],
-    ["/competitions/amc-12", /AMC 12/],
-    ["/competitions/aime", /AIME/],
-    ["/competitions/euclid", /Euclid/],
-    ["/competitions/pascal", /Pascal/],
-    ["/competitions/cayley", /Cayley/],
-    ["/competitions/fermat", /Fermat/],
-    ["/competitions/smc", /Senior Mathematical Challenge/],
-    ["/competitions/senior-kangaroo", /Senior Kangaroo/],
-    ["/competitions/bmo-1", /British Mathematical Olympiad Round 1/],
-    ["/competitions/bmo-2", /British Mathematical Olympiad Round 2/],
-    ["/competitions/china-league", /全国高中数学联赛/],
-    ["/competitions/cmo", /中国数学奥林匹克/],
-    ["/modeling/himcm", /HiMCM/],
-    ["/modeling/immc", /IMMC/],
-    ["/research/start", /Starting Mathematical Research/],
-    ["/research/records", /Research Records and Output Evidence/],
-    ["/research/integrity", /研究诚信/],
-    ["/summer/promys", /PROMYS/],
-    ["/summer/sumac", /SUMaC/],
-    ["/summer/mathcamp", /Mathcamp/],
-    ["/summer/ross", /Ross/],
-    ["/summer/mathily", /MathILy/],
-    ["/summer/ssp", /Summer Science Program/],
-    ["/assessments/sat", /SAT/],
-    ["/assessments/ap-calculus", /AP Calculus/],
-    ["/assessments/tmua", /TMUA/],
-    ["/assessments/esat", /ESAT/],
-    ["/assessments/step", /STEP/],
-  ];
+test("keeps subject curricula separate from admissions assessments", async () => {
+  const courseHtml = await renderHtml("/courses");
+  assert.match(courseHtml, /Mathematics curricula and subject exams/);
+  assert.match(courseHtml, /AP、Cambridge International、Pearson Edexcel International 与 IB 数学课程单独收录/);
+  assert.match(courseHtml, /href="\/courses\/ap-calculus-ab"/);
+  assert.match(courseHtml, /href="\/courses\/ap-calculus-bc"/);
 
-  for (const [path, pattern] of records) {
-    const response = await render(path);
-    assert.equal(response.status, 200, path);
-    const html = await response.text();
+  const assessmentHtml = await renderHtml("/assessments");
+  assert.match(assessmentHtml, /Mathematics admissions tests and quantitative assessments/);
+  assert.match(assessmentHtml, /课程统考与数学竞赛分别另列/);
+  assert.match(assessmentHtml, /href="\/assessments\/tmua"/);
+
+  for (const [path, pattern] of [
+    ["/courses/ap-calculus-ab", /AP Calculus AB/],
+    ["/courses/ap-calculus-bc", /AP Calculus BC/],
+    ["/assessments/tmua", /TMUA/],
+  ]) {
+    const html = await renderHtml(path);
     assert.match(html, pattern, path);
     assert.match(html, /来源|Sources/, path);
-    assert.doesNotMatch(html, /这是一个演示型规则引擎|正式版本可接入|Your site is taking shape/i, path);
+  }
+});
+
+test("renders destination guides with mathematics-only scope and official sources", async () => {
+  const directoryHtml = await renderHtml("/destinations");
+  assert.match(directoryHtml, /Language tests are outside this section/);
+
+  const requiredGuides = new Map([
+    ["/destinations/united-states-undergraduate-mathematics-requirements", /美国本科申请：数学课程与考试要求/],
+    ["/destinations/uk-undergraduate-mathematics-admissions", /英国本科数学及高数学含量专业申请/],
+    ["/destinations/singapore-undergraduate-mathematics-admissions", /新加坡本科数学及高数学含量专业申请/],
+    ["/destinations/australia", /澳大利亚本科申请：数学课程与考试体系/],
+    ["/destinations/canada-undergraduate-mathematics-requirements", /加拿大本科申请：数学课程与考试要求/],
+    ["/destinations/europe-other", /欧洲其他国家本科申请：数学课程与考试体系/],
+  ]);
+  const routes = childRoutes(directoryHtml, "/destinations");
+  assert.ok(routes.length > 0, "/destinations should expose destination guides");
+  for (const path of requiredGuides.keys()) {
+    assert.ok(routes.includes(path), `${path} should be linked from /destinations`);
+  }
+
+  for (const path of routes) {
+    const html = await renderHtml(path);
+    const title = requiredGuides.get(path);
+    if (title) assert.match(html, title, path);
+    assert.match(html, /仅数学相关要求/);
+    assert.match(html, /最后更新/);
+    assert.match(html, /id="sources"/);
+    assert.match(html, /Official sources/);
+  }
+});
+
+test("renders official learning-resource directories and project sections", async () => {
+  const directoryHtml = await renderHtml("/resources");
+  assert.match(directoryHtml, /data-resource-id=/);
+  assert.match(directoryHtml, /打开官方资料/);
+  assert.match(directoryHtml, /Official learning resources/);
+
+  for (const path of [
+    "/competitions/amc-8",
+    "/modeling/himcm",
+    "/research/start",
+    "/summer/promys",
+    "/courses/ap-calculus-ab",
+    "/assessments/sat",
+  ]) {
+    const html = await renderHtml(path);
+    assert.match(html, /id="official-learning-resources"/, path);
+    assert.match(html, /data-resource-id=/, path);
+    assert.match(html, /Open official resource/, path);
+  }
+});
+
+test("separates research programs by access and organizer type", async () => {
+  const directoryHtml = await renderHtml("/research");
+  for (const label of ["CrowdMath", "MIT PRIMES", "Pioneer Research", "丘成桐数学奖"]) {
+    assert.match(directoryHtml, new RegExp(label), label);
+  }
+  assert.match(directoryHtml, /商业导师项目/);
+  assert.match(directoryHtml, /中国学生路径/);
+
+  for (const [path, pattern] of [
+    ["/research/crowdmath", /可直接注册 AoPS 账户/],
+    ["/research/mit-primes", /仅限实际居住并在美国就读的学生/],
+    ["/research/pioneer-research-institute", /收费在线项目/],
+    ["/research/yau-high-school-mathematics-award", /研究成果竞赛|科研竞赛/],
+  ]) {
+    const html = await renderHtml(path);
+    assert.match(html, pattern, path);
+    assert.match(html, /id="official-learning-resources"/, path);
+  }
+});
+
+test("renders a mathematics social-practice guide with official resources", async () => {
+  const directoryHtml = await renderHtml("/research");
+  assert.match(directoryHtml, /数学相关社会实践与社区项目/);
+  assert.match(directoryHtml, /Methods and practical guidance/);
+
+  const html = await renderHtml("/research/math-social-practice");
+  for (const pattern of [/数学公益课堂/, /公益数据分析/, /社区运筹优化/, /申请材料可使用的证据/, /隐私、版权与伦理/]) {
+    assert.match(html, pattern);
+  }
+  for (const sourceLabel of ["Julia Robinson Mathematics Festival", "Math Circle Network", "Zooniverse", "国家统计局", "世界银行", "联合国儿童基金会"]) {
+    assert.match(html, new RegExp(sourceLabel), sourceLabel);
+  }
+  assert.match(html, /id="official-learning-resources"/);
+});
+
+test("renders a searchable official-site directory without third-party sources", async () => {
+  const html = await renderHtml("/official-sites");
+  assert.match(html, /Official website directory/);
+  assert.match(html, /data-static-component="official-sites"/);
+  for (const groupId of ["competition", "modeling", "research", "summer", "curriculum", "assessment", "university-united-states", "university-united-kingdom", "university-singapore", "university-australia", "university-canada", "university-other-europe"]) {
+    assert.match(html, new RegExp(`data-official-site-group="${groupId}"`), groupId);
+  }
+  for (const sourceId of ["sat-home", "act-home", "himcm-home", "aksf-home", "uk-ucas-how-to-apply", "sg-nus-gaokao-2026"]) {
+    assert.match(html, new RegExp(`data-source-id="${sourceId}"`), sourceId);
+  }
+  assert.doesNotMatch(html, /data-source-kind="secondary-archive"/);
+  const entryIds = [...html.matchAll(/data-entry-id="([^"]+)"/g)].map((match) => match[1]);
+  assert.ok(entryIds.length > 70, "official-site directory should contain project and university entries");
+  assert.equal(new Set(entryIds).size, entryIds.length, "official-site directory contains duplicate entry IDs");
+  for (const tag of html.match(/<a\b[^>]*data-source-kind="[^"]+"[^>]*>/g) ?? []) {
+    assert.match(tag, /href="https:\/\//i, `official-site link is not HTTPS: ${tag}`);
+  }
+});
+
+test("renders translated mathematics syllabus records and official materials", async () => {
+  for (const [path, title] of [
+    ["/syllabi/amc-8-current-scope", /AMC 8/],
+    ["/syllabi/ap-calculus-ab-2026-27", /AP Calculus AB/],
+    ["/syllabi/esat-2027-entry", /ESAT/],
+  ]) {
+    const html = await renderHtml(path);
+    assert.match(html, title, path);
+    assert.match(html, /中文译文说明/, path);
+    assert.match(html, /Official sources and versions/, path);
+    assert.match(html, /id="official-syllabus-materials"/, path);
+    assert.match(html, /data-resource-id=/, path);
+  }
+});
+
+test("renders past-paper sources, empty states and copyright notices", async () => {
+  const directoryHtml = await renderHtml("/past-papers");
+  assert.match(directoryHtml, /data-past-paper-id=/);
+  assert.match(directoryHtml, /官方来源/);
+  assert.match(directoryHtml, /第三方整理/);
+  assert.match(directoryHtml, /暂未找到可核验的公开入口/);
+  assert.match(directoryHtml, /does not copy, upload or rehost test files/);
+
+  for (const path of [
+    "/competitions/amc-12",
+    "/competitions/euclid",
+    "/modeling/himcm",
+    "/courses/ap-calculus-bc",
+    "/assessments/sat",
+    "/assessments/ukiset",
+  ]) {
+    const html = await renderHtml(path);
+    assert.match(html, /id="past-papers"/, path);
+    assert.match(html, /版权与链接说明/, path);
+    assert.match(html, /does not copy, upload or rehost test files/, path);
+  }
+});
+
+test("limits mixed assessments and translated syllabi to mathematics", async () => {
+  const forbidden = /Biology|Chemistry|Physics|English Test|English Essay|Reading and Writing|Verbal Reasoning|Non-verbal Reasoning|Spatial Ability/;
+  for (const path of [
+    "/assessments/sat",
+    "/assessments/act",
+    "/assessments/ssat",
+    "/assessments/isee",
+    "/assessments/ukiset",
+    "/assessments/cat4",
+    "/assessments/map-growth",
+    "/assessments/esat",
+    "/syllabi/sat-digital-current",
+    "/syllabi/act-enhanced-current",
+    "/syllabi/ssat-content-scope",
+    "/syllabi/isee-content-scope",
+    "/syllabi/ukiset-content-scope",
+    "/syllabi/cat4-public-content-scope",
+    "/syllabi/map-growth-content-framework",
+    "/syllabi/esat-2027-entry",
+  ]) {
+    assert.doesNotMatch(await renderHtml(path), forbidden, path);
+  }
+
+  for (const path of [
+    "/assessments/toefl-ibt",
+    "/assessments/ielts-academic",
+    "/syllabi/toefl-ibt-2026-content-scope",
+    "/syllabi/ielts-academic-content-scope",
+  ]) {
+    const response = await render(path);
+    assert.equal(response.status, 404, path);
+  }
+});
+
+test("renders every project linked by a track directory", async () => {
+  // Directory discovery also covers future mathematics admissions tests without reserving a slug for them.
+  for (const directoryPath of ["/competitions", "/modeling", "/research", "/summer", "/courses", "/assessments"]) {
+    const routes = childRoutes(await renderHtml(directoryPath), directoryPath);
+    assert.ok(routes.length > 0, `${directoryPath} should expose at least one project route`);
+
+    for (const path of routes) {
+      const html = await renderHtml(path);
+      assert.match(html, /来源|Sources/, path);
+      assert.doesNotMatch(html, staleDemoCopy, path);
+    }
   }
 });

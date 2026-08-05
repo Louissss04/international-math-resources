@@ -5,6 +5,7 @@ export const trackPath: Record<Track, string> = {
   modeling: "modeling",
   research: "research",
   summer: "summer",
+  curriculum: "courses",
   assessment: "assessments",
 };
 
@@ -12,3 +13,6 @@ export function projectHref(project: Pick<ProjectRecord, "track" | "slug">) {
   return `/${trackPath[project.track]}/${project.slug}`;
 }
 
+export function syllabusHref(slug: string) {
+  return `/syllabi/${slug}`;
+}

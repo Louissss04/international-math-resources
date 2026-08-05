@@ -4,18 +4,18 @@ export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="footer-inner">
-        <strong>MathPath</strong>
+        <strong><span className="lang-zh">国际升学数学资料库</span><span className="lang-en">International Math Library</span></strong>
         <nav aria-label="Footer">
           <Link href="/sources"><span className="lang-zh">来源</span><span className="lang-en">Sources</span></Link>
-          <Link href="/universities"><span className="lang-zh">院校政策</span><span className="lang-en">University policies</span></Link>
-          <Link href="/compare"><span className="lang-zh">项目比较</span><span className="lang-en">Compare</span></Link>
+          <Link href="/official-sites"><span className="lang-zh">官方入口</span><span className="lang-en">Official sites</span></Link>
+          <Link href="/resources#copyright"><span className="lang-zh">版权与使用</span><span className="lang-en">Copyright & use</span></Link>
+          <Link href="/maintenance"><span className="lang-zh">维护说明</span><span className="lang-en">Maintenance</span></Link>
         </nav>
         <p>
-          <span className="lang-zh">日期、资格、费用和评奖以所列官方来源为准。</span>
-          <span className="lang-en">Dates, eligibility, fees and awards are tied to the listed official sources.</span>
+          <span className="lang-zh">本站只索引公开来源，不托管试题文件；版权归原权利人。报名前请核对官网。</span>
+          <span className="lang-en">Public-source links only; test files are not hosted here and rights remain with their owners. Check the official site before registering.</span>
         </p>
       </div>
     </footer>
   );
 }
-

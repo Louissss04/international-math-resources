@@ -9,25 +9,25 @@ export async function generateMetadata(): Promise<Metadata> {
   const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "localhost:3000";
   const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
   const origin = `${protocol}://${host}`;
-  const description = "面向中国中学生与升学规划师的中英双语数学项目数据库：资格、赛制、日期、费用、奖项、历年分数线和官方来源。";
+  const description = "面向中国中学生与升学规划师的中英双语数学资料库：竞赛、建模、科研、夏校、国际课程、数学入学考试及各留学地区要求。";
 
   return {
     metadataBase: new URL(origin),
     title: {
-      default: "MathPath｜数学竞赛、建模、科研、夏校与考试数据库",
-      template: "%s｜MathPath",
+      default: "国际升学数学资料库",
+      template: "%s｜国际升学数学资料库",
     },
     description,
     openGraph: {
       type: "website",
-      siteName: "MathPath",
-      title: "MathPath｜数学竞赛、建模、科研、夏校与考试数据库",
+      siteName: "国际升学数学资料库",
+      title: "国际升学数学资料库",
       description,
-      images: [{ url: `${origin}/og.png`, width: 1760, height: 917, alt: "MathPath bilingual mathematics pathways database" }],
+      images: [{ url: `${origin}/og.png`, width: 1760, height: 917, alt: "国际升学数学资料库" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "MathPath｜数学竞赛、建模、科研、夏校与考试数据库",
+      title: "国际升学数学资料库",
       description,
       images: [`${origin}/og.png`],
     },

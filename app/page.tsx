@@ -1,62 +1,76 @@
 import Link from "next/link";
-import { allProjects, allSources, allThresholds } from "./data";
-import { projectHref } from "./lib/paths";
-import type { Track } from "./lib/types";
 import { Localized } from "./components/localized";
 import { StatusBadge } from "./components/status-badge";
+import { allProjects, destinationGuides } from "./data";
+import { projectHref } from "./lib/paths";
+import type { Track } from "./lib/types";
 
-const trackInfo: Array<{ track: Track; href: string; zh: string; en: string; fieldsZh: string; fieldsEn: string }> = [
-  { track: "competition", href: "/competitions", zh: "数学竞赛", en: "Competitions", fieldsZh: "资格、赛制、日期、奖项、分数线", fieldsEn: "Eligibility, format, dates, awards, thresholds" },
-  { track: "modeling", href: "/modeling", zh: "数学建模", en: "Modeling", fieldsZh: "团队、赛期、论文、提交、奖项", fieldsEn: "Team, window, paper, submission, awards" },
-  { track: "research", href: "/research", zh: "数学科研", en: "Research", fieldsZh: "选题、检索、记录、作者、诚信", fieldsEn: "Questions, search, records, authorship, integrity" },
-  { track: "summer", href: "/summer", zh: "夏校与夏令营", en: "Summer programs", fieldsZh: "资格、国际生、费用、资助、材料", fieldsEn: "Eligibility, international access, cost, aid, materials" },
-  { track: "assessment", href: "/assessments", zh: "课程与考试", en: "Assessments", fieldsZh: "用途、报名、日期、形式、评分", fieldsEn: "Purpose, registration, dates, format, scoring" },
+const LAST_UPDATED = "2026-08-05";
+
+const programTracks: Array<{ track: Track; href: string; zh: string; en: string; fieldsZh: string; fieldsEn: string }> = [
+  { track: "competition", href: "/competitions", zh: "数学竞赛", en: "Competitions", fieldsZh: "赛制、日期、报名、奖项线、考纲与历年题", fieldsEn: "Format, dates, registration, thresholds, scope and past papers" },
+  { track: "modeling", href: "/modeling", zh: "数学建模", en: "Modeling", fieldsZh: "团队、赛期、论文要求、提交与奖项", fieldsEn: "Teams, contest windows, papers, submission and awards" },
+  { track: "research", href: "/research", zh: "数学科研", en: "Research", fieldsZh: "科研项目、社会实践、申请资格、费用与成果", fieldsEn: "Programs, social practice, eligibility, cost and outputs" },
+  { track: "summer", href: "/summer", zh: "数学夏校", en: "Summer programs", fieldsZh: "资格、国际生、费用、资助与申请材料", fieldsEn: "Eligibility, international access, cost, aid and applications" },
 ];
 
+const academicTracks: Array<{ track: Track; href: string; zh: string; en: string; fieldsZh: string; fieldsEn: string }> = [
+  { track: "curriculum", href: "/courses", zh: "国际数学课程与统考", en: "Mathematics curricula", fieldsZh: "AP、A Level、IGCSE、IB 的考纲、试卷与成绩", fieldsEn: "AP, A Level, IGCSE and IB specifications, papers and grades" },
+  { track: "assessment", href: "/assessments", zh: "数学入学考试与测评", en: "Admissions tests", fieldsZh: "数学模块、报名、日期、考纲、样卷与成绩", fieldsEn: "Mathematics sections, registration, dates, scope, samples and scores" },
+];
+
+function trackRecordCount(track: Track) {
+  return allProjects.filter((project) => project.track === track && (track !== "research" || project.eligibilityTags.includes("research-program"))).length;
+}
+
 export default function Home() {
-  const dateCount = allProjects.reduce((total, project) => total + project.dates.length, 0);
   const today = new Date().toISOString().slice(0, 10);
-  const upcoming = allProjects.flatMap((project) => project.dates.map((date) => ({ ...date, project })))
-    .filter((item) => item.status === "confirmed" && item.date >= today)
-    .sort((a, b) => a.date.localeCompare(b.date)).slice(0, 9);
+  const upcomingByTrack = [...programTracks, ...academicTracks].map((info) => ({
+    ...info,
+    dates: allProjects
+      .filter((project) => project.track === info.track)
+      .flatMap((project) => project.dates.map((date) => ({ ...date, project })))
+      .filter((item) => item.status === "confirmed" && item.date >= today)
+      .sort((a, b) => a.date.localeCompare(b.date))
+      .slice(0, 2),
+  })).filter((group) => group.dates.length > 0);
 
   return (
     <main>
       <section className="home-hero">
         <div className="page-container home-hero-grid">
           <div>
-            <p className="label">MATHPATH · 中英双语 / BILINGUAL</p>
-            <h1><span className="lang-zh">数学竞赛、建模、科研、夏校与考试数据库</span><span className="lang-en">Mathematics competitions, modeling, research, summer programs and assessments</span></h1>
-            <p><span className="lang-zh">查询资格、日期、赛制、费用、奖项、历年分数线和官方来源。</span><span className="lang-en">Search eligibility, dates, format, cost, awards, historical thresholds and official sources.</span></p>
-            <form className="home-search" action="/catalog" method="get"><input name="q" type="search" aria-label="Search" placeholder="AMC / PROMYS / TMUA / 中国高中数学联赛" /><button className="primary-button" type="submit"><span className="lang-zh">查询</span><span className="lang-en">Search</span></button></form>
+            <p className="label"><span className="lang-zh">中英双语 · 最后更新 {LAST_UPDATED}</span><span className="lang-en">Bilingual · Updated {LAST_UPDATED}</span></p>
+            <h1><span className="lang-zh">国际升学数学资料库</span><span className="lang-en">Mathematics Resource Library for International Education</span></h1>
+            <p><span className="lang-zh">面向中国中学生的数学竞赛、建模、科研、夏校、国际课程与入学考试资料。</span><span className="lang-en">Mathematics competitions, modeling, research, summer programs, international curricula and admissions tests for students in China.</span></p>
+            <form className="home-search" action="/catalog" method="get"><input name="q" type="search" aria-label="Search" placeholder="AMC / HiMCM / PRIMES / AP / IB / TMUA" /><button className="primary-button" type="submit"><span className="lang-zh">查询</span><span className="lang-en">Search</span></button></form>
           </div>
-          <div className="home-stats">
-            <div><strong>{allProjects.length}</strong><span className="lang-zh">项目档案</span><span className="lang-en">project records</span></div>
-            <div><strong>{allThresholds.length}</strong><span className="lang-zh">分数线记录</span><span className="lang-en">threshold records</span></div>
-            <div><strong>{dateCount}</strong><span className="lang-zh">日期节点</span><span className="lang-en">date records</span></div>
-            <div><strong>{allSources.length}</strong><span className="lang-zh">来源记录</span><span className="lang-en">source records</span></div>
-          </div>
+          <nav className="home-entry-list" aria-label="Main sections">
+            <Link href="/programs"><strong><span className="lang-zh">竞赛与项目</span><span className="lang-en">Competitions & programs</span></strong><span className="lang-zh">竞赛、建模、科研、夏校</span><span className="lang-en">Competitions, modeling, research and summer programs</span></Link>
+            <Link href="/courses-tests"><strong><span className="lang-zh">课程与考试</span><span className="lang-en">Courses & tests</span></strong><span className="lang-zh">国际课程数学、入学考试与定量测评</span><span className="lang-en">International curricula and admissions assessments</span></Link>
+            <Link href="/resources"><strong><span className="lang-zh">资料中心</span><span className="lang-en">Resources</span></strong><span className="lang-zh">考纲、真题、分数线、教材与官方入口</span><span className="lang-en">Syllabi, papers, thresholds, textbooks and official sites</span></Link>
+          </nav>
         </div>
       </section>
 
       <section className="home-section page-container">
-        <div className="section-heading"><h2><span className="lang-zh">分类</span><span className="lang-en">Categories</span></h2><Link href="/catalog"><span className="lang-zh">打开全部项目</span><span className="lang-en">Open all records</span></Link></div>
-        <div className="track-grid">{trackInfo.map((item) => <Link className="track-tile" key={item.track} href={item.href}><b>{allProjects.filter((project) => project.track === item.track).length}</b><h3><span className="lang-zh">{item.zh}</span><span className="lang-en">{item.en}</span></h3><p><span className="lang-zh">{item.fieldsZh}</span><span className="lang-en">{item.fieldsEn}</span></p></Link>)}</div>
+        <div className="section-heading"><h2><span className="lang-zh">竞赛与项目</span><span className="lang-en">Competitions and programs</span></h2><Link href="/programs"><span className="lang-zh">查看分类入口</span><span className="lang-en">Open section</span></Link></div>
+        <div className="track-grid track-grid-four">{programTracks.map((item) => <Link className="track-tile" key={item.track} href={item.href}><b>{trackRecordCount(item.track)}</b><h3><span className="lang-zh">{item.zh}</span><span className="lang-en">{item.en}</span></h3><p><span className="lang-zh">{item.fieldsZh}</span><span className="lang-en">{item.fieldsEn}</span></p></Link>)}</div>
       </section>
 
       <section className="home-section page-container">
-        <div className="section-heading"><h2><span className="lang-zh">最近已确认日期</span><span className="lang-en">Next confirmed dates</span></h2><Link href="/calendar"><span className="lang-zh">打开日历</span><span className="lang-en">Open calendar</span></Link></div>
-        <div className="deadline-grid">{upcoming.map((item) => <Link className="deadline-card" key={`${item.project.id}-${item.id}`} href={projectHref(item.project)}><time dateTime={item.date}>{item.date}{item.endDate ? ` — ${item.endDate}` : ""}</time><StatusBadge status={item.status} /><h3>{item.project.shortTitle}</h3><p><Localized text={item.label} /></p></Link>)}</div>
+        <div className="section-heading"><h2><span className="lang-zh">课程与考试</span><span className="lang-en">Courses and tests</span></h2><Link href="/courses-tests"><span className="lang-zh">查看分类入口</span><span className="lang-en">Open section</span></Link></div>
+        <div className="track-grid track-grid-two">{academicTracks.map((item) => <Link className="track-tile" key={item.track} href={item.href}><b>{trackRecordCount(item.track)}</b><h3><span className="lang-zh">{item.zh}</span><span className="lang-en">{item.en}</span></h3><p><span className="lang-zh">{item.fieldsZh}</span><span className="lang-en">{item.fieldsEn}</span></p></Link>)}</div>
       </section>
 
       <section className="home-section page-container">
-        <div className="section-heading"><h2><span className="lang-zh">信息状态</span><span className="lang-en">Data status</span></h2><Link href="/sources"><span className="lang-zh">查看来源</span><span className="lang-en">View sources</span></Link></div>
-        <div className="status-legend">
-          <div><StatusBadge status="confirmed" /><p><span className="lang-zh">来源已公布当前周期信息。</span><span className="lang-en">The source publishes current-cycle information.</span></p></div>
-          <div><StatusBadge status="historical" /><p><span className="lang-zh">仅代表所标年份或往届记录。</span><span className="lang-en">Applies only to the stated past cycle.</span></p></div>
-          <div><StatusBadge status="pending" /><p><span className="lang-zh">当前周期尚未公布。</span><span className="lang-en">The current cycle has not been published.</span></p></div>
-          <div><StatusBadge status="conflict" /><p><span className="lang-zh">官方页面之间存在不一致。</span><span className="lang-en">Official pages contain inconsistent values.</span></p></div>
-        </div>
+        <div className="section-heading"><h2><span className="lang-zh">按留学地区查询</span><span className="lang-en">Study destinations</span></h2><Link href="/destinations"><span className="lang-zh">查看地区数学要求</span><span className="lang-en">View mathematics requirements</span></Link></div>
+        <div className="destination-home-grid">{destinationGuides.map((guide) => <Link key={guide.id} href={`/destinations/${guide.slug}`}><strong><Localized text={guide.shortTitle} /></strong><span><Localized text={guide.facts[0].value} /></span></Link>)}</div>
+      </section>
+
+      <section className="home-section page-container">
+        <div className="section-heading"><h2><span className="lang-zh">近期日期</span><span className="lang-en">Upcoming dates</span></h2><Link href="/calendar"><span className="lang-zh">打开完整日历</span><span className="lang-en">Open full calendar</span></Link></div>
+        <div className="deadline-groups">{upcomingByTrack.map((group) => <section className={`deadline-group deadline-group-${group.track}`} key={group.track}><div className="deadline-group-heading"><h3><span className="lang-zh">{group.zh}</span><span className="lang-en">{group.en}</span></h3><Link href={group.href}><span className="lang-zh">查看</span><span className="lang-en">View</span></Link></div><div className="deadline-list">{group.dates.map((item) => <Link className="deadline-card" key={`${item.project.id}-${item.id}`} href={projectHref(item.project)}><time dateTime={item.date}>{item.date}{item.endDate ? ` — ${item.endDate}` : ""}</time><StatusBadge status={item.status} /><h3>{item.project.shortTitle}</h3><p><Localized text={item.label} /></p></Link>)}</div></section>)}</div>
       </section>
     </main>
   );

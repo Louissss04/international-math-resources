@@ -1,0 +1,183 @@
+import { t, type LearningResourceRecord } from "@/app/lib/types";
+
+const VERIFIED_AT = "2026-08-05";
+
+export const officialSpecimenAndSampleResources: LearningResourceRecord[] = [
+  {
+    id: "college-board-sat-paper-practice-tests",
+    projectIds: ["sat"],
+    title: t("SAT 官方全长纸质练习卷", "Official Full-Length SAT Paper Practice Tests"),
+    provider: t("College Board", "College Board"),
+    url: "https://satsuite.collegeboard.org/practice/practice-tests/paper",
+    kind: "sample-questions",
+    description: t(
+      "汇总多套可打印的全长非自适应 SAT 练习卷；每套均配计分指南、答案和逐题解析。",
+      "Collects multiple printable, full-length nonadaptive SAT practice tests, each with a scoring guide, answer key, and question-by-question explanations.",
+    ),
+    access: "free",
+    note: t(
+      "纸质卷不模拟数字 SAT 的自适应分流。参加 Bluebook 数字考试的学生还应完成至少一套 Bluebook 自适应模考。",
+      "Paper tests do not reproduce the digital SAT's adaptive routing. Students taking the Bluebook test should also complete at least one adaptive Bluebook practice test.",
+    ),
+    verifiedAt: VERIFIED_AT,
+  },
+  {
+    id: "college-board-ap-calculus-current-sample-questions",
+    projectIds: ["ap-calculus"],
+    title: t("AP Calculus AB/BC 当前官方样题与评分指南", "Current Official AP Calculus AB/BC Sample Questions and Scoring Guidelines"),
+    provider: t("College Board", "College Board"),
+    url: "https://apcentral.collegeboard.org/media/pdf/ap-calculus-ab-and-bc-course-and-exam-description.pdf",
+    kind: "sample-questions",
+    description: t(
+      "最新版课程与考试说明的 Exam Information 部分同时提供 AB、BC 选择题与自由作答样题，并附答案和自由作答评分指南。",
+      "The current Course and Exam Description includes AB and BC multiple-choice and free-response samples in its Exam Information section, followed by answers and free-response scoring guidelines.",
+    ),
+    access: "free",
+    note: t(
+      "这是按当前考试框架编写的代表性样题，不是一套完整等时模考。",
+      "These are representative questions aligned to the current exam framework, not a complete timed practice exam.",
+    ),
+    verifiedAt: VERIFIED_AT,
+  },
+  {
+    id: "college-board-ap-classroom-official-practice",
+    projectIds: ["ap-calculus"],
+    title: t("AP Classroom 官方题库、进度检查与练习考试", "AP Classroom Official Question Bank, Progress Checks, and Practice Exams"),
+    provider: t("College Board", "College Board"),
+    url: "https://apcentral.collegeboard.org/instructional-resources/ap-classroom",
+    kind: "practice-platform",
+    description: t(
+      "教师可按知识点和技能从真实 AP 题库组卷，并布置单元 Progress Checks 与官方练习考试；选择题含答案解析，自由作答题含评分标准。",
+      "Teachers can build assignments from a bank of real AP questions indexed by content and skill and assign unit Progress Checks and official practice exams; multiple-choice items include rationales and free-response items include scoring information.",
+    ),
+    access: "school",
+    note: t(
+      "学生须加入学校的 AP 班级，并由教师布置相应内容；受保护的练习考试不得公开传播。",
+      "Students must join their school's AP class section and receive assignments from a teacher; secure practice-exam content must not be redistributed.",
+    ),
+    verifiedAt: VERIFIED_AT,
+  },
+  {
+    id: "college-board-ap-bluebook-test-preview",
+    projectIds: ["ap-calculus"],
+    title: t("AP Calculus Bluebook 官方机考预览", "Official AP Calculus Bluebook Test Preview"),
+    provider: t("College Board", "College Board"),
+    url: "https://bluebook.collegeboard.org/students/practice",
+    kind: "practice-platform",
+    description: t(
+      "在 Bluebook 的 Practice and Prepare 中打开 AP 考试预览，完成少量选择题与自由作答样题，并熟悉计时器、标记、计算器和题目导航。",
+      "Open the AP test preview under Practice and Prepare in Bluebook to try a short set of multiple-choice and free-response samples and use the timer, marking, calculator, and navigation tools.",
+    ),
+    access: "account",
+    note: t(
+      "预览不限时，不出分，也不反馈答案；AP 全长练习考试在 AP Classroom 中提供。",
+      "The preview is untimed, unscored, and gives no answer feedback; full-length AP practice exams are provided through AP Classroom.",
+    ),
+    verifiedAt: VERIFIED_AT,
+  },
+  {
+    id: "act-2026-27-full-practice-test-1",
+    projectIds: ["act"],
+    title: t("2026—27 ACT 官方全长练习卷 1", "Official 2026–27 Full-Length ACT Practice Test 1"),
+    provider: t("ACT", "ACT"),
+    url: "https://www.act.org/content/dam/act/unsecured/documents/Preparing-for-the-ACT.pdf",
+    kind: "sample-questions",
+    description: t(
+      "一份完整 ACT 练习卷，含 English、Mathematics、Reading、可选 Science 与 Writing、答题纸、答案、换分说明和 Writing 评分标准。",
+      "A complete ACT practice test covering English, Mathematics, Reading, optional Science and Writing, with an answer document, keys, score-conversion instructions, and Writing rubric.",
+    ),
+    access: "free",
+    note: t("题目来自 ACT 已退役的正式试题。", "The questions are retired items from previous official ACT administrations."),
+    verifiedAt: VERIFIED_AT,
+  },
+  {
+    id: "act-full-practice-test-2",
+    projectIds: ["act"],
+    title: t("ACT 官方全长练习卷 2", "Official Full-Length ACT Practice Test 2"),
+    provider: t("ACT", "ACT"),
+    url: "https://www.act.org/content/dam/act/unsecured/documents/ACT-Test-Prep-ACT-Practice-Test-2-Form.pdf",
+    kind: "sample-questions",
+    description: t(
+      "第二套完整 ACT 练习卷，含各科试题、Writing 题目、答题纸、答案、自评分说明和 Writing 评分标准。",
+      "A second complete ACT practice test with all subject tests, a Writing prompt, answer document, keys, self-scoring instructions, and Writing rubric.",
+    ),
+    access: "free",
+    note: t(
+      "ACT 当前免费备考页仍将其列为 Practice Test 2；题目来自已退役正式试题。",
+      "ACT's current free-preparation page continues to list this as Practice Test 2; it uses retired official test questions.",
+    ),
+    verifiedAt: VERIFIED_AT,
+  },
+  {
+    id: "ssat-free-mini-practice-test",
+    projectIds: ["ssat"],
+    title: t("SSAT 官方免费 Mini-Practice Test", "Official Free SSAT Mini-Practice Test"),
+    provider: t("Enrollment Management Association／SSAT", "Enrollment Management Association / SSAT"),
+    url: "https://portal.ssat.org/SAP/Practice",
+    kind: "practice-platform",
+    description: t(
+      "30 道在线诊断样题，完成后即时生成报告，列出学生得分最高和最低的十个主题。",
+      "A 30-question online diagnostic that produces an immediate report identifying the student's ten strongest and weakest topics.",
+    ),
+    access: "account",
+    note: t(
+      "需要 SSAT 家长账户；这不是 Middle 或 Upper Level 的完整模考，完整官方练习为付费产品或随获批 fee waiver 开放。",
+      "An SSAT parent account is required. This is not a full Middle- or Upper-Level test; complete official practice is paid or included with an approved fee waiver.",
+    ),
+    verifiedAt: VERIFIED_AT,
+  },
+  {
+    id: "erb-isee-lower-level-practice-test",
+    projectIds: ["isee"],
+    title: t("ISEE Lower Level 官方纸质练习卷", "Official ISEE Lower Level Paper Practice Test"),
+    provider: t("ERB", "ERB"),
+    url: "https://cdn.erblearn.org/www/20210712_ERB_ISEE_What_To_Expect_Guide_Lower-Level.pdf",
+    kind: "sample-questions",
+    description: t(
+      "适用于申请 5—6 年级的 What to Expect 指南，内含各部分说明、一套纸质练习卷、答案和自评分方法。",
+      "The What to Expect guide for applicants to Grades 5–6, including section guidance, a paper practice test, answer keys, and self-scoring instructions.",
+    ),
+    access: "free",
+    note: t(
+      "ERB 当前备考页仍链接此版本；在线样测另由该页按考试等级进入。",
+      "ERB's current preparation page continues to link this edition; level-specific online samples are also launched from that page.",
+    ),
+    verifiedAt: VERIFIED_AT,
+  },
+  {
+    id: "erb-isee-middle-level-practice-test",
+    projectIds: ["isee"],
+    title: t("ISEE Middle Level 官方纸质练习卷", "Official ISEE Middle Level Paper Practice Test"),
+    provider: t("ERB", "ERB"),
+    url: "https://cdn.erblearn.org/www/20210712_ERB_ISEE_What_to_Expect_Guide_Middle-Level.pdf",
+    kind: "sample-questions",
+    description: t(
+      "适用于申请 7—8 年级的 What to Expect 指南，内含各部分说明、一套纸质练习卷、答案和自评分方法。",
+      "The What to Expect guide for applicants to Grades 7–8, including section guidance, a paper practice test, answer keys, and self-scoring instructions.",
+    ),
+    access: "free",
+    note: t(
+      "ERB 当前备考页仍链接此版本；在线样测另由该页按考试等级进入。",
+      "ERB's current preparation page continues to link this edition; level-specific online samples are also launched from that page.",
+    ),
+    verifiedAt: VERIFIED_AT,
+  },
+  {
+    id: "erb-isee-upper-level-practice-test",
+    projectIds: ["isee"],
+    title: t("ISEE Upper Level 官方纸质练习卷", "Official ISEE Upper Level Paper Practice Test"),
+    provider: t("ERB", "ERB"),
+    url: "https://cdn.erblearn.org/www/20210712_ERB_ISEE_What_to_Expect_Guide_Upper-Level.pdf",
+    kind: "sample-questions",
+    description: t(
+      "适用于申请 9—12 年级的 What to Expect 指南，内含各部分说明、一套纸质练习卷、答案和自评分方法。",
+      "The What to Expect guide for applicants to Grades 9–12, including section guidance, a paper practice test, answer keys, and self-scoring instructions.",
+    ),
+    access: "free",
+    note: t(
+      "ERB 当前备考页仍链接此版本；在线样测另由该页按考试等级进入。",
+      "ERB's current preparation page continues to link this edition; level-specific online samples are also launched from that page.",
+    ),
+    verifiedAt: VERIFIED_AT,
+  },
+];

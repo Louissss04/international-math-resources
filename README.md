@@ -1,4 +1,4 @@
-# MathPath
+# 国际升学数学资料库
 
 面向中国中学生与升学规划师的中英双语数学项目数据库。
 
@@ -32,4 +32,8 @@ npm run dev
 npm run lint
 npx tsc --noEmit
 npm test
+npm run export:static
+npm run test:static
 ```
+
+静态多页版本生成在 `outputs/mathpath-static/`。直接打开其中的 `index.html`，无需启动服务器。
