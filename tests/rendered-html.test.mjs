@@ -304,6 +304,11 @@ test("separates formal modeling competitions from open modeling projects", async
   for (const pattern of [/数学建模竞赛/, /开放建模项目与训练/, /地区受限项目/, /MidMCM/, /SCUDEM/, /MCM\/ICM/, /M3 Open Mathematical Modeling Project Library/, /SIMIODE Differential-Equations Modeling Scenarios/, /COMAP Mathematical Modeling Modules/]) {
     assert.match(directoryHtml, pattern);
   }
+  const scopedProjectIds = directoryHtml.match(/data-project-ids="([^"]+)"/)?.[1].split("|") ?? [];
+  assert.deepEqual(new Set(scopedProjectIds), new Set(["himcm", "immc", "midmcm", "scudem", "mcm-icm", "m3-challenge", "modeling-the-future-challenge", "mmcss-hsmmc"]));
+  for (const openProjectId of ["comap-modeling-modules-project", "m3-open-modeling-projects", "simiode-modeling-scenarios", "gaimme-school-modeling-project"]) {
+    assert.ok(!scopedProjectIds.includes(openProjectId), `open project is inside the formal competition catalog: ${openProjectId}`);
+  }
   const filterOptionText = [...directoryHtml.matchAll(/<option\b[^>]*>([\s\S]*?)<\/option>/g)]
     .map((match) => match[1].replace(/<!--.*?-->/g, " ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim());
   for (const internalCode of ["undergraduate", "hong-kong", "shanghai", "united-kingdom"]) {

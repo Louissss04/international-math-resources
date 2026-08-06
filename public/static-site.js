@@ -305,7 +305,12 @@
     var costSelect = selects.find(function (select) { return Array.prototype.some.call(select.options, function (option) { return option.value === "free"; }); });
     var regionSelect = selects.find(function (select) { return /地区|Region/i.test((select.closest("label") || {}).textContent || ""); }) || selects.find(function (select) { return select !== trackSelect && select !== gradeSelect && select !== statusSelect && select !== costSelect; });
     var fixedTrack = detectFixedTrack(filters);
-    var subset = fixedTrack ? projects.filter(function (project) { return project.track === fixedTrack; }) : projects.slice();
+    var declaredProjectIds = (root.dataset.projectIds || "").split("|").filter(Boolean);
+    var subset = declaredProjectIds.length
+      ? projects.filter(function (project) { return declaredProjectIds.indexOf(project.id) !== -1; })
+      : fixedTrack
+        ? projects.filter(function (project) { return project.track === fixedTrack; })
+        : projects.slice();
     var queryValue = "";
     try { queryValue = new URL(window.location.href).searchParams.get("q") || ""; } catch { queryValue = ""; }
     if (input) input.value = queryValue;

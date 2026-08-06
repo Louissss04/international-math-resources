@@ -47,7 +47,11 @@ export function CatalogClient({ projects, fixedTrack, initialQuery = "" }: { pro
   }
 
   return (
-    <div data-static-component="catalog" data-fixed-track={fixedTrack ?? ""}>
+    <div
+      data-static-component="catalog"
+      data-fixed-track={fixedTrack ?? ""}
+      data-project-ids={projects.map((project) => project.id).join("|")}
+    >
       <div className="catalog-filters">
         <label className="filter-search">
           <span className="lang-zh">关键词</span><span className="lang-en">Keyword</span>

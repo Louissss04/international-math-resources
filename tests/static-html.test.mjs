@@ -473,6 +473,22 @@ test("curricula, admissions tests and competitions remain separate", async () =>
   assert.ok(!Object.values(data.routeMap).includes("assessment-ap-calculus.html"), "obsolete combined AP assessment page is still exported");
 });
 
+test("keeps the static modeling catalog scoped to formal competitions", async () => {
+  const data = await loadStaticData();
+  const html = await readFile(path.join(outputDirectory, "modeling.html"), "utf8");
+  const catalogTag = html.match(/<div\b[^>]*data-static-component=["']catalog["'][^>]*>/i)?.[0] ?? "";
+  const scopedIds = catalogTag.match(/data-project-ids=["']([^"']*)["']/i)?.[1].split("|").filter(Boolean) ?? [];
+  const expectedIds = data.projects
+    .filter((project) => project.track === "modeling" && project.eligibilityTags.includes("modeling-competition"))
+    .map((project) => project.id);
+  assert.deepEqual(new Set(scopedIds), new Set(expectedIds));
+  for (const project of data.projects.filter((item) => item.track === "modeling" && item.eligibilityTags.includes("modeling-open-project"))) {
+    assert.ok(!scopedIds.includes(project.id), `${project.id} is inside the formal competition catalog scope`);
+  }
+  const runtime = await readFile(path.join(outputDirectory, "assets/static-site.js"), "utf8");
+  assert.match(runtime, /root\.dataset\.projectIds/, "static catalog runtime ignores its declared project scope");
+});
+
 test("calendar exports begin in 2026 and archive elapsed milestones by end date", async () => {
   const data = await loadStaticData();
   const calendarStart = "2026-01-01";
