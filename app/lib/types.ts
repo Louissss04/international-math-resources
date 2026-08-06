@@ -25,6 +25,83 @@ export type SourceKind =
 
 export type CostBand = "free" | "low" | "medium" | "high" | "varies";
 
+export type JournalType =
+  | "youth-research-journal"
+  | "student-research-journal"
+  | "professional-research-journal"
+  | "expository-journal"
+  | "problem-solving-publication"
+  | "showcase-magazine";
+
+export type JournalAudienceScope =
+  | "secondary-only"
+  | "secondary-and-undergraduate"
+  | "students-general"
+  | "no-age-restriction"
+  | "eligibility-unclear";
+
+export type JournalReviewModel =
+  | "professional-peer-review"
+  | "student-peer-review"
+  | "editorial-review"
+  | "editorial-screening"
+  | "mixed"
+  | "not-stated";
+
+export type JournalSubmissionStatus =
+  | "open-rolling"
+  | "open-window"
+  | "closed"
+  | "paused"
+  | "historical"
+  | "unclear";
+
+export type JournalOutcomeType =
+  | "problem-solution-credit"
+  | "editor-selected-article"
+  | "peer-reviewed-research-paper"
+  | "mixed";
+
+export type JournalFeeCategory =
+  | "no-fee"
+  | "optional-fee"
+  | "paid-required"
+  | "varies"
+  | "unclear";
+
+export type JournalLinkKind =
+  | "home"
+  | "author-guidelines"
+  | "submission-portal"
+  | "template"
+  | "fees"
+  | "ethics"
+  | "archive"
+  | "sample-article";
+
+export type JournalArticleType =
+  | "original-research"
+  | "expository-paper"
+  | "modeling-paper"
+  | "problem-solution"
+  | "review-survey"
+  | "computational-project"
+  | "short-note";
+
+export type JournalTopicTag =
+  | "algebra"
+  | "number-theory"
+  | "geometry-topology"
+  | "combinatorics-graph-theory"
+  | "analysis-calculus"
+  | "probability-statistics"
+  | "applied-modeling"
+  | "data-computation"
+  | "mathematics-education"
+  | "history-philosophy-exposition"
+  | "general-mathematics"
+  | "interdisciplinary-stem";
+
 export type LearningResourceKind =
   | "past-papers"
   | "sample-questions"
@@ -224,6 +301,43 @@ export interface ContentSection {
   paragraphs?: LocalizedText[];
   bullets?: LocalizedText[];
   tables?: DataTableRecord[];
+}
+
+export interface JournalLinkRecord {
+  label: LocalizedText;
+  url: string;
+  kind: JournalLinkKind;
+  note?: LocalizedText;
+}
+
+export interface JournalRecord {
+  id: string;
+  slug: string;
+  title: LocalizedText;
+  shortTitle: string;
+  publisher: LocalizedText;
+  summary: LocalizedText;
+  journalType: JournalType;
+  audienceScope: JournalAudienceScope;
+  topicTags: JournalTopicTag[];
+  articleTypes: JournalArticleType[];
+  languages: LocalizedText[];
+  reviewModel: JournalReviewModel;
+  submissionStatus: JournalSubmissionStatus;
+  submissionSchedule: LocalizedText;
+  outcomeType: JournalOutcomeType;
+  feeCategory: JournalFeeCategory;
+  studentEligibility: LocalizedText;
+  mentorPolicy: LocalizedText;
+  fees: LocalizedText;
+  copyrightPolicy: LocalizedText;
+  status: InformationStatus;
+  facts: FactRecord[];
+  sections: ContentSection[];
+  links: JournalLinkRecord[];
+  sourceIds: string[];
+  relatedProjectIds?: string[];
+  lastVerified: string;
 }
 
 export interface ThresholdRecord {

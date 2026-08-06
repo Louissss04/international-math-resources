@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "竞赛与项目", description: "数�
 const items: Array<{ track: Track; href: string; zh: string; en: string; descriptionZh: string; descriptionEn: string }> = [
   { track: "competition", href: "/competitions", zh: "数学竞赛", en: "Mathematics competitions", descriptionZh: "赛制、报名、日期、奖项线、考纲与历年题。", descriptionEn: "Format, registration, dates, thresholds, scope and past papers." },
   { track: "modeling", href: "/modeling", zh: "数学建模", en: "Mathematical modeling", descriptionZh: "组队、赛期、论文、提交、奖项与历届题目。", descriptionEn: "Teams, contest windows, papers, submission, awards and past problems." },
-  { track: "research", href: "/research", zh: "数学科研", en: "Mathematical research", descriptionZh: "科研项目、技能工具、研究方法、申请资格与成果。", descriptionEn: "Research programs, skills, methods, eligibility and outputs." },
+  { track: "research", href: "/research", zh: "数学科研", en: "Mathematical research", descriptionZh: "科研项目、技能工具、论文规范、期刊与投稿。", descriptionEn: "Research programs, skills, paper standards, journals and submission." },
   { track: "summer", href: "/summer", zh: "数学夏校", en: "Mathematics summer programs", descriptionZh: "项目内容、国际生资格、费用、资助与申请材料。", descriptionEn: "Programs, international eligibility, cost, aid and applications." },
 ];
 

@@ -19,6 +19,7 @@ const TOP_LEVEL_ROUTES = [
   "/competitions",
   "/modeling",
   "/research",
+  "/journals",
   "/summer",
   "/courses",
   "/assessments",
@@ -87,6 +88,7 @@ async function loadSiteData() {
     const dataModule = await vite.ssrLoadModule("/app/data/index.ts");
     const data = {
       projects: plainData(dataModule.allProjects ?? []),
+      journals: plainData(dataModule.allJournals ?? []),
       sources: plainData(dataModule.allSources ?? []),
       thresholds: plainData(dataModule.allThresholds ?? []),
       syllabi: plainData(dataModule.allOfficialSyllabi ?? []),
@@ -107,6 +109,10 @@ function projectRoute(project) {
   return `/${base}/${project.slug}`;
 }
 
+function journalRoute(journal) {
+  return `/journals/${journal.slug}`;
+}
+
 function syllabusRoute(syllabus) {
   return `/syllabi/${syllabus.slug}`;
 }
@@ -115,12 +121,15 @@ function destinationRoute(guide) {
   return `/destinations/${guide.slug}`;
 }
 
-function routeFileName(route, projects, syllabi, destinationGuides) {
+function routeFileName(route, projects, syllabi, destinationGuides, journals) {
   const clean = route === "/" ? "/" : route.replace(/\/+$/, "");
   if (clean === "/") return "index.html";
 
   const project = projects.find((item) => projectRoute(item) === clean);
   if (project) return `${TRACK_FILE_PREFIX[project.track]}-${project.slug}.html`;
+
+  const journal = journals.find((item) => journalRoute(item) === clean);
+  if (journal) return `journal-${journal.slug}.html`;
 
   const syllabus = syllabi.find((item) => syllabusRoute(item) === clean);
   if (syllabus) {
@@ -137,9 +146,9 @@ function routeFileName(route, projects, syllabi, destinationGuides) {
   throw new Error(`No static filename is defined for route '${route}'.`);
 }
 
-function buildRouteMap(projects, syllabi, destinationGuides) {
-  const routes = [...TOP_LEVEL_ROUTES, ...projects.map(projectRoute), ...syllabi.map(syllabusRoute), ...destinationGuides.map(destinationRoute)];
-  const entries = routes.map((route) => [route, routeFileName(route, projects, syllabi, destinationGuides)]);
+function buildRouteMap(projects, syllabi, destinationGuides, journals) {
+  const routes = [...TOP_LEVEL_ROUTES, ...projects.map(projectRoute), ...syllabi.map(syllabusRoute), ...destinationGuides.map(destinationRoute), ...journals.map(journalRoute)];
+  const entries = routes.map((route) => [route, routeFileName(route, projects, syllabi, destinationGuides, journals)]);
   return { routes, map: new Map(entries) };
 }
 
@@ -224,7 +233,7 @@ function transformHtml(html, route, routeMap) {
   return `${output}${runtime}`;
 }
 
-async function renderRoutes(routes, routeMap, projects, syllabi, destinationGuides) {
+async function renderRoutes(routes, routeMap, projects, syllabi, destinationGuides, journals) {
   const workerUrl = pathToFileURL(DIST_SERVER);
   workerUrl.searchParams.set("static-export", `${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
@@ -239,7 +248,7 @@ async function renderRoutes(routes, routeMap, projects, syllabi, destinationGuid
     const contentType = response.headers.get("content-type") ?? "";
     if (!contentType.startsWith("text/html")) throw new Error(`Rendering ${route} did not return HTML.`);
     const html = transformHtml(await response.text(), route, routeMap);
-    await writeFile(path.join(OUTPUT, routeFileName(route, projects, syllabi, destinationGuides)), html, "utf8");
+    await writeFile(path.join(OUTPUT, routeFileName(route, projects, syllabi, destinationGuides, journals)), html, "utf8");
   }
 }
 
@@ -819,13 +828,13 @@ async function main() {
   await stat(DIST_SERVER);
   await stat(DIST_CLIENT);
   const data = await loadSiteData();
-  const { routes, map } = buildRouteMap(data.projects, data.syllabi, data.destinationGuides);
+  const { routes, map } = buildRouteMap(data.projects, data.syllabi, data.destinationGuides, data.journals);
 
   await rm(OUTPUT, { recursive: true, force: true });
   await mkdir(ASSETS, { recursive: true });
   await copyClientAssets();
   await writeRuntimeAssets(data, map);
-  await renderRoutes(routes, map, data.projects, data.syllabi, data.destinationGuides);
+  await renderRoutes(routes, map, data.projects, data.syllabi, data.destinationGuides, data.journals);
 
   console.log(`International Mathematics Resource Library static export complete: ${routes.length} HTML files`);
   console.log(path.join(OUTPUT, "index.html"));

@@ -372,6 +372,66 @@
     if (projects.length) render();
   }
 
+  function initJournalDirectory() {
+    var root = document.querySelector('[data-static-component="journal-directory"]');
+    if (!root) return;
+    var filters = root.querySelector(".journal-filters");
+    var results = root.querySelector("[data-journal-results]");
+    var rows = Array.prototype.slice.call(root.querySelectorAll("[data-journal-row]"));
+    var count = root.querySelector("[data-journal-result-count]");
+    var empty = root.querySelector("[data-journal-empty]");
+    var reset = root.querySelector("[data-journal-reset]");
+    if (!filters || !results) return;
+
+    function control(name) {
+      return filters.querySelector('[data-journal-filter="' + name + '"]');
+    }
+
+    function filterValue(name) {
+      var field = control(name);
+      return field ? String(field.value || "all") : "all";
+    }
+
+    function exactMatch(row, name) {
+      var selected = filterValue(name);
+      return selected === "all" || row.dataset[name] === selected;
+    }
+
+    function render() {
+      var query = control("query");
+      var needle = query ? query.value.trim().toLowerCase() : "";
+      var selectedTopic = filterValue("topic");
+      var visibleCount = 0;
+
+      rows.forEach(function (row) {
+        var topics = String(row.dataset.topic || "").split("|").filter(Boolean);
+        var visible = (!needle || String(row.dataset.search || "").toLowerCase().indexOf(needle) !== -1) &&
+          (selectedTopic === "all" || topics.indexOf(selectedTopic) !== -1) &&
+          exactMatch(row, "audience") &&
+          exactMatch(row, "review") &&
+          exactMatch(row, "submission") &&
+          exactMatch(row, "outcome") &&
+          exactMatch(row, "fee");
+        row.hidden = !visible;
+        if (visible) visibleCount += 1;
+      });
+
+      if (count) count.textContent = String(visibleCount);
+      results.hidden = visibleCount === 0;
+      if (empty) empty.hidden = visibleCount > 0;
+    }
+
+    filters.addEventListener("input", render);
+    filters.addEventListener("change", render);
+    if (reset) reset.addEventListener("click", function () {
+      Array.prototype.forEach.call(filters.querySelectorAll("input, select"), function (field) {
+        field.value = field.tagName === "SELECT" ? "all" : "";
+      });
+      render();
+    });
+    render();
+  }
+
   function initArchive() {
     var filters = document.querySelector(".archive-filters");
     var groupsContainer = document.querySelector(".archive-year-groups");
@@ -1008,6 +1068,7 @@
     initMenu();
     initHomeSearch();
     initCatalog();
+    initJournalDirectory();
     initArchive();
     initCalendar();
     initCompare();

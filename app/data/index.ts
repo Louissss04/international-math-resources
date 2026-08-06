@@ -2,6 +2,7 @@ import { competitionProjects, competitionSources, competitionThresholds } from "
 import { programProjects, programSources, programThresholds } from "./programs";
 import { researchProgramLearningResources, researchProgramProjects, researchProgramSources } from "./research-programs";
 import { researchSkillsLearningResources, researchSkillsProjects, researchSkillsSources } from "./research-skills";
+import { journals, journalSources } from "./journals";
 import { assessmentSources, assessmentThresholds, universityPolicies as policies } from "./assessments";
 import { mathAssessmentProjects } from "./assessment-projects-math";
 import { applyMathematicsThresholdScope } from "./assessment-thresholds-math";
@@ -44,7 +45,7 @@ import {
   modelingCatalogSources,
   modelingCatalogThresholds,
 } from "./modeling-catalog";
-import type { AdmissionRequirementRecord, AssessmentSyllabusRecord, BookResourceRecord, DestinationGuideRecord, LearningResourceRecord, PastPaperArchiveRecord, ProjectRecord, SourceRecord, ThresholdRecord, UniversityPolicyRecord, VideoResourceRecord } from "../lib/types";
+import type { AdmissionRequirementRecord, AssessmentSyllabusRecord, BookResourceRecord, DestinationGuideRecord, JournalRecord, LearningResourceRecord, PastPaperArchiveRecord, ProjectRecord, SourceRecord, ThresholdRecord, UniversityPolicyRecord, VideoResourceRecord } from "../lib/types";
 
 function uniqueById<T extends { id: string }>(records: T[]): T[] {
   const seen = new Set<string>();
@@ -69,6 +70,8 @@ export const allProjects: ProjectRecord[] = uniqueById([
   ...mathAssessmentProjects,
 ]);
 
+export const allJournals: JournalRecord[] = uniqueById(journals);
+
 const projectIds = new Set(allProjects.map((project) => project.id));
 
 export const allSources: SourceRecord[] = uniqueById([
@@ -77,6 +80,7 @@ export const allSources: SourceRecord[] = uniqueById([
   ...modelingCatalogSources,
   ...researchSkillsSources,
   ...researchProgramSources,
+  ...journalSources,
   ...apCourseSources,
   ...cambridgeCourseSources,
   ...ibCourseSources,

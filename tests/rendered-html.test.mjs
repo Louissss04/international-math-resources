@@ -105,6 +105,7 @@ test("renders track directories and category-specific archives, calendars and co
     ["/competitions", /数学竞赛/],
     ["/modeling", /数学建模/],
     ["/research", /数学科研/],
+    ["/journals", /中学生数学论文期刊与投稿/],
     ["/summer", /夏校与夏令营/],
     ["/courses", /数学课程与统考/],
     ["/assessments", /数学入学考试与定量测评/],
@@ -362,6 +363,42 @@ test("separates research programs by access and organizer type", async () => {
   }
 });
 
+test("renders a separate mathematics journal directory with detailed submission records", async () => {
+  const researchHtml = await renderHtml("/research");
+  assert.match(researchHtml, /href="\/journals"/);
+  assert.match(researchHtml, /期刊与刊物目录/);
+
+  const directoryHtml = await renderHtml("/journals");
+  assert.match(directoryHtml, /data-static-component="journal-directory"/);
+  for (const pattern of [
+    /按论文内容选择/,
+    /纯数学、定理与证明/,
+    /建模、统计、计算与数据/,
+    /原创问题与题解/,
+    /题解署名不等同于研究论文发表/,
+    /Journal of Emerging Investigators 当前官网明确不收 Mathematics/,
+  ]) assert.match(directoryHtml, pattern);
+  for (const label of ["R-HUMJ", "JHSS", "NHSJS", "Parabola", "Crux", "Mathematical Reflections", "JIS", "INTEGERS", "EJC"]) {
+    assert.match(directoryHtml, new RegExp(label), label);
+  }
+  assert.equal(childRoutes(directoryHtml, "/journals").length, 16);
+
+  for (const [path, patterns] of [
+    ["/journals/journal-of-high-school-science", [/主要 Topic/, /85 美元投稿费/, /两名独立评审/, /许可证简称与所链接法律文本存在不一致/]],
+    ["/journals/national-high-school-journal-of-science", [/Mathematics (?:&|&amp;) Statistics/, /280 美元/, /1—2 名专家评审/, /最多 20 页/]],
+    ["/journals/columbia-junior-science-journal", [/2026-09-30/, /纯数学适配/, /官网未把它描述为双盲专业同行评审/]],
+    ["/journals/rose-hulman-undergraduate-mathematics-journal", [/高中生/, /Sponsor/, /教师不得共同署名/, /转让全部版权/]],
+    ["/journals/mathematical-reflections", [/编辑遴选型出版物/, /LaTeX 源码/, /题解署名/, /不等于同行评审论文/]],
+    ["/journals/journal-of-integer-sequences", [/OEIS A-number/, /完全免费/, /中国邮箱/, /正文不得由 LLM 撰写/]],
+  ]) {
+    const html = await renderHtml(path);
+    for (const pattern of patterns) assert.match(html, pattern, `${path}: ${pattern}`);
+    assert.match(html, /官方投稿入口与材料/, path);
+    assert.match(html, /最后更新/, path);
+    assert.doesNotMatch(html, /加入规划器|Add to planner|研究节点|Research milestones/, path);
+  }
+});
+
 test("renders a research skills matrix, proficiency standards and learning path", async () => {
   const directoryHtml = await renderHtml("/research");
   assert.match(directoryHtml, /href="\/research\/skills"/);
@@ -413,7 +450,7 @@ test("renders a searchable official-site directory without third-party sources",
   const html = await renderHtml("/official-sites");
   assert.match(html, /Official website directory/);
   assert.match(html, /data-static-component="official-sites"/);
-  for (const groupId of ["competition", "modeling", "research", "summer", "curriculum", "assessment", "university-united-states", "university-united-kingdom", "university-singapore", "university-australia", "university-canada", "university-other-europe"]) {
+  for (const groupId of ["competition", "modeling", "research", "journal", "summer", "curriculum", "assessment", "university-united-states", "university-united-kingdom", "university-singapore", "university-australia", "university-canada", "university-other-europe"]) {
     assert.match(html, new RegExp(`data-official-site-group="${groupId}"`), groupId);
   }
   for (const sourceId of ["sat-home", "act-home", "himcm-home", "aksf-home", "uk-ucas-how-to-apply", "sg-nus-gaokao-2026"]) {

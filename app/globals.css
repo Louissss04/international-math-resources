@@ -173,9 +173,10 @@ html[data-language="en"] .lang-en { display: inline; }
 .track-tools a { display: flex; flex-direction: column; gap: 5px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--blue); border-radius: var(--radius); padding: 14px 16px; }
 .track-tools strong { color: var(--ink); font-size: .9rem; }
 .track-tools span { color: var(--muted); font-size: .77rem; }
-.catalog-filters, .archive-filters, .calendar-filters { display: grid; grid-template-columns: minmax(220px, 1.4fr) repeat(5, minmax(130px, .7fr)); gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
-.catalog-filters label, .archive-filters label, .calendar-filters label, .planner-workspace label { display: flex; flex-direction: column; gap: 5px; font-size: .76rem; font-weight: 700; color: #4a5960; }
-.catalog-filters input, .catalog-filters select, .archive-filters input, .archive-filters select, .calendar-filters input, .calendar-filters select, .planner-workspace input, .planner-workspace select, .planner-workspace textarea { width: 100%; min-width: 0; border: 1px solid var(--line-dark); border-radius: 5px; background: #fff; padding: 9px 10px; font-size: .88rem; }
+.catalog-filters, .archive-filters, .calendar-filters, .journal-filters { display: grid; grid-template-columns: minmax(220px, 1.4fr) repeat(5, minmax(130px, .7fr)); gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.journal-filters { grid-template-columns: minmax(240px, 1.5fr) repeat(6, minmax(130px, 1fr)); }
+.catalog-filters label, .archive-filters label, .calendar-filters label, .journal-filters label, .planner-workspace label { display: flex; flex-direction: column; gap: 5px; font-size: .76rem; font-weight: 700; color: #4a5960; }
+.catalog-filters input, .catalog-filters select, .archive-filters input, .archive-filters select, .calendar-filters input, .calendar-filters select, .journal-filters input, .journal-filters select, .planner-workspace input, .planner-workspace select, .planner-workspace textarea { width: 100%; min-width: 0; border: 1px solid var(--line-dark); border-radius: 5px; background: #fff; padding: 9px 10px; font-size: .88rem; }
 .result-toolbar { min-height: 60px; display: flex; justify-content: space-between; align-items: center; }
 .result-toolbar p, .result-count { margin: 0; color: var(--muted); font-size: .85rem; }
 .result-toolbar button { border: 0; background: transparent; color: var(--blue); font-size: .82rem; }
@@ -200,6 +201,19 @@ html[data-language="en"] .lang-en { display: inline; }
 .project-card dd { margin: 0; }
 .card-link { color: var(--blue); font-weight: 700; font-size: .86rem; }
 .empty-state { border: 1px dashed var(--line-dark); border-radius: var(--radius); padding: 24px; color: var(--muted); background: rgba(255,255,255,.45); }
+.journal-scope { padding-bottom: 36px; }
+.journal-scope h2 { margin: 0 0 14px; }
+.journal-scope table { min-width: 820px; }
+.journal-scope tbody th { background: var(--surface); }
+.journal-directory-table table { min-width: 1240px; }
+.journal-directory-table th:first-child { width: 260px; }
+.journal-directory-table tbody th { background: var(--surface); white-space: normal; }
+.journal-directory-table tbody th a { display: block; color: var(--blue); font-size: .95rem; }
+.journal-directory-table tbody th small { display: block; margin-top: 4px; color: var(--muted); font-weight: 500; }
+.journal-directory-table tbody td { min-width: 135px; }
+.journal-directory-table tbody td:nth-child(3) { min-width: 250px; }
+.journal-topic-list { display: flex; flex-wrap: wrap; gap: 5px; }
+.journal-topic-list > span { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; background: #f5f7f6; padding: 3px 7px; color: #46565c; font-size: .72rem; }
 .destination-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .destination-system-section { padding: 0 0 36px; }
 .destination-system-section h2 { margin: 0 0 14px; }
@@ -290,6 +304,23 @@ td small { display: block; margin-top: 4px; color: var(--muted); }
 .related-records > div { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .related-records a { display: flex; flex-direction: column; gap: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; }
 .related-records a > span { color: var(--blue); font-weight: 800; }
+.journal-classification-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.journal-classification-grid > div { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
+.journal-classification-grid h3 { margin: 0 0 12px; font-size: .95rem; }
+.journal-classification-grid ul { margin: 0; padding-left: 18px; }
+.journal-classification-grid li { margin-bottom: 5px; font-size: .84rem; }
+.journal-policy-list { margin: 0; border-top: 1px solid var(--line); }
+.journal-policy-list > div { display: grid; grid-template-columns: minmax(140px, .3fr) minmax(0, 1fr); gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.journal-policy-list dt { color: var(--muted); font-size: .78rem; font-weight: 700; }
+.journal-policy-list dd { margin: 0; }
+.journal-link-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.journal-link-grid a { display: flex; flex-direction: column; gap: 5px; min-height: 120px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.journal-link-grid a:hover { border-color: var(--blue); }
+.journal-link-grid small { color: var(--muted); font-size: .72rem; }
+.journal-link-grid strong { color: var(--blue); }
+.journal-link-grid span { color: var(--muted); font-size: .8rem; }
+.journal-back-link { margin: 0 0 48px; }
+.journal-back-link a { color: var(--blue); font-weight: 700; }
 
 /* Archive, calendar and comparison */
 .category-gateway-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
@@ -611,6 +642,7 @@ td small { display: block; margin-top: 4px; color: var(--muted); }
 
 @media (max-width: 1380px) {
   .catalog-filters { grid-template-columns: repeat(3, 1fr); }
+  .journal-filters { grid-template-columns: repeat(4, 1fr); }
   .filter-search { grid-column: span 2; }
   .project-grid { grid-template-columns: repeat(2, 1fr); }
   .track-grid { grid-template-columns: repeat(3, 1fr); }
@@ -651,7 +683,7 @@ td small { display: block; margin-top: 4px; color: var(--muted); }
   .track-grid, .deadline-grid, .status-legend { grid-template-columns: repeat(2, 1fr); }
   .deadline-groups, .category-gateway-grid, .research-guide-grid { grid-template-columns: 1fr; }
   .track-tools, .track-tools-4 { grid-template-columns: 1fr; }
-  .catalog-filters, .archive-filters, .calendar-filters { grid-template-columns: 1fr 1fr; }
+  .catalog-filters, .archive-filters, .calendar-filters, .journal-filters { grid-template-columns: 1fr 1fr; }
   .filter-search { grid-column: 1 / -1; }
   .project-grid { grid-template-columns: 1fr; }
   .project-card { min-height: auto; }
@@ -665,6 +697,8 @@ td small { display: block; margin-top: 4px; color: var(--muted); }
   .section-index strong { display: none; }
   .section-index a { white-space: nowrap; border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; background: var(--surface); }
   .related-records > div { grid-template-columns: 1fr 1fr; }
+  .journal-classification-grid { grid-template-columns: 1fr; }
+  .journal-link-grid { grid-template-columns: 1fr; }
   .calendar-row { grid-template-columns: 140px 1fr; }
   .calendar-row > div:last-child { grid-column: 2; }
   .calendar-summary { align-items: flex-start; flex-direction: column; gap: 4px; }
@@ -695,12 +729,13 @@ td small { display: block; margin-top: 4px; color: var(--muted); }
   .main-nav { left: 12px; right: 12px; }
   .home-search { display: grid; }
   .home-search a { text-align: center; }
-  .track-grid, .track-grid-four, .track-grid-two, .deadline-grid, .deadline-groups, .category-gateway-grid, .status-legend, .catalog-filters, .archive-filters, .calendar-filters, .fact-grid, .resource-hub-grid { grid-template-columns: 1fr; }
+  .track-grid, .track-grid-four, .track-grid-two, .deadline-grid, .deadline-groups, .category-gateway-grid, .status-legend, .catalog-filters, .archive-filters, .calendar-filters, .journal-filters, .fact-grid, .resource-hub-grid { grid-template-columns: 1fr; }
   .filter-search { grid-column: auto; }
   .fact-grid div, .fact-grid div:nth-child(n) { border-right: 0; }
   .record-actions { align-items: stretch; flex-direction: column; }
   .record-stamp { flex-direction: column; gap: 3px; }
   .related-records > div { grid-template-columns: 1fr; }
+  .journal-policy-list > div { grid-template-columns: 1fr; gap: 5px; }
   .calendar-row { grid-template-columns: 1fr; }
   .calendar-row > div:last-child { grid-column: 1; }
   .profile-current, .profile-new, .planner-add, .planner-export { align-items: stretch; flex-direction: column; }
@@ -723,7 +758,7 @@ td small { display: block; margin-top: 4px; color: var(--muted); }
 }
 
 @media print {
-  .site-header, .site-footer, .site-engagement, .record-actions, .section-index, .catalog-filters, .archive-filters, .calendar-filters, .official-site-filters, .admission-requirement-filters, .planner-profiles, .planner-add, .planner-export { display: none !important; }
+  .site-header, .site-footer, .site-engagement, .record-actions, .section-index, .catalog-filters, .archive-filters, .calendar-filters, .journal-filters, .official-site-filters, .admission-requirement-filters, .planner-profiles, .planner-add, .planner-export { display: none !important; }
   body { background: #fff; color: #000; font-size: 10pt; }
   .page-container { width: 100%; }
   .record-layout { display: block; }

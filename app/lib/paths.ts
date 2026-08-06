@@ -1,4 +1,4 @@
-import type { ProjectRecord, Track } from "./types";
+import type { JournalRecord, ProjectRecord, Track } from "./types";
 
 export const trackPath: Record<Track, string> = {
   competition: "competitions",
@@ -11,6 +11,10 @@ export const trackPath: Record<Track, string> = {
 
 export function projectHref(project: Pick<ProjectRecord, "track" | "slug">) {
   return `/${trackPath[project.track]}/${project.slug}`;
+}
+
+export function journalHref(journal: Pick<JournalRecord, "slug">) {
+  return `/journals/${journal.slug}`;
 }
 
 export function syllabusHref(slug: string) {

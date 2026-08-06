@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import type { LocalizedText, SourceKind, Track } from "../lib/types";
 import { Localized } from "./localized";
 
-export type OfficialSiteCategory = Track | "university";
+export type OfficialSiteCategory = Track | "journal" | "university";
 
 export interface OfficialSiteDirectoryLink {
   id: string;
@@ -35,6 +35,7 @@ const categoryLabels: Array<{ value: "all" | OfficialSiteCategory; label: Locali
   { value: "competition", label: { zh: "数学竞赛", en: "Competitions" } },
   { value: "modeling", label: { zh: "数学建模", en: "Modeling" } },
   { value: "research", label: { zh: "科研资源", en: "Research resources" } },
+  { value: "journal", label: { zh: "数学期刊与投稿", en: "Journals and submission" } },
   { value: "summer", label: { zh: "夏校与夏令营", en: "Summer programs" } },
   { value: "curriculum", label: { zh: "课程与统考", en: "Curricula" } },
   { value: "assessment", label: { zh: "入学考试与测评", en: "Admissions tests" } },

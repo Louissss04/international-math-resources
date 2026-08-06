@@ -10,7 +10,7 @@ const LAST_UPDATED = "2026-08-06";
 const programTracks: Array<{ track: Track; href: string; zh: string; en: string; fieldsZh: string; fieldsEn: string }> = [
   { track: "competition", href: "/competitions", zh: "数学竞赛", en: "Competitions", fieldsZh: "赛制、日期、报名、奖项线、考纲与历年题", fieldsEn: "Format, dates, registration, thresholds, scope and past papers" },
   { track: "modeling", href: "/modeling", zh: "数学建模", en: "Modeling", fieldsZh: "团队、赛期、论文要求、提交与奖项", fieldsEn: "Teams, contest windows, papers, submission and awards" },
-  { track: "research", href: "/research", zh: "数学科研", en: "Research", fieldsZh: "科研项目、技能工具、研究方法、申请资格与成果", fieldsEn: "Programs, skills, methods, eligibility and outputs" },
+  { track: "research", href: "/research", zh: "数学科研", en: "Research", fieldsZh: "科研项目、技能工具、论文规范、期刊与投稿", fieldsEn: "Programs, skills, paper standards, journals and submission" },
   { track: "summer", href: "/summer", zh: "数学夏校", en: "Summer programs", fieldsZh: "资格、国际生、费用、资助与申请材料", fieldsEn: "Eligibility, international access, cost, aid and applications" },
 ];
 

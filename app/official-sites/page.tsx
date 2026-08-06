@@ -6,14 +6,14 @@ import {
   type OfficialSiteDirectoryGroup,
   type OfficialSiteDirectoryLink,
 } from "../components/official-sites-client";
-import { admissionRequirements, allProjects, allSources, universityPolicies } from "../data";
+import { admissionRequirements, allJournals, allProjects, allSources, universityPolicies } from "../data";
 import { destinationOfficialSiteGroups, projectTrackGroups } from "../data/official-site-groups";
-import { projectHref } from "../lib/paths";
-import { t, type ProjectRecord, type SourceRecord, type Track } from "../lib/types";
+import { journalHref, projectHref } from "../lib/paths";
+import { t, type JournalRecord, type ProjectRecord, type SourceRecord, type Track } from "../lib/types";
 
 export const metadata: Metadata = {
   title: "官网导航",
-  description: "数学竞赛、建模、科研项目、夏校、国际数学课程、数学考试和大学本科申请的官方入口。",
+  description: "数学竞赛、建模、科研项目、数学期刊、夏校、国际数学课程、数学考试和大学本科申请的官方入口。",
 };
 
 const LAST_UPDATED = "2026-08-06";
@@ -117,6 +117,17 @@ function projectEntry(project: ProjectRecord): OfficialSiteDirectoryEntry {
   };
 }
 
+function journalEntry(journal: JournalRecord): OfficialSiteDirectoryEntry {
+  return {
+    id: `journal-${journal.id}`,
+    title: journal.title,
+    owner: journal.publisher,
+    detailHref: journalHref(journal),
+    detailLabel: t("查看期刊与投稿资料", "View journal and submission record"),
+    links: officialSources(journal.sourceIds).slice(0, 6).map(asLink),
+  };
+}
+
 function ownerEntries(sources: SourceRecord[], idPrefix: string, detailHref?: string): OfficialSiteDirectoryEntry[] {
   const owners = new Map<string, SourceRecord[]>();
   for (const source of sources) {
@@ -158,6 +169,13 @@ const projectGroups: OfficialSiteDirectoryGroup[] = projectTrackGroups.map((grou
   };
 });
 
+const journalGroup: OfficialSiteDirectoryGroup = {
+  id: "journal",
+  title: t("数学期刊、杂志与投稿官网", "Mathematics journals, magazines and submission sites"),
+  category: "journal",
+  entries: allJournals.slice().sort((a, b) => a.shortTitle.localeCompare(b.shortTitle, undefined, { numeric: true })).map(journalEntry),
+};
+
 const destinationSlugs: Record<string, string> = {
   "united-states": "united-states-undergraduate-mathematics-requirements",
   "united-kingdom": "uk-undergraduate-mathematics-admissions",
@@ -192,7 +210,7 @@ const destinationGroups: OfficialSiteDirectoryGroup[] = destinationOfficialSiteG
   };
 });
 
-const groups = [...projectGroups, ...destinationGroups];
+const groups = [...projectGroups, journalGroup, ...destinationGroups];
 const entryCount = groups.reduce((total, group) => total + group.entries.length, 0);
 const linkCount = groups.reduce((total, group) => total + group.entries.reduce((sum, entry) => sum + entry.links.length, 0), 0);
 
@@ -204,7 +222,7 @@ export default function Page() {
         <div className="page-title-row">
           <div>
             <h1><span className="lang-zh">官网导航</span><span className="lang-en">Official website directory</span></h1>
-            <p><span className="lang-zh">数学竞赛、课程、考试、项目与大学申请的官方入口。</span><span className="lang-en">Official sites for mathematics competitions, curricula, tests, programs and university applications.</span></p>
+            <p><span className="lang-zh">数学竞赛、课程、考试、科研、期刊投稿与大学申请的官方入口。</span><span className="lang-en">Official sites for mathematics competitions, curricula, tests, research, journals and university applications.</span></p>
             <p className="page-updated"><span className="lang-zh">最后更新：</span><span className="lang-en">Last updated: </span>{LAST_UPDATED}</p>
           </div>
         </div>

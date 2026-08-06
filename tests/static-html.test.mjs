@@ -40,6 +40,7 @@ const requiredCoreRoutes = [
   "/competitions",
   "/modeling",
   "/research",
+  "/journals",
   "/summer",
   "/courses",
   "/assessments",
@@ -162,6 +163,14 @@ function projectFile(project) {
   return `${prefix}-${project.slug}.html`;
 }
 
+function journalRoute(journal) {
+  return `/journals/${journal.slug}`;
+}
+
+function journalFile(journal) {
+  return `journal-${journal.slug}.html`;
+}
+
 function assertUniqueIds(records, label) {
   const ids = records.map((record) => record.id);
   assert.equal(new Set(ids).size, ids.length, `${label} contains duplicate IDs`);
@@ -190,7 +199,7 @@ async function loadStaticData() {
       assert.fail(`assets/data.js does not contain valid JSON: ${error.message}`);
     }
 
-    for (const key of ["projects", "sources", "thresholds", "syllabi", "destinationGuides", "admissionRequirements"]) {
+    for (const key of ["projects", "journals", "sources", "thresholds", "syllabi", "destinationGuides", "admissionRequirements"]) {
       assert.ok(Array.isArray(data[key]), `static payload is missing the ${key} array`);
     }
     assert.ok(data.routeMap && typeof data.routeMap === "object" && !Array.isArray(data.routeMap), "static payload is missing routeMap");
@@ -211,15 +220,19 @@ test("static payload has valid IDs, references and route records", async () => {
   const sourceIds = new Set(data.sources.map((source) => source.id));
 
   assert.ok(data.projects.length > 0, "static payload has no project records");
+  assert.ok(data.journals.length > 0, "static payload has no journal records");
   assert.ok(data.destinationGuides.length > 0, "static payload has no destination guides");
   assert.ok(data.admissionRequirements.length > 0, "static payload has no admission requirement records");
   assertUniqueIds(data.projects, "projects");
+  assertUniqueIds(data.journals, "journals");
   assertUniqueIds(data.sources, "sources");
   assertUniqueIds(data.thresholds, "thresholds");
   assertUniqueIds(data.syllabi, "syllabi");
   assertUniqueIds(data.destinationGuides, "destination guides");
   assertUniqueIds(data.admissionRequirements, "admission requirements");
   assert.equal(new Set(data.projects.map((project) => project.slug)).size, data.projects.length, "project slugs must be unique");
+  assert.equal(new Set(data.journals.map((journal) => journal.slug)).size, data.journals.length, "journal slugs must be unique");
+  assert.equal(new Set([...data.projects.map((record) => record.id), ...data.journals.map((record) => record.id)]).size, data.projects.length + data.journals.length, "projects and journals must not share IDs");
   assert.equal(new Set(data.syllabi.map((syllabus) => syllabus.slug)).size, data.syllabi.length, "syllabus slugs must be unique");
   assert.equal(new Set(data.destinationGuides.map((guide) => guide.slug)).size, data.destinationGuides.length, "destination slugs must be unique");
 
@@ -230,6 +243,22 @@ test("static payload has valid IDs, references and route records", async () => {
     }
     for (const relatedId of project.relatedIds ?? []) {
       assert.ok(projectIds.has(relatedId), `${project.id} refers to missing related project ${relatedId}`);
+    }
+  }
+
+  for (const journal of data.journals) {
+    assert.ok(journal.topicTags.length > 0, `${journal.id} has no mathematics topic`);
+    assert.ok(journal.articleTypes.length > 0, `${journal.id} has no article type`);
+    assert.ok(journal.facts.length > 0 && journal.sections.length > 0, `${journal.id} has no detailed content`);
+    assert.ok(journal.sourceIds.length > 0 && journal.links.length > 0, `${journal.id} has no official submission source`);
+    for (const sourceId of journal.sourceIds) {
+      assert.ok(sourceIds.has(sourceId), `${journal.id} refers to missing source ${sourceId}`);
+    }
+    for (const projectId of journal.relatedProjectIds ?? []) {
+      assert.ok(projectIds.has(projectId), `${journal.id} refers to missing related project ${projectId}`);
+    }
+    for (const link of journal.links) {
+      assert.match(link.url, /^https:\/\//i, `${journal.id} contains a non-HTTPS official link: ${link.url}`);
     }
   }
 
@@ -394,6 +423,40 @@ test("every project, syllabus and destination has its own complete detail page",
     assert.ok(text.includes("官方来源") && text.includes("Official sources"), `${expectedFile} is missing official sources`);
     assert.ok(text.includes("最后更新") && text.includes("Last updated"), `${expectedFile} is missing its page-level update stamp`);
   }
+});
+
+test("exports a separate journal directory and one complete page per publication", async () => {
+  const data = await loadStaticData();
+  assert.equal(data.journals.length, 16);
+  assert.equal(data.routeMap["/journals"], "journals.html");
+
+  const directoryHtml = await readRoute("/journals", data);
+  assert.match(directoryHtml, /data-static-component=["']journal-directory["']/);
+  assert.match(directoryHtml, /data-journal-filter=["']topic["']/);
+  assert.match(directoryHtml, /data-journal-filter=["']review["']/);
+  assert.match(directoryHtml, /data-journal-filter=["']fee["']/);
+  const declaredJournalIds = directoryHtml.match(/data-journal-ids=["']([^"']*)["']/)?.[1].split("|").filter(Boolean) ?? [];
+  assert.deepEqual(new Set(declaredJournalIds), new Set(data.journals.map((journal) => journal.id)));
+
+  for (const journal of data.journals) {
+    const route = journalRoute(journal);
+    const file = journalFile(journal);
+    assert.equal(data.routeMap[route], file, `${journal.id} has the wrong journal filename`);
+    assert.match(directoryHtml, new RegExp(`href=["']${file.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}["']`), `${file} is not linked from journals.html`);
+    const html = await readRoute(route, data);
+    const text = visibleText(html);
+    assert.ok(text.includes(journal.title.zh) && text.includes(journal.title.en), `${file} is missing its bilingual title`);
+    for (const label of ["主要主题与稿件类型", "投稿要点", "学生资格", "评审方式", "费用", "版权与许可", "官方投稿入口与材料", "最后更新"]) {
+      assert.ok(text.includes(label), `${file} is missing ${label}`);
+    }
+    assert.match(html, /href=["']https:\/\//i, `${file} has no direct official HTTPS link`);
+    assert.doesNotMatch(text, /加入规划器|Add to planner|研究节点|Research milestones/, `${file} is incorrectly treated as a project`);
+  }
+
+  const projectIds = new Set(data.projects.map((project) => project.id));
+  for (const journal of data.journals) assert.ok(!projectIds.has(journal.id), `${journal.id} leaked into projects`);
+  const runtime = await readFile(path.join(outputDirectory, "assets/static-site.js"), "utf8");
+  assert.match(runtime, /data-static-component="journal-directory"/, "static journal filters are not initialized");
 });
 
 test("exports the mathematical research skills guide and its official materials", async () => {

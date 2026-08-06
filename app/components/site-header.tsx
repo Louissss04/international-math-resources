@@ -6,7 +6,7 @@ import { useState } from "react";
 import { LanguageToggle } from "./language-toggle";
 
 const links = [
-  { href: "/programs", zh: "竞赛与项目", en: "Competitions & programs", sections: ["/programs", "/competitions", "/modeling", "/research", "/summer"] },
+  { href: "/programs", zh: "竞赛与项目", en: "Competitions & programs", sections: ["/programs", "/competitions", "/modeling", "/research", "/journals", "/summer"] },
   { href: "/courses-tests", zh: "课程与考试", en: "Courses & tests", sections: ["/courses-tests", "/courses", "/assessments"] },
   { href: "/destinations", zh: "留学地区", en: "Study destinations", sections: ["/destinations", "/universities"] },
   { href: "/calendar", zh: "日历", en: "Calendar", sections: ["/calendar", "/competition-calendar", "/course-calendar", "/assessment-calendar"] },
