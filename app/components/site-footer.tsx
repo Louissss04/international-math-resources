@@ -9,7 +9,6 @@ export function SiteFooter() {
           <Link href="/sources"><span className="lang-zh">来源</span><span className="lang-en">Sources</span></Link>
           <Link href="/official-sites"><span className="lang-zh">官方入口</span><span className="lang-en">Official sites</span></Link>
           <Link href="/resources#copyright"><span className="lang-zh">版权与使用</span><span className="lang-en">Copyright & use</span></Link>
-          <Link href="/maintenance"><span className="lang-zh">维护说明</span><span className="lang-en">Maintenance</span></Link>
         </nav>
         <p>
           <span className="lang-zh">本站只索引公开来源，不托管试题文件；版权归原权利人。报名前请核对官网。</span>

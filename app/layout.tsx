@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import "./globals.css";
 import { SiteHeader } from "./components/site-header";
 import { SiteFooter } from "./components/site-footer";
+import { SiteEngagement } from "./components/site-engagement";
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -35,13 +36,17 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const engagementApiUrl = process.env.NEXT_PUBLIC_ENGAGEMENT_API_URL ?? "";
+
   return (
     <html lang="zh-CN" data-language="zh">
       <body>
         <a className="skip-link" href="#main-content"><span className="lang-zh">跳至正文</span><span className="lang-en">Skip to content</span></a>
         <SiteHeader />
         <div id="main-content">{children}</div>
+        <SiteEngagement apiUrl={engagementApiUrl} />
         <SiteFooter />
+        <script src="/engagement.js" defer />
       </body>
     </html>
   );

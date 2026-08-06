@@ -11,6 +11,7 @@ const requiredAssets = [
   "assets/site.css",
   "assets/data.js",
   "assets/static-site.js",
+  "assets/engagement.js",
 ];
 
 const trackRoutes = {
@@ -59,7 +60,6 @@ const requiredCoreRoutes = [
   "/planner",
   "/sources",
   "/resources",
-  "/maintenance",
 ];
 
 function decodeEntities(value) {
@@ -321,6 +321,36 @@ test("routeMap exactly matches the flat HTML export", async () => {
   assert.deepEqual(nestedHtml, [], `HTML pages must be flat; nested pages found: ${nestedHtml.join(", ")}`);
 });
 
+test("does not publish internal maintenance material", async () => {
+  const data = await loadStaticData();
+  assert.equal(data.routeMap["/maintenance"], undefined, "maintenance route is public");
+  for (const name of ["maintenance.html", "mathpath-update-maintenance-prompt.md"]) {
+    const exposed = await stat(path.join(outputDirectory, name)).catch(() => null);
+    assert.equal(exposed, null, `${name} is present in the public export`);
+  }
+  for (const file of await htmlInventory()) {
+    const html = await readFile(file, "utf8");
+    assert.doesNotMatch(html, /href=["'][^"']*maintenance(?:\.html)?["']/i, `${path.basename(file)} links to internal maintenance material`);
+    assert.doesNotMatch(visibleText(html), /维护说明|Annual Maintenance Sources|maintenance entry points/i, `${path.basename(file)} exposes maintenance instructions`);
+  }
+});
+
+test("exports private feedback controls and the engagement runtime", async () => {
+  for (const file of await htmlInventory()) {
+    const html = await readFile(file, "utf8");
+    assert.equal((html.match(/data-static-component=["']engagement["']/g) ?? []).length, 1, `${path.basename(file)} has the wrong engagement module count`);
+    assert.match(html, /data-engagement-helpful/, `${path.basename(file)} has no helpful control`);
+    assert.match(html, /data-feedback-dialog/, `${path.basename(file)} has no feedback dialog`);
+    assert.match(html, /src=["']assets\/engagement\.js["']/, `${path.basename(file)} does not load engagement.js`);
+    assert.doesNotMatch(html, /data-feedback-list|\/v1\/admin/, `${path.basename(file)} exposes a feedback-reading control`);
+  }
+  const runtime = await readFile(path.join(outputDirectory, "assets/engagement.js"), "utf8");
+  assert.match(runtime, /\/v1\/view/);
+  assert.match(runtime, /\/v1\/like/);
+  assert.match(runtime, /\/v1\/feedback/);
+  assert.doesNotMatch(runtime, /\/v1\/(?:admin|feedbacks|messages)/, "browser runtime contains a public feedback-reading endpoint");
+});
+
 test("every project, syllabus and destination has its own complete detail page", async () => {
   const data = await loadStaticData();
   const projectById = new Map(data.projects.map((project) => [project.id, project]));
@@ -449,7 +479,10 @@ test("calendar exports begin in 2026 and archive elapsed milestones by end date"
     assert.equal(tagAttribute(rootTag, "data-fixed-track") ?? "", fixedTrack ?? "", `${route} has the wrong fixed track`);
     assert.match(html, /data-calendar-group=["']current["']/, `${route} has no current calendar group`);
     assert.match(html, /data-calendar-group=["']history["']/, `${route} has no history calendar group`);
-    assert.match(html, /data-calendar-filter=["']period["']/, `${route} has no period filter`);
+    for (const period of ["current", "history", "all"]) {
+      assert.match(html, new RegExp(`data-calendar-period-link=["']${period}["']`), `${route} has no ${period} period link`);
+    }
+    assert.match(html, /href=["'][^"']*\?period=history#calendar-results["']/, `${route} has no direct history link`);
 
     const entries = calendarEntries(html);
     assert.ok(entries.length > 0, `${route} has no calendar entries`);

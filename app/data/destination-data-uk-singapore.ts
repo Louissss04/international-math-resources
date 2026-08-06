@@ -775,7 +775,7 @@ const ukMathematicsAdmissionsGuide: DestinationGuideRecord = {
                 ["Oxford Mathematics", "Oxford Mathematics"],
                 ["A*A*A，若学校开设 Further Mathematics，则两个 A* 应为 Mathematics 和 Further Mathematics；或 IB 39、HL 766，HL Mathematics 7。", "A*A*A, with the two A*s in Mathematics and Further Mathematics where available; or IB 39 with HL 766 including 7 in HL Mathematics."],
                 ["2027 入学改用 TMUA，并须参加 10 月场。", "TMUA is used for 2027 entry and must be taken in the October sitting."],
-                ["2027 招生测试页和数学学院当年说明为考试口径的维护入口。", "The 2027 admissions-test page and current Mathematical Institute prospectus are the maintenance sources for the test requirement."],
+                ["考试要求以 2027 招生测试页和数学学院当年说明为准。", "Use the 2027 admissions-test page and current Mathematical Institute prospectus for the applicable test requirement."],
               ],
               ["uk-oxford-mathematics-course", "uk-oxford-mathematics-2027", "uk-oxford-admissions-tests-2027"],
             ),
@@ -796,53 +796,6 @@ const ukMathematicsAdmissionsGuide: DestinationGuideRecord = {
                 ["2025 入学多数 offer 的 TMUA 为 5.0 及以上，但也有低于 5.0 的整体审理录取；该历史数据不是 2027 固定线。", "For 2025 entry most offers went to applicants scoring 5.0 or above in TMUA, but some lower scores received offers after holistic review; this historical figure is not a fixed 2027 cutoff."],
               ],
               ["uk-warwick-mathematics-offer-2027", "uk-warwick-admissions-tests-2027"],
-            ),
-          ],
-        },
-      ],
-    },
-    {
-      id: "uk-maintenance",
-      title: t("年度更新入口", "Annual Maintenance Sources"),
-      tables: [
-        {
-          columns: [
-            t("每年核对项", "Annual check"),
-            t("官方入口", "Official source"),
-            t("重点字段", "Fields to review"),
-          ],
-          rows: [
-            row(
-              [
-                ["UCAS 周期", "UCAS cycle"],
-                ["UCAS dates and deadlines", "UCAS dates and deadlines"],
-                ["开放、提交、Oxford／Cambridge 截止、一般平等审理截止", "Opening, submission, Oxford/Cambridge deadline and general equal-consideration deadline"],
-              ],
-              ["uk-ucas-2027-dates"],
-            ),
-            row(
-              [
-                ["TMUA／ESAT", "TMUA / ESAT"],
-                ["UAT-UK deadlines、test pages、course list", "UAT-UK deadlines, test pages and course list"],
-                ["使用专业、模块、考点、费用、预约窗口、中国专用考试日", "Participating courses, modules, centres, fees, booking windows and China-specific dates"],
-              ],
-              ["uk-uat-deadlines-2027", "uk-uat-tmua-2027", "uk-uat-esat-2027", "uk-uat-registration"],
-            ),
-            row(
-              [
-                ["STEP", "STEP"],
-                ["OCR STEP key dates and fees", "OCR STEP key dates and fees"],
-                ["注册窗口、试卷日期、费用、中国考点规则", "Entry window, paper dates, fees and China centre rule"],
-              ],
-              ["uk-ocr-step-key-dates-2026", "uk-ocr-step-registration-china"],
-            ),
-            row(
-              [
-                ["院校专业条件", "University course conditions"],
-                ["每所大学的当年 course page 与 international qualifications page", "Each university's current course and international-qualifications pages"],
-                ["成绩、数学／高数科目、IB 路线、AP 科目、高考认可、考试用途", "Grades, Mathematics/Further Mathematics subjects, IB route, AP subjects, Gaokao recognition and test use"],
-              ],
-              ["uk-cambridge-mathematics-2027", "uk-cambridge-international-entry-2027", "uk-oxford-mathematics-2027", "uk-oxford-international-qualifications", "uk-imperial-mathematics-2027", "uk-warwick-mathematics-offer-2027"],
             ),
           ],
         },
@@ -1251,58 +1204,6 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
                 ["NUS、NTU 均设高考路径，但最低口径、验证和补分时间不同。", "NUS and NTU both offer Gaokao routes, but use different minimum standards, verification and result-update deadlines."],
               ],
               ["uk-cambridge-international-entry-2027", "uk-oxford-international-qualifications", "sg-nus-gaokao-2026", "sg-ntu-gaokao-2027"],
-            ),
-          ],
-        },
-      ],
-    },
-    {
-      id: "sg-maintenance",
-      title: t("年度更新入口", "Annual Maintenance Sources"),
-      tables: [
-        {
-          columns: [
-            t("每年核对项", "Annual check"),
-            t("NUS", "NUS"),
-            t("NTU", "NTU"),
-            t("重点字段", "Fields to review"),
-          ],
-          rows: [
-            row(
-              [
-                ["申请期与申请组别", "Application window and category"],
-                ["International Qualifications for Foreigners", "International Qualifications for Foreigners"],
-                ["Admission Guide / International Qualifications", "Admission Guide / International Qualifications"],
-                ["开放、截止、结果补交、资格类别和申请费", "Opening, closing, result updates, qualification category and application fee"],
-              ],
-              ["sg-nus-international-qualifications-2026", "sg-ntu-admission-guide-2026", "sg-ntu-international-qualifications-2026"],
-            ),
-            row(
-              [
-                ["中国高考", "China Gaokao"],
-                ["Gaokao qualification page", "Gaokao qualification page"],
-                ["PRC Gaokao page", "PRC Gaokao page"],
-                ["最低口径、实分截止、CSSD、面试和 AST 规则", "Minimum standard, actual-result deadline, CSSD, interview and AST rules"],
-              ],
-              ["sg-nus-gaokao-2026", "sg-ntu-gaokao-2027"],
-            ),
-            row(
-              [
-                ["数学专业先修", "Mathematics programme prerequisite"],
-                ["CHS Mathematics FAQ / programme prerequisites", "CHS Mathematics FAQ / programme prerequisites"],
-                ["SPMS Mathematical Sciences admissions", "SPMS Mathematical Sciences admissions"],
-                ["H2／HL 等效要求、IB AA／AI、衔接课程、院系测试适用对象", "H2/HL equivalence, IB AA/AI, bridging courses and scope of any faculty test"],
-              ],
-              ["sg-nus-mathematics-major", "sg-ntu-mathematical-sciences", "sg-ntu-ib-2026"],
-            ),
-            row(
-              [
-                ["历史竞争度", "Historical competitiveness"],
-                ["NUS Indicative Grade Profile", "NUS Indicative Grade Profile"],
-                ["NTU Indicative Grade Profile", "NTU Indicative Grade Profile"],
-                ["年份、适用资格、第 10／90 百分位；不得改写为国际录取线", "Year, applicable qualification and 10th/90th percentiles; never rewrite as an international cutoff"],
-              ],
-              ["sg-nus-igp-ay2025", "sg-ntu-igp-ay2025"],
             ),
           ],
         },

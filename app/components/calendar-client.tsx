@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import type { MouseEvent } from "react";
 import type { DateRecord, ProjectRecord, SourceRecord, Track } from "../lib/types";
 import { Localized } from "./localized";
 import { projectHref } from "../lib/paths";
@@ -28,6 +29,13 @@ export function CalendarClient({ projects, sources, fixedTrack }: { projects: Pr
   const [status, setStatus] = useState("all");
   const [period, setPeriod] = useState<CalendarPeriod>("current");
   const today = localDateString();
+
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get("period");
+    if (requested !== "current" && requested !== "history" && requested !== "all") return;
+    const timer = window.setTimeout(() => setPeriod(requested), 0);
+    return () => window.clearTimeout(timer);
+  }, []);
   const matched = useMemo(() => rows.filter((item) => {
     const text = `${item.project.title.zh} ${item.project.title.en} ${item.project.shortTitle} ${item.label.zh} ${item.label.en} ${item.region?.zh ?? ""}`.toLowerCase();
     return (!query.trim() || text.includes(query.trim().toLowerCase()))
@@ -41,6 +49,16 @@ export function CalendarClient({ projects, sources, fixedTrack }: { projects: Pr
     .filter((item) => calendarDateIsHistorical(item, today))
     .sort((a, b) => b.date.localeCompare(a.date) || a.project.shortTitle.localeCompare(b.project.shortTitle, undefined, { numeric: true })), [matched, today]);
   const visible = period === "current" ? currentRows : period === "history" ? historyRows : [...currentRows, ...historyRows];
+  const calendarPath = fixedTrack === "competition" ? "/competition-calendar" : fixedTrack === "curriculum" ? "/course-calendar" : fixedTrack === "assessment" ? "/assessment-calendar" : "/calendar";
+
+  function selectPeriod(event: MouseEvent<HTMLAnchorElement>, nextPeriod: CalendarPeriod) {
+    event.preventDefault();
+    setPeriod(nextPeriod);
+    const url = new URL(window.location.href);
+    url.searchParams.set("period", nextPeriod);
+    url.hash = "calendar-results";
+    window.history.replaceState({}, "", url);
+  }
 
   function renderRows(items: CalendarRow[], calendarPeriod: Exclude<CalendarPeriod, "all">) {
     return items.map((item) => (
@@ -84,15 +102,18 @@ export function CalendarClient({ projects, sources, fixedTrack }: { projects: Pr
       <div className="calendar-filters">
         <label className="filter-search"><span className="lang-zh">{fixedTrack === "competition" ? "竞赛关键词" : fixedTrack === "curriculum" ? "课程关键词" : fixedTrack === "assessment" ? "考试关键词" : "关键词"}</span><span className="lang-en">{fixedTrack === "competition" ? "Competition keyword" : fixedTrack === "curriculum" ? "Course keyword" : fixedTrack === "assessment" ? "Test keyword" : "Keyword"}</span><input data-calendar-filter="query" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={fixedTrack === "competition" ? "AMC / UKMT / 报名" : fixedTrack === "curriculum" ? "AP / IB / A Level" : fixedTrack === "assessment" ? "SSAT / TMUA / 报名" : "AMC / HiMCM / PROMYS / IB"} /></label>
         {!fixedTrack && <label><span className="lang-zh">类别</span><span className="lang-en">Category</span><select data-calendar-filter="track" value={track} onChange={(event) => setTrack(event.target.value as Track | "all")}><option value="all">全部 / All</option><option value="competition">数学竞赛 / Competitions</option><option value="modeling">数学建模 / Modeling</option><option value="research">数学科研 / Research</option><option value="summer">数学夏校 / Summer programs</option><option value="curriculum">课程统考 / Subject exams</option><option value="assessment">入学测评 / Admissions tests</option></select></label>}
-        <label><span className="lang-zh">时间范围</span><span className="lang-en">Period</span><select data-calendar-filter="period" value={period} onChange={(event) => setPeriod(event.target.value as CalendarPeriod)}><option value="current">当前与未来 / Current &amp; upcoming</option><option value="history">历史记录 / History</option><option value="all">全部 / All</option></select></label>
         <label><span className="lang-zh">信息状态</span><span className="lang-en">Information status</span><select data-calendar-filter="status" value={status} onChange={(event) => setStatus(event.target.value)}><option value="all">全部 / All</option><option value="confirmed">已确认 / Confirmed</option><option value="historical">历史资料 / Historical source</option><option value="pending">待公布 / Pending</option><option value="conflict">冲突 / Conflict</option></select></label>
         <button className="secondary-button" type="button" onClick={exportIcs} disabled={!visible.length}><span className="lang-zh">导出日历</span><span className="lang-en">Export ICS</span></button>
       </div>
-      <div className="calendar-summary" aria-live="polite">
-        <p className="result-count"><b>{visible.length}</b> <span className="lang-zh">个日期</span><span className="lang-en">dates</span></p>
-        <p><span className="lang-zh">当前与未来 {currentRows.length} · 历史 {historyRows.length}</span><span className="lang-en">Current &amp; upcoming {currentRows.length} · History {historyRows.length}</span></p>
+      <div className="calendar-summary">
+        <p className="result-count" aria-live="polite"><b>{visible.length}</b> <span className="lang-zh">个日期</span><span className="lang-en">dates</span></p>
+        <nav className="calendar-period-links" aria-label="Calendar period">
+          <a href={`${calendarPath}?period=current#calendar-results`} data-calendar-period-link="current" className={period === "current" ? "active" : ""} aria-current={period === "current" ? "page" : undefined} onClick={(event) => selectPeriod(event, "current")}><span className="lang-zh">当前与未来</span><span className="lang-en">Current &amp; upcoming</span><b>{currentRows.length}</b></a>
+          <a href={`${calendarPath}?period=history#calendar-results`} data-calendar-period-link="history" className={period === "history" ? "active" : ""} aria-current={period === "history" ? "page" : undefined} onClick={(event) => selectPeriod(event, "history")}><span className="lang-zh">历史记录</span><span className="lang-en">History</span><b>{historyRows.length}</b></a>
+          <a href={`${calendarPath}?period=all#calendar-results`} data-calendar-period-link="all" className={period === "all" ? "active" : ""} aria-current={period === "all" ? "page" : undefined} onClick={(event) => selectPeriod(event, "all")}><span className="lang-zh">全部</span><span className="lang-en">All</span><b>{currentRows.length + historyRows.length}</b></a>
+        </nav>
       </div>
-      <div className="calendar-list">
+      <div className="calendar-list" id="calendar-results">
         <section className="calendar-group" data-calendar-group="current" hidden={period === "history" || currentRows.length === 0}>
           <div className="calendar-group-heading"><h2><span className="lang-zh">当前与未来节点</span><span className="lang-en">Current and upcoming</span></h2><b>{currentRows.length}</b></div>
           <div>{renderRows(currentRows, "current")}</div>

@@ -1,0 +1,6 @@
+# Local development only. Copy to .dev.vars and replace this value.
+HASH_SECRET=replace-with-at-least-32-random-characters
+
+# Optional. When present, every feedback and like request must pass Turnstile.
+# TURNSTILE_SECRET=replace-with-cloudflare-turnstile-secret
+

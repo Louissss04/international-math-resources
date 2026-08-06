@@ -41,7 +41,6 @@ const TOP_LEVEL_ROUTES = [
   "/planner",
   "/sources",
   "/resources",
-  "/maintenance",
   "/universities",
 ];
 
@@ -220,7 +219,7 @@ function transformHtml(html, route, routeMap) {
     return `<html${withoutOldRoute} data-static-route="${route}">`;
   });
 
-  const runtime = '<script src="assets/data.js" defer></script><script src="assets/static-site.js" defer></script>';
+  const runtime = '<script src="assets/data.js" defer></script><script src="assets/static-site.js" defer></script><script src="assets/engagement.js" defer></script>';
   if (/<\/body\s*>/i.test(output)) return output.replace(/<\/body\s*>/i, `${runtime}</body>`);
   return `${output}${runtime}`;
 }
@@ -545,11 +544,16 @@ function browserRuntime() {
     const calendarStart = root && root.dataset.calendarStart || "2026-01-01";
     const queryInput = select('[data-calendar-filter="query"]', filters);
     const trackSelect = select('[data-calendar-filter="track"]', filters);
-    const periodSelect = select('[data-calendar-filter="period"]', filters);
     const statusSelect = select('[data-calendar-filter="status"]', filters);
+    const periodLinks = selectAll("[data-calendar-period-link]", root);
     const exportButton = select("button", filters);
     const count = select(".result-count b");
     let exportRows = [];
+    let period = "current";
+    try {
+      const requestedPeriod = new URLSearchParams(window.location.search).get("period");
+      if (["current", "history", "all"].includes(requestedPeriod)) period = requestedPeriod;
+    } catch {}
 
     const matchedRows = () => {
       const query = (queryInput && queryInput.value || "").trim().toLowerCase();
@@ -578,19 +582,38 @@ function browserRuntime() {
       const matched = matchedRows();
       const currentRows = matched.filter((item) => (item.endDate || item.date) >= today()).sort((a, b) => String(a.date).localeCompare(String(b.date)) || a.project.shortTitle.localeCompare(b.project.shortTitle, undefined, { numeric: true }));
       const historyRows = matched.filter((item) => (item.endDate || item.date) < today()).sort((a, b) => String(b.date).localeCompare(String(a.date)) || a.project.shortTitle.localeCompare(b.project.shortTitle, undefined, { numeric: true }));
-      const period = periodSelect ? periodSelect.value : "current";
       exportRows = period === "history" ? historyRows : period === "all" ? [...currentRows, ...historyRows] : currentRows;
       list.innerHTML = (period !== "history" ? groupHtml(currentRows, "current") : "")
         + (period !== "current" ? groupHtml(historyRows, "history") : "")
         + (!exportRows.length ? `<p class="empty-state" data-calendar-empty>${localised({ zh: "没有符合条件的日期。", en: "No matching dates." })}</p>` : "");
       if (count) count.textContent = String(exportRows.length);
-      const summary = select(".calendar-summary > p:last-child", root);
-      if (summary) summary.innerHTML = `<span class="lang-zh">当前与未来 ${currentRows.length} · 历史 ${historyRows.length}</span><span class="lang-en">Current &amp; upcoming ${currentRows.length} · History ${historyRows.length}</span>`;
+      periodLinks.forEach((link) => {
+        const linkPeriod = link.dataset.calendarPeriodLink;
+        const linkCount = select("b", link);
+        const value = linkPeriod === "current" ? currentRows.length : linkPeriod === "history" ? historyRows.length : currentRows.length + historyRows.length;
+        if (linkCount) linkCount.textContent = String(value);
+        link.classList.toggle("active", linkPeriod === period);
+        if (linkPeriod === period) link.setAttribute("aria-current", "page");
+        else link.removeAttribute("aria-current");
+      });
       if (exportButton) exportButton.disabled = exportRows.length === 0;
     };
 
-    [trackSelect, periodSelect, statusSelect].filter(Boolean).forEach((control) => control.addEventListener("change", render));
+    [trackSelect, statusSelect].filter(Boolean).forEach((control) => control.addEventListener("change", render));
     if (queryInput) queryInput.addEventListener("input", render);
+    periodLinks.forEach((link) => link.addEventListener("click", (event) => {
+      const nextPeriod = link.dataset.calendarPeriodLink;
+      if (!["current", "history", "all"].includes(nextPeriod)) return;
+      event.preventDefault();
+      period = nextPeriod;
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set("period", period);
+        url.hash = "calendar-results";
+        window.history.replaceState({}, "", url);
+      } catch {}
+      render();
+    }));
     if (exportButton) exportButton.addEventListener("click", () => {
       const stamp = new Date().toISOString().replaceAll(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
       const events = exportRows.filter((item) => /^\d{4}-\d{2}-\d{2}$/.test(item.date)).map((item) => {
@@ -786,6 +809,9 @@ async function writeRuntimeAssets(data, routeMap) {
   const runtimeSource = path.join(ROOT, "public", "static-site.js");
   await stat(runtimeSource);
   await cp(runtimeSource, path.join(ASSETS, "static-site.js"));
+  const engagementSource = path.join(ROOT, "public", "engagement.js");
+  await stat(engagementSource);
+  await cp(engagementSource, path.join(ASSETS, "engagement.js"));
 }
 
 async function main() {

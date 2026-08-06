@@ -34,6 +34,8 @@ jobs:
         run: npm ci
 
       - name: Build and export static site
+        env:
+          NEXT_PUBLIC_ENGAGEMENT_API_URL: ${{ vars.ENGAGEMENT_API_URL }}
         run: npm run export:static
 
       - name: Disable Jekyll processing

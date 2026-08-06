@@ -73,6 +73,29 @@ test("renders the current international mathematics resource library home", asyn
   assert.doesNotMatch(html, staleDemoCopy);
 });
 
+test("keeps the maintenance guide internal", async () => {
+  const home = await renderHtml();
+  assert.doesNotMatch(home, /href=["']\/maintenance["']/);
+  assert.doesNotMatch(home, /维护说明|>Maintenance</);
+  const response = await render("/maintenance");
+  assert.equal(response.status, 404);
+});
+
+test("renders one private engagement and feedback module on every page", async () => {
+  for (const path of ["/", "/calendar", "/competitions/amc-12"]) {
+    const html = await renderHtml(path);
+    assert.equal((html.match(/data-static-component=["']engagement["']/g) ?? []).length, 1, path);
+    assert.match(html, /data-engagement-helpful/);
+    assert.match(html, /aria-pressed=["']false["']/);
+    assert.match(html, /data-feedback-dialog/);
+    for (const field of ["category", "message", "contact", "website"]) {
+      assert.match(html, new RegExp(`name=["']${field}["']`), `${path} is missing ${field}`);
+    }
+    assert.match(html, /留言不会公开/);
+    assert.doesNotMatch(html, /data-feedback-list|\/v1\/admin/);
+  }
+});
+
 test("renders track directories and category-specific archives, calendars and comparisons", async () => {
   for (const [path, pattern] of [
     ["/catalog", /全部条目/],
@@ -99,7 +122,6 @@ test("renders track directories and category-specific archives, calendars and co
     ["/past-papers", /数学真题、样卷与答案入口/],
     ["/resources", /资料中心/],
     ["/syllabi", /官方考纲、范围、样卷与教材/],
-    ["/maintenance", /信息更新清单/],
     ["/destinations", /按留学地区查询数学要求/],
     ["/universities", /学校与专业考试要求/],
     ["/official-sites", /官网导航/],
@@ -129,6 +151,8 @@ test("renders calendars from 2026 with past milestones archived consistently", a
     assert.equal(tagAttribute(rootTag, "data-fixed-track") ?? "", fixedTrack ?? "", `${path} has the wrong fixed track`);
     assert.match(html, /data-calendar-group=["']current["']/, `${path} has no current calendar group`);
     assert.match(html, /data-calendar-group=["']history["']/, `${path} has no history calendar group`);
+    assert.match(html, /data-calendar-period-link=["']history["']/, `${path} has no direct history control`);
+    assert.match(html, /href=["'][^"']*\?period=history#calendar-results["']/, `${path} has no shareable history link`);
 
     const entries = calendarEntries(html);
     assert.ok(entries.length > 0, `${path} has no calendar entries`);

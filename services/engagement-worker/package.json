@@ -1,0 +1,20 @@
+{
+  "name": "international-math-engagement-worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.14.0"
+  },
+  "scripts": {
+    "check": "npm run typecheck && npm test",
+    "test": "tsc -p tsconfig.test.json && node --test .test-dist/tests/worker.test.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260702.1",
+    "@types/node": "^22.19.19",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.92.0"
+  }
+}

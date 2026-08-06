@@ -686,19 +686,6 @@ const unitedStatesGuide: DestinationGuideRecord = {
         ],
       }],
     },
-    {
-      id: "us-maintenance",
-      title: t("适用年度与维护入口", "Cycle scope and maintenance entry points"),
-      tables: [{
-        columns: [t("更新项目", "Item to recheck"), t("官方入口", "Official entry point"), t("何时更新", "Update timing")],
-        rows: [
-          row([["大学数学先修", "University mathematics preparation"], ["各校 preparation／requirements 页面；专业分学院招生的学校需同时查学院页", "Each university's preparation/requirements page, plus college-specific pages where admission is by college"], ["每年申请开放时，以及目标专业变化时", "When the annual application opens and whenever the intended program changes"]], ["us-uc-first-year-requirements", "us-mit-math-foundations", "us-stanford-math-preparation", "us-harvard-math-preparation", "us-cornell-college-requirements"]),
-          row([["SAT／ACT 是否要求", "SAT/ACT policy"], ["每所大学 testing 页面，不能依赖统一名单", "Each university's own testing page; do not rely on a universal list"], ["提交申请前再次检查；政策可按入学年份改变", "Recheck immediately before submission; policies can change by entry year"]], ["us-mit-tests-scores", "us-stanford-testing", "us-harvard-application-requirements", "us-uc-application-test-policy"]),
-          row([["考试结构、日期与报名", "Test structure, dates and registration"], ["College Board SAT Dates／Registration；ACT 国际报名与年度日历", "College Board SAT Dates/Registration and ACT international registration/calendar"], ["考试机构发布新年度日历后及每次报名时", "After the provider publishes a new annual calendar and at each registration"]], ["us-sat-registration", "us-sat-dates-2026-27", "us-act-international-registration", "us-act-international-dates-2026-27"]),
-          row([["中国成绩提交", "Chinese record submission"], ["大学 international applicants、transcripts、testing 页面和申请 Portal 清单", "University international-applicant, transcript and testing pages plus the applicant-portal checklist"], ["申请系统生成个性化清单后；录取后再核对 final-document 要求", "After the application generates a personalized checklist, and again after admission for final documents"]], ["us-uc-country-requirements", "us-uc-transcript-submission", "us-stanford-international", "us-stanford-transcripts"]),
-        ],
-      }],
-    },
   ],
   sourceIds: US_SOURCE_IDS,
   relatedProjectIds: ["sat", "act", ...commonCourseProjectIds],
@@ -863,19 +850,6 @@ const canadaGuide: DestinationGuideRecord = {
             ["IB 和 A Level 预测分由学校提交；AP 已考和计划考试按大学系统填写", "IB and A Level predictions are submitted by the school; completed and planned AP examinations are reported in the university system"],
             ["UBC：AP 由 College Board 直接发送（代码 0965），IB 由 IBO 电子发送；其他大学使用各自代码和 Portal 指示", "UBC: AP is sent directly by College Board (code 0965) and IB electronically by the IBO; other universities use their own codes and portal instructions"],
           ], ["ca-waterloo-required-documents", "ca-ubc-documents", "ca-uoft-required-documents"]),
-        ],
-      }],
-    },
-    {
-      id: "canada-maintenance",
-      title: t("适用年度与维护入口", "Cycle scope and maintenance entry points"),
-      tables: [{
-        columns: [t("更新项目", "Item to recheck"), t("官方入口", "Official entry point"), t("维护规则", "Maintenance rule")],
-        rows: [
-          row([["课程体系与数学先修", "Curriculum and mathematics prerequisites"], ["U of T international／Canadian requirements；Waterloo program requirement；UBC requirements selector；McGill requirements", "U of T international/Canadian requirements, Waterloo program requirements, UBC requirements selector and McGill requirements"], ["每年按目标专业、校区和实际课程体系逐项复核，不能沿用另一专业的等值关系", "Recheck annually by intended program, campus and actual curriculum; do not carry an equivalency across programs"]], ["ca-uoft-international-curricula", "ca-uoft-canadian-curricula", "ca-waterloo-math-ontario", "ca-ubc-requirements", "ca-mcgill-requirements"]),
-          row([["中国普高材料", "Chinese national-curriculum documents"], ["U of T Engineering China；Waterloo Required Documents／China program page；各校 applicant portal", "U of T Engineering China, Waterloo Required Documents/Chinese-system program page and each applicant portal"], ["申请后以 Portal 生成的个性化清单为准；CSSD、学校直送和考试机构送分不可互相替代", "Use the personalized post-application portal checklist; CSSD, direct school submission and examination-body reporting are not interchangeable"]], ["ca-uoft-engineering-international", "ca-waterloo-required-documents", "ca-waterloo-cs-china"]),
-          row([["申请与文件截止日", "Application and document deadlines"], ["Waterloo Deadlines、U of T deadlines／Portal、UBC Submit Documents", "Waterloo Deadlines, U of T deadlines/portal and UBC Submit Documents"], ["新一轮招生开放后替换旧年度；录取通知书中的个别截止日优先", "Replace the prior cycle after a new cycle opens; individualized deadlines in the offer take priority"]], ["ca-waterloo-deadlines-2027", "ca-uoft-required-documents", "ca-ubc-documents"]),
-          row([["Euclid／CSMC", "Euclid / CSMC"], ["CEMC 当届 Euclid 和 CSIMC 页面；Waterloo Mathematics supplementary policy", "Current CEMC Euclid and CSIMC pages plus Waterloo Mathematics supplementary policy"], ["每年 9 月 CEMC 开放订购后更新日期、订购截止、地区场次；同时复核 Waterloo 是否仍将其列为非必考", "After CEMC opens annual ordering in September, update dates, order deadlines and regional sittings; also reconfirm Waterloo still lists them as non-mandatory"]], ["ca-cemc-euclid", "ca-cemc-csmc", "ca-waterloo-supplement", "ca-waterloo-deadlines-2027"]),
         ],
       }],
     },

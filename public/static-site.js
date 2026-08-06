@@ -472,10 +472,15 @@
     if (!filters || !list || !rows.length) return;
     var input = filters.querySelector('[data-calendar-filter="query"]');
     var trackSelect = filters.querySelector('[data-calendar-filter="track"]');
-    var periodSelect = filters.querySelector('[data-calendar-filter="period"]');
     var statusSelect = filters.querySelector('[data-calendar-filter="status"]');
+    var periodLinks = Array.prototype.slice.call(root.querySelectorAll("[data-calendar-period-link]"));
     var exportButton = filters.querySelector("button");
     var visible = [];
+    var period = "current";
+    try {
+      var requestedPeriod = new URLSearchParams(window.location.search).get("period");
+      if (["current", "history", "all"].indexOf(requestedPeriod) !== -1) period = requestedPeriod;
+    } catch {}
 
     function isHistory(item) {
       return (item.endDate || item.date) < today();
@@ -514,15 +519,21 @@
       });
       var currentRows = matched.filter(function (row) { return !isHistory(row.dateRecord); }).sort(function (a, b) { return a.dateRecord.date.localeCompare(b.dateRecord.date) || a.project.shortTitle.localeCompare(b.project.shortTitle, undefined, { numeric: true }); });
       var historyRows = matched.filter(function (row) { return isHistory(row.dateRecord); }).sort(function (a, b) { return b.dateRecord.date.localeCompare(a.dateRecord.date) || a.project.shortTitle.localeCompare(b.project.shortTitle, undefined, { numeric: true }); });
-      var period = periodSelect ? periodSelect.value : "current";
       visible = period === "history" ? historyRows : period === "all" ? currentRows.concat(historyRows) : currentRows;
       list.innerHTML = (period !== "history" ? calendarGroupHtml(currentRows, "current") : "") +
         (period !== "current" ? calendarGroupHtml(historyRows, "history") : "") +
         (!visible.length ? '<p class="empty-state" data-calendar-empty><span class="lang-zh">没有符合条件的日期。</span><span class="lang-en">No matching dates.</span></p>' : "");
       var count = root.querySelector(".result-count");
       if (count) count.innerHTML = "<b>" + visible.length + '</b> <span class="lang-zh">个日期</span><span class="lang-en">dates</span>';
-      var summary = root.querySelector(".calendar-summary > p:last-child");
-      if (summary) summary.innerHTML = '<span class="lang-zh">当前与未来 ' + currentRows.length + " · 历史 " + historyRows.length + '</span><span class="lang-en">Current &amp; upcoming ' + currentRows.length + " · History " + historyRows.length + "</span>";
+      periodLinks.forEach(function (link) {
+        var linkPeriod = link.dataset.calendarPeriodLink;
+        var linkCount = link.querySelector("b");
+        var value = linkPeriod === "current" ? currentRows.length : linkPeriod === "history" ? historyRows.length : currentRows.length + historyRows.length;
+        if (linkCount) linkCount.textContent = String(value);
+        link.classList.toggle("active", linkPeriod === period);
+        if (linkPeriod === period) link.setAttribute("aria-current", "page");
+        else link.removeAttribute("aria-current");
+      });
       exportButton.disabled = !visible.length;
     }
 
@@ -548,6 +559,21 @@
 
     filters.addEventListener("input", render);
     filters.addEventListener("change", render);
+    periodLinks.forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        var nextPeriod = link.dataset.calendarPeriodLink;
+        if (["current", "history", "all"].indexOf(nextPeriod) === -1) return;
+        event.preventDefault();
+        period = nextPeriod;
+        try {
+          var url = new URL(window.location.href);
+          url.searchParams.set("period", period);
+          url.hash = "calendar-results";
+          window.history.replaceState({}, "", url);
+        } catch {}
+        render();
+      });
+    });
     exportButton.addEventListener("click", exportIcs);
     render();
   }
