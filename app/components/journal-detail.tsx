@@ -16,6 +16,7 @@ import { Breadcrumbs } from "./breadcrumbs";
 import { Localized } from "./localized";
 import { SourceCitations } from "./source-citations";
 import { StatusBadge } from "./status-badge";
+import { AcademicIntegrityNotice } from "./academic-integrity-notice";
 
 const sourceKinds: Record<SourceKind, ReturnType<typeof t>> = {
   official: t("官方页面", "Official page"),
@@ -76,6 +77,7 @@ export function JournalDetail({
             </div>
           ))}
         </dl>
+        <AcademicIntegrityNotice context="publication" />
         <div className="record-stamp"><span><span className="lang-zh">最后更新</span><span className="lang-en">Last updated</span>: {journal.lastVerified}</span></div>
       </div>
 

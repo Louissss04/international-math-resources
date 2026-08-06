@@ -81,6 +81,35 @@ test("keeps the maintenance guide internal", async () => {
   assert.equal(response.status, 404);
 });
 
+test("shows one context-specific academic-integrity notice on relevant pages", async () => {
+  for (const [path, context, pattern] of [
+    ["/competitions/amc-12", "competition", /仅在规定队伍范围内协作/],
+    ["/courses/ap-calculus-ab", "exam", /考试须由考生本人/],
+    ["/assessments/tmua", "exam", /不得代考、场外求助/],
+    ["/modeling/himcm", "research", /数据、代码及 AI 协助/],
+    ["/research", "research", /不得代写、抄袭/],
+    ["/research/integrity", "research", /伪造证明、数据、图像与引用/],
+    ["/summer/promys", "application", /申请题、作品和申请材料/],
+    ["/journals", "publication", /重复投稿、预印本和 AI 使用/],
+    ["/journals/rose-hulman-undergraduate-mathematics-journal", "publication", /目标刊物现行政策/],
+  ]) {
+    const html = await renderHtml(path);
+    assert.equal((html.match(/data-academic-integrity=/g) ?? []).length, 1, path);
+    assert.match(html, new RegExp(`data-academic-integrity=["']${context}["']`), path);
+    assert.match(html, /诚信提醒/);
+    assert.match(html, pattern, path);
+  }
+
+  for (const path of ["/research", "/journals", "/journals/rose-hulman-undergraduate-mathematics-journal"]) {
+    assert.match(await renderHtml(path), /href=["']\/research\/integrity["']/, path);
+  }
+  assert.doesNotMatch(await renderHtml("/research/integrity"), /href=["']\/research\/integrity["']/);
+
+  for (const path of ["/", "/calendar", "/sources", "/official-sites"]) {
+    assert.doesNotMatch(await renderHtml(path), /data-academic-integrity=/, path);
+  }
+});
+
 test("renders one private engagement and feedback module on every page", async () => {
   for (const path of ["/", "/calendar", "/competitions/amc-12"]) {
     const html = await renderHtml(path);

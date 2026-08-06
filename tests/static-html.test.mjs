@@ -353,6 +353,8 @@ test("routeMap exactly matches the flat HTML export", async () => {
 test("does not publish internal maintenance material", async () => {
   const data = await loadStaticData();
   assert.equal(data.routeMap["/maintenance"], undefined, "maintenance route is public");
+  const gitignore = await readFile(path.resolve(testDirectory, "../.gitignore"), "utf8");
+  assert.match(gitignore, /^\/private\/$/m, "private maintenance files are no longer ignored");
   for (const name of ["maintenance.html", "mathpath-update-maintenance-prompt.md"]) {
     const exposed = await stat(path.join(outputDirectory, name)).catch(() => null);
     assert.equal(exposed, null, `${name} is present in the public export`);
@@ -361,6 +363,13 @@ test("does not publish internal maintenance material", async () => {
     const html = await readFile(file, "utf8");
     assert.doesNotMatch(html, /href=["'][^"']*maintenance(?:\.html)?["']/i, `${path.basename(file)} links to internal maintenance material`);
     assert.doesNotMatch(visibleText(html), /维护说明|Annual Maintenance Sources|maintenance entry points/i, `${path.basename(file)} exposes maintenance instructions`);
+  }
+  for (const asset of requiredAssets) {
+    const contents = await readFile(path.join(outputDirectory, asset), "utf8");
+    assert.doesNotMatch(contents, /mathpath-update-maintenance-prompt|内部资料：国际升学数学资料库全站更新维护 Prompt|private[\\/]mathpath/i, `${asset} exposes internal maintenance material`);
+  }
+  for (const route of ["/", "/calendar", "/sources", "/official-sites"]) {
+    assert.doesNotMatch(await readRoute(route, data), /data-academic-integrity=/, `${route} has an out-of-context integrity notice`);
   }
 });
 
@@ -394,6 +403,15 @@ test("every project, syllabus and destination has its own complete detail page",
     assert.ok(text.includes(project.title.en), `${projectFile(project)} is missing its English title`);
     assert.ok(text.includes("来源") && text.includes("Sources"), `${projectFile(project)} is missing bilingual source labeling`);
     assert.ok(text.includes("最后更新") && text.includes("Last updated"), `${projectFile(project)} is missing its page-level update stamp`);
+    const integrityContext = project.track === "competition"
+      ? "competition"
+      : project.track === "modeling" || project.track === "research"
+        ? "research"
+        : project.track === "summer"
+          ? "application"
+          : "exam";
+    assert.equal((html.match(/data-academic-integrity=/g) ?? []).length, 1, `${projectFile(project)} has the wrong integrity-notice count`);
+    assert.match(html, new RegExp(`data-academic-integrity=["']${integrityContext}["']`), `${projectFile(project)} has the wrong integrity context`);
   }
 
   for (const syllabus of data.syllabi) {
@@ -409,6 +427,7 @@ test("every project, syllabus and destination has its own complete detail page",
     assert.ok(text.includes("中文译文说明") && text.includes("Chinese translation"), `${expectedFile} is missing its translation note`);
     assert.ok(text.includes("官方原文与版本") && text.includes("Official sources and versions"), `${expectedFile} is missing official versioned sources`);
     assert.match(html, /href=["']https:\/\//i, `${expectedFile} has no direct HTTPS official source`);
+    assert.doesNotMatch(html, /data-academic-integrity=/, `${expectedFile} duplicates the parent project integrity notice`);
   }
 
   for (const guide of data.destinationGuides) {
@@ -435,6 +454,9 @@ test("exports a separate journal directory and one complete page per publication
   assert.match(directoryHtml, /data-journal-filter=["']topic["']/);
   assert.match(directoryHtml, /data-journal-filter=["']review["']/);
   assert.match(directoryHtml, /data-journal-filter=["']fee["']/);
+  assert.equal((directoryHtml.match(/data-academic-integrity=/g) ?? []).length, 1, "journals.html has the wrong integrity-notice count");
+  assert.match(directoryHtml, /data-academic-integrity=["']publication["']/);
+  assert.match(directoryHtml, /href=["']research-integrity\.html["']/);
   const declaredJournalIds = directoryHtml.match(/data-journal-ids=["']([^"']*)["']/)?.[1].split("|").filter(Boolean) ?? [];
   assert.deepEqual(new Set(declaredJournalIds), new Set(data.journals.map((journal) => journal.id)));
 
@@ -451,6 +473,9 @@ test("exports a separate journal directory and one complete page per publication
     }
     assert.match(html, /href=["']https:\/\//i, `${file} has no direct official HTTPS link`);
     assert.doesNotMatch(text, /加入规划器|Add to planner|研究节点|Research milestones/, `${file} is incorrectly treated as a project`);
+    assert.equal((html.match(/data-academic-integrity=/g) ?? []).length, 1, `${file} has the wrong integrity-notice count`);
+    assert.match(html, /data-academic-integrity=["']publication["']/, `${file} has the wrong integrity context`);
+    assert.match(html, /href=["']research-integrity\.html["']/, `${file} does not link to the integrity guide`);
   }
 
   const projectIds = new Set(data.projects.map((project) => project.id));
@@ -464,6 +489,9 @@ test("exports the mathematical research skills guide and its official materials"
   assert.equal(data.routeMap["/research/skills"], "research-skills.html");
   const directoryHtml = await readRoute("/research", data);
   assert.match(directoryHtml, /href=["']research-skills\.html["']/);
+  assert.equal((directoryHtml.match(/data-academic-integrity=/g) ?? []).length, 1, "research.html has the wrong integrity-notice count");
+  assert.match(directoryHtml, /data-academic-integrity=["']research["']/);
+  assert.match(directoryHtml, /href=["']research-integrity\.html["']/);
 
   const html = await readRoute("/research/skills", data);
   const text = visibleText(html);

@@ -12,6 +12,7 @@ import { LearningResourceList } from "./learning-resource-list";
 import { PastPaperSection } from "./past-paper-section";
 import { VideoResourceList } from "./video-resource-list";
 import { BookResourceList } from "./book-resource-list";
+import { AcademicIntegrityNotice } from "./academic-integrity-notice";
 
 const dateSectionLabels: Record<Track, ReturnType<typeof t>> = {
   competition: t("赛程与报名节点", "Competition schedule and registration"),
@@ -130,6 +131,13 @@ export function ProjectDetail({
       return groups;
     }, new Map<string, ThresholdRecord[]>()),
   ).sort(([yearA], [yearB]) => yearB.localeCompare(yearA));
+  const integrityContext = project.track === "competition"
+    ? "competition"
+    : project.track === "modeling" || project.track === "research"
+      ? "research"
+      : project.track === "summer"
+        ? "application"
+        : "exam";
 
   return (
     <main>
@@ -167,6 +175,7 @@ export function ProjectDetail({
             </div>
           ))}
         </dl>
+        <AcademicIntegrityNotice context={integrityContext} showGuideLink={project.id !== "research-integrity"} />
         <div className="record-stamp">
           <span><span className="lang-zh">适用周期</span><span className="lang-en">Cycle</span>: {project.cycle}</span>
           <span><span className="lang-zh">最后更新</span><span className="lang-en">Last updated</span>: {pageLastUpdated}</span>

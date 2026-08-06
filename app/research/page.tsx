@@ -5,6 +5,7 @@ import { CatalogClient } from "../components/catalog-client";
 import { Localized } from "../components/localized";
 import { allJournals, allProjects } from "../data";
 import { projectHref } from "../lib/paths";
+import { AcademicIntegrityNotice } from "../components/academic-integrity-notice";
 
 export const metadata: Metadata = {
   title: "中学生数学科研",
@@ -30,6 +31,8 @@ export default function Page() {
           <b>{programs.length}</b>
         </div>
       </header>
+
+      <div className="page-container integrity-page-note"><AcademicIntegrityNotice context="research" /></div>
 
       <section className="page-container research-access-table">
         <div className="table-scroll">

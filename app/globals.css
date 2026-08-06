@@ -261,6 +261,13 @@ html[data-language="en"] .lang-en { display: inline; }
 .fact-grid dt { color: var(--muted); font-size: .75rem; margin-bottom: 9px; }
 .fact-grid dd { margin: 0; font-size: .9rem; font-weight: 650; }
 .record-stamp { display: flex; gap: 24px; padding: 13px 0 36px; color: var(--muted); font-size: .76rem; border-bottom: 1px solid var(--line); }
+.academic-integrity-notice { display: grid; grid-template-columns: minmax(180px, .32fr) minmax(0, 1fr) auto; gap: 18px; align-items: start; margin-top: 22px; padding: 16px 18px; background: #fff8e8; border: 1px solid #e5c978; border-left: 4px solid #9a6513; border-radius: var(--radius); }
+.academic-integrity-notice strong { color: #70460b; font-size: .86rem; }
+.academic-integrity-notice p { margin: 0; color: #594b36; font-size: .82rem; }
+.academic-integrity-notice a { color: #70460b; font-size: .78rem; font-weight: 800; white-space: nowrap; }
+.academic-integrity-notice a:hover { color: var(--blue); }
+.integrity-page-note { margin-top: 24px; margin-bottom: 30px; }
+.integrity-page-note .academic-integrity-notice { margin-top: 0; }
 .record-layout { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 48px; padding-top: 42px; }
 .section-index { align-self: start; position: sticky; top: 88px; border-top: 2px solid var(--ink); }
 .section-index strong, .section-index a { display: block; padding: 10px 2px; border-bottom: 1px solid var(--line); font-size: .78rem; }
@@ -693,6 +700,8 @@ td small { display: block; margin-top: 4px; color: var(--muted); }
   .fact-grid div:nth-child(3n) { border-right: 1px solid var(--line); }
   .fact-grid div:nth-child(2n) { border-right: 0; }
   .record-layout { grid-template-columns: 1fr; gap: 28px; }
+  .academic-integrity-notice { grid-template-columns: 1fr; gap: 7px; }
+  .academic-integrity-notice a { white-space: normal; }
   .section-index { position: static; display: flex; overflow-x: auto; gap: 6px; border: 0; padding-bottom: 8px; }
   .section-index strong { display: none; }
   .section-index a { white-space: nowrap; border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; background: var(--surface); }

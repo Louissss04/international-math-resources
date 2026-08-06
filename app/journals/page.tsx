@@ -4,6 +4,7 @@ import { Breadcrumbs } from "../components/breadcrumbs";
 import { JournalDirectory } from "../components/journal-directory";
 import { allJournals } from "../data";
 import { t } from "../lib/types";
+import { AcademicIntegrityNotice } from "../components/academic-integrity-notice";
 
 export const metadata: Metadata = {
   title: "中学生数学论文期刊与投稿",
@@ -26,6 +27,8 @@ export default function Page() {
           <b>{allJournals.length}</b>
         </div>
       </header>
+
+      <div className="page-container integrity-page-note"><AcademicIntegrityNotice context="publication" /></div>
 
       <section className="page-container journal-scope" aria-labelledby="journal-scope-title">
         <h2 id="journal-scope-title"><span className="lang-zh">如何理解不同刊物</span><span className="lang-en">How the publications differ</span></h2>
