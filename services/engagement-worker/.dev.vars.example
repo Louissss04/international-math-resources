@@ -1,6 +1,7 @@
 # Local development only. Copy to .dev.vars and replace this value.
 HASH_SECRET=replace-with-at-least-32-random-characters
+ADMIN_PASSWORD_HASH=pbkdf2-sha256$750000$replace-salt$replace-derived-key
+ADMIN_SESSION_SECRET=replace-with-an-independent-random-secret-of-at-least-32-characters
 
 # Optional. When present, every feedback and like request must pass Turnstile.
 # TURNSTILE_SECRET=replace-with-cloudflare-turnstile-secret
-

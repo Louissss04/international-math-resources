@@ -5,6 +5,7 @@
   if (!root || window.location.protocol === "file:") return;
 
   var apiUrl = String(root.dataset.apiUrl || "").replace(/\/+$/, "");
+  var turnstileSiteKey = String(root.dataset.turnstileSiteKey || "").trim();
   try {
     var parsedApiUrl = new URL(apiUrl);
     if (parsedApiUrl.protocol !== "https:" && parsedApiUrl.protocol !== "http:") return;
@@ -12,8 +13,6 @@
     return;
   }
 
-  var siteVisits = root.querySelector("[data-engagement-site-visits]");
-  var pageViews = root.querySelector("[data-engagement-page-views]");
   var helpfulButton = root.querySelector("[data-engagement-helpful]");
   var helpfulCount = root.querySelector("[data-engagement-helpful-count]");
   var engagementStatus = root.querySelector("[data-engagement-status]");
@@ -23,8 +22,11 @@
   var feedbackPage = root.querySelector("[data-feedback-page]");
   var feedbackSubmit = root.querySelector("[data-feedback-submit]");
   var feedbackCopy = root.querySelector("[data-feedback-copy]");
+  var likeTurnstileContainer = root.querySelector("[data-turnstile-like]");
+  var feedbackTurnstileContainer = root.querySelector("[data-turnstile-feedback]");
   var liked = false;
   var likeBusy = false;
+  var turnstileReadyPromise = null;
 
   function canonicalPath() {
     var value = document.documentElement.dataset.staticRoute || window.location.pathname || "/";
@@ -92,6 +94,141 @@
     node.append(chinese, english);
   }
 
+  function turnstileError(code) {
+    var error = new Error("The security check could not be completed.");
+    error.code = code;
+    return error;
+  }
+
+  function isTurnstileError(error) {
+    return Boolean(error && typeof error.code === "string" && error.code.startsWith("turnstile_"));
+  }
+
+  function ensureTurnstileScript() {
+    if (!turnstileSiteKey) return null;
+    var existing = document.querySelector("script[data-turnstile-api]");
+    if (existing) return existing;
+    var script = document.createElement("script");
+    script.dataset.turnstileApi = "true";
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+    script.defer = true;
+    document.head.appendChild(script);
+    return script;
+  }
+
+  function waitForTurnstile() {
+    if (!turnstileSiteKey) return Promise.resolve(null);
+    if (turnstileReadyPromise) return turnstileReadyPromise;
+
+    turnstileReadyPromise = new Promise(function (resolve, reject) {
+      var settled = false;
+      var timer = window.setTimeout(function () {
+        finish(turnstileError("turnstile_unavailable"));
+      }, 10000);
+
+      function finish(error, api) {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timer);
+        if (error) reject(error);
+        else resolve(api);
+      }
+
+      function useApi() {
+        var api = window.turnstile;
+        if (!api || typeof api.ready !== "function") {
+          finish(turnstileError("turnstile_unavailable"));
+          return;
+        }
+        api.ready(function () { finish(null, api); });
+      }
+
+      if (window.turnstile) {
+        useApi();
+        return;
+      }
+
+      var script = ensureTurnstileScript();
+      if (!script) {
+        finish(turnstileError("turnstile_unavailable"));
+        return;
+      }
+      script.addEventListener("load", useApi, { once: true });
+      script.addEventListener("error", function () {
+        finish(turnstileError("turnstile_unavailable"));
+      }, { once: true });
+    }).catch(function (error) {
+      turnstileReadyPromise = null;
+      throw error;
+    });
+
+    return turnstileReadyPromise;
+  }
+
+  function freshTurnstileToken(action, container) {
+    if (!turnstileSiteKey) return Promise.resolve(null);
+    if (!container) return Promise.reject(turnstileError("turnstile_unavailable"));
+
+    return waitForTurnstile().then(function (api) {
+      return new Promise(function (resolve, reject) {
+        var settled = false;
+        var widgetId = null;
+        var timer = window.setTimeout(function () {
+          finish(turnstileError("turnstile_timeout"));
+        }, 90000);
+
+        function removeWidget() {
+          if (widgetId !== null && api && typeof api.remove === "function") {
+            try { api.remove(widgetId); } catch {}
+          }
+          container.replaceChildren();
+        }
+
+        function finish(error, token) {
+          if (settled) return;
+          settled = true;
+          window.clearTimeout(timer);
+          removeWidget();
+          if (error) reject(error);
+          else resolve(token);
+        }
+
+        container.replaceChildren();
+        try {
+          widgetId = api.render(container, {
+            sitekey: turnstileSiteKey,
+            action: action,
+            execution: "execute",
+            appearance: "interaction-only",
+            theme: "auto",
+            size: "flexible",
+            retry: "never",
+            "refresh-expired": "never",
+            "response-field": false,
+            callback: function (token) {
+              if (typeof token !== "string" || !token) {
+                finish(turnstileError("turnstile_failed"));
+                return;
+              }
+              finish(null, token);
+            },
+            "error-callback": function () { finish(turnstileError("turnstile_failed")); },
+            "expired-callback": function () { finish(turnstileError("turnstile_expired")); },
+            "timeout-callback": function () { finish(turnstileError("turnstile_timeout")); },
+            "unsupported-callback": function () { finish(turnstileError("turnstile_unsupported")); },
+          });
+          if (widgetId === undefined || widgetId === null) {
+            finish(turnstileError("turnstile_unavailable"));
+            return;
+          }
+          api.execute(container);
+        } catch {
+          finish(turnstileError("turnstile_unavailable"));
+        }
+      });
+    });
+  }
+
   function endpoint(path) {
     return apiUrl + path;
   }
@@ -109,8 +246,9 @@
       }, options || {}));
       var body = await response.json().catch(function () { return {}; });
       if (!response.ok) {
-        var error = new Error(body && body.message ? String(body.message) : "Request failed");
-        error.code = body && body.code ? String(body.code) : "request_failed";
+        var details = body && body.error && typeof body.error === "object" ? body.error : body;
+        var error = new Error(details && details.message ? String(details.message) : "Request failed");
+        error.code = details && details.code ? String(details.code) : "request_failed";
         error.status = response.status;
         throw error;
       }
@@ -122,8 +260,6 @@
 
   function updateStats(data) {
     if (!data || typeof data !== "object") return;
-    if (siteVisits) siteVisits.textContent = formatCount(data.siteVisits);
-    if (pageViews) pageViews.textContent = formatCount(data.pageViews);
     if (helpfulCount) helpfulCount.textContent = formatCount(data.likes);
     if (typeof data.liked === "boolean") liked = data.liked;
     if (helpfulButton) {
@@ -155,11 +291,18 @@
     likeBusy = true;
     helpfulButton.disabled = true;
     helpfulButton.setAttribute("aria-busy", "true");
-    setBilingualStatus(engagementStatus, "", "");
+    setBilingualStatus(
+      engagementStatus,
+      turnstileSiteKey ? "正在进行安全验证…" : "",
+      turnstileSiteKey ? "Completing a security check…" : "",
+    );
     try {
+      var turnstileToken = await freshTurnstileToken("like", likeTurnstileContainer);
+      var likePayload = { path: pagePath, visitorId: voteToken, active: nextLiked };
+      if (turnstileToken) likePayload.turnstileToken = turnstileToken;
       var data = await request("/v1/like", {
         method: "POST",
-        body: JSON.stringify({ path: pagePath, visitorId: voteToken, active: nextLiked }),
+        body: JSON.stringify(likePayload),
       });
       updateStats(data);
       setBilingualStatus(
@@ -167,8 +310,12 @@
         data.liked ? "已标记为有用。" : "已取消标记。",
         data.liked ? "Marked as useful." : "Mark removed.",
       );
-    } catch {
-      setBilingualStatus(engagementStatus, "暂时无法提交，请稍后再试。", "Unable to submit right now. Please try again later.");
+    } catch (error) {
+      if (isTurnstileError(error)) {
+        setBilingualStatus(engagementStatus, "安全验证未完成，请重试。", "The security check could not be completed. Please try again.");
+      } else {
+        setBilingualStatus(engagementStatus, "暂时无法提交，请稍后再试。", "Unable to submit right now. Please try again later.");
+      }
     } finally {
       likeBusy = false;
       helpfulButton.disabled = false;
@@ -225,20 +372,27 @@
     feedbackSubmit.disabled = true;
     feedbackSubmit.setAttribute("aria-busy", "true");
     if (feedbackCopy) feedbackCopy.hidden = true;
-    setBilingualStatus(feedbackStatus, "正在提交…", "Submitting…");
+    setBilingualStatus(
+      feedbackStatus,
+      turnstileSiteKey ? "正在进行安全验证…" : "正在提交…",
+      turnstileSiteKey ? "Completing a security check…" : "Submitting…",
+    );
     try {
+      var turnstileToken = await freshTurnstileToken("feedback", feedbackTurnstileContainer);
+      var feedbackPayload = {
+        path: pagePath,
+        visitorId: dailyToken,
+        submissionId: feedbackForm.dataset.submissionId || randomToken(),
+        category: String(formData.get("category") || "other"),
+        message: message,
+        contact: String(formData.get("contact") || "").trim(),
+        website: String(formData.get("website") || ""),
+        language: document.documentElement.dataset.language === "en" ? "en" : "zh-CN",
+      };
+      if (turnstileToken) feedbackPayload.turnstileToken = turnstileToken;
       var data = await request("/v1/feedback", {
         method: "POST",
-        body: JSON.stringify({
-          path: pagePath,
-          visitorId: dailyToken,
-          submissionId: feedbackForm.dataset.submissionId || randomToken(),
-          category: String(formData.get("category") || "other"),
-          message: message,
-          contact: String(formData.get("contact") || "").trim(),
-          website: String(formData.get("website") || ""),
-          language: document.documentElement.dataset.language === "en" ? "en" : "zh-CN",
-        }),
+        body: JSON.stringify(feedbackPayload),
       });
       feedbackForm.reset();
       feedbackForm.dataset.submissionId = "";
@@ -247,6 +401,8 @@
       if (feedbackCopy) feedbackCopy.hidden = false;
       if (error && error.status === 429) {
         setBilingualStatus(feedbackStatus, "提交次数过多，请稍后再试。", "Too many submissions. Please try again later.");
+      } else if (isTurnstileError(error)) {
+        setBilingualStatus(feedbackStatus, "安全验证未完成，留言内容已保留，请重试。", "The security check could not be completed. Your message has been kept; please try again.");
       } else {
         setBilingualStatus(feedbackStatus, "暂时无法提交，留言内容已保留。", "Unable to submit right now. Your message has been kept in the form.");
       }
@@ -256,5 +412,6 @@
     }
   });
 
+  ensureTurnstileScript();
   loadStats();
 })();

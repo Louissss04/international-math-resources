@@ -61,11 +61,8 @@ html[data-language="en"] .lang-en { display: inline; }
 .site-engagement { margin-top: 80px; border-top: 1px solid var(--line); background: #fff; }
 .site-engagement[hidden] { display: none !important; }
 .site-engagement:not([hidden]) + .site-footer { margin-top: 0; }
-.engagement-inner { width: min(calc(100% - 48px), var(--max)); min-height: 86px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
-.engagement-metrics, .engagement-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
-.engagement-metrics > span { display: inline-flex; align-items: baseline; gap: 7px; color: var(--muted); font-size: .82rem; }
-.engagement-metrics b { color: var(--ink); font-size: 1.05rem; }
-.site-engagement[data-state="unavailable"] .engagement-metrics { display: none; }
+.engagement-inner { width: min(calc(100% - 48px), var(--max)); min-height: 86px; margin: auto; display: flex; align-items: center; justify-content: flex-end; gap: 28px; }
+.engagement-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
 .helpful-button, .feedback-open { min-height: 44px; border-radius: 6px; padding: 9px 13px; font-size: .84rem; font-weight: 700; }
 .helpful-button { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line-dark); background: #fff; }
 .helpful-button:hover, .helpful-button.active { border-color: var(--blue); color: var(--blue); background: var(--blue-soft); }
@@ -754,7 +751,7 @@ td small { display: block; margin-top: 4px; color: var(--muted); }
   .policy-card > p { grid-column: 1; }
   .admission-requirement-card > header, .admission-requirement-card > footer { align-items: start; flex-direction: column; }
   .requirement-programs, .requirement-details > div { grid-template-columns: 1fr; gap: 4px; }
-  .engagement-metrics, .engagement-actions { width: 100%; }
+  .engagement-actions { width: 100%; }
   .engagement-actions > * { flex: 1 1 auto; }
   .feedback-form { padding: 20px; }
   .feedback-actions { align-items: stretch; flex-direction: column-reverse; }

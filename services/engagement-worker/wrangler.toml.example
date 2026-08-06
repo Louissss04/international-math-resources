@@ -2,6 +2,11 @@ name = "international-math-engagement"
 main = "src/index.ts"
 compatibility_date = "2026-08-06"
 
+[assets]
+directory = "./admin"
+binding = "ASSETS"
+run_worker_first = true
+
 [[d1_databases]]
 binding = "DB"
 database_name = "international-math-engagement"
@@ -18,5 +23,8 @@ LIKE_BROWSER_DAILY_LIMIT = "40"
 LIKE_NETWORK_DAILY_LIMIT = "1000"
 FEEDBACK_BROWSER_DAILY_LIMIT = "3"
 FEEDBACK_NETWORK_DAILY_LIMIT = "20"
+ADMIN_SESSION_TTL_SECONDS = "14400"
+ADMIN_LOGIN_NETWORK_LIMIT = "8"
 
-# Do not put HASH_SECRET or TURNSTILE_SECRET here. Add them with `wrangler secret put`.
+# Do not put HASH_SECRET, ADMIN_PASSWORD_HASH, ADMIN_SESSION_SECRET or
+# TURNSTILE_SECRET here. Add them with `wrangler secret put`.

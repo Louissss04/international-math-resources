@@ -37,6 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const engagementApiUrl = process.env.NEXT_PUBLIC_ENGAGEMENT_API_URL ?? "";
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "";
 
   return (
     <html lang="zh-CN" data-language="zh">
@@ -44,8 +45,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <a className="skip-link" href="#main-content"><span className="lang-zh">跳至正文</span><span className="lang-en">Skip to content</span></a>
         <SiteHeader />
         <div id="main-content">{children}</div>
-        <SiteEngagement apiUrl={engagementApiUrl} />
+        <SiteEngagement apiUrl={engagementApiUrl} turnstileSiteKey={turnstileSiteKey} />
         <SiteFooter />
+        {turnstileSiteKey ? (
+          <script
+            data-turnstile-api
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+            defer
+          />
+        ) : null}
         <script src="/engagement.js" defer />
       </body>
     </html>

@@ -1,29 +1,22 @@
 type SiteEngagementProps = {
   apiUrl: string;
+  turnstileSiteKey: string;
 };
 
-export function SiteEngagement({ apiUrl }: SiteEngagementProps) {
+export function SiteEngagement({ apiUrl, turnstileSiteKey }: SiteEngagementProps) {
   const endpoint = apiUrl.trim().replace(/\/+$/, "");
+  const siteKey = turnstileSiteKey.trim();
 
   return (
     <section
       className="site-engagement"
       data-static-component="engagement"
       data-api-url={endpoint}
+      data-turnstile-site-key={siteKey || undefined}
       hidden={!endpoint}
       aria-label="Site feedback"
     >
       <div className="engagement-inner">
-        <div className="engagement-metrics" aria-live="polite">
-          <span>
-            <span className="lang-zh">本站访问</span><span className="lang-en">Site visits</span>
-            <b data-engagement-site-visits>—</b>
-          </span>
-          <span>
-            <span className="lang-zh">本页浏览</span><span className="lang-en">Page views</span>
-            <b data-engagement-page-views>—</b>
-          </span>
-        </div>
         <div className="engagement-actions">
           <button className="helpful-button" type="button" aria-pressed="false" data-engagement-helpful>
             <span className="lang-zh">觉得本页有用</span><span className="lang-en">This page was useful</span>
@@ -35,6 +28,7 @@ export function SiteEngagement({ apiUrl }: SiteEngagementProps) {
         </div>
       </div>
       <p className="engagement-status" role="status" aria-live="polite" aria-atomic="true" data-engagement-status />
+      {siteKey ? <div data-turnstile-like /> : null}
 
       <dialog className="feedback-dialog" data-feedback-dialog aria-labelledby="feedback-dialog-title">
         <form className="feedback-form" method="dialog" data-feedback-form>
@@ -84,6 +78,7 @@ export function SiteEngagement({ apiUrl }: SiteEngagementProps) {
             <span className="lang-en">Do not include names, schools, phone numbers, messaging IDs, identity documents, application numbers or transcripts. If you are under 14, do not provide contact details.</span>
           </p>
 
+          {siteKey ? <div data-turnstile-feedback /> : null}
           <p className="feedback-status" role="status" aria-live="polite" aria-atomic="true" data-feedback-status />
           <div className="feedback-actions">
             <button className="secondary-button" type="button" data-feedback-copy hidden>

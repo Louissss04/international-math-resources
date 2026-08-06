@@ -376,17 +376,36 @@ test("does not publish internal maintenance material", async () => {
 test("exports private feedback controls and the engagement runtime", async () => {
   for (const file of await htmlInventory()) {
     const html = await readFile(file, "utf8");
+    const turnstileConfigured = /data-turnstile-site-key=/.test(html);
     assert.equal((html.match(/data-static-component=["']engagement["']/g) ?? []).length, 1, `${path.basename(file)} has the wrong engagement module count`);
     assert.match(html, /data-engagement-helpful/, `${path.basename(file)} has no helpful control`);
+    assert.doesNotMatch(html, /data-engagement-(?:site-visits|page-views)/, `${path.basename(file)} exposes private traffic totals`);
     assert.match(html, /data-feedback-dialog/, `${path.basename(file)} has no feedback dialog`);
     assert.match(html, /src=["']assets\/engagement\.js["']/, `${path.basename(file)} does not load engagement.js`);
-    assert.doesNotMatch(html, /data-feedback-list|\/v1\/admin/, `${path.basename(file)} exposes a feedback-reading control`);
+    assert.doesNotMatch(html, /data-feedback-list|\/(?:v1\/admin|admin\/api)|管理后台登录/, `${path.basename(file)} exposes an administrator control`);
+    if (turnstileConfigured) {
+      assert.match(html, /data-turnstile-like/, `${path.basename(file)} has no like challenge container`);
+      assert.match(html, /data-turnstile-feedback/, `${path.basename(file)} has no feedback challenge container`);
+      const turnstileScripts = attributeValues(html, "script", "src").filter((src) => src.includes("challenges.cloudflare.com/turnstile/"));
+      assert.ok(turnstileScripts.length <= 1, `${path.basename(file)} repeats the Turnstile script`);
+      if (turnstileScripts.length) {
+        assert.equal(turnstileScripts[0], "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit", `${path.basename(file)} uses the wrong Turnstile script`);
+      }
+    } else {
+      assert.doesNotMatch(html, /data-turnstile-(?:like|feedback)|challenges\.cloudflare\.com\/turnstile/, `${path.basename(file)} loads Turnstile without a site key`);
+    }
   }
   const runtime = await readFile(path.join(outputDirectory, "assets/engagement.js"), "utf8");
   assert.match(runtime, /\/v1\/view/);
   assert.match(runtime, /\/v1\/like/);
   assert.match(runtime, /\/v1\/feedback/);
-  assert.doesNotMatch(runtime, /\/v1\/(?:admin|feedbacks|messages)/, "browser runtime contains a public feedback-reading endpoint");
+  assert.match(runtime, /freshTurnstileToken\("like", likeTurnstileContainer\)/, "likes do not request a fresh Turnstile token");
+  assert.match(runtime, /freshTurnstileToken\("feedback", feedbackTurnstileContainer\)/, "feedback does not request a fresh Turnstile token");
+  assert.match(runtime, /turnstileToken/, "Turnstile tokens are not sent to the Worker");
+  assert.match(runtime, /appearance: "interaction-only"/, "Turnstile challenges are not interaction-only");
+  assert.match(runtime, /https:\/\/challenges\.cloudflare\.com\/turnstile\/v0\/api\.js\?render=explicit/, "the static runtime cannot load the official Turnstile API");
+  assert.match(runtime, /if \(!turnstileSiteKey\) return null;/, "the static runtime does not keep Turnstile optional");
+  assert.doesNotMatch(runtime, /\/(?:v1\/(?:admin|feedbacks|messages)|admin\/api)/, "browser runtime contains an administrator endpoint");
 });
 
 test("every project, syllabus and destination has its own complete detail page", async () => {
@@ -728,7 +747,11 @@ test("uses only portable relative assets and contains no framework payload", asy
 
     assert.ok(resourceReferences.length >= requiredAssets.length, `${label} does not reference its CSS and JavaScript assets`);
     for (const reference of resourceReferences) {
-      assert.ok(!isExternalReference(reference), `${label} uses an external runtime asset: ${reference}`);
+      if (isExternalReference(reference)) {
+        assert.equal(reference, "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit", `${label} uses an unapproved external runtime asset: ${reference}`);
+        assert.match(html, /data-turnstile-site-key=/, `${label} loads Turnstile without a site key`);
+        continue;
+      }
       assert.ok(!reference.startsWith("/"), `${label} uses a root-absolute runtime asset: ${reference}`);
       const target = resolveLocalReference(file, reference);
       const targetStats = await stat(target).catch(() => null);

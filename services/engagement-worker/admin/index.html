@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="admin-api-base" content="/admin/api" />
+    <title>管理后台｜国际升学数学资料库</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳至主要内容</a>
+    <div id="announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+    <section id="login-view" class="login-view" aria-labelledby="login-title">
+      <div class="login-brand" aria-hidden="true">
+        <div class="login-brand-inner">
+          <span class="brand-mark">M</span>
+          <p>国际升学数学资料库</p>
+          <h1>内容管理后台</h1>
+          <span>Administration</span>
+        </div>
+      </div>
+      <main class="login-main">
+        <div class="login-card">
+          <div class="login-heading">
+            <span class="eyebrow">管理员登录</span>
+            <h2 id="login-title">登录后台</h2>
+            <p>查看访问趋势、页面反馈和内容数据。</p>
+          </div>
+          <form id="login-form" novalidate>
+            <div class="field">
+              <label for="login-password">管理员密码</label>
+              <input id="login-password" name="password" type="password" autocomplete="current-password" minlength="14" required />
+            </div>
+            <p id="login-error" class="form-error" role="alert" hidden></p>
+            <button id="login-submit" class="button button-primary button-wide" type="submit">
+              <span class="button-label">登录</span>
+              <span class="button-loading" hidden>正在验证…</span>
+            </button>
+          </form>
+          <p class="login-note">仅限授权管理人员使用。登录信息不会保存在浏览器本地存储中。</p>
+        </div>
+      </main>
+    </section>
+
+    <div id="admin-view" class="admin-shell" hidden>
+      <header class="mobile-header">
+        <button id="menu-toggle" class="icon-button" type="button" aria-controls="sidebar" aria-expanded="false">
+          <span aria-hidden="true">☰</span><span class="sr-only">打开导航</span>
+        </button>
+        <strong>资料库管理后台</strong>
+        <span class="mobile-header-spacer" aria-hidden="true"></span>
+      </header>
+
+      <aside id="sidebar" class="sidebar" aria-label="后台导航">
+        <div class="sidebar-brand">
+          <span class="brand-mark brand-mark-small">M</span>
+          <div><strong>数学资料库</strong><span>管理后台</span></div>
+        </div>
+        <nav class="sidebar-nav">
+          <button class="nav-item is-active" type="button" data-panel="overview" aria-current="page">
+            <span class="nav-symbol" aria-hidden="true">总</span><span>总览</span>
+          </button>
+          <button class="nav-item" type="button" data-panel="feedback">
+            <span class="nav-symbol" aria-hidden="true">馈</span><span>反馈管理</span><span id="new-feedback-badge" class="nav-count" hidden>0</span>
+          </button>
+        </nav>
+        <div class="sidebar-footer">
+          <p>仅限授权访问</p>
+          <span>Admin Console</span>
+        </div>
+      </aside>
+      <button id="sidebar-backdrop" class="sidebar-backdrop" type="button" aria-label="关闭导航" hidden></button>
+
+      <div class="workspace">
+        <header class="topbar">
+          <div>
+            <span id="topbar-section" class="topbar-section">总览</span>
+            <span id="data-updated" class="topbar-updated">尚未更新</span>
+          </div>
+          <div class="topbar-actions">
+            <span id="admin-name" class="admin-name">管理员</span>
+            <button id="logout-button" class="button button-quiet" type="button">退出登录</button>
+          </div>
+        </header>
+
+        <main id="main-content" class="main-content" tabindex="-1">
+          <section id="overview-panel" class="panel" data-panel-view="overview" aria-labelledby="overview-title">
+            <div class="page-heading">
+              <div>
+                <span class="eyebrow">Overview</span>
+                <h1 id="overview-title">数据总览</h1>
+                <p>访问数据按北京时间统计，并按匿名浏览器每日去重；数据不在公开前台展示。</p>
+              </div>
+              <div class="range-control" role="group" aria-label="趋势时间范围">
+                <button type="button" data-range="today" aria-pressed="false">今日</button>
+                <button class="is-active" type="button" data-range="7d" aria-pressed="true">7 日</button>
+                <button type="button" data-range="30d" aria-pressed="false">30 日</button>
+              </div>
+            </div>
+
+            <div id="dashboard-loading" class="state-block" role="status">
+              <span class="spinner" aria-hidden="true"></span><p>正在加载总览数据…</p>
+            </div>
+            <div id="dashboard-error" class="state-block state-error" role="alert" hidden>
+              <strong>总览数据暂时无法加载</strong><p>请检查网络连接后重试。</p>
+              <button id="dashboard-retry" class="button button-secondary" type="button">重新加载</button>
+            </div>
+
+            <div id="dashboard-content" hidden>
+              <section class="metric-grid" aria-label="核心统计">
+                <article class="metric-card metric-card-primary">
+                  <span>今日访问</span><strong id="metric-today">0</strong><small>匿名浏览器当日去重</small>
+                </article>
+                <article class="metric-card">
+                  <span>近 7 日访问</span><strong id="metric-seven">0</strong><small>每日去重后累计</small>
+                </article>
+                <article class="metric-card">
+                  <span>近 30 日访问</span><strong id="metric-thirty">0</strong><small>每日去重后累计</small>
+                </article>
+                <article class="metric-card">
+                  <span>页面浏览</span><strong id="metric-pageviews">0</strong><small id="metric-pageviews-range">匿名浏览器／页面／日去重</small>
+                </article>
+                <article class="metric-card">
+                  <span>当前点赞</span><strong id="metric-likes">0</strong><small>全部页面</small>
+                </article>
+                <article class="metric-card">
+                  <span>待处理反馈</span><strong id="metric-feedback">0</strong><small>新提交</small>
+                </article>
+              </section>
+
+              <section class="content-card trend-card" aria-labelledby="trend-title">
+                <div class="card-heading">
+                  <div><span class="card-kicker">Traffic</span><h2 id="trend-title">访问趋势</h2></div>
+                  <p id="trend-summary">—</p>
+                </div>
+                <div id="trend-empty" class="compact-empty" hidden>所选时段暂无访问数据。</div>
+                <ol id="trend-chart" class="bar-chart" aria-label="每日访问趋势"></ol>
+              </section>
+
+              <section class="content-card ranking-card" aria-labelledby="ranking-title">
+                <div class="card-heading card-heading-wrap">
+                  <div><span class="card-kicker">Ranking</span><h2 id="ranking-title">页面排行</h2></div>
+                  <div class="tab-control" role="group" aria-label="排行指标">
+                    <button class="is-active" type="button" data-ranking="views" aria-pressed="true">浏览排行</button>
+                    <button type="button" data-ranking="likes" aria-pressed="false">点赞排行</button>
+                  </div>
+                </div>
+                <div id="ranking-empty" class="compact-empty" hidden>暂无可显示的页面数据。</div>
+                <div id="ranking-table-wrap" class="table-wrap">
+                  <table class="data-table ranking-table">
+                    <thead><tr><th scope="col">排名</th><th scope="col">页面</th><th scope="col">浏览</th><th scope="col">点赞</th></tr></thead>
+                    <tbody id="ranking-body"></tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+          </section>
+
+          <section id="feedback-panel" class="panel" data-panel-view="feedback" aria-labelledby="feedback-title" hidden>
+            <div class="page-heading page-heading-feedback">
+              <div>
+                <span class="eyebrow">Feedback</span>
+                <h1 id="feedback-title">反馈管理</h1>
+                <p>查看用户提交的问题和建议，并记录处理状态。</p>
+              </div>
+              <button id="export-feedback" class="button button-secondary" type="button">导出 CSV</button>
+            </div>
+
+            <form id="feedback-filters" class="filter-card">
+              <div class="field field-search">
+                <label for="feedback-query">搜索</label>
+                <input id="feedback-query" name="q" type="search" placeholder="内容、页面或联系方式" />
+              </div>
+              <div class="field">
+                <label for="feedback-status">状态</label>
+                <select id="feedback-status" name="status">
+                  <option value="">全部状态</option><option value="new">新反馈</option><option value="reviewing">处理中</option><option value="resolved">已解决</option><option value="archived">已归档</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="feedback-category">类型</label>
+                <select id="feedback-category" name="category">
+                  <option value="">全部类型</option><option value="content_error">内容错误</option><option value="broken_link">链接失效</option><option value="date_update">日期更新</option><option value="suggestion">改进建议</option><option value="question">问题咨询</option><option value="other">其他</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="feedback-from">开始日期</label><input id="feedback-from" name="from" type="date" />
+              </div>
+              <div class="field">
+                <label for="feedback-to">结束日期</label><input id="feedback-to" name="to" type="date" />
+              </div>
+              <div class="filter-actions">
+                <button class="button button-primary" type="submit">筛选</button>
+                <button id="filter-reset" class="button button-quiet" type="button">重置</button>
+              </div>
+            </form>
+
+            <div class="list-summary">
+              <p id="feedback-total" aria-live="polite">共 0 条反馈</p>
+              <label for="feedback-page-size">每页
+                <select id="feedback-page-size"><option value="20">20 条</option><option value="50">50 条</option><option value="100">100 条</option></select>
+              </label>
+            </div>
+
+            <div id="feedback-loading" class="state-block" role="status" hidden>
+              <span class="spinner" aria-hidden="true"></span><p>正在加载反馈…</p>
+            </div>
+            <div id="feedback-error" class="state-block state-error" role="alert" hidden>
+              <strong>反馈列表暂时无法加载</strong><p>请稍后重试。</p>
+              <button id="feedback-retry" class="button button-secondary" type="button">重新加载</button>
+            </div>
+            <div id="feedback-empty" class="state-block" hidden>
+              <strong>没有符合条件的反馈</strong><p>可以调整筛选条件后再次查询。</p>
+              <button id="feedback-empty-reset" class="button button-quiet" type="button">清除筛选</button>
+            </div>
+
+            <div id="feedback-content" hidden>
+              <div class="table-wrap feedback-table-wrap">
+                <table class="data-table feedback-table">
+                  <thead><tr><th scope="col">类型</th><th scope="col">反馈内容</th><th scope="col">来源页面</th><th scope="col">提交时间</th><th scope="col">状态</th><th scope="col"><span class="sr-only">操作</span></th></tr></thead>
+                  <tbody id="feedback-body"></tbody>
+                </table>
+              </div>
+              <nav class="pagination" aria-label="反馈分页">
+                <button id="page-previous" class="button button-quiet" type="button">上一页</button>
+                <span id="page-status">第 1 / 1 页</span>
+                <button id="page-next" class="button button-quiet" type="button">下一页</button>
+              </nav>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <dialog id="feedback-dialog" class="feedback-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <div><span class="eyebrow">Feedback detail</span><h2 id="dialog-title">反馈详情</h2></div>
+          <button id="dialog-close" class="icon-button" type="button" aria-label="关闭反馈详情">×</button>
+        </header>
+        <div id="dialog-loading" class="state-block" role="status"><span class="spinner" aria-hidden="true"></span><p>正在加载详情…</p></div>
+        <div id="dialog-error" class="state-block state-error" role="alert" hidden><strong>详情加载失败</strong><p>请关闭后重试。</p></div>
+        <div id="dialog-content" class="dialog-content" hidden>
+          <div class="dialog-meta">
+            <span id="dialog-category" class="category-badge"></span><span id="dialog-created"></span>
+          </div>
+          <section class="dialog-message" aria-labelledby="dialog-message-title">
+            <h3 id="dialog-message-title">反馈内容</h3><p id="dialog-message"></p>
+          </section>
+          <dl class="detail-list">
+            <div><dt>来源页面</dt><dd id="dialog-path">—</dd></div>
+            <div><dt>联系方式</dt><dd><span id="dialog-contact">未提供</span><button id="copy-contact" class="text-button" type="button" hidden>复制</button></dd></div>
+            <div><dt>语言</dt><dd id="dialog-language">—</dd></div>
+            <div><dt>反馈编号</dt><dd id="dialog-id">—</dd></div>
+          </dl>
+          <form id="dialog-status-form" class="dialog-status-form">
+            <div class="field"><label for="dialog-status">处理状态</label><select id="dialog-status" name="status"><option value="new">新反馈</option><option value="reviewing">处理中</option><option value="resolved">已解决</option><option value="archived">已归档</option></select></div>
+            <div class="field field-note"><label for="dialog-note">内部备注</label><textarea id="dialog-note" name="internalNote" rows="4" maxlength="4000" placeholder="记录核验结果、处理决定或后续事项；不会向提交者公开。"></textarea></div>
+            <p id="dialog-save-error" class="form-error" role="alert" hidden></p>
+            <button id="dialog-save" class="button button-primary" type="submit">保存处理记录</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script src="./app.js" defer></script>
+  </body>
+</html>

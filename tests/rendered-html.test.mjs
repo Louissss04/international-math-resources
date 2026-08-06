@@ -111,17 +111,27 @@ test("shows one context-specific academic-integrity notice on relevant pages", a
 });
 
 test("renders one private engagement and feedback module on every page", async () => {
+  const turnstileConfigured = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim());
   for (const path of ["/", "/calendar", "/competitions/amc-12"]) {
     const html = await renderHtml(path);
     assert.equal((html.match(/data-static-component=["']engagement["']/g) ?? []).length, 1, path);
     assert.match(html, /data-engagement-helpful/);
     assert.match(html, /aria-pressed=["']false["']/);
+    assert.doesNotMatch(html, /data-engagement-(?:site-visits|page-views)/, `${path} exposes private traffic totals`);
     assert.match(html, /data-feedback-dialog/);
     for (const field of ["category", "message", "contact", "website"]) {
       assert.match(html, new RegExp(`name=["']${field}["']`), `${path} is missing ${field}`);
     }
     assert.match(html, /留言不会公开/);
-    assert.doesNotMatch(html, /data-feedback-list|\/v1\/admin/);
+    assert.doesNotMatch(html, /data-feedback-list|\/(?:v1\/admin|admin\/api)|管理后台登录/);
+    if (turnstileConfigured) {
+      assert.match(html, /<section\b[^>]*data-turnstile-site-key=/, `${path} has no Turnstile site key`);
+      assert.match(html, /<div\b[^>]*data-turnstile-like/, `${path} has no like challenge container`);
+      assert.match(html, /<div\b[^>]*data-turnstile-feedback/, `${path} has no feedback challenge container`);
+      assert.match(html, /src=["']https:\/\/challenges\.cloudflare\.com\/turnstile\/v0\/api\.js\?render=explicit["']/, `${path} has no Turnstile API script`);
+    } else {
+      assert.doesNotMatch(html, /<(?:section|div)\b[^>]*data-turnstile-(?:site-key|like|feedback)|src=["']https:\/\/challenges\.cloudflare\.com\/turnstile\//, `${path} loads Turnstile without a site key`);
+    }
   }
 });
 

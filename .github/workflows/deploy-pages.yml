@@ -33,10 +33,22 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check source and engagement service
+        run: |
+          npm run lint
+          npx tsc --noEmit
+          npm run --prefix services/engagement-worker check
+
       - name: Build and export static site
         env:
           NEXT_PUBLIC_ENGAGEMENT_API_URL: ${{ vars.ENGAGEMENT_API_URL }}
+          NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY }}
         run: npm run export:static
+
+      - name: Verify rendered and exported pages
+        run: |
+          node --test tests/rendered-html.test.mjs
+          npm run test:static
 
       - name: Disable Jekyll processing
         run: touch outputs/mathpath-static/.nojekyll

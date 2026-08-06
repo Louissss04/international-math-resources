@@ -7,7 +7,9 @@
     "node": ">=20.14.0"
   },
   "scripts": {
-    "check": "npm run typecheck && npm test",
+    "admin:check": "node --check admin/app.js",
+    "admin:hash-password": "node scripts/hash-admin-password.mjs",
+    "check": "npm run typecheck && npm run admin:check && npm test",
     "test": "tsc -p tsconfig.test.json && node --test .test-dist/tests/worker.test.js",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
