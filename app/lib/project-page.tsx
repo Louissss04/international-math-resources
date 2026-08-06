@@ -22,11 +22,16 @@ export async function ProjectPage({ params, track }: { params: Promise<{ slug: s
   const related = (project.relatedIds ?? [])
     .map((id) => allProjects.find((item) => item.id === id))
     .filter((item): item is NonNullable<typeof item> => item !== undefined && item.track === project.track);
-  const learningResources = allLearningResources.filter((resource) => resource.projectIds.includes(project.id) && resource.kind !== "official-textbook");
+  const pastPaperArchive = allPastPaperArchives.find((record) => record.projectId === project.id);
+  const modelingArchiveUrls = new Set(project.track === "modeling" ? pastPaperArchive?.links.map((link) => link.url) : []);
+  const learningResources = allLearningResources.filter((resource) => (
+    resource.projectIds.includes(project.id)
+    && resource.kind !== "official-textbook"
+    && !modelingArchiveUrls.has(resource.url)
+  ));
   const videoResources = allVideoResources.filter((resource) => resource.projectIds.includes(project.id));
   const bookResources = allBookResources.filter((resource) => resource.projectIds.includes(project.id));
   const syllabus = allOfficialSyllabi.find((record) => record.projectId === project.id);
-  const pastPaperArchive = allPastPaperArchives.find((record) => record.projectId === project.id);
   const projectAdmissionRequirements = admissionRequirements.filter((record) => record.projectIds.includes(project.id));
   return <ProjectDetail project={project} sources={allSources} thresholds={allThresholds} related={related} learningResources={learningResources} videoResources={videoResources} bookResources={bookResources} syllabus={syllabus} pastPaperArchive={pastPaperArchive} admissionRequirements={projectAdmissionRequirements} />;
 }

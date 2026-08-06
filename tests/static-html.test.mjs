@@ -790,11 +790,19 @@ test("indexes translated syllabi and mathematics past-paper sources without reho
   assert.ok(papersText.includes("第三方整理") && papersText.includes("Third-party index"), "past-papers.html is missing secondary-source labels");
   assert.match(papersText, /本站只链接公开来源|does not copy or host test files/i, "past-papers.html is missing the copyright and linking notice");
 
-  for (const project of data.projects.filter((project) => ["competition", "modeling", "curriculum", "assessment"].includes(project.track))) {
+  for (const project of data.projects.filter((project) => (
+    ["competition", "curriculum", "assessment"].includes(project.track)
+    || (project.track === "modeling" && project.eligibilityTags.includes("modeling-competition"))
+  ))) {
     const html = await readFile(path.join(outputDirectory, projectFile(project)), "utf8");
     const text = visibleText(html);
     assert.match(html, /id=["']past-papers["']/, `${projectFile(project)} is missing its past-paper section`);
     assert.match(text, /版权与链接说明|Copyright and linking notice/i, `${projectFile(project)} is missing its copyright notice`);
+  }
+
+  for (const project of data.projects.filter((project) => project.track === "modeling" && project.eligibilityTags.includes("modeling-open-project"))) {
+    const html = await readFile(path.join(outputDirectory, projectFile(project)), "utf8");
+    assert.doesNotMatch(html, /id=["']past-papers["']/, `${projectFile(project)} incorrectly presents an open project as a past-paper competition`);
   }
 
   for (const link of attributeValues(papersHtml, "a", "href").filter(isExternalReference)) {

@@ -132,7 +132,7 @@ export const projectTrackGroups = [
   },
   {
     id: "modeling",
-    title: t("数学建模竞赛官网", "Mathematical modeling competition official sites"),
+    title: t("数学建模竞赛与项目官网", "Mathematical modeling competitions and projects official sites"),
   },
   {
     id: "research",

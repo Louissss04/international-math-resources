@@ -37,6 +37,13 @@ import { australiaEuropeDestinationGuides, australiaEuropeDestinationSources } f
 import { northAmericaDestinationGuides, northAmericaDestinationSources } from "./destination-data-north-america";
 import { ukSingaporeDestinationGuides, ukSingaporeDestinationSources } from "./destination-data-uk-singapore";
 import { admissionRequirementRecords, admissionRequirementSources } from "./admission-requirements";
+import {
+  modelingCatalogLearningResources,
+  modelingCatalogPastPaperArchives,
+  modelingCatalogProjects,
+  modelingCatalogSources,
+  modelingCatalogThresholds,
+} from "./modeling-catalog";
 import type { AdmissionRequirementRecord, AssessmentSyllabusRecord, BookResourceRecord, DestinationGuideRecord, LearningResourceRecord, PastPaperArchiveRecord, ProjectRecord, SourceRecord, ThresholdRecord, UniversityPolicyRecord, VideoResourceRecord } from "../lib/types";
 
 function uniqueById<T extends { id: string }>(records: T[]): T[] {
@@ -51,6 +58,7 @@ function uniqueById<T extends { id: string }>(records: T[]): T[] {
 export const allProjects: ProjectRecord[] = uniqueById([
   ...competitionProjects,
   ...programProjects,
+  ...modelingCatalogProjects,
   ...researchSkillsProjects,
   ...researchProgramProjects,
   ...apCourseProjects,
@@ -66,6 +74,7 @@ const projectIds = new Set(allProjects.map((project) => project.id));
 export const allSources: SourceRecord[] = uniqueById([
   ...competitionSources,
   ...programSources,
+  ...modelingCatalogSources,
   ...researchSkillsSources,
   ...researchProgramSources,
   ...apCourseSources,
@@ -83,6 +92,7 @@ export const allSources: SourceRecord[] = uniqueById([
 export const allThresholds: ThresholdRecord[] = applyMathematicsThresholdScope(uniqueById([
   ...competitionThresholds,
   ...programThresholds,
+  ...modelingCatalogThresholds,
   ...apCourseThresholds,
   ...cambridgeCourseThresholds,
   ...ibCourseThresholds,
@@ -94,6 +104,7 @@ export const allThresholds: ThresholdRecord[] = applyMathematicsThresholdScope(u
 export const allLearningResources: LearningResourceRecord[] = applyMathematicsResourceScope(uniqueById([
   ...competitionLearningResources,
   ...programLearningResources,
+  ...modelingCatalogLearningResources,
   ...researchSkillsLearningResources,
   ...researchProgramLearningResources,
   ...apCourseLearningResources,
@@ -188,6 +199,7 @@ export const allPastPaperArchives: PastPaperArchiveRecord[] = uniqueById([
   ...cemcUkmtPastPaperArchives,
   ...assessmentPastPaperArchives,
   ...modelingPastPaperArchives,
+  ...modelingCatalogPastPaperArchives,
   ...apCoursePastPaperArchives,
   ...cambridgeCoursePastPaperArchives,
   ...ibCoursePastPaperArchives,

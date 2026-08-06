@@ -68,7 +68,9 @@ const regionLabels: Record<string, LocalizedText> = {
   china: t("中国", "China"),
   global: t("全球", "Global"),
   "greater-china": t("中国大陆及港澳台", "Greater China"),
+  "hong-kong": t("中国香港", "Hong Kong"),
   online: t("线上", "Online"),
+  shanghai: t("中国上海", "Shanghai, China"),
   uk: t("英国", "United Kingdom"),
   "united-states": t("美国", "United States"),
   us: t("美国", "United States"),
@@ -96,7 +98,7 @@ export function canonicalRegion(value: string): string {
   if (value === "Canada") return "canada";
   if (value === "China") return "china";
   if (value === "Global") return "global";
-  if (value === "United Kingdom") return "uk";
+  if (value === "United Kingdom" || value === "united-kingdom") return "uk";
   if (value === "United States" || value === "united-states") return "us";
   return value;
 }

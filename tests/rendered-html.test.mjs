@@ -299,6 +299,44 @@ test("renders official learning-resource directories and project sections", asyn
   }
 });
 
+test("separates formal modeling competitions from open modeling projects", async () => {
+  const directoryHtml = await renderHtml("/modeling");
+  for (const pattern of [/数学建模竞赛/, /开放建模项目与训练/, /地区受限项目/, /MidMCM/, /SCUDEM/, /MCM\/ICM/, /M3 Open Mathematical Modeling Project Library/, /SIMIODE Differential-Equations Modeling Scenarios/, /COMAP Mathematical Modeling Modules/]) {
+    assert.match(directoryHtml, pattern);
+  }
+  const filterOptionText = [...directoryHtml.matchAll(/<option\b[^>]*>([\s\S]*?)<\/option>/g)]
+    .map((match) => match[1].replace(/<!--.*?-->/g, " ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim());
+  for (const internalCode of ["undergraduate", "hong-kong", "shanghai", "united-kingdom"]) {
+    assert.ok(!filterOptionText.some((text) => text === internalCode || text.startsWith(`${internalCode} /`)), `raw filter code is visible: ${internalCode}`);
+  }
+
+  for (const [path, pattern] of [
+    ["/modeling/midmcm", /中国学生报名/],
+    ["/modeling/scudem", /中国大陆参赛的提交事项/],
+    ["/modeling/mcm-icm", /中国学校可通过 COMAP 全球报名系统参赛/],
+    ["/modeling/m3-challenge", /仅在中国就读不能直接报名/],
+    ["/modeling/m3-open-modeling-projects", /不是正式参赛/],
+    ["/modeling/comap-modeling-modules", /教师须先填写身份表/],
+  ]) {
+    const html = await renderHtml(path);
+    assert.match(html, pattern, path);
+    assert.match(html, /id="official-learning-resources"/, path);
+  }
+
+  assert.doesNotMatch(await renderHtml("/modeling/m3-open-modeling-projects"), /id="past-papers"/);
+  assert.doesNotMatch(await renderHtml("/modeling/comap-modeling-modules"), /id="past-papers"/);
+
+  for (const [path, duplicateResourceId] of [
+    ["/modeling/midmcm", "midmcm-problems-results"],
+    ["/modeling/scudem", "scudem-past-problems-results"],
+    ["/modeling/mcm-icm", "mcm-icm-problems-results-resource"],
+    ["/modeling/m3-challenge", "m3-past-problems-winning-papers"],
+    ["/modeling/modeling-the-future-challenge", "mtfc-example-projects-resource"],
+  ]) {
+    assert.doesNotMatch(await renderHtml(path), new RegExp(`data-resource-id="${duplicateResourceId}"`), `${path} repeats its past-problem link in the learning-resource section`);
+  }
+});
+
 test("separates research programs by access and organizer type", async () => {
   const directoryHtml = await renderHtml("/research");
   for (const label of ["CrowdMath", "MIT PRIMES", "Pioneer Research", "丘成桐数学奖"]) {

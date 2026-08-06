@@ -14,11 +14,20 @@ export function PastPaperCopyright() {
   );
 }
 
-export function PastPaperSection({ archive, showCopyright = true }: { archive?: PastPaperArchiveRecord; showCopyright?: boolean }) {
+export function PastPaperSection({
+  archive,
+  showCopyright = true,
+  context = "general",
+}: {
+  archive?: PastPaperArchiveRecord;
+  showCopyright?: boolean;
+  context?: "general" | "modeling";
+}) {
+  const isModeling = context === "modeling";
   return (
     <section id="past-papers" className="record-section past-paper-section">
       <div className="section-title-row">
-        <h2><span className="lang-zh">真题、样卷与答案入口</span><span className="lang-en">Past papers, samples and solutions</span></h2>
+        <h2>{isModeling ? <><span className="lang-zh">历届题目、结果与示例作品</span><span className="lang-en">Past problems, results and exemplar work</span></> : <><span className="lang-zh">真题、样卷与答案入口</span><span className="lang-en">Past papers, samples and solutions</span></>}</h2>
         {archive && <span className={`past-paper-status past-paper-${archive.availability}`}><Localized text={pastPaperAvailabilityLabels[archive.availability]} /></span>}
       </div>
 
@@ -45,13 +54,13 @@ export function PastPaperSection({ archive, showCopyright = true }: { archive?: 
             </div>
           ) : (
             <div className="past-paper-empty">
-              <p><span className="lang-zh">暂未找到可核验的公开真题或样卷入口。</span><span className="lang-en">No verifiable public past-paper or sample source has been found.</span></p>
+              <p>{isModeling ? <><span className="lang-zh">暂未找到可核验的公开题目或示例作品入口。</span><span className="lang-en">No verifiable public problem or exemplar source has been found.</span></> : <><span className="lang-zh">暂未找到可核验的公开真题或样卷入口。</span><span className="lang-en">No verifiable public past-paper or sample source has been found.</span></>}</p>
             </div>
           )}
         </>
       ) : (
         <div className="past-paper-empty">
-          <p><span className="lang-zh">暂未找到可核验的公开真题或样卷入口。</span><span className="lang-en">No verifiable public past-paper or sample source has been found.</span></p>
+          <p>{isModeling ? <><span className="lang-zh">暂未找到可核验的公开题目或示例作品入口。</span><span className="lang-en">No verifiable public problem or exemplar source has been found.</span></> : <><span className="lang-zh">暂未找到可核验的公开真题或样卷入口。</span><span className="lang-en">No verifiable public past-paper or sample source has been found.</span></>}</p>
         </div>
       )}
 

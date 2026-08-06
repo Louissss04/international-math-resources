@@ -15,7 +15,7 @@ import { BookResourceList } from "./book-resource-list";
 
 const dateSectionLabels: Record<Track, ReturnType<typeof t>> = {
   competition: t("赛程与报名节点", "Competition schedule and registration"),
-  modeling: t("赛期与提交节点", "Competition window and submission milestones"),
+  modeling: t("日期与提交节点", "Dates and submission milestones"),
   research: t("研究节点", "Research milestones"),
   summer: t("申请与项目日期", "Application and program dates"),
   curriculum: t("课程与统考节点", "Course and subject-exam milestones"),
@@ -42,7 +42,7 @@ const thresholdColumnLabels: Record<Track, { sitting: ReturnType<typeof t>; metr
 
 const resourceSectionLabels: Record<Track, { title: ReturnType<typeof t> }> = {
   competition: { title: t("官方样卷、试题与练习资料", "Official samples, papers and practice resources") },
-  modeling: { title: t("官方题目与优秀作品", "Official problems and exemplars") },
+  modeling: { title: t("官方题目、指南与示例", "Official problems, guides and examples") },
   research: { title: t("官方研究与规范资料", "Official research and standards resources") },
   summer: { title: t("官方课程与申请材料", "Official program and application materials") },
   curriculum: { title: t("官方考纲、样卷与课程资料", "Official specifications, specimens and course resources") },
@@ -98,14 +98,17 @@ export function ProjectDetail({
   const thresholdSectionLabel = thresholdSectionLabels[project.track];
   const thresholdColumns = thresholdColumnLabels[project.track];
   const resourceSection = resourceSectionLabels[project.track];
-  const hasPastPaperSection = project.track === "competition" || project.track === "modeling" || project.track === "curriculum" || project.track === "assessment";
+  const hasPastPaperSection = project.track === "competition"
+    || (project.track === "modeling" && project.eligibilityTags.includes("modeling-competition"))
+    || project.track === "curriculum"
+    || project.track === "assessment";
   const archiveHref = project.track === "competition"
     ? `/competition-results?project=${project.id}`
     : project.track === "curriculum"
       ? `/course-scores?project=${project.id}`
     : project.track === "assessment"
       ? `/assessment-scores?project=${project.id}`
-      : `/archive?project=${project.id}`;
+      : null;
   const projectThresholds = thresholds.filter((item) => item.projectId === project.id);
   const pageLastUpdated = [
     project.lastVerified,
@@ -176,7 +179,7 @@ export function ProjectDetail({
           {project.dates.length > 0 && <a href="#dates"><Localized text={dateSectionLabel} /></a>}
           {project.sections.map((section) => <a key={section.id} href={`#${section.id}`}><Localized text={section.title} /></a>)}
           {syllabus && <a href="#official-syllabus"><Localized text={syllabusClassificationLabels[syllabus.classification]} /></a>}
-          {hasPastPaperSection && <a href="#past-papers"><span className="lang-zh">真题、样卷与答案</span><span className="lang-en">Past papers and samples</span></a>}
+          {hasPastPaperSection && <a href="#past-papers">{project.track === "modeling" ? <><span className="lang-zh">历届题目与作品</span><span className="lang-en">Past problems and work</span></> : <><span className="lang-zh">真题、样卷与答案</span><span className="lang-en">Past papers and samples</span></>}</a>}
           {learningResources.length > 0 && <a href="#official-learning-resources"><Localized text={resourceSection.title} /></a>}
           {videoResources.length > 0 && <a href="#video-resources"><span className="lang-zh">公开视频课程与讲解</span><span className="lang-en">Public video courses and walkthroughs</span></a>}
           {bookResources.length > 0 && <a href="#books"><span className="lang-zh">教材、习题集与参考书</span><span className="lang-en">Textbooks, problem books and references</span></a>}
@@ -243,7 +246,7 @@ export function ProjectDetail({
             </section>
           )}
 
-          {hasPastPaperSection && <PastPaperSection archive={pastPaperArchive} />}
+          {hasPastPaperSection && <PastPaperSection archive={pastPaperArchive} context={project.track === "modeling" ? "modeling" : "general"} />}
 
           {learningResources.length > 0 && (
             <section id="official-learning-resources" className="record-section">
@@ -271,7 +274,7 @@ export function ProjectDetail({
             <section id="thresholds" className="record-section">
               <div className="section-title-row">
                 <h2><Localized text={thresholdSectionLabel} /></h2>
-                <Link href={archiveHref}><span className="lang-zh">完整档案</span><span className="lang-en">Full archive</span></Link>
+                {archiveHref && <Link href={archiveHref}><span className="lang-zh">完整档案</span><span className="lang-en">Full archive</span></Link>}
               </div>
               <div className="threshold-years">
                 {thresholdYears.map(([year, records], yearIndex) => (
