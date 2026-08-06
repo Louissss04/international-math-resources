@@ -1099,7 +1099,7 @@ export const programProjects: ProjectRecord[] = [
       },
     ],
     sourceIds: ["mit-primes-overview", "mit-primes-papers", "mit-primes-apply-2027", "isef-rules-2027", "isef-math-categories", "isef-forms-2027", "isef-forms-dates-2027", "isef-judging"],
-    relatedIds: ["research-records", "research-integrity"],
+    relatedIds: ["research-skills", "research-records", "research-integrity"],
     searchTerms: ["数学科研", "research question", "proof", "replication", "literature review", "ISEF mathematics"],
   },
   {
@@ -1190,7 +1190,7 @@ export const programProjects: ProjectRecord[] = [
       },
     ],
     sourceIds: ["credit-roles", "osf-files", "osf-registrations", "osf-preprints", "zenodo-records", "zenodo-versions", "isef-rules-2027", "isef-forms-2027", "isef-forms-dates-2027", "isef-form-2a-2027", "isef-judging"],
-    relatedIds: ["research-start", "research-integrity"],
+    relatedIds: ["research-start", "research-skills", "research-integrity"],
     searchTerms: ["科研档案", "research record", "version", "reproducibility", "preprint", "DOI", "贡献声明", "CRediT", "ISEF forms"],
   },
   {
@@ -1291,7 +1291,7 @@ export const programProjects: ProjectRecord[] = [
       },
     ],
     sourceIds: ["credit-roles", "icmje-authors", "nature-reporting", "nature-image-integrity", "github-licensing", "spdx-licenses", "isef-rules-2027", "isef-forms-2027", "isef-forms-dates-2027", "isef-form-2a-2027"],
-    relatedIds: ["research-start", "research-records"],
+    relatedIds: ["research-start", "research-skills", "research-records"],
     searchTerms: ["研究诚信", "authorship", "citation", "data integrity", "image integrity", "AI disclosure", "ISEF ethics", "license", "retraction"],
   },
   {

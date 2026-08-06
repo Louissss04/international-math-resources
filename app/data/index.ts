@@ -1,6 +1,7 @@
 import { competitionProjects, competitionSources, competitionThresholds } from "./competitions";
 import { programProjects, programSources, programThresholds } from "./programs";
 import { researchProgramLearningResources, researchProgramProjects, researchProgramSources } from "./research-programs";
+import { researchSkillsLearningResources, researchSkillsProjects, researchSkillsSources } from "./research-skills";
 import { assessmentSources, assessmentThresholds, universityPolicies as policies } from "./assessments";
 import { mathAssessmentProjects } from "./assessment-projects-math";
 import { applyMathematicsThresholdScope } from "./assessment-thresholds-math";
@@ -50,6 +51,7 @@ function uniqueById<T extends { id: string }>(records: T[]): T[] {
 export const allProjects: ProjectRecord[] = uniqueById([
   ...competitionProjects,
   ...programProjects,
+  ...researchSkillsProjects,
   ...researchProgramProjects,
   ...apCourseProjects,
   ...cambridgeCourseProjects,
@@ -64,6 +66,7 @@ const projectIds = new Set(allProjects.map((project) => project.id));
 export const allSources: SourceRecord[] = uniqueById([
   ...competitionSources,
   ...programSources,
+  ...researchSkillsSources,
   ...researchProgramSources,
   ...apCourseSources,
   ...cambridgeCourseSources,
@@ -91,6 +94,7 @@ export const allThresholds: ThresholdRecord[] = applyMathematicsThresholdScope(u
 export const allLearningResources: LearningResourceRecord[] = applyMathematicsResourceScope(uniqueById([
   ...competitionLearningResources,
   ...programLearningResources,
+  ...researchSkillsLearningResources,
   ...researchProgramLearningResources,
   ...apCourseLearningResources,
   ...cambridgeCourseLearningResources,

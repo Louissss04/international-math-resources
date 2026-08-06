@@ -319,6 +319,38 @@ test("separates research programs by access and organizer type", async () => {
   }
 });
 
+test("renders a research skills matrix, proficiency standards and learning path", async () => {
+  const directoryHtml = await renderHtml("/research");
+  assert.match(directoryHtml, /href="\/research\/skills"/);
+  assert.match(directoryHtml, /数学科研技能与工具/);
+
+  const html = await renderHtml("/research/skills");
+  for (const pattern of [
+    /掌握程度怎么判断/,
+    /所有数学研究都要具备的能力/,
+    /软件与工具应掌握到什么程度/,
+    /按研究类型选择技能组合/,
+    /从基础到独立项目的学习路径/,
+    /项目文件与研究记录/,
+    /提交前的技术与诚信检查/,
+  ]) {
+    assert.match(html, pattern);
+  }
+  for (const tool of ["Python", "MATLAB", "LaTeX", "Jupyter", "Git", "Zotero", "SageMath", "SymPy"]) {
+    assert.match(html, new RegExp(tool), tool);
+  }
+  for (const resourceId of [
+    "research-skills-resource-mit-proof",
+    "research-skills-resource-python",
+    "research-skills-resource-matlab",
+    "research-skills-resource-overleaf",
+    "research-skills-resource-git",
+    "research-skills-resource-zotero",
+  ]) {
+    assert.match(html, new RegExp(`data-resource-id="${resourceId}"`), resourceId);
+  }
+});
+
 test("renders a mathematics social-practice guide with official resources", async () => {
   const directoryHtml = await renderHtml("/research");
   assert.match(directoryHtml, /数学相关社会实践与社区项目/);

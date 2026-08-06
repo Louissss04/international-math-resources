@@ -396,6 +396,22 @@ test("every project, syllabus and destination has its own complete detail page",
   }
 });
 
+test("exports the mathematical research skills guide and its official materials", async () => {
+  const data = await loadStaticData();
+  assert.equal(data.routeMap["/research/skills"], "research-skills.html");
+  const directoryHtml = await readRoute("/research", data);
+  assert.match(directoryHtml, /href=["']research-skills\.html["']/);
+
+  const html = await readRoute("/research/skills", data);
+  const text = visibleText(html);
+  for (const label of ["掌握程度怎么判断", "项目可用", "从基础到独立项目的学习路径", "Python", "MATLAB", "LaTeX", "Git", "Zotero"]) {
+    assert.ok(text.includes(label), `research-skills.html is missing ${label}`);
+  }
+  for (const host of ["docs.python.org", "matlabacademy.mathworks.com", "www.overleaf.com", "git-scm.com", "www.zotero.org"]) {
+    assert.match(html, new RegExp(`href=["']https:\\/\\/${host.replaceAll(".", "\\.")}`), `missing official material from ${host}`);
+  }
+});
+
 test("curricula, admissions tests and competitions remain separate", async () => {
   const data = await loadStaticData();
   const projectById = new Map(data.projects.map((project) => [project.id, project]));

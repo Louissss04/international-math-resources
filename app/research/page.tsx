@@ -14,7 +14,9 @@ export const metadata: Metadata = {
 export default function Page() {
   const records = allProjects.filter((item) => item.track === "research");
   const programs = records.filter((item) => item.eligibilityTags.includes("research-program"));
-  const guides = records.filter((item) => !item.eligibilityTags.includes("research-program"));
+  const guides = records
+    .filter((item) => !item.eligibilityTags.includes("research-program"))
+    .sort((left, right) => Number(right.id === "research-skills") - Number(left.id === "research-skills"));
 
   return (
     <main>
@@ -23,7 +25,7 @@ export default function Page() {
         <div className="page-title-row">
           <div>
             <h1><span className="lang-zh">中学生数学研究项目</span><span className="lang-en">Mathematics research programs for secondary students</span></h1>
-            <p><span className="lang-zh">原创研究、研究训练、成果竞赛与商业导师项目分别标注。</span><span className="lang-en">Original research, research training, research competitions and commercial mentorship are labelled separately.</span></p>
+            <p><span className="lang-zh">查询研究项目、技能工具、研究方法与成果规范；项目性质和中国学生申请路径分别标注。</span><span className="lang-en">Research programs, skills, methods, and output standards, with program type and access from China labelled separately.</span></p>
           </div>
           <b>{programs.length}</b>
         </div>
