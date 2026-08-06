@@ -237,6 +237,24 @@ export const researchProgramSources: SourceRecord[] = [
     appliesTo: "2026 Mainland China region",
   },
   {
+    id: "research-yau-schedule-2026",
+    label: t("2026 丘成桐中学科学奖内地赛区日程", "2026 S.-T. Yau Award Mainland China Schedule"),
+    owner: t("清华大学丘成桐数学科学中心", "Yau Mathematical Sciences Center, Tsinghua University"),
+    url: "https://www.yau-awards.com/page-schedule.html",
+    kind: "official",
+    verifiedAt: "2026-08-06",
+    appliesTo: "2026 Mainland China region",
+  },
+  {
+    id: "research-yau-ai-rules-2026",
+    label: t("丘成桐中学科学奖 AI 使用规则", "S.-T. Yau Award Rules on AI Use"),
+    owner: t("清华大学丘成桐数学科学中心", "Yau Mathematical Sciences Center, Tsinghua University"),
+    url: "https://www.yau-awards.com/show-86-59.html",
+    kind: "official",
+    verifiedAt: "2026-08-06",
+    appliesTo: "2026 competition",
+  },
+  {
     id: "research-yau-faq",
     label: t("丘成桐中学科学奖常见问题", "S.-T. Yau High School Science Award FAQ"),
     owner: t("清华大学丘成桐数学科学中心", "Yau Mathematical Sciences Center, Tsinghua University"),
@@ -906,7 +924,7 @@ export const researchProgramProjects: ProjectRecord[] = [
     costBand: "free",
     status: "confirmed",
     cycle: "2026",
-    lastVerified: VERIFIED_AT,
+    lastVerified: "2026-08-06",
     facts: [
       { label: t("主办性质", "Organizer type"), value: t("由清华大学主办、丘成桐数学科学中心承办的中学生科研竞赛；不是提供导师匹配的研究课程。", "A high-school research competition sponsored by Tsinghua University and organized by the Yau Mathematical Sciences Center; it is not a mentor-matching course."), sourceIds: ["research-yau-home", "research-yau-rules"] },
       { label: t("研究性质", "Research character"), value: t("参赛者提交已完成的研究成果，评审关注研究问题、数学方法与创新；学生可接受合规指导，但须独立完成项目并完整披露贡献和外部协助。", "Entrants submit completed research. Judging considers the question, mathematical methods, and innovation. Guidance is allowed, but students must complete the work independently and disclose contributions and external assistance."), sourceIds: ["research-yau-rules", "research-yau-criteria"] },
@@ -915,9 +933,11 @@ export const researchProgramProjects: ProjectRecord[] = [
       { label: t("成果与发表", "Output and publication"), value: t("竞赛评奖不等于学术期刊发表。若同一报告已参加其他赛事、正在投稿或已经发表，须在报名时如实披露。", "A competition award is not journal publication. Any prior or concurrent competition entry, submission, or publication of the same report must be disclosed during registration."), sourceIds: ["research-yau-rules", "research-yau-faq"] },
     ],
     dates: [
-      { id: "yau-math-2026-registration", label: t("2026 报名与报告提交", "2026 Registration and Report Submission"), date: "2026-07-01", endDate: "2026-09-15", status: "confirmed", region: t("中国内地赛区", "Mainland China region"), sourceIds: ["research-yau-rules", "research-yau-faq"] },
-      { id: "yau-math-2026-regional", label: t("2026 分赛区评审与答辩", "2026 Regional Review and Defense"), date: "2026-10-01", endDate: "2026-11-02", status: "confirmed", region: t("中国内地赛区", "Mainland China region"), sourceIds: ["research-yau-rules"] },
-      { id: "yau-math-2026-final", label: t("2026 全球总决赛与颁奖", "2026 Global Final and Awards"), date: "2026-12-05", endDate: "2026-12-06", status: "confirmed", region: t("清华大学", "Tsinghua University"), sourceIds: ["research-yau-rules"] },
+      { id: "yau-math-2026-registration", label: t("2026 报名与报告提交", "2026 Registration and Report Submission"), date: "2026-07-01", endDate: "2026-09-15", status: "confirmed", region: t("中国内地赛区", "Mainland China region"), sourceIds: ["research-yau-rules", "research-yau-schedule-2026", "research-yau-faq"] },
+      { id: "yau-math-2026-material-review", label: t("2026 参赛材料审核", "2026 Submission Materials Review"), date: "2026-09-16", endDate: "2026-09-30", status: "confirmed", region: t("中国内地赛区", "Mainland China region"), sourceIds: ["research-yau-schedule-2026"] },
+      { id: "yau-math-2026-regional", label: t("2026 分赛区评审与答辩", "2026 Regional Review and Defense"), date: "2026-10-01", endDate: "2026-11-02", status: "confirmed", region: t("中国内地赛区", "Mainland China region"), sourceIds: ["research-yau-rules", "research-yau-schedule-2026"] },
+      { id: "yau-math-2026-public-review", label: t("2026 总决赛入围论文公示", "2026 Public Review of Global-Finalist Reports"), date: "2026-11-03", endDate: "2026-11-10", status: "confirmed", region: t("线上公示", "Online public review"), sourceIds: ["research-yau-schedule-2026", "research-yau-ai-rules-2026"] },
+      { id: "yau-math-2026-final", label: t("2026 全球总决赛与颁奖", "2026 Global Final and Awards"), date: "2026-12-05", endDate: "2026-12-06", status: "confirmed", region: t("清华大学", "Tsinghua University"), sourceIds: ["research-yau-rules", "research-yau-schedule-2026"] },
     ],
     sections: [
       {
@@ -935,7 +955,8 @@ export const researchProgramProjects: ProjectRecord[] = [
         bullets: [
           t("报告需含题目、作者、摘要、关键词、目录、正文、参考文献和致谢，并详细说明选题来源、研究过程、分工、导师作用与外部帮助。", "The report includes title, authors, abstract, keywords, contents, main text, references, and acknowledgments, with detailed disclosure of topic origin, process, division of work, adviser role, and outside help."),
           t("须提交学术诚信声明、导师信息表和最终论文查重报告；涉及人类或动物等研究还需相应伦理材料。", "An academic-integrity declaration, adviser information, and a similarity report are required; research involving humans or animals also requires relevant ethics documents."),
-          t("使用 AI 时须披露工具名称与版本、用途、时间和频率，并按要求提交相关记录。", "AI use must disclose the tool and version, purpose, timing, and frequency, with related records submitted where required."),
+          t("AI 只能用于语言润色、语法检查、代码调试、文献检索线索、结构梳理、图表草稿或数据分析辅助；选题、研究设计、核心论证、验证和主体表达必须由学生完成。", "AI may assist with language polishing, grammar checks, code debugging, literature-search leads, structure, chart drafts, or data analysis; the topic, research design, core argument, validation, and substantive writing must be the student's own work."),
+          t("使用 AI 须事先取得指导教师许可，并在致谢页披露工具名称与版本、具体用途、时间和频率；还须提交相关聊天记录及其他辅助材料。", "AI use requires prior adviser approval and disclosure in the acknowledgments of the tool and version, purpose, timing, and frequency; related chat records and other supporting materials must also be submitted."),
         ],
       },
       {
@@ -947,7 +968,7 @@ export const researchProgramProjects: ProjectRecord[] = [
         ],
       },
     ],
-    sourceIds: ["research-yau-home", "research-yau-rules", "research-yau-faq", "research-yau-criteria"],
+    sourceIds: ["research-yau-home", "research-yau-rules", "research-yau-schedule-2026", "research-yau-ai-rules-2026", "research-yau-faq", "research-yau-criteria"],
     relatedIds: ["research-start", "research-integrity", "research-records"],
     searchTerms: ["丘成桐中学科学奖", "丘成桐数学奖", "中学生数学论文", "Yau High School Science Award"],
   },

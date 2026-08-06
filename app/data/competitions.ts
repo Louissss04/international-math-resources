@@ -25,8 +25,8 @@ export const competitionSources: SourceRecord[] = [
     owner: t("美国数学协会", "Mathematical Association of America"),
     url: "https://maa.org/amcreg/",
     kind: "official",
-    verifiedAt: "2026-08-04",
-    appliesTo: "2026–27 AMC 8, AMC 10 and AMC 12 registration in the US and Canada",
+    verifiedAt: "2026-08-06",
+    appliesTo: "2026–27 AMC 8, AMC 10 and AMC 12 registration in the US and Canada; USAMO and USAJMO dates",
     note: t("页面费用与截止日期适用于 MAA 直接管理的美国／加拿大赛点；国际赛区费用与本地截止日期由 IGL 另行公布。", "The listed fees and deadlines apply to US/Canada competition centres administered directly by MAA; international IGLs publish local fees and deadlines separately."),
   },
   {
@@ -708,7 +708,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026–27",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-08-06",
     facts: [
       { label: t("参赛资格", "Eligibility"), value: t("竞赛当天就读八年级及以下，且未满 15.5 周岁", "Grade 8 or below and under age 15.5 on the competition day"), sourceIds: ["maa-amc-policies"] },
       { label: t("题量与时长", "Questions and duration"), value: t("25 题，40 分钟", "25 questions, 40 minutes"), sourceIds: ["maa-amc-policies"] },
@@ -722,6 +722,7 @@ export const competitionProjects: ProjectRecord[] = [
       { id: "amc8-2027-us-early", label: t("美国／加拿大早鸟报名截止", "US/Canada early-registration deadline"), date: "2026-10-28", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"] },
       { id: "amc8-2027-us-regular", label: t("美国／加拿大常规报名截止", "US/Canada regular-registration deadline"), date: "2027-01-05", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"] },
       { id: "amc8-2027-us-late", label: t("美国／加拿大逾期报名截止", "US/Canada late-registration deadline"), date: "2027-01-14", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"] },
+      { id: "amc8-2027-us-bundles", label: t("美国／加拿大追加学生名额购买截止", "US/Canada additional-bundles deadline"), date: "2027-01-26", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"], note: t("只适用于已经完成赛点注册的 Competition Manager；不是新赛点或学生个人报名截止。", "This applies only to registered Competition Managers purchasing additional student bundles; it is not a deadline for a new centre or an individual student entry.") },
       { id: "amc8-2027-cn-register", label: t("中国大陆学生报名截止", "Mainland China student registration deadline"), date: "2027-01-12", region: t("中国大陆", "Mainland China"), status: "confirmed", sourceIds: ["aseeder-amc8-2027"] },
       { id: "amc8-2027-cn-ticket", label: t("中国大陆参赛凭证下载窗口", "Mainland China competition-pass window"), date: "2027-01-16", endDate: "2027-01-22", region: t("中国大陆", "Mainland China"), status: "confirmed", sourceIds: ["aseeder-amc8-2027"], note: t("1 月 16 日 12:00 开放，竞赛当日 17:00 关闭。", "Opens at 12:00 on 16 January and closes at 17:00 on the competition day.") },
       { id: "amc8-2027-cn-test", label: t("中国大陆竞赛", "Mainland China competition"), date: "2027-01-22", time: "17:00–17:40", timezone: "Asia/Shanghai", region: t("中国大陆", "Mainland China"), status: "confirmed", sourceIds: ["aseeder-amc8-2027"] },
@@ -784,7 +785,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026–27",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-08-06",
     facts: [
       { label: t("参赛资格", "Eligibility"), value: t("竞赛当天就读十年级及以下，且未满 17.5 周岁", "Grade 10 or below and under age 17.5 on the competition day"), sourceIds: ["maa-amc-policies"] },
       { label: t("题量与时长", "Questions and duration"), value: t("25 题，75 分钟", "25 questions, 75 minutes"), sourceIds: ["maa-amc-policies"] },
@@ -799,6 +800,8 @@ export const competitionProjects: ProjectRecord[] = [
       { id: "amc10-2026-us-early", label: t("美国／加拿大早鸟报名截止", "US/Canada early-registration deadline"), date: "2026-09-30", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"] },
       { id: "amc10-2026-us-regular", label: t("美国／加拿大常规报名截止", "US/Canada regular-registration deadline"), date: "2026-10-15", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"] },
       { id: "amc10-2026-us-late", label: t("美国／加拿大逾期报名截止", "US/Canada late-registration deadline"), date: "2026-10-28", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"], note: t("逾期阶段仅限已回归的 Competition Manager；新赛点最晚须在常规截止日前完成。", "The late window is for returning Competition Managers only; new competition centres must complete registration by the regular deadline.") },
+      { id: "amc10a-2026-us-bundles", label: t("美国／加拿大 AMC 10A 追加学生名额购买截止", "US/Canada AMC 10A additional-bundles deadline"), date: "2026-11-04", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"], note: t("只适用于已注册赛点追加学生名额。", "For registered competition centres purchasing additional student bundles only.") },
+      { id: "amc10b-2026-us-bundles", label: t("美国／加拿大 AMC 10B 追加学生名额购买截止", "US/Canada AMC 10B additional-bundles deadline"), date: "2026-11-12", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"], note: t("只适用于已注册赛点追加学生名额。", "For registered competition centres purchasing additional student bundles only.") },
       { id: "amc10-2026-cn-local", label: t("中国大陆本地竞赛时间与报名截止", "Mainland China local competition time and registration deadline"), date: "TBD", region: t("中国大陆", "Mainland China"), status: "pending", sourceIds: ["aseeder-amc10-mainland"], note: t("截至 2026 年 8 月 4 日，承办页尚未发布 2026–27 赛季中国本地时间和报名截止。", "As of 4 August 2026, the administration page had not published the 2026–27 local time or registration deadline for China.") },
     ],
     sections: [
@@ -860,7 +863,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026–27",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-08-06",
     facts: [
       { label: t("参赛资格", "Eligibility"), value: t("竞赛当天就读十二年级及以下，且未满 19.5 周岁", "Grade 12 or below and under age 19.5 on the competition day"), sourceIds: ["maa-amc-policies"] },
       { label: t("题量与时长", "Questions and duration"), value: t("25 题，75 分钟", "25 questions, 75 minutes"), sourceIds: ["maa-amc-policies"] },
@@ -875,6 +878,8 @@ export const competitionProjects: ProjectRecord[] = [
       { id: "amc12-2026-us-early", label: t("美国／加拿大早鸟报名截止", "US/Canada early-registration deadline"), date: "2026-09-30", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"] },
       { id: "amc12-2026-us-regular", label: t("美国／加拿大常规报名截止", "US/Canada regular-registration deadline"), date: "2026-10-15", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"] },
       { id: "amc12-2026-us-late", label: t("美国／加拿大逾期报名截止", "US/Canada late-registration deadline"), date: "2026-10-28", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"], note: t("逾期阶段仅限已回归的 Competition Manager；新赛点最晚须在常规截止日前完成。", "The late window is for returning Competition Managers only; new competition centres must complete registration by the regular deadline.") },
+      { id: "amc12a-2026-us-bundles", label: t("美国／加拿大 AMC 12A 追加学生名额购买截止", "US/Canada AMC 12A additional-bundles deadline"), date: "2026-11-04", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"], note: t("只适用于已注册赛点追加学生名额。", "For registered competition centres purchasing additional student bundles only.") },
+      { id: "amc12b-2026-us-bundles", label: t("美国／加拿大 AMC 12B 追加学生名额购买截止", "US/Canada AMC 12B additional-bundles deadline"), date: "2026-11-12", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"], note: t("只适用于已注册赛点追加学生名额。", "For registered competition centres purchasing additional student bundles only.") },
       { id: "amc12-2026-cn-local", label: t("中国大陆本地竞赛时间与报名截止", "Mainland China local competition time and registration deadline"), date: "TBD", region: t("中国大陆", "Mainland China"), status: "pending", sourceIds: ["aseeder-amc12-mainland"], note: t("截至 2026 年 8 月 4 日，承办页尚未发布 2026–27 赛季中国本地时间和报名截止。", "As of 4 August 2026, the administration page had not published the 2026–27 local time or registration deadline for China.") },
     ],
     sections: [
@@ -936,7 +941,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "pending",
     cycle: "2026–27",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-08-06",
     facts: [
       { label: t("参赛资格", "Eligibility"), value: t("达到当届 AMC 10／12 对应试卷资格线，或通过 MAA 认可的其他邀请渠道", "Meet the current cutoff on the relevant AMC 10 or AMC 12 paper, or qualify through another MAA-recognised route"), sourceIds: ["maa-amc-policies"] },
       { label: t("题量与时长", "Questions and duration"), value: t("15 题，3 小时", "15 questions, 3 hours"), sourceIds: ["maa-aime-current"] },
@@ -949,6 +954,7 @@ export const competitionProjects: ProjectRecord[] = [
       { id: "aime2-2026", label: t("2025–26 赛季 AIME II", "2025–26 AIME II"), date: "2026-02-11", status: "historical", sourceIds: ["maa-aime-2025-cutoffs"] },
       { id: "aime1-2027", label: t("下一届 AIME I", "Next AIME I"), date: "TBD", status: "pending", sourceIds: ["maa-aime-current"] },
       { id: "aime2-2027", label: t("下一届 AIME II", "Next AIME II"), date: "TBD", status: "pending", sourceIds: ["maa-aime-current"] },
+      { id: "usamo-usajmo-2027", label: t("USAMO／USAJMO（邀请制）", "USAMO/USAJMO (invitation only)"), date: "2027-03-20", endDate: "2027-03-21", region: t("仅符合 MAA 地域与学籍资格的受邀者", "Invitees meeting MAA residency and enrollment eligibility"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27", "maa-amc-international"] },
     ],
     sections: [
       {
@@ -981,7 +987,7 @@ export const competitionProjects: ProjectRecord[] = [
         ],
       },
     ],
-    sourceIds: ["maa-aime-current", "maa-amc-policies", "maa-amc-dashboard", "maa-amc-international", "maa-amc-resources", "maa-aime-2025-cutoffs", "aseeder-amc10-mainland", "aseeder-amc12-mainland"],
+    sourceIds: ["maa-aime-current", "maa-amc-policies", "maa-amc-dashboard", "maa-amc-international", "maa-amc-registration-2026-27", "maa-amc-resources", "maa-aime-2025-cutoffs", "aseeder-amc10-mainland", "aseeder-amc12-mainland"],
     relatedIds: ["amc10", "amc12"],
     searchTerms: ["AIME", "American Invitational Mathematics Examination", "USAJMO index", "USAMO index", "资格线"],
   },
