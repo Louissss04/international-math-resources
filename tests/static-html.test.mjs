@@ -38,6 +38,7 @@ const requiredCoreRoutes = [
   "/programs",
   "/courses-tests",
   "/competitions",
+  "/university-competitions",
   "/modeling",
   "/research",
   "/journals",
@@ -894,6 +895,48 @@ test("exports the official-site directory with only HTTPS official sources", asy
   for (const sourceId of ["sat-home", "act-home", "himcm-home", "aksf-home", "uk-ucas-how-to-apply", "sg-nus-gaokao-2026"]) {
     assert.match(html, new RegExp(`data-source-id=["']${sourceId}["']`), `official-sites.html is missing ${sourceId}`);
   }
+});
+
+test("exports the university-competition directory, its official links and static filters", async () => {
+  const data = await loadStaticData();
+  assert.equal(data.routeMap["/university-competitions"], "university-competitions.html");
+  const html = await readRoute("/university-competitions", data);
+  const text = visibleText(html);
+  assert.match(html, /data-static-route=["']\/university-competitions["']/);
+  assert.match(html, /data-static-component=["']university-competition-directory["']/);
+  assert.match(text, /大学.*数学竞赛/);
+  assert.match(text, /University-organized mathematics competitions/i);
+  for (const filter of ["query", "region", "organizer", "status", "china"]) {
+    assert.match(html, new RegExp(`data-university-competition-filter=["']${filter}["']`), `university-competitions.html is missing the ${filter} filter`);
+  }
+  for (const attribute of ["data-search", "data-region", "data-organizer-type", "data-status", "data-china-access"]) {
+    assert.match(html, new RegExp(`${attribute}=["'][^"']+["']`), `university-competitions.html has no row with ${attribute}`);
+  }
+  for (const pattern of [
+    /HMMT/,
+    /student[- ]run|student organi[sz]ation|学生(?:组织|运营|主办)/i,
+    /CEMC/,
+    /University of Waterloo|滑铁卢大学/i,
+    /MPFG/,
+    /Advantage Testing Foundation/i,
+    /举办地|场地|host(?:ed)? (?:at|on)|venue|not (?:organized|run) by MIT/i,
+    /最后更新/,
+    /Last updated/i,
+  ]) assert.match(text, pattern, `university-competitions.html is missing ${pattern}`);
+  for (const href of [
+    "https://www.hmmt.org/",
+    "https://cemc.uwaterloo.ca/",
+  ]) {
+    assert.ok(attributeValues(html, "a", "href").some((value) => value.startsWith(href)), `university-competitions.html is missing official link ${href}`);
+  }
+
+  const competitionDirectory = await readRoute("/competitions", data);
+  assert.ok(attributeValues(competitionDirectory, "a", "href").includes("university-competitions.html"), "competitions.html does not link to the university-competition directory");
+  const runtime = await readFile(path.join(outputDirectory, "assets/static-site.js"), "utf8");
+  assert.match(runtime, /function initUniversityCompetitionDirectory\(\)/);
+  assert.match(runtime, /data-university-competition-filter/);
+  assert.match(runtime, /data-university-competition-empty/);
+  assert.match(runtime, /data-university-competition-reset/);
 });
 
 test("indexes translated syllabi and mathematics past-paper sources without rehosting files", async () => {

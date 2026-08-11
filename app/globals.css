@@ -211,6 +211,20 @@ html[data-language="en"] .lang-en { display: inline; }
 .journal-directory-table tbody td:nth-child(3) { min-width: 250px; }
 .journal-topic-list { display: flex; flex-wrap: wrap; gap: 5px; }
 .journal-topic-list > span { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; background: #f5f7f6; padding: 3px 7px; color: #46565c; font-size: .72rem; }
+.university-competition-table table { min-width: 1540px; }
+.university-competition-table th:first-child { width: 250px; }
+.university-competition-table td:first-child { min-width: 250px; }
+.university-competition-table td:first-child > strong { display: block; margin-bottom: 5px; }
+.university-competition-table td:first-child > strong a { color: var(--blue); }
+.university-competition-table td:nth-child(2) { min-width: 240px; }
+.university-competition-table td:nth-child(3) { min-width: 165px; }
+.university-competition-table td:nth-child(4),
+.university-competition-table td:nth-child(5) { min-width: 270px; }
+.university-competition-table td:nth-child(6) { min-width: 150px; }
+.university-competition-table td:nth-child(7) { min-width: 190px; }
+.university-competition-table .track-badge { display: inline-flex; margin-bottom: 4px; white-space: normal; }
+.university-competition-table .requirement-tests { display: flex; flex-wrap: wrap; gap: 5px; }
+.university-competition-table .requirement-tests a { display: inline-flex; padding: 4px 7px; border-radius: 4px; background: var(--blue-soft); color: var(--blue); font-size: .7rem; font-weight: 800; }
 .destination-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .destination-system-section { padding: 0 0 36px; }
 .destination-system-section h2 { margin: 0 0 14px; }

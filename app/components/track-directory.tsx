@@ -9,6 +9,7 @@ const trackTools: Partial<Record<Track, Array<{ href: string; title: LocalizedTe
   competition: [
     { href: "/competition-results", title: { zh: "竞赛奖项与分数线", en: "Competition awards and thresholds" }, description: { zh: "按竞赛、年份和奖项查询。", en: "Search by competition, year and award." } },
     { href: "/competition-calendar", title: { zh: "竞赛日历", en: "Competition calendar" }, description: { zh: "报名、比赛、晋级与放榜日期。", en: "Registration, contest, qualification and result dates." } },
+    { href: "/university-competitions", title: { zh: "大学组织的数学竞赛", en: "University-organized mathematics competitions" }, description: { zh: "查询主办关系、参赛地区与中国学生路径。", en: "Check organizer relationships, regions and access for students in China." } },
   ],
   assessment: [
     { href: "/assessment-scores", title: { zh: "数学考试成绩档案", en: "Mathematics test score archive" }, description: { zh: "按考试、年份和数学成绩指标查询。", en: "Search by test, year and mathematics score metric." } },

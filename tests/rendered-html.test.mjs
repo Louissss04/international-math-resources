@@ -37,6 +37,16 @@ function requirementCard(html, id) {
   return card;
 }
 
+function universityCompetitionRow(html, token) {
+  const rows = [...html.matchAll(/<(tr|article)\b[^>]*>[\s\S]*?<\/\1>/gi)].map((match) => match[0]);
+  const row = rows.find((candidate) => {
+    const openingTag = candidate.match(/^<[^>]+>/)?.[0] ?? "";
+    return (tagAttribute(openingTag, "data-search") ?? "").toLowerCase().includes(token.toLowerCase());
+  });
+  assert.ok(row, `missing university-competition row for ${token}`);
+  return row;
+}
+
 function tagAttribute(tag, name) {
   const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   return tag.match(new RegExp(`\\b${escapedName}\\s*=\\s*(["'])(.*?)\\1`, "i"))?.[2];
@@ -142,6 +152,7 @@ test("renders track directories and category-specific archives, calendars and co
     ["/courses-tests", /课程与考试/],
     ["/archive", /分类数据档案/],
     ["/competitions", /数学竞赛/],
+    ["/university-competitions", /大学.*数学竞赛/],
     ["/modeling", /数学建模/],
     ["/research", /数学科研/],
     ["/journals", /中学生数学论文期刊与投稿/],
@@ -168,6 +179,40 @@ test("renders track directories and category-specific archives, calendars and co
   ]) {
     assert.match(await renderHtml(path), pattern, path);
   }
+});
+
+test("renders a filterable directory of university-organized mathematics competitions with clear organizer boundaries", async () => {
+  const html = await renderHtml("/university-competitions");
+  assert.match(html, /data-static-component="university-competition-directory"/);
+  for (const filter of ["query", "region", "organizer", "status", "china"]) {
+    assert.match(html, new RegExp(`data-university-competition-filter="${filter}"`), `missing ${filter} filter`);
+  }
+
+  const rowTags = [...html.matchAll(/<(?:tr|article)\b[^>]*>/gi)]
+    .map((match) => match[0])
+    .filter((tag) => tagAttribute(tag, "data-search"));
+  assert.ok(rowTags.length >= 10, "the university-competition directory contains too few verified records");
+  for (const tag of rowTags) {
+    for (const attribute of ["data-search", "data-region", "data-organizer-type", "data-status", "data-china-access"]) {
+      assert.ok(tagAttribute(tag, attribute), `university-competition row is missing ${attribute}`);
+    }
+  }
+
+  const hmmt = universityCompetitionRow(html, "hmmt");
+  assert.match(hmmt, /student[- ]run|student organi[sz]ation|学生(?:组织|运营|主办)/i, "HMMT's student-run relationship is unclear");
+  const cemc = universityCompetitionRow(html, "cemc");
+  assert.match(cemc, /University of Waterloo|滑铁卢大学/i);
+  assert.match(cemc, /Centre for Education in Mathematics and Computing|数学与计算教育中心|大学部门|university (?:centre|department)/i, "CEMC's university-unit relationship is unclear");
+  assert.match(html, /Mathematics Prize for Girls \(MPFG\)/i);
+  assert.match(html, /Advantage Testing Foundation/i);
+  assert.match(html, /举办地|场地|host(?:ed)? (?:at|on)|venue|not (?:organized|run) by MIT/i, "MPFG must distinguish its organizer from its MIT venue");
+
+  for (const officialUrl of [
+    /href="https:\/\/www\.hmmt\.org\//i,
+    /href="https:\/\/(?:www\.)?cemc\.uwaterloo\.ca\//i,
+  ]) assert.match(html, officialUrl);
+  assert.match(html, /最后更新/);
+  assert.match(html, /Last updated/i);
 });
 
 test("renders calendars from 2026 with past milestones archived consistently", async () => {

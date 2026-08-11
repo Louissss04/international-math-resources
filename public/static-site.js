@@ -984,6 +984,67 @@
     render();
   }
 
+  function initUniversityCompetitionDirectory() {
+    var root = document.querySelector('[data-static-component="university-competition-directory"]');
+    if (!root) return;
+    var query = root.querySelector('[data-university-competition-filter="query"]');
+    var region = root.querySelector('[data-university-competition-filter="region"]');
+    var organizer = root.querySelector('[data-university-competition-filter="organizer"]');
+    var status = root.querySelector('[data-university-competition-filter="status"]');
+    var china = root.querySelector('[data-university-competition-filter="china"]');
+    var rows = Array.prototype.slice.call(root.querySelectorAll(
+      '[data-university-competition-row], tr[data-search][data-region][data-organizer-type][data-status][data-china-access]',
+    ));
+    var results = root.querySelector('[data-university-competition-results]') || root.querySelector("table");
+    var count = root.querySelector('[data-university-competition-count]');
+    var empty = root.querySelector('[data-university-competition-empty]');
+    var reset = root.querySelector('[data-university-competition-reset]');
+
+    function matchesValue(rawValue, selectedValue) {
+      if (!selectedValue || selectedValue === "all") return true;
+      return String(rawValue || "").split(/[\s|,]+/).indexOf(selectedValue) !== -1;
+    }
+
+    function render() {
+      var needle = query ? query.value.trim().toLowerCase() : "";
+      var visibleCount = 0;
+      rows.forEach(function (row) {
+        var matches = (!needle || String(row.dataset.search || row.textContent || "").toLowerCase().indexOf(needle) !== -1)
+          && matchesValue(row.dataset.region, region && region.value)
+          && matchesValue(row.dataset.organizerType, organizer && organizer.value)
+          && matchesValue(row.dataset.status, status && status.value)
+          && matchesValue(row.dataset.chinaAccess, china && china.value);
+        row.hidden = !matches;
+        if (matches) visibleCount += 1;
+      });
+
+      if (count) {
+        var countValue = count.matches("b") ? count : count.querySelector("b") || count;
+        countValue.textContent = String(visibleCount);
+      }
+      if (results) results.hidden = visibleCount === 0;
+      if (!empty) {
+        empty = document.createElement("p");
+        empty.className = "empty-state";
+        empty.dataset.universityCompetitionEmpty = "";
+        empty.innerHTML = '<span class="lang-zh">没有符合条件的竞赛。</span><span class="lang-en">No matching competitions.</span>';
+        if (results) results.after(empty);
+        else root.appendChild(empty);
+      }
+      empty.hidden = visibleCount > 0;
+    }
+
+    [query, region, organizer, status, china].filter(Boolean).forEach(function (control) {
+      control.addEventListener(control.tagName === "SELECT" ? "change" : "input", render);
+    });
+    if (reset) reset.addEventListener("click", function () {
+      if (query) query.value = "";
+      [region, organizer, status, china].filter(Boolean).forEach(function (control) { control.value = "all"; });
+      render();
+    });
+    render();
+  }
+
   function initAdmissionRequirements() {
     var root = document.querySelector('[data-static-component="admission-requirements"]');
     if (!root) return;
@@ -1075,6 +1136,7 @@
     initPlanner();
     initAddToPlanner();
     initOfficialSites();
+    initUniversityCompetitionDirectory();
     initAdmissionRequirements();
   }
 

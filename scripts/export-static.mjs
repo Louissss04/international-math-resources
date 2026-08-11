@@ -17,6 +17,7 @@ const TOP_LEVEL_ROUTES = [
   "/courses-tests",
   "/catalog",
   "/competitions",
+  "/university-competitions",
   "/modeling",
   "/research",
   "/journals",
