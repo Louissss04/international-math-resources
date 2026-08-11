@@ -1,7 +1,12 @@
 import { t, type PastPaperArchiveRecord } from "@/app/lib/types";
 
 const VERIFIED_AT = "2026-08-05";
+const HMMT_VERIFIED_AT = "2026-08-11";
 const MAA = t("美国数学协会（MAA）", "Mathematical Association of America (MAA)");
+const HMMT = t(
+  "哈佛—麻省理工数学竞赛（HMMT）",
+  "Harvard-MIT Mathematics Tournament (HMMT)",
+);
 const AOPS = t("Art of Problem Solving Wiki", "Art of Problem Solving Wiki");
 const AMT = t("澳大利亚数学信托（AMT）", "Australian Maths Trust (AMT)");
 const MATH_KANGAROO = t("Math Kangaroo USA", "Math Kangaroo USA");
@@ -131,6 +136,117 @@ export const maaOtherPastPaperArchives: PastPaperArchiveRecord[] = [
       },
     ],
     lastVerified: VERIFIED_AT,
+  },
+  {
+    id: "ppa-competition-hmmt",
+    projectId: "hmmt",
+    availability: "official",
+    summary: t(
+      "HMMT 官方档案免费提供各轮试题、解答与结果。总档案目前收录 November 1998–2025、February 2008–2026，以及 HMIC 2013–2026；官网另指定 November 2009、2011 与 February 2010、2013 作为判断两场比赛目标难度的代表样卷。",
+      "The official HMMT archive provides round-by-round problems, solutions, and results free of charge. It currently covers November 1998–2025, February 2008–2026, and HMIC 2013–2026. HMMT also identifies November 2009 and 2011 and February 2010 and 2013 as representative papers for judging the target difficulty of the two tournaments.",
+    ),
+    links: [
+      {
+        title: t("HMMT 官方历年试题、解答与结果总档案", "Official HMMT problems, solutions, and results archive"),
+        provider: HMMT,
+        url: "https://www.hmmt.org/www/archive/problems",
+        authority: "official",
+        kind: "archive",
+        access: "free",
+        note: t(
+          "按 November、February 和 Invitational 分类浏览；目前可追溯至 November 1998、February 2008 和 HMIC 2013。不同年份所保留的轮次与结果文件可能不同。",
+          "Browse by November, February, and Invitational. The current archive reaches November 1998, February 2008, and HMIC 2013. The rounds and result files retained vary by year.",
+        ),
+      },
+      {
+        title: t("November 2025 官方完整档案", "Official November 2025 complete archive"),
+        provider: HMMT,
+        url: "https://www.hmmt.org/www/archive/291",
+        authority: "official",
+        kind: "archive",
+        access: "free",
+        note: t(
+          "提供 General、Theme、Team、Guts 各轮试题与解答，以及简版和完整版比赛结果。",
+          "Provides problems and solutions for the General, Theme, Team, and Guts rounds, together with short and extended results.",
+        ),
+      },
+      {
+        title: t("February 2026 官方完整档案", "Official February 2026 complete archive"),
+        provider: HMMT,
+        url: "https://www.hmmt.org/www/archive/292",
+        authority: "official",
+        kind: "archive",
+        access: "free",
+        note: t(
+          "提供 Algebra and Number Theory、Combinatorics、Geometry、Team、Guts 各轮试题与解答，以及简版和完整版比赛结果。",
+          "Provides problems and solutions for Algebra and Number Theory, Combinatorics, Geometry, Team, and Guts, together with short and extended results.",
+        ),
+      },
+      {
+        title: t(
+          "November 与 February 官方对比及代表样卷说明",
+          "Official November–February comparison and representative-paper guidance",
+        ),
+        provider: HMMT,
+        url: "https://www.hmmt.org/www/tournaments/novfeb",
+        authority: "official",
+        kind: "index",
+        access: "free",
+        note: t(
+          "官网在此列出两场比赛的现行轮次、难度与推荐代表年份，并说明 February 2010 的 Team B 和 Calculus 已取消。",
+          "HMMT lists the current formats, difficulty ranges, and recommended representative years here and notes that Team B and Calculus from February 2010 have since been eliminated.",
+        ),
+      },
+      {
+        title: t("November 2009 官方代表样卷", "Official representative November 2009 papers"),
+        provider: HMMT,
+        url: "https://www.hmmt.org/www/archive/131",
+        authority: "official",
+        kind: "specimen",
+        access: "free",
+        note: t(
+          "HMMT 在 November 与 February 对比页中指定的 November 目标难度代表年份；档案提供当届试题、解答与结果。",
+          "A November year identified by HMMT as representative of its target difficulty; the archive supplies that tournament's problems, solutions, and results.",
+        ),
+      },
+      {
+        title: t("November 2011 官方代表样卷", "Official representative November 2011 papers"),
+        provider: HMMT,
+        url: "https://www.hmmt.org/www/archive/151",
+        authority: "official",
+        kind: "specimen",
+        access: "free",
+        note: t(
+          "HMMT 在 November 与 February 对比页中指定的 November 目标难度代表年份；含 General、Theme、Team、Guts 试题与解答。",
+          "A November year identified by HMMT as representative of its target difficulty, with General, Theme, Team, and Guts problems and solutions.",
+        ),
+      },
+      {
+        title: t("February 2010 官方代表样卷", "Official representative February 2010 papers"),
+        provider: HMMT,
+        url: "https://www.hmmt.org/www/archive/132",
+        authority: "official",
+        kind: "specimen",
+        access: "free",
+        note: t(
+          "HMMT 指定的 February 目标难度代表年份。该届仍包含现行赛制已经取消的 Calculus 个人轮和 Team B，适合判断难度，不应直接当作现行完整模拟卷。",
+          "A February year identified by HMMT as representative of its target difficulty. It still includes the Calculus individual test and Team B, both removed from the current format, so it is useful for judging difficulty but not as a direct simulation of the present tournament.",
+        ),
+      },
+      {
+        title: t("February 2013 官方代表样卷", "Official representative February 2013 papers"),
+        provider: HMMT,
+        url: "https://www.hmmt.org/www/archive/162",
+        authority: "official",
+        kind: "specimen",
+        access: "free",
+        note: t(
+          "HMMT 在 November 与 February 对比页中指定的 February 目标难度代表年份；含 Algebra、Combinatorics、Geometry、Team、Guts 试题与解答。",
+          "A February year identified by HMMT as representative of its target difficulty, with Algebra, Combinatorics, Geometry, Team, and Guts problems and solutions.",
+        ),
+      },
+    ],
+    lastVerified: HMMT_VERIFIED_AT,
   },
   {
     id: "ppa-competition-china-league",

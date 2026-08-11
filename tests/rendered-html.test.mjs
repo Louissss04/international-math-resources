@@ -492,7 +492,7 @@ test("renders a searchable official-site directory without third-party sources",
   for (const groupId of ["competition", "modeling", "research", "journal", "summer", "curriculum", "assessment", "university-united-states", "university-united-kingdom", "university-singapore", "university-australia", "university-canada", "university-other-europe"]) {
     assert.match(html, new RegExp(`data-official-site-group="${groupId}"`), groupId);
   }
-  for (const sourceId of ["sat-home", "act-home", "himcm-home", "aksf-home", "uk-ucas-how-to-apply", "sg-nus-gaokao-2026"]) {
+  for (const sourceId of ["sat-home", "act-home", "himcm-home", "hmmt-home-season30", "aksf-home", "uk-ucas-how-to-apply", "sg-nus-gaokao-2026"]) {
     assert.match(html, new RegExp(`data-source-id="${sourceId}"`), sourceId);
   }
   assert.doesNotMatch(html, /data-source-kind="secondary-archive"/);
@@ -507,6 +507,7 @@ test("renders a searchable official-site directory without third-party sources",
 test("renders translated mathematics syllabus records and official materials", async () => {
   for (const [path, title] of [
     ["/syllabi/amc-8-current-scope", /AMC 8/],
+    ["/syllabi/hmmt-published-format", /HMMT/],
     ["/syllabi/ap-calculus-ab-2026-27", /AP Calculus AB/],
     ["/syllabi/esat-2027-entry", /ESAT/],
   ]) {
@@ -529,6 +530,7 @@ test("renders past-paper sources, empty states and copyright notices", async () 
 
   for (const path of [
     "/competitions/amc-12",
+    "/competitions/hmmt",
     "/competitions/euclid",
     "/modeling/himcm",
     "/courses/ap-calculus-bc",
@@ -540,6 +542,31 @@ test("renders past-paper sources, empty states and copyright notices", async () 
     assert.match(html, /版权与链接说明/, path);
     assert.match(html, /does not copy or host test files/, path);
   }
+});
+
+test("renders the HMMT Season 30 guide with registration, results and China-specific cautions", async () => {
+  const directoryHtml = await renderHtml("/competitions");
+  assert.match(directoryHtml, /href="\/competitions\/hmmt"/);
+
+  const html = await renderHtml("/competitions/hmmt");
+  for (const pattern of [
+    /Harvard–MIT Mathematics Tournament/,
+    /Season 30/,
+    /9 月 20 日|20 September/,
+    /November 2025/,
+    /February 2026/,
+    /61\.80/,
+    /不与任何和参赛队伍相关的机构合作/,
+    /does not partner with organizations connected to competing teams/,
+    /没有预先公布的晋级线或获奖线/,
+  ]) {
+    assert.match(html, pattern);
+  }
+  for (const sectionId of ["official-syllabus", "past-papers", "official-learning-resources", "sources"]) {
+    assert.match(html, new RegExp(`id="${sectionId}"`), sectionId);
+  }
+  assert.match(html, /href="\/syllabi\/hmmt-published-format"/);
+  assert.match(html, /hmmt-archive\.s3\.amazonaws\.com/);
 });
 
 test("limits mixed assessments and translated syllabi to mathematics", async () => {

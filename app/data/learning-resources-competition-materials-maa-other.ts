@@ -1,11 +1,13 @@
 import { t, type LearningResourceRecord } from "@/app/lib/types";
 
 const VERIFIED_AT = "2026-08-05";
+const HMMT_VERIFIED_AT = "2026-08-11";
 const MAA = t("美国数学协会（MAA）", "Mathematical Association of America (MAA)");
 const MAA_PRESS = t("MAA Press（AMS 书店）", "MAA Press (AMS Bookstore)");
 const AMT = t("澳大利亚数学信托（AMT）", "Australian Maths Trust (AMT)");
 const MATH_KANGAROO = t("Math Kangaroo USA", "Math Kangaroo USA");
 const CMS = t("加拿大数学学会（CMS）", "Canadian Mathematical Society (CMS)");
+const HMMT = t("HMMT 组委会", "HMMT");
 
 export const maaOtherCompetitionMaterials: LearningResourceRecord[] = [
   {
@@ -208,5 +210,95 @@ export const maaOtherCompetitionMaterials: LearningResourceRecord[] = [
     access: "mixed",
     note: t("第 17 卷起采用免费电子版；较早卷册的获取方式以页面标注为准。", "From Volume 17 onward the series uses free electronic access; availability of earlier volumes is shown on the page."),
     verifiedAt: VERIFIED_AT,
+  },
+  {
+    id: "hmmt-official-problem-archive",
+    projectIds: ["hmmt"],
+    title: t("HMMT 官方历年试题、解答与成绩档案", "HMMT Official Problems, Solutions, and Results Archive"),
+    provider: HMMT,
+    url: "https://www.hmmt.org/www/archive/problems",
+    kind: "past-papers",
+    description: t(
+      "按 November、February 与 Invitational 分类并按年份开放历届试题、官方解答和成绩页面，可直接用于整套限时训练和赛后复盘。",
+      "Organizes past November, February, and Invitational tournaments by year, with official problem sets, solutions, and results for timed practice and review.",
+    ),
+    access: "free",
+    note: t(
+      "各年份和场次开放的文件类型不完全相同，应进入对应赛事页查看实际可用的试题、解答与成绩。",
+      "The available files vary by year and tournament; open the relevant event page to see which problems, solutions, and result files are provided.",
+    ),
+    verifiedAt: HMMT_VERIFIED_AT,
+  },
+  {
+    id: "hmmt-problem-of-the-week-archive",
+    projectIds: ["hmmt"],
+    title: t("HMMT Problem of the Week 历史题目与解答", "HMMT Problem of the Week Archive"),
+    provider: HMMT,
+    url: "https://www.hmmt.org/www/potw/archive",
+    kind: "sample-questions",
+    description: t(
+      "收录由 HMMT 命题团队编写的每周题及其解答，适合补充证明表达、非标准问题和专题解题训练。",
+      "Collects weekly problems and solutions written by the HMMT Problems staff, supporting work on proof writing, non-standard problems, and focused problem solving.",
+    ),
+    access: "free",
+    note: t(
+      "HMMT 当前将 Problem of the Week 标为暂停更新；历史档案仍可免费使用。",
+      "HMMT currently marks Problem of the Week as being on hiatus; the historical archive remains freely available.",
+    ),
+    verifiedAt: HMMT_VERIFIED_AT,
+  },
+  {
+    id: "hmmt-november-february-sample-guidance",
+    projectIds: ["hmmt"],
+    title: t("HMMT November / February 赛制对比与代表样卷", "HMMT November / February Format Comparison and Representative Tests"),
+    provider: HMMT,
+    url: "https://www.hmmt.org/www/tournaments/novfeb",
+    kind: "official-guide",
+    description: t(
+      "官方比较两场比赛的个人轮、团队轮、Guts Round、队伍人数和难度，并推荐 November 2009、2011 与 February 2010、2013 作为代表性试卷。",
+      "The official comparison covers individual, team, and Guts rounds, team size, and difficulty, and recommends November 2009 and 2011 plus February 2010 and 2013 as representative tests.",
+    ),
+    access: "free",
+    note: t(
+      "这些年份用于判断目标难度，不构成封闭考纲；旧 February 试卷中的 Team B 与 Calculus subject test 已取消。",
+      "These papers illustrate target difficulty rather than define a closed syllabus; the former February Team B round and Calculus subject test have been discontinued.",
+    ),
+    verifiedAt: HMMT_VERIFIED_AT,
+  },
+  {
+    id: "hmmt-online-tournament-practice",
+    projectIds: ["hmmt"],
+    title: t("HMMT Online Tournament 线上练习", "HMMT Online Tournament Practice"),
+    provider: HMMT,
+    url: "https://www.hmmt.org/www/tournaments/online",
+    kind: "practice-platform",
+    description: t(
+      "线下各轮结束后通过 HMMT Hydrogen 开放相应线上考试；无需提前报名或现场监考，可用于按规定时长体验个人题和团队题。",
+      "After the corresponding in-person rounds conclude, online exams are released through HMMT Hydrogen; no advance registration or in-person proctor is required, making them useful for timed individual and team practice.",
+    ),
+    access: "account",
+    note: t(
+      "线上赛属于非正式活动，不公布排名或颁发奖项；February 的证明型 Team Round 不包含在线上赛中。",
+      "The online tournament is unofficial, with no published rankings or prizes; February's proof-based Team Round is not included.",
+    ),
+    verifiedAt: HMMT_VERIFIED_AT,
+  },
+  {
+    id: "hmmt-registration-video-guide",
+    projectIds: ["hmmt"],
+    title: t("HMMT 官方报名视频指南", "Official HMMT Registration Video Guide"),
+    provider: HMMT,
+    url: "https://www.hmmt.org/rg/guide",
+    kind: "application-materials",
+    description: t(
+      "按账号创建、预组队或个人申请、抽签后确认等环节整理操作视频，供学生、家长与教练完成官方报名流程。",
+      "Provides operational videos for account creation, pre-arranged team or individual applications, and post-lottery confirmation for students, parents, and coaches.",
+    ),
+    access: "free",
+    note: t(
+      "这些视频只讲报名操作，不是数学备赛课程。截至 2026-08-11，HMMT 官网未发现系统化的官方备赛录播课。",
+      "These videos explain registration operations and are not mathematics-preparation lessons. As of August 11, 2026, no structured official recorded preparation course was found on the HMMT website.",
+    ),
+    verifiedAt: HMMT_VERIFIED_AT,
   },
 ];

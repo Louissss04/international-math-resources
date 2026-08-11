@@ -6,6 +6,7 @@ import {
 } from "@/app/lib/types";
 
 const VERIFIED_AT = "2026-08-05";
+const HMMT_VERIFIED_AT = "2026-08-11";
 
 const fact = (
   labelZh: string,
@@ -1010,5 +1011,146 @@ export const maaOtherCompetitionSyllabi: AssessmentSyllabusRecord[] = [
       "AIME is rendered as an examination while retaining its invitational status in the MAA sequence. “Integer between 0 and 999” is expressed as an integer answer from 000–999 to match answer-entry convention. The chapter list of an official problem book is not recast as a test syllabus.",
     ),
     lastVerified: VERIFIED_AT,
+  },
+  {
+    id: "syllabus-hmmt-published-format",
+    slug: "hmmt-published-format",
+    projectId: "hmmt",
+    classification: "structure-only",
+    title: t("HMMT 官方公开赛制与范围说明", "HMMT Official Published Format and Scope"),
+    officialName: t("哈佛—MIT 数学竞赛（HMMT）", "Harvard–MIT Mathematics Tournament (HMMT)"),
+    applicableCycle: t("Season 30：2026 年 November 与 2027 年 February", "Season 30: November 2026 and February 2027"),
+    status: "confirmed",
+    summary: t(
+      "HMMT 官网公布两场比赛的轮次、时长、作答规则、相对难度和计分方法，但没有发布按知识点、题量或权重划分的封闭考纲。November 个人轮覆盖高中数学与当届 Theme；February 只给出代数与数论、欧氏几何、组合三个宽泛领域。以下内容只整理官方明示的赛制和范围，不根据历年题补写主题清单。",
+      "HMMT publishes the rounds, timing, answer rules, relative difficulty and scoring methods for both tournaments, but no closed specification divided into topics, item counts or content weights. November individual rounds draw broadly from high-school mathematics and the current Theme, while February states only the broad areas of algebra and number theory, Euclidean geometry, and combinatorics. This record reports the published format and scope without deriving an expanded topic list from past papers.",
+    ),
+    facts: [
+      fact("考纲性质", "Specification type", "仅有官方赛制与宽泛范围；没有正式封闭考纲", "Official format and broad scope only; no formal closed syllabus"),
+      fact("November 个人轮", "November individual rounds", "General、Theme；各 10 道短答题、50 分钟", "General and Theme; 10 short-answer problems and 50 minutes each"),
+      fact("February 个人轮", "February individual rounds", "Algebra & Number Theory、Geometry、Combinatorics；各 10 道短答题、50 分钟", "Algebra & Number Theory, Geometry, and Combinatorics; 10 short-answer problems and 50 minutes each"),
+      fact("Team Round", "Team Round", "10 题、60 分钟；November 为短答，February 为证明题", "10 problems in 60 minutes; short answer in November and proof-based in February"),
+      fact("Guts Round", "Guts Round", "36 道短答题、80 分钟；November 每组 3 题，February 每组 4 题", "36 short-answer problems in 80 minutes; sets of three in November and four in February"),
+      fact("禁用工具", "Prohibited aids", "书籍、笔记、计算器、计算设备、绘图工具与通信设备均不得使用", "Books, notes, calculators, computational aids, drawing tools and communication devices are prohibited"),
+      fact("个人题动态计分", "Dynamic individual scoring", "已解题目的分值约为 3—10 分，并随题号及当场解出人数变化", "A solved problem is worth approximately 3–10 points, varying with problem number and the number of contestants who solve it"),
+    ],
+    sections: [
+      {
+        id: "hmmt-publication-boundary",
+        title: t("官方范围的边界", "Boundary of the published scope"),
+        paragraphs: [
+          t(
+            "HMMT 的 November 与 February 对比页和 Testing Information 页描述了比赛结构及大致难度，没有公布一份可约束命题的逐项 syllabus，也没有给出各知识领域的固定题量或比例。Theme Round 的主题随当届试卷变化，不能预先写成固定知识点。",
+            "HMMT's November-versus-February and Testing Information pages describe the tournament structure and approximate difficulty. They do not publish an itemized syllabus binding future papers or fixed item proportions by topic. The Theme Round changes with the paper and cannot be presented as a permanent topic list.",
+          ),
+          t(
+            "官网将 November 难度概括为 AMC 中段至 AIME 较难题，将 February 概括为 AIME 中段至国家奥赛级别。这是选场参照，不是晋级线、分数线或封闭命题范围。",
+            "The official comparison places November approximately from mid-AMC to upper-AIME and February from mid-AIME to national-olympiad level. These are tournament-selection guides, not qualification thresholds, score cutoffs or a closed content specification.",
+          ),
+        ],
+      },
+      {
+        id: "hmmt-round-comparison",
+        title: t("November 与 February 赛制", "November and February formats"),
+        tables: [
+          {
+            columns: [t("轮次", "Round"), t("November", "November"), t("February", "February")],
+            rows: [
+              row(["个人轮", "Individual rounds"], ["General、Theme；各 10 题／50 分钟", "General and Theme; 10 problems / 50 minutes each"], ["Algebra & Number Theory、Geometry、Combinatorics；各 10 题／50 分钟", "Algebra & Number Theory, Geometry, and Combinatorics; 10 problems / 50 minutes each"]),
+              row(["个人轮内容", "Individual-round scope"], ["General 取材于高中数学各领域；Theme 围绕共同主题", "General draws from high-school mathematics; Theme is organized around a common theme"], ["高中代数与数论、欧氏几何、高中组合", "High-school algebra and number theory, Euclidean geometry, and high-school combinatorics"]),
+              row(["Team Round", "Team Round"], ["10 道短答题／60 分钟", "10 short-answer problems / 60 minutes"], ["10 道证明题／60 分钟；可按过程给分", "10 proof problems / 60 minutes; partial credit is available"]),
+              row(["Guts Round", "Guts Round"], ["36 道短答题／80 分钟；每组 3 题", "36 short-answer problems / 80 minutes; sets of three"], ["36 道短答题／80 分钟；每组 4 题", "36 short-answer problems / 80 minutes; sets of four"]),
+              row(["官方难度参照", "Official difficulty guide"], ["约 AMC 中段至 AIME 较难题", "Approximately mid-AMC to upper-AIME"], ["约 AIME 中段至国家奥赛题", "Approximately mid-AIME to national-olympiad level"]),
+            ],
+          },
+        ],
+      },
+      {
+        id: "hmmt-answer-and-equipment-rules",
+        title: t("作答形式与工具规则", "Answer format and permitted materials"),
+        bullets: [
+          t("除 February Team Round 外，官网所述个人轮、November Team Round 与 Guts Round 均为单值短答；一般不按过程给分。", "Except for the February Team Round, the published individual rounds, November Team Round and Guts Round use single-value short answers and generally do not award partial credit."),
+          t("短答应写成能够明确判定且尽可能化简的精确形式。官方允许基本算术、括号、指数、阶乘、三角与反三角函数、二项式系数及题目另行允许的记号；通常不接受求和号或连乘号作为最终答案。", "Short answers should be unambiguous, exact and as simplified as reasonably possible. The official answer guide permits basic arithmetic, parentheses, exponents, factorials, trigonometric and inverse-trigonometric functions, binomial coefficients, and notation explicitly allowed by a problem; summation and product notation are generally not accepted as final answers."),
+          t("不得使用书籍、笔记、计算器、计算设备、方格纸、直尺、量角器、圆规等绘图工具，也不得使用手机、电脑或其他通信设备。", "Books, notes, calculators, computational aids, graph paper, rulers, protractors, compasses and other drawing tools are prohibited, as are phones, computers and other communication devices."),
+        ],
+      },
+      {
+        id: "hmmt-scoring",
+        title: t("动态计分与团队总分", "Dynamic scoring and team aggregate"),
+        paragraphs: [
+          t(
+            "个人题不是预先固定同一分值。官方算法对第 n 题、当场有 N 人解出的情况使用 w(n,N)=exp(n/20)+max(8−⌊ln N⌋,2)，因此权重约在 3—10 分之间；个人单科成绩及个人总分均为已解题目权重之和。",
+            "Individual problems do not carry one fixed value in advance. For problem n solved by N contestants, the official algorithm uses w(n,N)=exp(n/20)+max(8−⌊ln N⌋,2), giving weights of roughly 3–10 points. A test score and individual total are the sums of the weights of solved problems.",
+          ),
+          t(
+            "Team Round 与 Guts Round 的题目分值直接标在试卷上。Guts 按题组领取和提交，交卷后立即评分并实时显示成绩。",
+            "Problem weights for the Team and Guts rounds are printed on the paper. Guts sets are collected and submitted sequentially, graded immediately, and displayed in real time.",
+          ),
+        ],
+        tables: [
+          {
+            title: t("Sweepstakes 总分构成", "Sweepstakes score components"),
+            columns: [t("部分", "Component"), t("折算上限", "Scaled maximum"), t("计算方式", "Method")],
+            rows: [
+              row(["Individual Total", "Individual Total"], ["800", "800"], ["队员个人原始总分相加，再按当场该部分最高原始分折算", "Team members' individual raw totals are summed, then scaled so the highest component raw score receives the maximum"]),
+              row(["Team Round", "Team Round"], ["400", "400"], ["题目权重相加，再按当场最高原始分折算", "Problem weights are summed, then scaled against the highest raw score in that component"]),
+              row(["Guts Round", "Guts Round"], ["400", "400"], ["题目权重相加，再按当场最高原始分折算", "Problem weights are summed, then scaled against the highest raw score in that component"]),
+              row(["理论总分", "Theoretical total"], ["1600", "1600"], ["只有同一队在三个部分均取得最高原始分时达到", "Reached only when the same team has the highest raw score in all three components"]),
+            ],
+            note: t(
+              "动态个人权重及按当场最高分折算意味着不同届的原始分和 Sweepstakes 分不宜直接横向比较。",
+              "Dynamic individual weights and scaling against the current field mean that raw and Sweepstakes scores should not be compared directly across editions.",
+            ),
+          },
+        ],
+      },
+    ],
+    sources: [
+      syllabusSource(
+        "HMMT November 与 February 赛制对比",
+        "HMMT November vs. February",
+        "HMMT 组委会",
+        "HMMT",
+        "https://www.hmmt.org/www/tournaments/novfeb",
+        "webpage",
+        "Season 30 核验于 2026 年 8 月",
+        "Season 30, verified August 2026",
+      ),
+      syllabusSource(
+        "HMMT Testing Information",
+        "HMMT Testing Information",
+        "HMMT 组委会",
+        "HMMT",
+        "https://www.hmmt.org/www/tournaments/testing",
+        "webpage",
+        "核验于 2026 年 8 月",
+        "Verified August 2026",
+      ),
+      syllabusSource(
+        "HMMT 可接受答案形式",
+        "HMMT Acceptable Answer Forms",
+        "HMMT Head Graders",
+        "HMMT Head Graders",
+        "https://hmmt-prod.s3.amazonaws.com/static/acceptable_answers.pdf",
+        "pdf",
+        "官网 Testing Information 所链接文件；HMMT 2012",
+        "Linked from the official Testing Information page; HMMT 2012",
+      ),
+      syllabusSource(
+        "HMMT 个人题动态计分算法",
+        "HMMT Individual Test Weight Function",
+        "HMMT 组委会",
+        "HMMT",
+        "https://hmmt-prod.s3.amazonaws.com/static/scoring_algorithm.pdf",
+        "pdf",
+        "2018 年 2 月 13 日更新；官网现行 Testing Information 所链接",
+        "Updated 13 February 2018; linked from the current official Testing Information page",
+      ),
+    ],
+    translationNote: t(
+      "保留 General、Theme、Team Round、Guts Round、Sweepstakes 等官方轮次名称；Theme 不译写成固定知识主题。Algebra test 按官网说明表述为“Algebra & Number Theory”。动态权重公式按官方 PDF 原式保留，不据历届成绩反推固定分数线。",
+      "Official round names such as General, Theme, Team Round, Guts Round and Sweepstakes are retained; Theme is not recast as a fixed content topic. Algebra test is presented as Algebra & Number Theory following the official description. The dynamic weight formula is preserved from the official PDF, and no fixed cutoff is inferred from historical results.",
+    ),
+    lastVerified: HMMT_VERIFIED_AT,
   },
 ];
