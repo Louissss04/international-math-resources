@@ -91,6 +91,24 @@ export const formatTagLabels: Record<UniversityCompetitionFormatTag, LocalizedTe
   "writing-modeling": l("论文／建模／综合", "Writing, modeling, or mixed"),
 };
 
+const countryLabels: Record<string, LocalizedText> = {
+  "United States": l("美国", "United States"),
+  Canada: l("加拿大", "Canada"),
+  "United Kingdom": l("英国", "United Kingdom"),
+  "Germany / Belgium / Netherlands / Austria": l("德国／比利时／荷兰／奥地利", "Germany / Belgium / Netherlands / Austria"),
+  Netherlands: l("荷兰", "Netherlands"),
+  "Italy / international": l("意大利／国际赛区", "Italy / international"),
+  Australia: l("澳大利亚", "Australia"),
+  "New Zealand": l("新西兰", "New Zealand"),
+  Singapore: l("新加坡", "Singapore"),
+  "Hong Kong SAR": l("中国香港", "Hong Kong SAR"),
+  "South Africa": l("南非", "South Africa"),
+};
+
+export function universityCompetitionCountryLabel(country: string): LocalizedText {
+  return countryLabels[country] ?? l(country, country);
+}
+
 export const universityCompetitions: UniversityCompetitionRecord[] = [
   {
     id: "hmmt",

@@ -30,6 +30,26 @@ function childRoutes(html, directoryPath) {
   )].sort();
 }
 
+function decodeEntities(value) {
+  return value
+    .replaceAll("&nbsp;", " ")
+    .replaceAll("&amp;", "&")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&quot;", '"')
+    .replaceAll("&#39;", "'")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+    .replace(/&#x([\da-f]+);/gi, (_, code) => String.fromCodePoint(Number.parseInt(code, 16)));
+}
+
+function visibleText(html) {
+  return decodeEntities(html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim());
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 function requirementCard(html, id) {
   const escapedId = id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const card = html.match(new RegExp(`<article\\b[^>]*data-requirement-id="${escapedId}"[^>]*>[\\s\\S]*?<\\/article>`))?.[0];
@@ -44,6 +64,13 @@ function universityCompetitionRow(html, token) {
     return (tagAttribute(openingTag, "data-search") ?? "").toLowerCase().includes(token.toLowerCase());
   });
   assert.ok(row, `missing university-competition row for ${token}`);
+  return row;
+}
+
+function universityCompetitionRowById(html, id) {
+  const escapedId = escapeRegExp(id);
+  const row = html.match(new RegExp(`<tr\\b(?=[^>]*data-university-competition-id="${escapedId}")[^>]*>[\\s\\S]*?<\\/tr>`))?.[0];
+  assert.ok(row, `missing university-competition row ${id}`);
   return row;
 }
 
@@ -77,7 +104,7 @@ test("renders the current international mathematics resource library home", asyn
   assert.match(html, /国际升学数学资料库/);
   assert.match(html, /面向中国中学生的数学竞赛、建模、科研、夏校、国际课程与入学考试资料/);
   assert.match(html, /Mathematics competitions, modeling, research, summer programs, international curricula and admissions tests/);
-  for (const href of ["/programs", "/courses-tests", "/destinations", "/calendar", "/resources"]) {
+  for (const href of ["/programs", "/courses-tests", "/university-competitions", "/destinations", "/calendar", "/resources"]) {
     assert.match(html, new RegExp(`href="${href}"`), href);
   }
   assert.doesNotMatch(html, staleDemoCopy);
@@ -213,6 +240,46 @@ test("renders a filterable directory of university-organized mathematics competi
   ]) assert.match(html, officialUrl);
   assert.match(html, /最后更新/);
   assert.match(html, /Last updated/i);
+});
+
+test("renders one resolvable detail route for every university-competition record", async () => {
+  const directory = await renderHtml("/university-competitions");
+  const rootTag = directory.match(/<div\b[^>]*data-static-component="university-competition-directory"[^>]*>/)?.[0];
+  assert.ok(rootTag, "the university-competition directory has no record manifest");
+  const ids = (tagAttribute(rootTag, "data-record-ids") ?? "").split("|").filter(Boolean);
+  assert.ok(ids.length >= 39, "the university-competition manifest must retain the current 39-record baseline");
+  assert.equal(new Set(ids).size, ids.length, "the university-competition manifest contains duplicate IDs");
+  for (const id of ids) assert.match(id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/, `unsafe university-competition ID: ${id}`);
+
+  const expectedRoutes = ids.map((id) => `/university-competitions/${id}`).sort();
+  assert.deepEqual(childRoutes(directory, "/university-competitions"), expectedRoutes, "directory links do not cover every detail route exactly once");
+
+  for (const id of ids) {
+    const route = `/university-competitions/${id}`;
+    const row = universityCompetitionRowById(directory, id);
+    const titleAnchor = row.match(new RegExp(`<a\\b(?=[^>]*href="${escapeRegExp(route)}")[^>]*>[\\s\\S]*?<\\/a>`))?.[0];
+    assert.ok(titleAnchor, `${id} has no detail link in the directory`);
+    const title = visibleText(titleAnchor);
+    assert.ok(title.length > 2, `${id} has no project-specific title`);
+    const officialHref = [...row.matchAll(/<a\b[^>]*href="(https:\/\/[^"#]+)"[^>]*>/gi)].map((match) => decodeEntities(match[1]))[0];
+    assert.ok(officialHref, `${id} has no HTTPS official link in the directory`);
+
+    const detail = await renderHtml(route);
+    const detailText = visibleText(detail);
+    assert.match(detail, /data-university-competition-detail/, `${route} has no detail marker`);
+    assert.match(detail, new RegExp(`data-university-competition-id="${escapeRegExp(id)}"`), `${route} identifies the wrong record`);
+    assert.ok(detailText.includes(title), `${route} is missing its project-specific title`);
+    assert.match(detailText, /主办关系/, `${route} is missing the Chinese organizer relationship`);
+    assert.match(detailText, /Organizer relationship/i, `${route} is missing the English organizer relationship`);
+    assert.match(detailText, /中国学生路径/, `${route} is missing the Chinese access path`);
+    assert.match(detailText, /Access from China/i, `${route} is missing the English access path`);
+    assert.match(detail, new RegExp(`href="${escapeRegExp(officialHref.replaceAll("&", "&amp;"))}"`), `${route} is missing its HTTPS official link`);
+    const verifiedTag = detail.match(/<[^>]+\bdata-last-verified="[^"]+"[^>]*>/)?.[0];
+    assert.ok(verifiedTag, `${route} has no last-verification date`);
+    assert.match(tagAttribute(verifiedTag, "data-last-verified") ?? "", /^\d{4}-\d{2}-\d{2}$/, `${route} has an invalid last-verification date`);
+    assert.match(detailText, /最后核验/, `${route} is missing the Chinese verification label`);
+    assert.match(detailText, /Last verified/i, `${route} is missing the English verification label`);
+  }
 });
 
 test("renders calendars from 2026 with past milestones archived consistently", async () => {

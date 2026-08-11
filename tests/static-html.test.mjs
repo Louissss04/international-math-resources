@@ -200,7 +200,7 @@ async function loadStaticData() {
       assert.fail(`assets/data.js does not contain valid JSON: ${error.message}`);
     }
 
-    for (const key of ["projects", "journals", "sources", "thresholds", "syllabi", "destinationGuides", "admissionRequirements"]) {
+    for (const key of ["projects", "journals", "sources", "thresholds", "syllabi", "destinationGuides", "admissionRequirements", "universityCompetitions"]) {
       assert.ok(Array.isArray(data[key]), `static payload is missing the ${key} array`);
     }
     assert.ok(data.routeMap && typeof data.routeMap === "object" && !Array.isArray(data.routeMap), "static payload is missing routeMap");
@@ -224,6 +224,7 @@ test("static payload has valid IDs, references and route records", async () => {
   assert.ok(data.journals.length > 0, "static payload has no journal records");
   assert.ok(data.destinationGuides.length > 0, "static payload has no destination guides");
   assert.ok(data.admissionRequirements.length > 0, "static payload has no admission requirement records");
+  assert.ok(data.universityCompetitions.length >= 39, "static payload must retain the current 39-record university-competition baseline");
   assertUniqueIds(data.projects, "projects");
   assertUniqueIds(data.journals, "journals");
   assertUniqueIds(data.sources, "sources");
@@ -231,6 +232,7 @@ test("static payload has valid IDs, references and route records", async () => {
   assertUniqueIds(data.syllabi, "syllabi");
   assertUniqueIds(data.destinationGuides, "destination guides");
   assertUniqueIds(data.admissionRequirements, "admission requirements");
+  assertUniqueIds(data.universityCompetitions, "university competitions");
   assert.equal(new Set(data.projects.map((project) => project.slug)).size, data.projects.length, "project slugs must be unique");
   assert.equal(new Set(data.journals.map((journal) => journal.slug)).size, data.journals.length, "journal slugs must be unique");
   assert.equal(new Set([...data.projects.map((record) => record.id), ...data.journals.map((record) => record.id)]).size, data.projects.length + data.journals.length, "projects and journals must not share IDs");
@@ -932,11 +934,52 @@ test("exports the university-competition directory, its official links and stati
 
   const competitionDirectory = await readRoute("/competitions", data);
   assert.ok(attributeValues(competitionDirectory, "a", "href").includes("university-competitions.html"), "competitions.html does not link to the university-competition directory");
+  const home = await readRoute("/", data);
+  assert.ok(attributeValues(home, "a", "href").includes("university-competitions.html"), "index.html does not link directly to the university-competition directory");
   const runtime = await readFile(path.join(outputDirectory, "assets/static-site.js"), "utf8");
   assert.match(runtime, /function initUniversityCompetitionDirectory\(\)/);
   assert.match(runtime, /data-university-competition-filter/);
   assert.match(runtime, /data-university-competition-empty/);
   assert.match(runtime, /data-university-competition-reset/);
+});
+
+test("exports a complete, resolvable static detail page for every university competition", async () => {
+  const data = await loadStaticData();
+  const directory = await readRoute("/university-competitions", data);
+  const directoryLinks = new Set(attributeValues(directory, "a", "href").map(referencePath));
+
+  for (const record of data.universityCompetitions) {
+    assert.match(record.id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/, `unsafe university-competition ID: ${record.id}`);
+    assert.ok(record.title?.zh && record.title?.en, `${record.id} has no bilingual project-specific title`);
+    assert.ok(record.organizer?.zh && record.organizer?.en, `${record.id} has no bilingual organizer relationship`);
+    assert.ok(record.chinaPath?.zh && record.chinaPath?.en, `${record.id} has no bilingual China access path`);
+    assert.match(record.lastVerified ?? "", /^\d{4}-\d{2}-\d{2}$/, `${record.id} has an invalid last-verification date`);
+    assert.ok(record.officialLinks?.length > 0, `${record.id} has no official links`);
+    for (const link of record.officialLinks) assert.match(link.url, /^https:\/\//i, `${record.id} has a non-HTTPS official link: ${link.url}`);
+
+    const route = `/university-competitions/${record.id}`;
+    const file = `university-competition-${record.id}.html`;
+    assert.equal(data.routeMap[route], file, `${route} has the wrong static filename`);
+    assert.ok(directoryLinks.has(file), `university-competitions.html does not link to ${file}`);
+
+    const html = await readRoute(route, data);
+    const text = visibleText(html);
+    const hrefs = new Set(attributeValues(html, "a", "href"));
+    assert.match(html, new RegExp(`data-static-route=["']${route}["']`), `${file} has the wrong route marker`);
+    assert.match(html, /data-university-competition-detail/, `${file} has no detail marker`);
+    assert.match(html, new RegExp(`data-university-competition-id=["']${record.id}["']`), `${file} identifies the wrong record`);
+    assert.match(html, new RegExp(`data-last-verified=["']${record.lastVerified}["']`), `${file} has the wrong verification date`);
+    assert.ok(text.includes(record.title.zh) && text.includes(record.title.en), `${file} is missing its bilingual project-specific title`);
+    assert.ok(text.includes(record.organizer.zh) && text.includes(record.organizer.en), `${file} is missing its organizer relationship`);
+    assert.ok(text.includes(record.chinaPath.zh) && text.includes(record.chinaPath.en), `${file} is missing its China access path`);
+    assert.match(text, /主办关系/, `${file} is missing the Chinese organizer label`);
+    assert.match(text, /Organizer relationship/i, `${file} is missing the English organizer label`);
+    assert.match(text, /中国学生路径/, `${file} is missing the Chinese China-access label`);
+    assert.match(text, /Access from China/i, `${file} is missing the English China-access label`);
+    assert.match(text, /最后核验/, `${file} is missing the Chinese verification label`);
+    assert.match(text, /Last verified/i, `${file} is missing the English verification label`);
+    assert.ok(record.officialLinks.some((link) => hrefs.has(link.url)), `${file} has no direct HTTPS official link`);
+  }
 });
 
 test("indexes translated syllabi and mathematics past-paper sources without rehosting files", async () => {

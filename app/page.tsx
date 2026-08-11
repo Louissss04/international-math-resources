@@ -5,7 +5,7 @@ import { allProjects, destinationGuides } from "./data";
 import { projectHref } from "./lib/paths";
 import type { Track } from "./lib/types";
 
-const LAST_UPDATED = "2026-08-06";
+const LAST_UPDATED = "2026-08-11";
 
 const programTracks: Array<{ track: Track; href: string; zh: string; en: string; fieldsZh: string; fieldsEn: string }> = [
   { track: "competition", href: "/competitions", zh: "数学竞赛", en: "Competitions", fieldsZh: "赛制、日期、报名、奖项线、考纲与历年题", fieldsEn: "Format, dates, registration, thresholds, scope and past papers" },
@@ -47,6 +47,7 @@ export default function Home() {
           </div>
           <nav className="home-entry-list" aria-label="Main sections">
             <Link href="/programs"><strong><span className="lang-zh">竞赛与项目</span><span className="lang-en">Competitions & programs</span></strong></Link>
+            <Link href="/university-competitions"><strong><span className="lang-zh">大学组织竞赛</span><span className="lang-en">University-organized competitions</span></strong></Link>
             <Link href="/courses-tests"><strong><span className="lang-zh">课程与考试</span><span className="lang-en">Courses & tests</span></strong></Link>
             <Link href="/resources"><strong><span className="lang-zh">资料中心</span><span className="lang-en">Resources</span></strong></Link>
           </nav>

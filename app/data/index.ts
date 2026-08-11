@@ -3,6 +3,7 @@ import { programProjects, programSources, programThresholds } from "./programs";
 import { researchProgramLearningResources, researchProgramProjects, researchProgramSources } from "./research-programs";
 import { researchSkillsLearningResources, researchSkillsProjects, researchSkillsSources } from "./research-skills";
 import { journals, journalSources } from "./journals";
+export { universityCompetitions } from "./university-competitions";
 import { assessmentSources, assessmentThresholds, universityPolicies as policies } from "./assessments";
 import { mathAssessmentProjects } from "./assessment-projects-math";
 import { applyMathematicsThresholdScope } from "./assessment-thresholds-math";

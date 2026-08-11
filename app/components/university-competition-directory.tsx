@@ -8,6 +8,7 @@ import {
   organizerTypeLabels,
   regionLabels,
   universityCompetitions,
+  universityCompetitionCountryLabel,
   universityCompetitionStatusLabels,
 } from "../data/university-competitions";
 import type { LocalizedText } from "../lib/types";
@@ -156,8 +157,8 @@ export function UniversityCompetitionDirectory() {
                 data-search={searchText(record)}
               >
                 <td>
-                  <strong>{record.internalHref ? <Link href={record.internalHref}><Localized text={record.title} /></Link> : <Localized text={record.title} />}</strong>
-                  <small>{record.shortTitle} · {record.country}</small>
+                  <strong><Link href={`/university-competitions/${record.id}`}><Localized text={record.title} /></Link></strong>
+                  <small>{record.shortTitle} · <Localized text={universityCompetitionCountryLabel(record.country)} /></small>
                   {record.note && <small><Localized text={record.note} /></small>}
                 </td>
                 <td>
@@ -185,7 +186,7 @@ export function UniversityCompetitionDirectory() {
                       <a href={link.url} target="_blank" rel="noreferrer" key={link.url}><Localized text={link.label} /></a>
                     ))}
                   </div>
-                  {record.internalHref && <small><Link href={record.internalHref}><span className="lang-zh">查看本站详情</span><span className="lang-en">View full record</span></Link></small>}
+                  {record.internalHref && <small><Link href={record.internalHref}><span className="lang-zh">本站专项档案</span><span className="lang-en">Full specialist record</span></Link></small>}
                 </td>
               </tr>
             ))}
