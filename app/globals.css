@@ -350,6 +350,10 @@ td small { display: block; margin-top: 4px; color: var(--muted); }
 .category-gateway-card h2 { margin: auto 0 10px; }
 .category-gateway-card p { margin: 0 0 18px; color: var(--muted); max-width: 540px; }
 .category-gateway-card > span { color: var(--blue); font-size: .86rem; font-weight: 800; }
+.competition-category-section { padding-bottom: 32px; }
+.competition-category-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.competition-category-grid .category-gateway-card { min-height: 210px; }
+.competition-category-grid .category-gateway-card h3 { margin: auto 0 10px; font-size: 1.1rem; }
 .gateway-secondary { margin-top: 18px; color: var(--muted); font-size: .82rem; }
 .resource-hub-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin-bottom: 42px; }
 .resource-hub-grid a { display: flex; flex-direction: column; gap: 5px; min-height: 118px; padding: 15px; background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--blue); border-radius: var(--radius); }
@@ -699,7 +703,7 @@ td small { display: block; margin-top: 4px; color: var(--muted); }
   .section-heading > p { margin-top: 10px; }
   .page-title-row > b { display: none; }
   .track-grid, .deadline-grid, .status-legend { grid-template-columns: repeat(2, 1fr); }
-  .deadline-groups, .category-gateway-grid, .research-guide-grid { grid-template-columns: 1fr; }
+  .deadline-groups, .category-gateway-grid, .competition-category-grid, .research-guide-grid { grid-template-columns: 1fr; }
   .track-tools, .track-tools-4 { grid-template-columns: 1fr; }
   .catalog-filters, .archive-filters, .calendar-filters, .journal-filters { grid-template-columns: 1fr 1fr; }
   .filter-search { grid-column: 1 / -1; }
@@ -749,7 +753,7 @@ td small { display: block; margin-top: 4px; color: var(--muted); }
   .main-nav { left: 12px; right: 12px; }
   .home-search { display: grid; }
   .home-search a { text-align: center; }
-  .track-grid, .track-grid-four, .track-grid-two, .deadline-grid, .deadline-groups, .category-gateway-grid, .status-legend, .catalog-filters, .archive-filters, .calendar-filters, .journal-filters, .fact-grid, .resource-hub-grid { grid-template-columns: 1fr; }
+  .track-grid, .track-grid-four, .track-grid-two, .deadline-grid, .deadline-groups, .category-gateway-grid, .competition-category-grid, .status-legend, .catalog-filters, .archive-filters, .calendar-filters, .journal-filters, .fact-grid, .resource-hub-grid { grid-template-columns: 1fr; }
   .filter-search { grid-column: auto; }
   .fact-grid div, .fact-grid div:nth-child(n) { border-right: 0; }
   .record-actions { align-items: stretch; flex-direction: column; }

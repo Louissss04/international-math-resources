@@ -933,9 +933,15 @@ test("exports the university-competition directory, its official links and stati
   }
 
   const competitionDirectory = await readRoute("/competitions", data);
-  assert.ok(attributeValues(competitionDirectory, "a", "href").includes("university-competitions.html"), "competitions.html does not link to the university-competition directory");
+  assert.match(
+    competitionDirectory,
+    /<a\b(?=[^>]*data-competition-category=["']university-organized["'])(?=[^>]*href=["']university-competitions\.html["'])[^>]*>/,
+    "competitions.html has no university-organized category card linking to the university-competition directory",
+  );
   const home = await readRoute("/", data);
-  assert.ok(attributeValues(home, "a", "href").includes("university-competitions.html"), "index.html does not link directly to the university-competition directory");
+  const homeEntryList = home.match(/<nav\b[^>]*class=["'][^"']*home-entry-list[^"']*["'][^>]*>[\s\S]*?<\/nav>/)?.[0];
+  assert.ok(homeEntryList, "index.html has no primary-entry list");
+  assert.doesNotMatch(homeEntryList, /href=["']university-competitions\.html["']/, "the university-competition directory must not be a top-level home entry");
   const runtime = await readFile(path.join(outputDirectory, "assets/static-site.js"), "utf8");
   assert.match(runtime, /function initUniversityCompetitionDirectory\(\)/);
   assert.match(runtime, /data-university-competition-filter/);

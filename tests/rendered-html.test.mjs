@@ -104,9 +104,12 @@ test("renders the current international mathematics resource library home", asyn
   assert.match(html, /国际升学数学资料库/);
   assert.match(html, /面向中国中学生的数学竞赛、建模、科研、夏校、国际课程与入学考试资料/);
   assert.match(html, /Mathematics competitions, modeling, research, summer programs, international curricula and admissions tests/);
-  for (const href of ["/programs", "/courses-tests", "/university-competitions", "/destinations", "/calendar", "/resources"]) {
+  for (const href of ["/programs", "/courses-tests", "/destinations", "/calendar", "/resources"]) {
     assert.match(html, new RegExp(`href="${href}"`), href);
   }
+  const homeEntryList = html.match(/<nav\b[^>]*class="[^"]*home-entry-list[^"]*"[^>]*>[\s\S]*?<\/nav>/)?.[0];
+  assert.ok(homeEntryList, "home has no primary-entry list");
+  assert.doesNotMatch(homeEntryList, /href="\/university-competitions"/, "the university-competition directory must not be a top-level home entry");
   assert.doesNotMatch(html, staleDemoCopy);
 });
 
@@ -209,6 +212,13 @@ test("renders track directories and category-specific archives, calendars and co
 });
 
 test("renders a filterable directory of university-organized mathematics competitions with clear organizer boundaries", async () => {
+  const competitions = await renderHtml("/competitions");
+  assert.match(
+    competitions,
+    /<a\b(?=[^>]*data-competition-category="university-organized")(?=[^>]*href="\/university-competitions")[^>]*>/,
+    "the competition directory has no university-organized category card",
+  );
+
   const html = await renderHtml("/university-competitions");
   assert.match(html, /data-static-component="university-competition-directory"/);
   for (const filter of ["query", "region", "organizer", "status", "china"]) {

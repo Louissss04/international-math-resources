@@ -47,7 +47,6 @@ export default function Home() {
           </div>
           <nav className="home-entry-list" aria-label="Main sections">
             <Link href="/programs"><strong><span className="lang-zh">竞赛与项目</span><span className="lang-en">Competitions & programs</span></strong></Link>
-            <Link href="/university-competitions"><strong><span className="lang-zh">大学组织竞赛</span><span className="lang-en">University-organized competitions</span></strong></Link>
             <Link href="/courses-tests"><strong><span className="lang-zh">课程与考试</span><span className="lang-en">Courses & tests</span></strong></Link>
             <Link href="/resources"><strong><span className="lang-zh">资料中心</span><span className="lang-en">Resources</span></strong></Link>
           </nav>
