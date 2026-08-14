@@ -75,6 +75,18 @@ export const programLearningResources: LearningResourceRecord[] = [
     verifiedAt: VERIFIED_AT,
   },
   {
+    id: "immc-2026-outstanding-work",
+    projectIds: ["immc"],
+    title: t("IM²C 2026 Outstanding 论文与峰会演示", "IM²C 2026 Outstanding Papers and Summit Presentations"),
+    provider: t("国际数学建模挑战（IM²C）", "International Mathematical Modeling Challenge (IM²C)"),
+    url: "https://immchallenge.org/2026-results/",
+    kind: "results-and-exemplars",
+    description: t("官方结果页直接提供两支 Outstanding 队伍的完整论文、峰会演示和队伍证书入口。", "The official results page provides the complete papers and summit presentations from both Outstanding teams, together with the team-certificate portal."),
+    access: "free",
+    note: t("用于研究已公开的建模、论证和表达方式；文件版权归主办方及作者，当前竞赛期仍须遵守当届队外协助和 AI 披露规则。", "Use these released files to study modeling, argument, and presentation. Copyright remains with the organiser and authors, and teams in an active contest must still follow the current rules on outside assistance and AI disclosure."),
+    verifiedAt: "2026-08-14",
+  },
+  {
     id: "immc-results-problems-archive",
     projectIds: ["immc"],
     title: t("IM²C 官方结果与历年题目入口", "IM²C Official Results and Problem Archive"),

@@ -502,6 +502,19 @@ test("separates formal modeling competitions from open modeling projects", async
   ]) {
     assert.doesNotMatch(await renderHtml(path), new RegExp(`data-resource-id="${duplicateResourceId}"`), `${path} repeats its past-problem link in the learning-resource section`);
   }
+
+  const immcHtml = await renderHtml("/modeling/immc");
+  for (const pattern of [
+    /2026 最终：68 队/,
+    /2026 final: 68 teams/,
+    /Team 2026033/,
+    /Shanghai High School International Division/,
+    /9（13\.2%）/,
+    /9 \(13\.2%\)/,
+    /2026033_Paper\.pdf/,
+    /2026033_Presentation\.pdf/,
+  ]) assert.match(immcHtml, pattern, `/modeling/immc is missing ${pattern}`);
+  assert.doesNotMatch(immcHtml, /待峰会公布|Pending summit/, "/modeling/immc still presents the 2026 result as pending");
 });
 
 test("separates research programs by access and organizer type", async () => {

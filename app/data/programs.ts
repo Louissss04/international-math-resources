@@ -6,6 +6,7 @@ import {
 } from "@/app/lib/types";
 
 const VERIFIED_AT = "2026-08-04";
+const IMMC_RESULTS_VERIFIED_AT = "2026-08-14";
 
 export const programSources: SourceRecord[] = [
   {
@@ -122,13 +123,23 @@ export const programSources: SourceRecord[] = [
   },
   {
     id: "immc-results-2026",
-    label: t("IM²C 2026 初步结果", "IM²C 2026 Preliminary Results"),
+    label: t("IM²C 2026 初步结果（已由最终结果取代）", "IM²C 2026 Preliminary Results (superseded)"),
     owner: t("国际数学建模挑战", "IM²C"),
     url: "https://immchallenge.org/wp-content/uploads/2026/06/2026_IMMC_Prelim_Results.pdf",
     kind: "official-data",
-    verifiedAt: VERIFIED_AT,
+    verifiedAt: IMMC_RESULTS_VERIFIED_AT,
     appliesTo: "IM²C 2026 preliminary results",
-    note: t("列出 68 支国际代表队的初步等级；Outstanding 将从 11 支 Meritorious 队伍中在 2026 年国际峰会公布。", "Lists preliminary recognition for 68 international representative teams; Outstanding teams will be announced from the 11 Meritorious teams at the 2026 International Summit."),
+    note: t("保存峰会前的初步评审状态；2026 年 8 月发布最终结果后，不再用于判断最终奖项。", "Preserves the pre-summit judging status; it no longer determines final recognition after the final results were published in August 2026."),
+  },
+  {
+    id: "immc-results-2026-final",
+    label: t("IM²C 2026 最终结果", "IM²C 2026 Final Results"),
+    owner: t("国际数学建模挑战", "IM²C"),
+    url: "https://immchallenge.org/wp-content/uploads/2026/08/2026_IMMC_Results.pdf",
+    kind: "official-data",
+    verifiedAt: IMMC_RESULTS_VERIFIED_AT,
+    appliesTo: "IM²C 2026 final results",
+    note: t("最终文件逐队列出 68 支代表队及其奖项等级。", "The final file lists all 68 representative teams and their recognition levels."),
   },
   {
     id: "immc-results-2026-page",
@@ -136,9 +147,54 @@ export const programSources: SourceRecord[] = [
     owner: t("国际数学建模挑战", "IM²C"),
     url: "https://immchallenge.org/2026-results/",
     kind: "official-data",
-    verifiedAt: VERIFIED_AT,
+    verifiedAt: IMMC_RESULTS_VERIFIED_AT,
     appliesTo: "IM²C 2026 results and summit",
-    note: t("截至 2026 年 8 月 4 日，页面确认 68 支代表队、8 月 5–9 日波士顿峰会，并说明 Outstanding 将在峰会期间从 11 支 Meritorious 队伍中公布。", "As of August 4, 2026, the page confirms 68 representative teams, the August 5–9 Boston summit, and that Outstanding teams will be announced during the summit from the 11 Meritorious teams."),
+    note: t("页面已公布两支 Outstanding 队伍，并连接最终结果、证书、获奖论文及峰会演示；下方峰会介绍仍残留公布前的将来时表述。", "The page now names the two Outstanding teams and links the final results, certificates, winning papers, and summit presentations; its lower summit description still retains pre-announcement future-tense wording."),
+  },
+  {
+    id: "immc-2026-outstanding-2026025-paper",
+    label: t("Team 2026025 Outstanding 论文", "Team 2026025 Outstanding Paper"),
+    owner: t("国际数学建模挑战", "IM²C"),
+    url: "https://immchallenge.org/wp-content/uploads/2026/08/2026025_Paper.pdf",
+    kind: "official-archive",
+    verifiedAt: IMMC_RESULTS_VERIFIED_AT,
+    appliesTo: "IM²C 2026 Team 2026025",
+  },
+  {
+    id: "immc-2026-outstanding-2026025-presentation",
+    label: t("Team 2026025 峰会演示", "Team 2026025 Summit Presentation"),
+    owner: t("国际数学建模挑战", "IM²C"),
+    url: "https://immchallenge.org/wp-content/uploads/2026/08/2026025_Presentation.pdf",
+    kind: "official-archive",
+    verifiedAt: IMMC_RESULTS_VERIFIED_AT,
+    appliesTo: "IM²C 2026 Team 2026025",
+  },
+  {
+    id: "immc-2026-outstanding-2026033-paper",
+    label: t("Team 2026033 Outstanding 论文", "Team 2026033 Outstanding Paper"),
+    owner: t("国际数学建模挑战", "IM²C"),
+    url: "https://immchallenge.org/wp-content/uploads/2026/08/2026033_Paper.pdf",
+    kind: "official-archive",
+    verifiedAt: IMMC_RESULTS_VERIFIED_AT,
+    appliesTo: "IM²C 2026 Team 2026033",
+  },
+  {
+    id: "immc-2026-outstanding-2026033-presentation",
+    label: t("Team 2026033 峰会演示", "Team 2026033 Summit Presentation"),
+    owner: t("国际数学建模挑战", "IM²C"),
+    url: "https://immchallenge.org/wp-content/uploads/2026/08/2026033_Presentation.pdf",
+    kind: "official-archive",
+    verifiedAt: IMMC_RESULTS_VERIFIED_AT,
+    appliesTo: "IM²C 2026 Team 2026033",
+  },
+  {
+    id: "immc-certificates-2026",
+    label: t("IM²C 2026 队伍证书查询", "IM²C 2026 Team Certificate Portal"),
+    owner: t("国际数学建模挑战", "IM²C"),
+    url: "https://immchallenge.org/certificates/",
+    kind: "official-data",
+    verifiedAt: IMMC_RESULTS_VERIFIED_AT,
+    appliesTo: "IM²C 2026 team certificates",
   },
   {
     id: "immc-results-hub",
@@ -941,7 +997,7 @@ export const programProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "pending",
     cycle: "2027",
-    lastVerified: VERIFIED_AT,
+    lastVerified: IMMC_RESULTS_VERIFIED_AT,
     facts: [
       { label: t("参赛方式", "Entry process"), value: t("国际轮代表队由国家或地区选拔产生，学校不能绕过地区组织者直接报名国际轮。", "International-round teams are selected through national or regional competitions; schools cannot enter the international round directly without the regional organizer."), sourceIds: ["immc-regions", "immc-challenge"] },
       { label: t("中华区组织者", "Greater China organizer"), value: t("国际官网将中国大陆、香港、澳门和台湾列在 NeoUnion ESC Organization（儒莲教科文机构）名下，联系邮箱为 info@neounion.net。", "The international directory lists Mainland China, Hong Kong, Macao, and Taiwan under NeoUnion ESC Organization, with info@neounion.net as the contact address."), sourceIds: ["immc-regions", "immc-greater-china-edb-2026"] },
@@ -952,7 +1008,7 @@ export const programProjects: ProjectRecord[] = [
       { label: t("论文语言", "Paper language"), value: t("提交国际专家组终审的论文使用英文；地区轮如允许其他语言，翻译或转换要求由地区规则规定。", "Papers submitted to the International Expert Panel are in English. Regional rules govern translation or conversion when a local round permits another language."), sourceIds: ["immc-problem-2026"] },
       { label: t("报名费", "Fee"), value: t("国际官网未公布统一国际轮费用；由地区组织者另行规定。", "No universal international-round fee is published; regional organizers set local fees."), sourceIds: ["immc-regions"] },
       { label: t("国际轮奖项", "International recognition"), value: t("国际轮设四个奖项等级，官方不公布统一的原始分数或分数线。", "The international round has four recognition levels. No universal raw score or cutoff is published."), sourceIds: ["immc-challenge"] },
-      { label: t("2026 国际结果状态", "Status of 2026 international results"), value: t("68 支代表队的初步结果已经公布；截至 2026 年 8 月 4 日，11 支 Meritorious 队伍中的 Outstanding 尚待 8 月 5–9 日波士顿国际峰会公布。", "Preliminary results for 68 representative teams are published. As of August 4, 2026, the Outstanding selections from the 11 Meritorious teams remain pending the August 5–9 International Summit in Boston."), status: "pending", sourceIds: ["immc-results-2026", "immc-results-2026-page"] },
+      { label: t("2026 国际轮最终结果", "2026 international-round final results"), value: t("最终结果已经发布。68 支代表队中，Outstanding 2 队、Meritorious 9 队、Honorable Mention 36 队、Successful Participant 21 队。初步结果只保留为峰会前的历史记录。", "Final results have been published. Of 68 representative teams, 2 received Outstanding, 9 Meritorious, 36 Honorable Mention, and 21 Successful Participant recognition. The preliminary file is retained only as a historical pre-summit record."), status: "historical", sourceIds: ["immc-results-2026-final", "immc-results-2026-page"] },
       { label: t("2026/27 中华区报名状态", "Greater China 2026/27 entry status"), value: t("截至 2026 年 8 月 4 日，国际官网、中华区承办方页面和香港教育局现有通知均未公布 2026/27 中华区报名日期、费用或各轮赛期；继续保留 2025/26 历史安排，不向新周期外推。", "As of August 4, 2026, the international site, Greater China organizer page, and currently available Hong Kong Education Bureau notice have not published 2026/27 Greater China registration dates, fees, or round schedule. The 2025/26 arrangements remain historical and are not carried forward."), status: "pending", sourceIds: ["immc-regions", "immc-regional-rules", "immc-greater-china-edb-2026", "immc-greater-china-results-2025"] },
     ],
     dates: [
@@ -967,12 +1023,13 @@ export const programProjects: ProjectRecord[] = [
       },
       {
         id: "immc-2026-summit",
-        label: t("2026 国际峰会及 Outstanding 结果公布", "2026 International Summit and announcement of Outstanding results"),
+        label: t("2026 国际峰会（已结束）", "2026 International Summit (completed)"),
         date: "2026-08-05",
         endDate: "2026-08-09",
         region: t("美国波士顿", "Boston, United States"),
-        status: "confirmed",
+        status: "historical",
         sourceIds: ["immc-results-2026-page"],
+        note: t("最终奖项和主办方公开的作品现作为 2026 届历史材料保存。", "Final recognition and organiser-released work are retained as historical material for the 2026 cycle."),
       },
     ],
     sections: [
@@ -1038,22 +1095,49 @@ export const programProjects: ProjectRecord[] = [
         ],
       },
       {
+        id: "final-results-2026",
+        title: t("2026 最终结果与官方作品", "2026 Final Results and Official Work"),
+        intro: t("主办方已发布最终结果、两支 Outstanding 队伍的论文与峰会演示，以及队伍证书查询入口。下表只列主办方直接公开的文件。", "The organiser has released the final results, papers and summit presentations from both Outstanding teams, and the team-certificate portal. The tables below include only files published directly by the organiser."),
+        tables: [
+          {
+            columns: [t("奖项", "Recognition"), t("队伍", "Team"), t("学校／地区", "School / region")],
+            rows: [
+              { cells: [t("Outstanding", "Outstanding"), t("Team 2026033", "Team 2026033"), t("Shanghai High School International Division（上海中学国际部）／中国大陆", "Shanghai High School International Division / Mainland China")], sourceIds: ["immc-results-2026-final", "immc-results-2026-page"] },
+              { cells: [t("Meritorious", "Meritorious"), t("Team 2026051", "Team 2026051"), t("Guangzhou No.7 Middle School／中国大陆", "Guangzhou No.7 Middle School / Mainland China")], sourceIds: ["immc-results-2026-final", "immc-results-2026-page"] },
+            ],
+            note: t("此表只摘录最终结果中代表中国大陆的队伍；完整 68 队名单见最终结果 PDF。", "This table extracts the teams representing Mainland China from the final results; the final-results PDF contains the complete 68-team roster."),
+          },
+          {
+            columns: [t("队伍", "Team"), t("学校／地区", "School / region"), t("官方材料", "Official material"), t("公开状态", "Availability")],
+            rows: [
+              { cells: [t("Team 2026025", "Team 2026025"), t("Collingwood School／加拿大", "Collingwood School / Canada"), t("Outstanding 论文 PDF", "Outstanding paper PDF"), t("主办方公开", "Released by organiser")], sourceIds: ["immc-2026-outstanding-2026025-paper"] },
+              { cells: [t("Team 2026025", "Team 2026025"), t("Collingwood School／加拿大", "Collingwood School / Canada"), t("峰会演示 PDF", "Summit presentation PDF"), t("主办方公开", "Released by organiser")], sourceIds: ["immc-2026-outstanding-2026025-presentation"] },
+              { cells: [t("Team 2026033", "Team 2026033"), t("Shanghai High School International Division／中国大陆", "Shanghai High School International Division / Mainland China"), t("Outstanding 论文 PDF", "Outstanding paper PDF"), t("主办方公开", "Released by organiser")], sourceIds: ["immc-2026-outstanding-2026033-paper"] },
+              { cells: [t("Team 2026033", "Team 2026033"), t("Shanghai High School International Division／中国大陆", "Shanghai High School International Division / Mainland China"), t("峰会演示 PDF", "Summit presentation PDF"), t("主办方公开", "Released by organiser")], sourceIds: ["immc-2026-outstanding-2026033-presentation"] },
+              { cells: [t("2026 全部队伍", "All 2026 teams"), t("国际轮", "International round"), t("队伍证书查询与下载", "Team certificate lookup and download"), t("主办方入口", "Official portal")], sourceIds: ["immc-certificates-2026"] },
+            ],
+            note: t("未由主办方公开的材料不使用第三方镜像补齐。", "Items not released by the organiser are not filled with third-party mirrors."),
+          },
+        ],
+      },
+      {
         id: "awards-history",
         title: t("国际轮奖项与历年结果", "International Recognition and Historical Results"),
-        intro: t("国际轮的四个正式奖项等级为 Outstanding、Meritorious、Honorable Mention 和 Successful Participant。", "The four formal international recognition levels are Outstanding, Meritorious, Honorable Mention, and Successful Participant."),
+        intro: t("国际轮设 Outstanding、Meritorious、Honorable Mention 和 Successful Participant 四个正式等级。下表按各届最终结果文件统计；历年分布不是下一届的固定名额或分数线。", "The international round uses four formal recognition levels: Outstanding, Meritorious, Honorable Mention, and Successful Participant. The table is compiled from each cycle's final-results file; historical distributions are not fixed quotas or score cutoffs for later cycles."),
         tables: [{
-          columns: [t("结果", "Result"), t("2026 初步：68 队", "2026 preliminary: 68 teams"), t("2025 最终：69 队", "2025 final: 69 teams"), t("2024 最终：68 队", "2024 final: 68 teams")],
+          columns: [t("结果", "Result"), t("2026 最终：68 队", "2026 final: 68 teams"), t("2025 最终：69 队", "2025 final: 69 teams"), t("2024 最终：68 队", "2024 final: 68 teams")],
           rows: [
-            { cells: [t("Outstanding", "Outstanding"), t("待峰会公布", "Pending summit"), t("2（2.9%）", "2 (2.9%)"), t("2（2.9%）", "2 (2.9%)")], sourceIds: ["immc-results-2026", "immc-results-2025", "immc-results-2024"] },
-            { cells: [t("Meritorious", "Meritorious"), t("11（16.2%，其中产生 Outstanding）", "11 (16.2%; Outstanding selected from this group)"), t("8（11.6%）", "8 (11.6%)"), t("6（8.8%）", "6 (8.8%)")], sourceIds: ["immc-results-2026", "immc-results-2025", "immc-results-2024"] },
-            { cells: [t("Honorable Mention", "Honorable Mention"), t("36（52.9%）", "36 (52.9%)"), t("42（60.9%）", "42 (60.9%)"), t("37（54.4%）", "37 (54.4%)")], sourceIds: ["immc-results-2026", "immc-results-2025", "immc-results-2024"] },
-            { cells: [t("Successful Participant", "Successful Participant"), t("21（30.9%）", "21 (30.9%)"), t("16（23.2%）", "16 (23.2%)"), t("23（33.8%）", "23 (33.8%)")], sourceIds: ["immc-results-2026", "immc-results-2025", "immc-results-2024"] },
+            { cells: [t("Outstanding", "Outstanding"), t("2（2.9%）", "2 (2.9%)"), t("2（2.9%）", "2 (2.9%)"), t("2（2.9%）", "2 (2.9%)")], sourceIds: ["immc-results-2026-final", "immc-results-2025", "immc-results-2024"] },
+            { cells: [t("Meritorious", "Meritorious"), t("9（13.2%）", "9 (13.2%)"), t("8（11.6%）", "8 (11.6%)"), t("6（8.8%）", "6 (8.8%)")], sourceIds: ["immc-results-2026-final", "immc-results-2025", "immc-results-2024"] },
+            { cells: [t("Honorable Mention", "Honorable Mention"), t("36（52.9%）", "36 (52.9%)"), t("42（60.9%）", "42 (60.9%)"), t("37（54.4%）", "37 (54.4%)")], sourceIds: ["immc-results-2026-final", "immc-results-2025", "immc-results-2024"] },
+            { cells: [t("Successful Participant", "Successful Participant"), t("21（30.9%）", "21 (30.9%)"), t("16（23.2%）", "16 (23.2%)"), t("23（33.8%）", "23 (33.8%)")], sourceIds: ["immc-results-2026-final", "immc-results-2025", "immc-results-2024"] },
+            { cells: [t("其他结果状态（非奖项）", "Other result status (not an award)"), t("0", "0"), t("1 Unsuccessful（1.4%）", "1 Unsuccessful (1.4%)"), t("0", "0")], status: "historical", sourceIds: ["immc-results-2026-final", "immc-results-2025", "immc-results-2024"] },
           ],
-          note: t("截至 2026 年 8 月 4 日，2026 年 Outstanding 尚待 8 月 5–9 日国际峰会公布，因此仍为初步结果。历年比例不代表下一届固定名额。", "As of August 4, 2026, the 2026 Outstanding selections remain pending the August 5–9 International Summit, so the figures are still preliminary. Historical proportions do not establish fixed quotas for later rounds."),
+          note: t("2026 的队数按最终结果 68 队名单统计；百分比按当届总队数计算并四舍五入到一位小数。2025 的 69 队中另有 1 队为 Unsuccessful，该状态不是奖项。", "The 2026 counts are compiled from the 68-team final roster; percentages are calculated from each cycle's team total and rounded to one decimal place. One of the 69 teams in 2025 was marked Unsuccessful, which is a result status rather than recognition."),
         }],
       },
     ],
-    sourceIds: ["immc-challenge", "immc-regions", "immc-regional-rules", "immc-greater-china-edb-2026", "immc-greater-china-results-2025", "immc-problem-2026", "immc-flyer-2027", "immc-results-2026", "immc-results-2026-page", "immc-results-hub", "immc-results-2025", "immc-results-2024", "immc-history"],
+    sourceIds: ["immc-challenge", "immc-regions", "immc-regional-rules", "immc-greater-china-edb-2026", "immc-greater-china-results-2025", "immc-problem-2026", "immc-flyer-2027", "immc-results-2026-final", "immc-results-2026-page", "immc-2026-outstanding-2026025-paper", "immc-2026-outstanding-2026025-presentation", "immc-2026-outstanding-2026033-paper", "immc-2026-outstanding-2026033-presentation", "immc-certificates-2026", "immc-results-2026", "immc-results-hub", "immc-results-2025", "immc-results-2024", "immc-history"],
     relatedIds: ["himcm", "midmcm", "mcm-icm", "mmcss-hsmmc"],
     searchTerms: ["IMMC", "IM2C", "IM²C", "国际数学建模挑战", "five days", "地区选拔", "modeling challenge"],
   },

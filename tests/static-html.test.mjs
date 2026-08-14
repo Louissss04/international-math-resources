@@ -602,6 +602,26 @@ test("keeps the static modeling catalog scoped to formal competitions", async ()
   assert.match(runtime, /root\.dataset\.projectIds/, "static catalog runtime ignores its declared project scope");
 });
 
+test("exports the IMMC 2026 final results and official Outstanding work", async () => {
+  const data = await loadStaticData();
+  const html = await readRoute("/modeling/immc", data);
+  const text = visibleText(html);
+  for (const value of [
+    "2026 最终：68 队",
+    "2026 final: 68 teams",
+    "Team 2026033",
+    "Shanghai High School International Division",
+    "9（13.2%）",
+    "9 (13.2%)",
+  ]) assert.ok(text.includes(value), `modeling-immc.html is missing ${value}`);
+  for (const href of [
+    "https://immchallenge.org/wp-content/uploads/2026/08/2026_IMMC_Results.pdf",
+    "https://immchallenge.org/wp-content/uploads/2026/08/2026033_Paper.pdf",
+    "https://immchallenge.org/wp-content/uploads/2026/08/2026033_Presentation.pdf",
+  ]) assert.ok(attributeValues(html, "a", "href").includes(href), `modeling-immc.html is missing ${href}`);
+  assert.doesNotMatch(text, /待峰会公布|Pending summit/, "modeling-immc.html still presents the 2026 result as pending");
+});
+
 test("calendar exports begin in 2026 and archive elapsed milestones by end date", async () => {
   const data = await loadStaticData();
   const calendarStart = "2026-01-01";
