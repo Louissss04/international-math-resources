@@ -242,7 +242,7 @@ export const researchProgramSources: SourceRecord[] = [
     owner: t("清华大学丘成桐数学科学中心", "Yau Mathematical Sciences Center, Tsinghua University"),
     url: "https://www.yau-awards.com/page-schedule.html",
     kind: "official",
-    verifiedAt: "2026-08-06",
+    verifiedAt: "2026-08-15",
     appliesTo: "2026 Mainland China region",
   },
   {
@@ -924,7 +924,7 @@ export const researchProgramProjects: ProjectRecord[] = [
     costBand: "free",
     status: "confirmed",
     cycle: "2026",
-    lastVerified: "2026-08-06",
+    lastVerified: "2026-08-15",
     facts: [
       { label: t("主办性质", "Organizer type"), value: t("由清华大学主办、丘成桐数学科学中心承办的中学生科研竞赛；不是提供导师匹配的研究课程。", "A high-school research competition sponsored by Tsinghua University and organized by the Yau Mathematical Sciences Center; it is not a mentor-matching course."), sourceIds: ["research-yau-home", "research-yau-rules"] },
       { label: t("研究性质", "Research character"), value: t("参赛者提交已完成的研究成果，评审关注研究问题、数学方法与创新；学生可接受合规指导，但须独立完成项目并完整披露贡献和外部协助。", "Entrants submit completed research. Judging considers the question, mathematical methods, and innovation. Guidance is allowed, but students must complete the work independently and disclose contributions and external assistance."), sourceIds: ["research-yau-rules", "research-yau-criteria"] },
@@ -934,7 +934,6 @@ export const researchProgramProjects: ProjectRecord[] = [
     ],
     dates: [
       { id: "yau-math-2026-registration", label: t("2026 报名与报告提交", "2026 Registration and Report Submission"), date: "2026-07-01", endDate: "2026-09-15", status: "confirmed", region: t("中国内地赛区", "Mainland China region"), sourceIds: ["research-yau-rules", "research-yau-schedule-2026", "research-yau-faq"] },
-      { id: "yau-math-2026-material-review", label: t("2026 参赛材料审核", "2026 Submission Materials Review"), date: "2026-09-16", endDate: "2026-09-30", status: "confirmed", region: t("中国内地赛区", "Mainland China region"), sourceIds: ["research-yau-schedule-2026"] },
       { id: "yau-math-2026-regional", label: t("2026 分赛区评审与答辩", "2026 Regional Review and Defense"), date: "2026-10-01", endDate: "2026-11-02", status: "confirmed", region: t("中国内地赛区", "Mainland China region"), sourceIds: ["research-yau-rules", "research-yau-schedule-2026"] },
       { id: "yau-math-2026-public-review", label: t("2026 总决赛入围论文公示", "2026 Public Review of Global-Finalist Reports"), date: "2026-11-03", endDate: "2026-11-10", status: "confirmed", region: t("线上公示", "Online public review"), sourceIds: ["research-yau-schedule-2026", "research-yau-ai-rules-2026"] },
       { id: "yau-math-2026-final", label: t("2026 全球总决赛与颁奖", "2026 Global Final and Awards"), date: "2026-12-05", endDate: "2026-12-06", status: "confirmed", region: t("清华大学", "Tsinghua University"), sourceIds: ["research-yau-rules", "research-yau-schedule-2026"] },

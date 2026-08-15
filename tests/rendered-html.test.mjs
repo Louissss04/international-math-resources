@@ -537,6 +537,13 @@ test("separates research programs by access and organizer type", async () => {
   }
 });
 
+test("uses the published 2026 Yau schedule without an unsupported review stage", async () => {
+  const html = await renderHtml("/research/yau-high-school-mathematics-award");
+  assert.match(html, /2026 报名与报告提交/);
+  assert.match(html, /2026 分赛区评审与答辩/);
+  assert.doesNotMatch(html, /参赛材料审核|Submission Materials Review|2026-09-16|2026-09-30/);
+});
+
 test("renders a separate mathematics journal directory with detailed submission records", async () => {
   const researchHtml = await renderHtml("/research");
   assert.match(researchHtml, /href="\/journals"/);
