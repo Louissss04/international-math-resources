@@ -500,6 +500,10 @@ test("exports a separate journal directory and one complete page per publication
     assert.match(html, /href=["']research-integrity\.html["']/, `${file} does not link to the integrity guide`);
   }
 
+  const mathematicalReflectionsHtml = await readRoute("/journals/mathematical-reflections", data);
+  assert.match(mathematicalReflectionsHtml, /2026 年第 3 期题解/);
+  assert.match(mathematicalReflectionsHtml, /mr_3_2026_solutions\.pdf/);
+
   const projectIds = new Set(data.projects.map((project) => project.id));
   for (const journal of data.journals) assert.ok(!projectIds.has(journal.id), `${journal.id} leaked into projects`);
   const runtime = await readFile(path.join(outputDirectory, "assets/static-site.js"), "utf8");

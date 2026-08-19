@@ -569,7 +569,7 @@ test("renders a separate mathematics journal directory with detailed submission 
     ["/journals/national-high-school-journal-of-science", [/Mathematics (?:&|&amp;) Statistics/, /280 美元/, /1—2 名专家评审/, /最多 20 页/]],
     ["/journals/columbia-junior-science-journal", [/2026-09-30/, /纯数学适配/, /官网未把它描述为双盲专业同行评审/]],
     ["/journals/rose-hulman-undergraduate-mathematics-journal", [/高中生/, /Sponsor/, /教师不得共同署名/, /转让全部版权/]],
-    ["/journals/mathematical-reflections", [/编辑遴选型出版物/, /LaTeX 源码/, /题解署名/, /不等于同行评审论文/]],
+    ["/journals/mathematical-reflections", [/编辑遴选型出版物/, /LaTeX 源码/, /题解署名/, /不等于同行评审论文/, /2026 年第 3 期题解/, /mr_3_2026_solutions\.pdf/]],
     ["/journals/journal-of-integer-sequences", [/OEIS A-number/, /完全免费/, /中国邮箱/, /正文不得由 LLM 撰写/]],
   ]) {
     const html = await renderHtml(path);
