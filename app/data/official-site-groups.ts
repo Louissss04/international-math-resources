@@ -51,7 +51,7 @@ export const singaporeOfficialSiteGroup = {
     "sg-nus-international-a-level-2026",
     "sg-nus-standardised-tests-2026",
     "sg-nus-mathematics-major",
-    "sg-ntu-admission-guide-2026",
+    "sg-ntu-admission-guide-current",
     "sg-ntu-international-qualifications-2026",
     "sg-ntu-gaokao-2027",
     "sg-ntu-mathematical-sciences",

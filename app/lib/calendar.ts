@@ -1,13 +1,15 @@
 import type { DateRecord, ProjectRecord } from "./types";
 
 export const CALENDAR_START_DATE = "2026-01-01";
+const ISO_CALENDAR_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 export function calendarDateInRange(record: DateRecord): boolean {
-  return record.date >= CALENDAR_START_DATE;
+  return ISO_CALENDAR_DATE.test(record.date) && record.date >= CALENDAR_START_DATE;
 }
 
 export function calendarDateIsHistorical(record: DateRecord, today: string): boolean {
-  return (record.endDate ?? record.date) < today;
+  const effectiveDate = record.endDate ?? record.date;
+  return ISO_CALENDAR_DATE.test(effectiveDate) && effectiveDate < today;
 }
 
 export function calendarDateCount(projects: ProjectRecord[]): number {

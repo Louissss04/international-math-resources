@@ -324,14 +324,11 @@ test("renders calendars from 2026 with past milestones archived consistently", a
     for (const entry of entries) {
       assert.ok(entry.eventId && entry.projectId && entry.track && entry.status && entry.date && entry.endDate, `${path} has an incomplete calendar entry`);
       if (fixedTrack) assert.equal(entry.track, fixedTrack, `${path} contains ${entry.track}`);
-      if (isoDate.test(entry.date)) {
-        assert.ok(entry.date >= calendarStart, `${path} shows a pre-2026 date: ${entry.date}`);
-        assert.match(entry.endDate, isoDate, `${path} has an invalid end date for ${entry.eventId}`);
-        const expectedPeriod = entry.endDate < today ? "history" : "current";
-        assert.equal(entry.period, expectedPeriod, `${path} files ${entry.projectId}:${entry.eventId} under the wrong period`);
-      } else {
-        assert.equal(entry.period, "current", `${path} archives undated milestone ${entry.projectId}:${entry.eventId}`);
-      }
+      assert.match(entry.date, isoDate, `${path} exposes an undated milestone as a calendar event: ${entry.projectId}:${entry.eventId}`);
+      assert.ok(entry.date >= calendarStart, `${path} shows a pre-2026 date: ${entry.date}`);
+      assert.match(entry.endDate, isoDate, `${path} has an invalid end date for ${entry.eventId}`);
+      const expectedPeriod = entry.endDate < today ? "history" : "current";
+      assert.equal(entry.period, expectedPeriod, `${path} files ${entry.projectId}:${entry.eventId} under the wrong period`);
       if (entry.period === "history" && entry.status === "confirmed") confirmedHistoryCount += 1;
     }
     entriesByRoute.set(path, entries);
@@ -343,7 +340,7 @@ test("renders calendars from 2026 with past milestones archived consistently", a
     const actual = entriesByRoute.get(path).map((entry) => `${entry.projectId}:${entry.eventId}:${entry.period}`).sort();
     assert.deepEqual(actual, expected, `${path} differs from the ${track} subset of /calendar`);
   }
-  assert.ok(confirmedHistoryCount > 0, "past confirmed milestones are not archived under History");
+  assert.equal(confirmedHistoryCount, 0, "elapsed milestones still use the current-cycle confirmed status");
 });
 
 test("keeps subject curricula separate from admissions assessments", async () => {
@@ -565,7 +562,7 @@ test("renders a separate mathematics journal directory with detailed submission 
   assert.equal(childRoutes(directoryHtml, "/journals").length, 16);
 
   for (const [path, patterns] of [
-    ["/journals/journal-of-high-school-science", [/主要 Topic/, /85 美元投稿费/, /两名独立评审/, /许可证简称与所链接法律文本存在不一致/]],
+    ["/journals/journal-of-high-school-science", [/主要 Topic/, /95 美元投稿费/, /两名独立评审/, /许可证简称与所链接法律文本存在不一致/]],
     ["/journals/national-high-school-journal-of-science", [/Mathematics (?:&|&amp;) Statistics/, /280 美元/, /1—2 名专家评审/, /最多 20 页/]],
     ["/journals/columbia-junior-science-journal", [/2026-09-30/, /纯数学适配/, /官网未把它描述为双盲专业同行评审/]],
     ["/journals/rose-hulman-undergraduate-mathematics-journal", [/高中生/, /Sponsor/, /教师不得共同署名/, /转让全部版权/]],

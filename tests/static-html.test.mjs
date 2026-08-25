@@ -661,7 +661,7 @@ test("calendar exports begin in 2026 and archive elapsed milestones by end date"
     const expected = data.projects
       .filter((project) => !fixedTrack || project.track === fixedTrack)
       .flatMap((project) => project.dates
-        .filter((record) => record.date >= calendarStart)
+        .filter((record) => isoDate.test(record.date) && record.date >= calendarStart)
         .map((record) => ({ project, record })));
     const expectedKeys = expected.map(({ project, record }) => `${project.id}:${record.id}`).sort();
     assert.deepEqual(actualKeys, expectedKeys, `${route} does not contain exactly the calendar records from 2026 onward`);
@@ -669,13 +669,10 @@ test("calendar exports begin in 2026 and archive elapsed milestones by end date"
     for (const entry of entries) {
       assert.ok(entry.eventId && entry.projectId && entry.track && entry.status && entry.date && entry.endDate, `${route} has an incomplete calendar entry`);
       if (fixedTrack) assert.equal(entry.track, fixedTrack, `${route} contains ${entry.track}`);
-      if (isoDate.test(entry.date)) {
-        assert.ok(entry.date >= calendarStart, `${route} shows a pre-2026 date: ${entry.date}`);
-        assert.match(entry.endDate, isoDate, `${route} has an invalid end date for ${entry.eventId}`);
-        assert.equal(entry.period, entry.endDate < today ? "history" : "current", `${route} files ${entry.projectId}:${entry.eventId} under the wrong period`);
-      } else {
-        assert.equal(entry.period, "current", `${route} archives undated milestone ${entry.projectId}:${entry.eventId}`);
-      }
+      assert.match(entry.date, isoDate, `${route} exposes an undated milestone as a calendar event: ${entry.projectId}:${entry.eventId}`);
+      assert.ok(entry.date >= calendarStart, `${route} shows a pre-2026 date: ${entry.date}`);
+      assert.match(entry.endDate, isoDate, `${route} has an invalid end date for ${entry.eventId}`);
+      assert.equal(entry.period, entry.endDate < today ? "history" : "current", `${route} files ${entry.projectId}:${entry.eventId} under the wrong period`);
       if (entry.period === "history" && entry.status === "confirmed") confirmedHistoryCount += 1;
     }
     entriesByRoute.set(route, entries);
@@ -687,7 +684,7 @@ test("calendar exports begin in 2026 and archive elapsed milestones by end date"
     const actual = entriesByRoute.get(route).map((entry) => `${entry.projectId}:${entry.eventId}:${entry.period}`).sort();
     assert.deepEqual(actual, expected, `${route} differs from the ${track} subset of /calendar`);
   }
-  assert.ok(confirmedHistoryCount > 0, "past confirmed milestones are not archived under History");
+  assert.equal(confirmedHistoryCount, 0, "elapsed milestones still use the current-cycle confirmed status");
 });
 
 test("destination directory covers the requested study systems and links every guide", async () => {

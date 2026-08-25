@@ -109,7 +109,7 @@ const apSpecs: ApSpec[] = [
       ["自由作答 A", "Free response Part A", "2", "35 分钟；要求图形计算器", "35 minutes; graphing calculator required"],
       ["自由作答 B", "Free response Part B", "2", "35 分钟；不得使用计算器", "35 minutes; no calculator"],
     ],
-    sourceIds: ["ap-precalculus-course", "ap-precalculus-exam", "ap-precalculus-ced-2026", "ap-precalculus-frq", "ap-precalculus-score-distributions", "ap-2027-exam-dates", "ap-registration", "ap-china", "ap-china-registration-2026"],
+    sourceIds: ["ap-precalculus-course", "ap-precalculus-exam", "ap-precalculus-ced-2026", "ap-precalculus-frq", "ap-precalculus-score-distributions", "ap-2027-exam-dates", "ap-registration", "ap-china", "ap-china-registration-2027", "ap-china-timeline-2027"],
     cedSourceId: "ap-precalculus-ced-2026",
     cedUrl: "https://apcentral.collegeboard.org/media/pdf/ap-precalculus-course-and-exam-description.pdf",
     examSourceId: "ap-precalculus-exam",
@@ -136,7 +136,7 @@ const apSpecs: ApSpec[] = [
       ["极限与连续性", "Limits and Continuity", "10–15%"], ["微分：定义与基本法则", "Differentiation: Definition and Basic Rules", "10–15%"], ["复合、隐函数与反函数微分", "Composite, Implicit and Inverse Differentiation", "5–10%"], ["微分的情境应用", "Contextual Applications of Differentiation", "10–15%"], ["用导数分析函数", "Analytical Applications of Differentiation", "15–20%"], ["积分与变化累积", "Integration and Accumulation of Change", "15–20%"], ["微分方程", "Differential Equations", "5–10%"], ["积分的应用", "Applications of Integration", "10–15%"],
     ],
     examRows: calculusExamRows,
-    sourceIds: ["ap-calculus-ced-2026", "ap-clarifications-2027", "ap-ab-exam", "ap-ab-past-questions", "ap-ab-score-distributions", "ap-calculus-sample-2027", "ap-2027-exam-dates", "ap-registration", "ap-china", "ap-china-registration-2026"],
+    sourceIds: ["ap-calculus-ced-2026", "ap-clarifications-2027", "ap-ab-exam", "ap-ab-past-questions", "ap-ab-score-distributions", "ap-calculus-sample-2027", "ap-2027-exam-dates", "ap-registration", "ap-china", "ap-china-registration-2027", "ap-china-timeline-2027"],
     cedSourceId: "ap-calculus-ced-2026",
     cedUrl: "https://apcentral.collegeboard.org/media/pdf/ap-calculus-ab-and-bc-course-and-exam-description.pdf",
     examSourceId: "ap-ab-exam",
@@ -163,7 +163,7 @@ const apSpecs: ApSpec[] = [
       ["极限与连续性", "Limits and Continuity", "5–10%"], ["微分：定义与基本法则", "Differentiation: Definition and Basic Rules", "5–10%"], ["复合、隐函数与反函数微分", "Composite, Implicit and Inverse Differentiation", "5–10%"], ["微分的情境应用", "Contextual Applications of Differentiation", "5–10%"], ["用导数分析函数", "Analytical Applications of Differentiation", "10–15%"], ["积分与变化累积", "Integration and Accumulation of Change", "15–20%"], ["微分方程", "Differential Equations", "5–10%"], ["积分的应用", "Applications of Integration", "5–10%"], ["参数方程、极坐标与向量值函数", "Parametric Equations, Polar Coordinates and Vector-Valued Functions", "10–15%"], ["无穷数列与级数", "Infinite Sequences and Series", "15–20%"],
     ],
     examRows: calculusExamRows,
-    sourceIds: ["ap-calculus-ced-2026", "ap-clarifications-2027", "ap-bc-exam", "ap-bc-past-questions", "ap-bc-score-distributions", "ap-calculus-sample-2027", "ap-bc-subscore", "ap-2027-exam-dates", "ap-registration", "ap-china", "ap-china-registration-2026"],
+    sourceIds: ["ap-calculus-ced-2026", "ap-clarifications-2027", "ap-bc-exam", "ap-bc-past-questions", "ap-bc-score-distributions", "ap-calculus-sample-2027", "ap-bc-subscore", "ap-2027-exam-dates", "ap-registration", "ap-china", "ap-china-registration-2027", "ap-china-timeline-2027"],
     cedSourceId: "ap-calculus-ced-2026",
     cedUrl: "https://apcentral.collegeboard.org/media/pdf/ap-calculus-ab-and-bc-course-and-exam-description.pdf",
     examSourceId: "ap-bc-exam",
@@ -192,7 +192,7 @@ const apSpecs: ApSpec[] = [
     examRows: [
       ["选择题", "Multiple choice", "42", "90 分钟；占 50%", "90 minutes; 50%"], ["自由作答", "Free response", "4", "90 分钟；每题 10 分、各占 12.5%", "90 minutes; four 10-point questions worth 12.5% each"],
     ],
-    sourceIds: ["ap-statistics-course-2026", "ap-statistics-exam-2027", "ap-statistics-ced-2026", "ap-statistics-frq", "ap-statistics-score-distributions", "ap-2027-exam-dates", "ap-registration", "ap-china", "ap-china-registration-2026"],
+    sourceIds: ["ap-statistics-course-2026", "ap-statistics-exam-2027", "ap-statistics-ced-2026", "ap-statistics-frq", "ap-statistics-score-distributions", "ap-2027-exam-dates", "ap-registration", "ap-china", "ap-china-registration-2027", "ap-china-timeline-2027"],
     cedSourceId: "ap-statistics-ced-2026",
     cedUrl: "https://apcentral.collegeboard.org/media/pdf/ap-statistics-course-and-exam-description-effective-fall-2026.pdf",
     examSourceId: "ap-statistics-exam-2027",
@@ -204,14 +204,31 @@ const apSpecs: ApSpec[] = [
   },
 ];
 
+function apChinaRegistrationDates(projectId: string): DateRecord[] {
+  const sourceIds = ["ap-china-timeline-2027"];
+  const region = t("中国大陆 Prometric 路径", "Prometric route in mainland China");
+  return [
+    { id: `${projectId}-china-coordinator-open`, label: t("AP 管理员系统开放", "AP coordinator system opens"), date: "2026-09-15", region, status: "confirmed", sourceIds, note: t("中午 12:00 开放，管理员开始提交学生和科目花名册。", "Opens at 12:00 noon for coordinators to submit student and subject rosters.") },
+    { id: `${projectId}-china-student-open`, label: t("AP 学生开始报名", "AP student registration opens"), date: "2026-09-16", region, status: "confirmed", sourceIds },
+    { id: `${projectId}-china-roster-deadline`, label: t("AP 学校花名册截止", "AP school roster deadline"), date: "2026-10-16", region, status: "confirmed", sourceIds, note: t("中午 12:00 截止。", "Deadline is 12:00 noon.") },
+    { id: `${projectId}-china-payment-deadline`, label: t("AP 报名缴费截止", "AP registration and payment deadline"), date: "2026-11-09", region, status: "confirmed", sourceIds, note: t("中午 12:00 截止。", "Deadline is 12:00 noon.") },
+    { id: `${projectId}-china-myap-check`, label: t("核对 My AP 科目与资料", "Verify My AP subjects and details"), date: "2026-12-01", region, status: "confirmed", sourceIds },
+    { id: `${projectId}-china-correction-deadline`, label: t("资料及科目更正截止", "Details and subject correction deadline"), date: "2027-03-12", region, status: "confirmed", sourceIds },
+    { id: `${projectId}-china-admission-letter`, label: t("准考信开放下载", "Admission letter available"), date: "2027-04-03", region, status: "confirmed", sourceIds },
+  ];
+}
+
 function chinaRegistrationSection(): ContentSection {
   return {
     id: "ap-china-registration",
     title: t("中国学生报名", "Registration for students in China"),
     bullets: [
       t("AP 授权学校学生通过本校 AP coordinator 和 My AP class／exam-only section 报名；学校决定开考科目及是否接收外校考生。", "Students at AP-authorized schools register through their AP coordinator and a My AP class or exam-only section; each school decides which subjects it offers and whether it accepts external candidates."),
-      t("中国大陆指定考务路线、公开考点、资格、证件、费用和内部截止日按当届 College Board International／Prometric 中国通知执行。", "Mainland-China administration routes, public centres, eligibility, ID, fees and internal deadlines follow the current College Board International and Prometric China notices."),
-      t("2027 科目日期已经公布；截至本页更新日，Prometric 中国 2027 的报名细则和费用尚未公布，不沿用 2026 金额。", "The 2027 subject dates are published, but the Prometric China registration rules and fees for 2027 were not yet published at this update; 2026 fees are not carried forward."),
+      t("中国大陆指定考务路线、公开考点、资格和证件要求按 Prometric 中国 2027 通知执行；AP 授权学校学生由本校 AP coordinator 先提交名单。", "Mainland-China administration routes, public centres, eligibility and ID requirements follow the 2027 Prometric China notice; students at AP-authorized schools must first be placed on the roster by their AP coordinator."),
+      t("学生自 2026 年 9 月 16 日起办理，全部科目确认与缴费在 11 月 9 日中午 12:00 截止；每科 1475 元，其中 88 元手续费及税费不退。", "Student registration begins on 16 September 2026, with all subject confirmation and payment due by 12:00 noon on 9 November. The fee is CNY 1,475 per exam, including a non-refundable CNY 88 processing fee and tax."),
+      t("社会考生须符合 Prometric 列明的高中在读、自主学习／网校或因大学录取需要指定 AP 成绩等条件；已由本校提供 AP 报名的学生必须通过本校报考。", "Unaffiliated candidates must meet Prometric's listed conditions, such as current high-school, home/independent/online study, or needing a specified AP score for university admission. Students whose AP school offers registration must register through that school."),
+      t("同一科目不得在不同学校或考点重复报名。缴费完成后不得取消或退款，缺考没有补考或退款；只有主办方无法正常组织考试等规定情形可扣除手续费后退款。", "The same subject must not be registered at multiple schools or centres. After payment, cancellation and refunds are unavailable, and there is no make-up or refund for absence; only specified organizer-side disruptions may qualify for a refund less the processing charge."),
+      t("Prometric 中国考点不支持 Chromebook；iPad 或 Windows 平板须配实体键盘，设备至少可续航 4 小时。", "Prometric China centres do not support Chromebooks. An iPad or Windows tablet requires a physical keyboard, and the device must have at least four hours of battery life."),
     ],
   };
 }
@@ -264,7 +281,7 @@ export const apCourseProjects: ProjectRecord[] = apSpecs.map((spec) => ({
   costBand: "varies",
   status: "confirmed",
   cycle: spec.cycle,
-  lastVerified: VERIFIED_AT,
+  lastVerified: "2026-08-25",
   facts: [
     { label: t("课程层级", "Course level"), value: t("高中阶段的大学先修课程与统一考试", "College-level high-school course and standardized subject exam"), sourceIds: [spec.cedSourceId] },
     { label: t("考查范围", "Assessed scope"), value: spec.assessedScope, sourceIds: [spec.cedSourceId] },
@@ -273,9 +290,9 @@ export const apCourseProjects: ProjectRecord[] = apSpecs.map((spec) => ({
     { label: t("计算器", "Calculator"), value: spec.calculator, sourceIds: [spec.cedSourceId, spec.examSourceId] },
     { label: t("考试日期", "Exam date"), value: t(`${spec.examDate}；${spec.examSession.zh}`, `${spec.examDate}; ${spec.examSession.en}`), sourceIds: ["ap-2027-exam-dates"] },
     { label: t("成绩", "Score"), value: t("1–5；原始分转换线不预先固定公布", "1–5; raw-score conversion points are not published as fixed advance cutoffs"), sourceIds: [spec.scoreSourceId] },
-    { label: t("中国报名", "Registration in China"), value: t("通过 AP coordinator 或当届指定中国考务路线；不得直接向 College Board 个人订卷", "Through an AP coordinator or the designated China administration route for the cycle; individuals cannot order an exam directly from College Board"), sourceIds: ["ap-registration", "ap-china", "ap-china-registration-2026"] },
+    { label: t("中国报名", "Registration in China"), value: t("授权学校学生先由 AP coordinator 提交名单；符合条件的社会考生通过 MyAPChina 申请。2026 年 11 月 9 日中午 12:00 截止缴费，每科 1475 元", "Authorized-school students must first be rostered by their AP coordinator; eligible unaffiliated candidates apply through MyAPChina. Payment is due by 12:00 noon on 9 November 2026 at CNY 1,475 per exam"), sourceIds: ["ap-registration", "ap-china", "ap-china-registration-2027", "ap-china-timeline-2027"] },
   ],
-  dates: [{
+  dates: [...(spec.id === "ap-calculus-ab" ? apChinaRegistrationDates(spec.id) : []), {
     id: `${spec.id}-2027-exam`,
     label: t(`${spec.shortTitle} 2027 正式考试`, `${spec.shortTitle} 2027 regular exam`),
     date: spec.examDate,

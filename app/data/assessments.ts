@@ -50,7 +50,8 @@ export const assessmentSources: SourceRecord[] = [
   source("ap-bc-exam", "AP Calculus BC 考试", "AP Calculus BC Exam", "College Board", "College Board", "https://apcentral.collegeboard.org/courses/ap-calculus-bc/exam", "official", "AP Calculus BC"),
   source("ap-registration", "AP 考试报名", "Register for AP Exams", "College Board", "College Board", "https://apstudents.collegeboard.org/register-for-ap-exams", "official", "AP registration"),
   source("ap-china", "在中国参加 AP 考试", "Taking AP in China", "College Board 国际部", "College Board International", "https://international.collegeboard.org/students/ap/taking-ap-china", "official", "AP testing routes in mainland China"),
-  source("ap-china-registration-2026", "Prometric 中国 2026 AP 报名须知", "Prometric China 2026 AP Exam Registration", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/apregistration/", "official", "AP China 2026 registration, eligibility and ID rules", "2027 年中国报名规则尚未公布；本页仅记录 2026 流程。", "China registration rules for 2027 are not yet published; this source documents the 2026 process only."),
+  { ...source("ap-china-registration-2027", "Prometric 中国 2027 AP 报名须知", "Prometric China 2027 AP Exam Registration", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/apregistration-y27/", "official", "AP China 2027 registration, eligibility, fees, ID rules and exam schedule"), verifiedAt: "2026-08-25" },
+  { ...source("ap-china-timeline-2027", "Prometric 中国 2027 AP 报名流程", "Prometric China 2027 AP Registration Timeline", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/aptimeline-y27/", "official", "AP China 2027 roster, registration, payment, correction and admission-ticket deadlines", "页面日期对应 2026–27 周期，但部分下载链接名称仍写 2025–26；操作时应以页面当前日期并复核最新手册。", "The page dates correspond to the 2026–27 cycle, but some linked guide names still say 2025–26; use the live dates and recheck the latest guide before acting."), verifiedAt: "2026-08-25" },
   source("ap-score-data", "AP 2026 成绩分布", "2026 AP Score Distributions", "College Board", "College Board", "https://apstudents.collegeboard.org/about-ap-scores/score-distributions", "official-data", "AP 2026 score distributions"),
   source("ap-ab-score-distributions", "AP Calculus AB 历年成绩分布", "Past AP Calculus AB Score Distributions", "College Board", "College Board", "https://apstudents.collegeboard.org/about-ap-scores/score-distributions/ap-calculus-ab", "official-data", "AP Calculus AB score distributions 2020-2026"),
   source("ap-bc-score-distributions", "AP Calculus BC 历年成绩分布", "Past AP Calculus BC Score Distributions", "College Board", "College Board", "https://apstudents.collegeboard.org/about-ap-scores/score-distributions/ap-calculus-bc", "official-data", "AP Calculus BC score distributions 2020-2026"),
@@ -89,16 +90,15 @@ export const assessmentSources: SourceRecord[] = [
   source("act-score-guide", "ACT 成绩解释", "Understanding ACT Scores", "ACT", "ACT", "https://www.act.org/content/act/en/products-and-services/the-act/scores/understanding-your-scores.html", "official-data", "ACT scoring and score reporting"),
   source("act-free-practice", "ACT 官方免费练习", "Official Free ACT Practice", "ACT", "ACT", "https://www.act.org/content/act/en/products-and-services/the-act/test-preparation/free-act-test-prep.html", "official-archive", "Current official ACT practice resources"),
 
-  source("ssat-overview", "SSAT 官方说明", "About the SSAT", "Enrollment Management Association", "Enrollment Management Association", "https://www.ssat.org/about/about-the-ssat", "official", "SSAT purpose, levels and norms"),
-  source("ssat-options-fees", "SSAT 形式与费用", "SSAT Options and Pricing", "Enrollment Management Association", "Enrollment Management Association", "https://www.ssat.org/testing/ssat-options-pricing", "official", "SSAT testing modes, attempt limits and international fees"),
-  source("ssat-upper-format", "Upper Level SSAT 结构", "Upper Level SSAT Format", "Enrollment Management Association", "Enrollment Management Association", "https://www.ssat.org/about/school-level/upper-level-ssat", "official", "Upper Level SSAT sections, items and timing"),
-  source("ssat-scoring", "SSAT 评分与出分", "SSAT Scoring and Release", "Enrollment Management Association", "Enrollment Management Association", "https://www.ssat.org/about/scoring/scoring-and-release-schedule", "official-data", "SSAT raw scoring, release and score availability"),
-  source("ssat-score-report", "SSAT 成绩报告", "SSAT Score Report", "Enrollment Management Association", "Enrollment Management Association", "https://www.ssat.org/about/scoring/ssat-score-report", "official-data", "SSAT scaled scores and percentile interpretation"),
+  { ...source("ssat-overview", "SSAT 官方说明、形式与费用", "SSAT Overview, Options and Pricing", "Enrollment Management Association", "Enrollment Management Association", "https://www.admission.org/assessments/ssat/about-the-ssat", "official", "SSAT purpose, levels, testing modes, attempt limits and current international fees"), verifiedAt: "2026-08-25" },
+  { ...source("ssat-upper-format", "Upper Level SSAT 结构", "Upper Level SSAT Format", "Enrollment Management Association", "Enrollment Management Association", "https://www.admission.org/help/whats-on-the-upper-level-ssat", "official", "Upper Level SSAT sections, items and timing"), verifiedAt: "2026-08-25" },
+  { ...source("ssat-scoring", "SSAT 评分、出分与成绩报告", "SSAT Scoring, Release and Score Reports", "Enrollment Management Association", "Enrollment Management Association", "https://www.admission.org/assessments/ssat/score-reports", "official-data", "SSAT raw scoring, release, score availability and sample score reports"), verifiedAt: "2026-08-25" },
+  { ...source("ssat-candidate-handbook-2026-27", "SSAT 2026–27 考生手册", "SSAT Candidate Handbook 2026–27", "Enrollment Management Association", "Enrollment Management Association", "https://5232910.fs1.hubspotusercontent-na1.net/hubfs/5232910/website_files/ssat/SSAT%20Candidate%20Handbook.pdf", "official", "SSAT policies and candidate agreement effective 3 August 2026"), verifiedAt: "2026-08-25" },
   source("ssat-prometric-registration", "Prometric SSAT 适用地区与报名", "Prometric SSAT Eligibility and Registration", "Enrollment Management Association", "Enrollment Management Association", "https://www.admission.org/assessments/ssat/prometric", "official", "Prometric SSAT eligibility, exclusions and scheduling; China and Hong Kong are excluded"),
   source("ssat-china-cycle-2026-27", "SSAT 中国 2026–27 考试日期", "SSAT China Test Dates 2026–27", "SSAT 中国／BTS Education", "SSAT China / BTS Education", "https://test.ssatchina.cn/ssat/", "official", "Mainland-China SSAT dates, levels, late and rush registration windows for 2026–27"),
-  source("ssat-china-registration-rule", "中国大陆 SSAT 报名规则", "Mainland-China SSAT Registration Rule", "Enrollment Management Association", "Enrollment Management Association", "https://www.admission.org/help/i-already-have-an-ema-account-why-cant-i-create-another-registration-if-im-in-china", "official", "Mandatory SSAT China route for new registrations and service purchases in mainland China"),
+  { ...source("ssat-china-registration-rule", "中国大陆 SSAT 报名规则", "Mainland-China SSAT Registration Rule", "Enrollment Management Association", "Enrollment Management Association", "https://www.admission.org/help/why-is-the-ssat-registration-process-different-in-china", "official", "Mandatory SSAT China route for new registrations and service purchases in mainland China"), verifiedAt: "2026-08-25" },
   source("ssat-china-support", "中国大陆 SSAT 报名支持", "Mainland-China SSAT Registration Support", "Enrollment Management Association", "Enrollment Management Association", "https://www.admission.org/help/who-do-i-contact-for-help-with-questions-in-china", "official", "BTS Education support responsibilities and contact details for mainland-China families"),
-  source("ssat-official-practice", "SSAT 官方在线练习", "Official SSAT Online Practice", "Enrollment Management Association", "Enrollment Management Association", "https://www.ssat.org/prepare/practice-online", "official-archive", "SSAT official practice and free mini-test"),
+  { ...source("ssat-official-practice", "SSAT 官方练习", "Official SSAT Practice", "Enrollment Management Association", "Enrollment Management Association", "https://www.admission.org/assessments/ssat/ssat-practice", "official-archive", "SSAT official online practice, guide books and free mini-test"), verifiedAt: "2026-08-25" },
 
   source("isee-overview", "ISEE 官方说明", "ISEE by ERB Overview", "ERB", "ERB", "https://www.erblearn.org/families/isee-by-erb/", "official", "ISEE levels, testing seasons and formats"),
   source("isee-registration", "ISEE 报名与费用", "ISEE Registration and Pricing", "ERB", "ERB", "https://www.erblearn.org/families/isee-registration/", "official", "ISEE testing routes, fees and Prometric appointments"),
@@ -107,6 +107,7 @@ export const assessmentSources: SourceRecord[] = [
   source("isee-preparation", "ISEE 官方备考材料", "ISEE Preparation", "ERB", "ERB", "https://www.erblearn.org/families/isee-preparation/", "official-archive", "ISEE sample tests and What to Expect guides"),
 
   source("ukiset-overview", "UKiset 官方说明", "About UKiset", "UKiset", "UKiset", "https://ukiset.com/about-ukiset/", "official", "UKiset eligibility, fee, result validity and retesting"),
+  { ...source("ukiset-agent-policy", "UKiset 合作机构说明", "UKiset Partner-Agent Information", "UKiset", "UKiset", "https://ukiset.com/become-a-partner-agents/", "official", "UKiset partner responsibilities and retesting guidance", "该页写明四个月后可重考，与考生说明页的三个月口径不一致。", "This page says candidates may retest after four months, conflicting with the three-month interval on the family overview."), verifiedAt: "2026-08-25" },
   source("ukiset-process", "UKiset 报名与在线监考", "UKiset Registration and Online Invigilation", "UKiset", "UKiset", "https://ukiset.com/the-process/", "official", "UKiset registration, appointment confirmation and identification"),
   source("ukiset-administration", "UKiset 考试结构", "UKiset Test Administration", "UKiset", "UKiset", "https://ukiset.com/test-administration/", "official", "UKiset sections and timing"),
   source("ukiset-reports", "UKiset 成绩报告", "UKiset School and Parent Reports", "UKiset", "UKiset", "https://ukiset.com/school-parent-report/", "official-data", "UKiset standardised scores, percentiles, stanines and CEFR"),
@@ -191,13 +192,13 @@ const satSessions = [
 ] as const;
 
 const satDates: DateRecord[] = satSessions.flatMap(([exam, regular, late], index) => [
-  dateRecord(`sat-${index + 1}-registration`, "SAT 常规报名截止", "SAT regular registration deadline", regular, "confirmed", ["sat-dates"], {
+  dateRecord(`sat-${index + 1}-registration`, "SAT 常规报名截止", "SAT regular registration deadline", regular, index === 0 ? "historical" : "confirmed", ["sat-dates"], {
     time: "23:59",
     timezone: "America/New_York",
     region: t("全球周末场", "Worldwide weekend administration"),
     note: t(`对应 ${exam} 考试；修改、常规取消及晚报名截止为 ${late}。`, `For the ${exam} test; changes, regular cancellation and late registration close on ${late}.`),
   }),
-  dateRecord(`sat-${index + 1}-exam`, "SAT 考试日", "SAT test date", exam, "confirmed", ["sat-dates"], {
+  dateRecord(`sat-${index + 1}-exam`, "SAT 考试日", "SAT test date", exam, index === 0 ? "historical" : "confirmed", ["sat-dates"], {
     region: t("按实际授权考点", "At the booked authorized test center"),
   }),
 ]);
@@ -319,7 +320,7 @@ const apProject: ProjectRecord = {
   title: t("AP Calculus AB / BC", "AP Calculus AB / BC"),
   shortTitle: "AP Calculus",
   organizer: t("College Board", "College Board"),
-  summary: t("面向高中生的大学单变量微积分课程与考试。2027 年考试含 42 道数字化选择题和 6 道纸笔自由作答题；具体日期与国际费用尚未公布。", "College-level single-variable calculus courses and exams for high school students. The 2027 exam has 42 digital multiple-choice questions and 6 handwritten free-response questions; the exact date and international fees remain unpublished."),
+  summary: t("面向高中生的大学单变量微积分课程与考试。2027 年考试含 42 道数字化选择题和 6 道纸笔自由作答题；AB 与 BC 均于 5 月 10 日举行。", "College-level single-variable calculus courses and exams for high school students. The 2027 exam has 42 digital multiple-choice questions and six handwritten free-response questions; both AB and BC are scheduled for 10 May."),
   regions: ["global", "china", "us"],
   gradeBands: ["high-school"],
   eligibilityTags: ["school-or-authorized-center-registration", "self-study-allowed", "ab-bc-mutually-exclusive"],
@@ -327,7 +328,7 @@ const apProject: ProjectRecord = {
   costBand: "varies",
   status: "confirmed",
   cycle: "2026-27 course / May 2027 exam",
-  lastVerified: VERIFIED_AT,
+  lastVerified: "2026-08-25",
   facts: [
     { label: t("用途", "Purpose"), value: t("反映微积分课程学习；大学分别制定学分、分班和专业先修政策。", "Documents calculus coursework; universities set their own credit, placement and prerequisite policies."), sourceIds: ["ap-ab-exam", "ap-bc-exam"] },
     { label: t("AB / BC", "AB / BC"), value: t("AB 对应第一学期单变量微积分；BC 覆盖 AB 核心并增加后续单变量微积分、参数／极坐标与无穷级数。", "AB approximates first-semester single-variable calculus; BC includes the AB core plus subsequent calculus, parametric/polar topics and infinite series."), sourceIds: ["ap-ab-exam", "ap-bc-exam"] },
@@ -336,12 +337,37 @@ const apProject: ProjectRecord = {
     { label: t("2027 结构", "2027 format"), value: t("42 MCQ／100 分钟 + 6 FRQ／90 分钟；MCQ 与 FRQ 各占 50%。", "42 MCQs in 100 minutes plus 6 FRQs in 90 minutes; MCQ and FRQ each contribute 50%."), sourceIds: ["ap-clarifications-2027"] },
     { label: t("作答方式", "Delivery"), value: t("Hybrid digital：Bluebook 完成 MCQ；FRQ 在屏幕看题并写入纸质答题册。", "Hybrid digital: MCQs are completed in Bluebook; FRQs are viewed on screen and handwritten in a paper booklet."), sourceIds: ["ap-ab-exam", "ap-bc-exam"] },
     { label: t("评分", "Scoring"), value: t("报告 1–5；BC 另有 AB subscore。原始分到 1–5 的 cut points 不作为赛前固定线公布。", "Scores are reported on a 1–5 scale; BC also reports an AB subscore. Raw-to-1–5 cut points are not published as fixed pre-exam thresholds."), sourceIds: ["ap-score-data", "ap-ab-score-distributions", "ap-bc-score-distributions"] },
-    { label: t("2027 日期与费用", "2027 date and fees"), value: t("截至 2026-08-04，考试日期、国际基础费、逾期费用及 Prometric 中国当届费用均未公布。", "As of 4 August 2026, the exam date, international base fee, late fee and current-cycle Prometric China fee have not been published."), status: "pending", sourceIds: ["ap-registration", "ap-china-registration-2026"] },
+    { label: t("2027 日期与中国费用", "2027 date and China fee"), value: t("AB 与 BC 均于 2027 年 5 月 10 日举行；Prometric 中国考点每科 1475 元，其中 88 元手续费及税费不退。", "AB and BC are both scheduled for 10 May 2027. At Prometric China centres, the fee is CNY 1,475 per exam, including a non-refundable CNY 88 processing fee and tax."), sourceIds: ["ap-2027-exam-dates", "ap-china-registration-2027"] },
   ],
   dates: [
-    dateRecord("ap-2027-exam", "AP Calculus AB / BC 2027 考试", "AP Calculus AB / BC 2027 exam", "2027-05", "pending", ["ap-clarifications-2027", "ap-registration"], {
+    dateRecord("ap-2027-coordinator-open", "Prometric 中国 AP 管理员系统开放", "Prometric China AP coordinator system opens", "2026-09-15", "confirmed", ["ap-china-timeline-2027"], {
+      region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
+      note: t("中午 12:00 开放，AP 管理员开始提交学生和考试科目花名册。", "Opens at 12:00 noon for AP coordinators to submit student and exam rosters."),
+    }),
+    dateRecord("ap-2027-registration-open", "Prometric 中国 AP 学生开始报名", "Prometric China AP student registration opens", "2026-09-16", "confirmed", ["ap-china-timeline-2027"], {
+      region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
+      note: t("AP 授权学校须先由管理员提交考生和科目名单；符合条件的社会考生按 MyAPChina 页面操作。", "AP-authorized schools must first submit student and subject rosters; eligible unaffiliated candidates follow the MyAPChina instructions."),
+    }),
+    dateRecord("ap-2027-roster-deadline", "Prometric 中国 AP 学校花名册截止", "Prometric China AP school roster deadline", "2026-10-16", "confirmed", ["ap-china-timeline-2027"], {
+      region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
+      note: t("中午 12:00 截止，AP 管理员完成本校考试花名册。", "Deadline is 12:00 noon for AP coordinators to complete school exam rosters."),
+    }),
+    dateRecord("ap-2027-registration-deadline", "Prometric 中国 AP 报名缴费截止", "Prometric China AP registration and payment deadline", "2026-11-09", "confirmed", ["ap-china-timeline-2027"], {
+      region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
+      note: t("中午 12:00 截止；学生须完成全部科目确认和缴费。", "Deadline is 12:00 noon; students must finalize all subjects and payment."),
+    }),
+    dateRecord("ap-2027-myap-check", "AP 学生核对 My AP 科目与资料", "AP students verify My AP subjects and details", "2026-12-01", "confirmed", ["ap-china-timeline-2027"], {
+      region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
+    }),
+    dateRecord("ap-2027-correction-deadline", "Prometric 中国 AP 资料及科目更正截止", "Prometric China AP correction deadline", "2027-03-12", "confirmed", ["ap-china-timeline-2027"], {
+      region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
+    }),
+    dateRecord("ap-2027-admission-letter", "Prometric 中国 AP 准考信开放下载", "Prometric China AP admission letter available", "2027-04-03", "confirmed", ["ap-china-timeline-2027"], {
+      region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
+    }),
+    dateRecord("ap-2027-exam", "AP Calculus AB / BC 2027 考试", "AP Calculus AB / BC 2027 exam", "2027-05-10", "confirmed", ["ap-2027-exam-dates", "ap-china-registration-2027"], {
       region: t("由学校或授权考点按当地时间组织", "Administered by the school or authorized center at local time"),
-      note: t("官方已确认 2027 结构，但具体考试日、late-testing 日期和中国考点安排尚未公布。", "The 2027 structure is confirmed, but the exact date, late-testing date and mainland-China arrangements are not yet published."),
+      note: t("中国 Prometric 考点上午 8:50 开考；AB 与 BC 同时举行，同一考生同年只能选择一科。", "At Prometric China centres the exams begin at 8:50 a.m.; AB and BC run simultaneously and a student may take only one in the same year."),
     }),
   ],
   sections: [
@@ -370,34 +396,30 @@ const apProject: ProjectRecord = {
           {
             cells: [
               t("中国大陆本地学校路径", "Mainland local-school route"),
-              t("受中国教育主管部门管理、服务中国籍学生的本地 AP 授权学校，通过当届指定的 Prometric 考点组织考试。2026 年由 AP coordinator 向 Prometric 上传本校考生与科目，学生随后在 Prometric 中国完成注册和缴费；2027 年具体流程尚未公布。", "Local AP-authorized schools governed by Chinese education authorities and serving Chinese nationals use designated Prometric centers for that cycle. In 2026, the AP coordinator uploaded the school's candidates and subjects to Prometric, after which students registered and paid through Prometric China; the detailed 2027 process has not been published."),
+              t("AP coordinator 自 2026 年 9 月 15 日中午 12:00 起在 MyAPChina 提交本校考生与科目名单；学生自 9 月 16 日起补全资料、上传照片、确认科目并缴费。", "From 12:00 noon on 15 September 2026, the AP coordinator submits the school's student and subject roster in MyAPChina; from 16 September, students complete their details, upload a photograph, confirm subjects, and pay."),
             ],
-            status: "pending",
-            sourceIds: ["ap-china", "ap-china-registration-2026"],
+            sourceIds: ["ap-china", "ap-china-registration-2027", "ap-china-timeline-2027"],
           },
           {
             cells: [
               t("非学校考生／自学考生", "Unaffiliated / self-study candidates"),
-              t("2026 年，符合条件且未隶属 AP 学校的考生可通过 MyAPChina 直接申请。2027 年是否继续开放、资格范围和报名时间尚未公布。", "In 2026, eligible candidates not affiliated with an AP school could apply directly through MyAPChina. Availability, eligibility and the registration timetable for 2027 have not been published."),
+              t("2027 年继续设置符合条件的社会考生通道；考生须自行通过 MyAPChina 提交报名信息，再按系统流程确认科目和缴费。", "An eligible unaffiliated-candidate route remains available for 2027. Candidates submit their information through MyAPChina, then confirm subjects and pay through the system workflow."),
             ],
-            status: "pending",
-            sourceIds: ["ap-china-registration-2026"],
+            sourceIds: ["ap-china-registration-2027", "ap-china-timeline-2027"],
           },
           {
             cells: [
               t("中国大陆考点", "Mainland-China test centers"),
-              t("2026 年 Prometric 在中国大陆设置公开考点并公布城市／考点名单；具体地址在考前另行通知。2027 年城市、考点、开考科目和考位安排尚未公布。", "Prometric operated public mainland-China centers in 2026 and published a city/center list; exact addresses were issued later. Cities, centers, subjects and seat arrangements for 2027 have not been published."),
+              t("报名缴费前可在 Prometric 中国考点名录或 MyAPChina 查询对应城市；具体考试地点计划在 2027 年 4 月初公布。", "Before payment, candidates can check the relevant city in the Prometric China centre directory or MyAPChina; specific venues are scheduled to be released in early April 2027."),
             ],
-            status: "pending",
-            sourceIds: ["ap-china", "ap-china-registration-2026"],
+            sourceIds: ["ap-china", "ap-china-registration-2027"],
           },
           {
             cells: [
               t("证件", "Identification"),
-              t("2026 年，中国大陆中国籍考生只可使用有效中华人民共和国居民身份证原件；非中国籍考生须使用有效护照原件及有效中国签证或居留证件。2027 年证件规则尚未公布。", "For 2026, mainland Chinese citizens could use only an original valid PRC resident identity card; non-Chinese citizens needed an original valid passport together with a valid Chinese visa or residence document. The 2027 ID rules have not been published."),
+              t("中国大陆考生须持有效中华人民共和国居民身份证原件；港澳台考生使用官网列明的居住证、通行证、身份证或特区护照；非中国籍考生使用有效护照原件。报名信息必须与考试证件一致。", "Mainland-China candidates must carry an original valid PRC resident identity card. Candidates from Hong Kong, Macao, or Taiwan use one of the listed residence permits, travel permits, identity cards, or SAR passports; non-Chinese candidates use an original valid passport. Registration details must match the test-day ID."),
             ],
-            status: "pending",
-            sourceIds: ["ap-china-registration-2026"],
+            sourceIds: ["ap-china-registration-2027"],
           },
         ],
       }],
@@ -449,7 +471,7 @@ const apProject: ProjectRecord = {
       }],
     },
   ],
-  sourceIds: ["ap-clarifications-2027", "ap-ab-exam", "ap-bc-exam", "ap-registration", "ap-china", "ap-china-registration-2026", "ap-score-data", "ap-ab-score-distributions", "ap-bc-score-distributions", "ap-ab-past-questions", "ap-bc-past-questions"],
+  sourceIds: ["ap-clarifications-2027", "ap-ab-exam", "ap-bc-exam", "ap-registration", "ap-china", "ap-china-registration-2027", "ap-china-timeline-2027", "ap-score-data", "ap-ab-score-distributions", "ap-bc-score-distributions", "ap-ab-past-questions", "ap-bc-past-questions"],
   relatedIds: ["sat"],
   searchTerms: ["AP Calculus", "AP 微积分", "AB", "BC", "hybrid digital", "Bluebook", "FRQ", "大学学分"],
 };
@@ -481,8 +503,8 @@ const tmuaProject: ProjectRecord = {
     { label: t("成绩共享", "Score sharing"), value: t("成绩通过 UCAS matching 自动发送至正式使用 TMUA 的对应课程；考生不能对其中单个课程隐藏成绩。", "Scores are automatically matched to UCAS courses that officially use TMUA; candidates cannot withhold a score from one matched course."), sourceIds: ["uat-handbook-2027", "uat-tmua-results"] },
   ],
   dates: [
-    dateRecord("tmua-oct-account", "October 场账户及支持申请开放", "October account and support applications open", "2026-06-01", "confirmed", ["uat-dates-2027"], { time: "15:00", timezone: "Europe/London" }),
-    dateRecord("tmua-oct-booking-open", "October 场预约开放", "October booking opens", "2026-07-20", "confirmed", ["uat-dates-2027"], { time: "15:00", timezone: "Europe/London" }),
+    dateRecord("tmua-oct-account", "October 场账户及支持申请开放", "October account and support applications open", "2026-06-01", "historical", ["uat-dates-2027"], { time: "15:00", timezone: "Europe/London" }),
+    dateRecord("tmua-oct-booking-open", "October 场预约开放", "October booking opens", "2026-07-20", "historical", ["uat-dates-2027"], { time: "15:00", timezone: "Europe/London" }),
     dateRecord("tmua-oct-access-deadline", "October 特殊安排截止", "October access-arrangements deadline", "2026-09-14", "confirmed", ["uat-dates-2027"], { time: "18:00", timezone: "Europe/London" }),
     dateRecord("tmua-oct-bursary-deadline", "October 助学金申请截止", "October bursary deadline", "2026-09-21", "confirmed", ["uat-dates-2027"], { time: "18:00", timezone: "Europe/London", region: t("仅符合条件的英国考生", "Eligible UK candidates only") }),
     dateRecord("tmua-oct-booking-close", "October 场预约截止", "October booking closes", "2026-09-28", "confirmed", ["uat-dates-2027"], { time: "18:00", timezone: "Europe/London" }),
@@ -616,8 +638,8 @@ const esatProject: ProjectRecord = {
     { label: t("中国考期", "China test dates"), value: t("中国大陆、香港和澳门的 October 场为 2026.10.12–13，January 场为 2027.01.06。", "In mainland China, Hong Kong and Macau, the October sitting is 12–13 October 2026 and the January sitting is 6 January 2027."), sourceIds: ["uat-dates-2027"] },
   ],
   dates: [
-    dateRecord("esat-oct-account", "October 场账户及支持申请开放", "October account and support applications open", "2026-06-01", "confirmed", ["uat-dates-2027"], { time: "15:00", timezone: "Europe/London" }),
-    dateRecord("esat-oct-booking-open", "October 场预约开放", "October booking opens", "2026-07-20", "confirmed", ["uat-dates-2027"], { time: "15:00", timezone: "Europe/London" }),
+    dateRecord("esat-oct-account", "October 场账户及支持申请开放", "October account and support applications open", "2026-06-01", "historical", ["uat-dates-2027"], { time: "15:00", timezone: "Europe/London" }),
+    dateRecord("esat-oct-booking-open", "October 场预约开放", "October booking opens", "2026-07-20", "historical", ["uat-dates-2027"], { time: "15:00", timezone: "Europe/London" }),
     dateRecord("esat-oct-access-deadline", "October 特殊安排截止", "October access-arrangements deadline", "2026-09-14", "confirmed", ["uat-dates-2027"], { time: "18:00", timezone: "Europe/London" }),
     dateRecord("esat-oct-bursary-deadline", "October 助学金申请截止", "October bursary deadline", "2026-09-21", "confirmed", ["uat-dates-2027"], { time: "18:00", timezone: "Europe/London", region: t("仅符合条件的英国考生", "Eligible UK candidates only") }),
     dateRecord("esat-oct-booking-close", "October 场预约截止", "October booking closes", "2026-09-28", "confirmed", ["uat-dates-2027"], { time: "18:00", timezone: "Europe/London" }),
@@ -756,8 +778,8 @@ const stepProject: ProjectRecord = {
     dateRecord("step-2026-registration-close", "STEP 2026 报名与特殊安排截止", "STEP 2026 registration and access-arrangements deadline", "2026-05-04", "historical", ["step-dates-fees"], { note: t("OCR 不接受 late entry；考点内部截止通常更早。", "OCR accepts no late entry; center deadlines are usually earlier.") }),
     dateRecord("step2-2026-exam", "STEP Mathematics 2", "STEP Mathematics 2", "2026-06-04", "historical", ["step-dates-fees"], { time: "16:00", timezone: "Asia/Shanghai", region: t("中国大陆官方开考时间", "Official mainland-China start time") }),
     dateRecord("step3-2026-exam", "STEP Mathematics 3", "STEP Mathematics 3", "2026-06-10", "historical", ["step-dates-fees"], { time: "16:00", timezone: "Asia/Shanghai", region: t("中国大陆官方开考时间", "Official mainland-China start time") }),
-    dateRecord("step-2026-candidate-results", "STEP 2026 考生成绩发布", "STEP 2026 candidate results", "2026-08-13", "confirmed", ["step-dates-fees", "step-results"], { time: "08:00", timezone: "Europe/London" }),
-    dateRecord("step-2026-enquiry-deadline", "STEP 2026 results enquiry 截止", "STEP 2026 results-enquiry deadline", "2026-08-20", "confirmed", ["step-dates-fees", "step-results"]),
+    dateRecord("step-2026-candidate-results", "STEP 2026 考生成绩发布", "STEP 2026 candidate results", "2026-08-13", "historical", ["step-dates-fees", "step-results"], { time: "08:00", timezone: "Europe/London" }),
+    dateRecord("step-2026-enquiry-deadline", "STEP 2026 results enquiry 截止", "STEP 2026 results-enquiry deadline", "2026-08-20", "historical", ["step-dates-fees", "step-results"]),
     dateRecord("step-2027-cycle", "STEP 2027 日期与费用", "STEP 2027 dates and fees", "2027", "pending", ["step-admin"], { note: t("截至 2026-08-04 尚未公布。", "Not published as of 4 August 2026.") }),
   ],
   sections: [
@@ -886,10 +908,10 @@ const actInternationalSessions = [
 ] as const;
 
 const actDates: DateRecord[] = actInternationalSessions.flatMap(([start, regular, late, end], index) => [
-  dateRecord(`act-intl-${index + 1}-regular`, "ACT 国际场常规报名截止", "ACT international regular-registration deadline", regular, "confirmed", ["act-intl-dates-2026-27"], {
+  dateRecord(`act-intl-${index + 1}-regular`, "ACT 国际场常规报名截止", "ACT international regular-registration deadline", regular, index === 0 ? "historical" : "confirmed", ["act-intl-dates-2026-27"], {
     region: t("美国境外国际考点", "International test centers outside the United States"),
   }),
-  dateRecord(`act-intl-${index + 1}-late`, "ACT 国际场晚报名截止", "ACT international late-registration deadline", late, "confirmed", ["act-intl-dates-2026-27"], {
+  dateRecord(`act-intl-${index + 1}-late`, "ACT 国际场晚报名截止", "ACT international late-registration deadline", late, index === 0 ? "historical" : "confirmed", ["act-intl-dates-2026-27"], {
     region: t("美国境外国际考点", "International test centers outside the United States"),
   }),
   dateRecord(`act-intl-${index + 1}-test`, "ACT 国际考试", "ACT international test", start, "confirmed", ["act-intl-dates-2026-27"], {
@@ -985,7 +1007,7 @@ const ssatChinaSessions = [
 ] as const;
 
 const ssatChinaDates: DateRecord[] = [
-  dateRecord("ssat-china-2026-27-registration-opens", "SSAT 中国 2026–27 开放报名", "SSAT China 2026–27 registration opens", "2026-08-01", "confirmed", ["ssat-china-cycle-2026-27"], {
+  dateRecord("ssat-china-2026-27-registration-opens", "SSAT 中国 2026–27 开放报名", "SSAT China 2026–27 registration opens", "2026-08-01", "historical", ["ssat-china-cycle-2026-27"], {
     region: t("中国大陆", "Mainland China"),
     timezone: "Asia/Shanghai",
   }),
@@ -1029,12 +1051,12 @@ const ssatProject: ProjectRecord = {
   costBand: "medium",
   status: "confirmed",
   cycle: "2026-27 testing year",
-  lastVerified: VERIFIED_AT,
+  lastVerified: "2026-08-25",
   facts: [
-    { label: t("用途", "Purpose"), value: t("供私立、独立及寄宿学校在入学评估中使用；不是美国大学本科考试。申请学校决定是否接受 SSAT、要求哪一级别及最晚考试日期。", "Used by private, independent and boarding schools in admission review; it is not a U.S. undergraduate test. Each applicant school determines whether it accepts SSAT, the required level and latest test date."), sourceIds: ["ssat-overview", "ssat-score-report"] },
-    { label: t("级别", "Levels"), value: t("Elementary：当前 3–4 年级；Middle：当前 5–7 年级；Upper：当前 8–11 年级。报名页面按考生当前年级分配级别。", "Elementary: current grades 3–4; Middle: grades 5–7; Upper: grades 8–11. Registration assigns the level from the student's current grade."), sourceIds: ["ssat-overview", "ssat-options-fees"] },
-    { label: t("国际考试方式", "International options"), value: t("国际地区可用纸笔 Standard／Flex 及 Prometric 机考，但适用范围不同。中国大陆和香港不提供 Prometric SSAT；SSAT at Home 只面向美国、美国领地和加拿大。", "International locations may offer Standard/Flex paper tests and computer-based Prometric appointments, but eligibility differs. Prometric SSAT is unavailable in mainland China and Hong Kong; SSAT at Home is limited to the United States, U.S. territories and Canada."), sourceIds: ["ssat-options-fees", "ssat-prometric-registration", "ssat-china-cycle-2026-27"] },
-    { label: t("国际公开价（非中国站实付价）", "Published international price—not China checkout price"), value: t("EMA 公布的国际选项价格为 Elementary US$229、Middle／Upper US$329；这不能作为中国大陆报名的最终应付金额。中国站考试费及延迟／抢注附加费以 ssatchina.cn 结算页为准。", "EMA lists Elementary at US$229 and Middle/Upper at US$329 for international options. These are not the final amounts payable for a mainland-China registration; use the ssatchina.cn checkout for the test fee and any late/rush surcharge."), sourceIds: ["ssat-options-fees", "ssat-china-cycle-2026-27"] },
+    { label: t("用途", "Purpose"), value: t("供私立、独立及寄宿学校在入学评估中使用；不是美国大学本科考试。申请学校决定是否接受 SSAT、要求哪一级别及最晚考试日期。", "Used by private, independent and boarding schools in admission review; it is not a U.S. undergraduate test. Each applicant school determines whether it accepts SSAT, the required level and latest test date."), sourceIds: ["ssat-overview", "ssat-scoring"] },
+    { label: t("级别", "Levels"), value: t("Elementary：当前 3–4 年级；Middle：当前 5–7 年级；Upper：当前 8–11 年级。报名页面按考生当前年级分配级别。", "Elementary: current grades 3–4; Middle: grades 5–7; Upper: grades 8–11. Registration assigns the level from the student's current grade."), sourceIds: ["ssat-overview"] },
+    { label: t("国际考试方式", "International options"), value: t("国际地区可用纸笔 Standard／Flex 及 Prometric 机考，但适用范围不同。中国大陆和香港不提供 Prometric SSAT；SSAT at Home 只面向美国、美国领地和加拿大。", "International locations may offer Standard/Flex paper tests and computer-based Prometric appointments, but eligibility differs. Prometric SSAT is unavailable in mainland China and Hong Kong; SSAT at Home is limited to the United States, U.S. territories and Canada."), sourceIds: ["ssat-overview", "ssat-prometric-registration", "ssat-china-cycle-2026-27"] },
+    { label: t("国际公开价（非中国站实付价）", "Published international price—not China checkout price"), value: t("EMA 公布的国际选项价格为 Elementary US$229、Middle／Upper US$339；这不能作为中国大陆报名的最终应付金额。中国站考试费及延迟／抢注附加费以 ssatchina.cn 结算页为准。", "EMA lists Elementary at US$229 and Middle/Upper at US$339 for international options. These are not the final amounts payable for a mainland-China registration; use the ssatchina.cn checkout for the test fee and any late/rush surcharge."), sourceIds: ["ssat-overview", "ssat-china-cycle-2026-27"] },
     { label: t("计分", "Scoring"), value: t("Middle／Upper 每题答对 +1、答错 −0.25、空题 0；Elementary 答错不扣分。写作样本不计分，但随成绩报告发送给所选学校。", "Middle/Upper award +1 for a correct response, −0.25 for an incorrect response and 0 for an omission. Elementary has no wrong-answer penalty. The writing sample is unscored but accompanies reports sent to selected schools."), sourceIds: ["ssat-scoring", "ssat-upper-format"] },
     { label: t("成绩可发送期限", "Score availability"), value: t("EMA 按 testing year（8 月 1 日至次年 7 月 31 日）管理成绩，并在官网列明每届成绩可继续发送的截止日期。申请前应以账户中的 Active Scores 和学校截止日期为准，不把“可发送”理解为学校必然接受。", "EMA manages scores by testing year (1 August–31 July) and publishes the last date each year's results remain sendable. Use Active Scores in the account and the school's deadline; sendability does not guarantee that a school will accept an older result."), sourceIds: ["ssat-scoring"] },
   ],
@@ -1049,7 +1071,7 @@ const ssatProject: ProjectRecord = {
           { cells: [t("使用 SSAT 中国", "Use SSAT China"), t("位于中国大陆的家庭，新建 EMA 账户、新报 SSAT／Snapshot 以及购买 SSAT Practice 等服务，必须通过 ssatchina.cn 办理；不能在 Admission.org／SSAT.org 直接新报。完成中国站开户后，仍可登录 EMA 主站管理既有考试和 SAO 申请。", "Families located in mainland China must use ssatchina.cn to create an EMA account, make a new SSAT/Snapshot registration, or purchase services such as SSAT Practice; they cannot create a new registration directly at Admission.org/SSAT.org. After the China account is created, the main EMA portal remains available for existing registrations and SAO applications.")], sourceIds: ["ssat-china-registration-rule", "ssat-china-support"] },
           { cells: [t("Prometric 不适用", "Prometric unavailable"), t("EMA 当前官方页把 China 与 Hong Kong 明确列入 Prometric SSAT 不可用地区；中国大陆和香港考生不得按其他国家的 Prometric 流程购买或预约。", "EMA's current official page explicitly lists China and Hong Kong among locations where Prometric SSAT is unavailable; candidates testing there must not purchase or schedule through another country's Prometric route.")], sourceIds: ["ssat-prometric-registration"] },
           { cells: [t("选择中国纸笔场次", "Select a China paper sitting"), t("2026–27 中国站列出 6 个纸笔考试日；报名均于 2026 年 8 月 1 日开放。具体城市、考点和剩余考位以登录后的中国站选项为准。", "SSAT China lists six paper dates for 2026–27, all opening for registration on 1 August 2026. Available cities, centers and seats are shown after login on the China site.")], sourceIds: ["ssat-china-cycle-2026-27"] },
-          { cells: [t("核对费用和截止", "Check price and deadlines"), t("中国站对每个考试日分别设置延迟报名、抢注报名和最后报名时间；后两个阶段费用会增加。国际官网 US$229／329 的公开价不能替代中国站结算金额。", "SSAT China sets separate late, rush and final deadlines for each test date, with higher fees in the late and rush periods. The public US$229/329 international prices do not replace the China checkout amount.")], sourceIds: ["ssat-options-fees", "ssat-china-cycle-2026-27"] },
+          { cells: [t("核对费用和截止", "Check price and deadlines"), t("中国站对每个考试日分别设置延迟报名、抢注报名和最后报名时间；后两个阶段费用会增加。国际官网 US$229／339 的公开价不能替代中国站结算金额。", "SSAT China sets separate late, rush and final deadlines for each test date, with higher fees in the late and rush periods. The public US$229/339 international prices do not replace the China checkout amount.")], sourceIds: ["ssat-overview", "ssat-china-cycle-2026-27"] },
           { cells: [t("报名支持", "Registration support"), t("账户、登录、报名、改考期或地点由 EMA 中国合作方 BTS Education 处理：info@ssatchina.cn，010-53657051；服务时间为工作日 9:30–12:00、13:30–17:00（中国标准时间，节假日除外）。", "EMA's China partner BTS Education handles account, login, registration, and date/location changes: info@ssatchina.cn, +86 10 5365 7051; hours are weekdays 09:30–12:00 and 13:30–17:00 China Standard Time, excluding holidays.")], sourceIds: ["ssat-china-support"] },
         ],
       }],
@@ -1073,9 +1095,9 @@ const ssatProject: ProjectRecord = {
       tables: [{
         columns: [t("级别", "Level"), t("适用当前年级", "Current grade"), t("计分量尺", "Reported scale"), t("主要结构", "Main structure")],
         rows: [
-          { cells: [t("Elementary", "Elementary"), t("3–4", "3–4"), t("三科各 300–600；总分 900–1800", "300–600 per section; total 900–1800"), t("Quantitative、Verbal、Reading、写作样本与实验题；约 2 小时 5 分含休息", "Quantitative, Verbal, Reading, writing sample and experimental items; about 2h05 including break")], sourceIds: ["ssat-options-fees", "ssat-score-report"] },
-          { cells: [t("Middle", "Middle"), t("5–7", "5–7"), t("三科各 440–710；总分 1320–2130", "440–710 per section; total 1320–2130"), t("与 Upper 相同顺序和时长：写作、两次数学、阅读、词汇与实验题；约 3 小时 10 分含休息", "Same order and timing as Upper: writing, two quantitative sections, reading, verbal and experimental; about 3h10 including breaks")], sourceIds: ["ssat-overview", "ssat-upper-format", "ssat-score-report"] },
-          { cells: [t("Upper", "Upper"), t("8–11", "8–11"), t("三科各 500–800；总分 1500–2400", "500–800 per section; total 1500–2400"), t("写作 25 分钟；数学 50 题／60 分钟；阅读 40／40；词汇 60／30；实验题 16／15", "Writing 25 minutes; Quantitative 50/60; Reading 40/40; Verbal 60/30; Experimental 16/15")], sourceIds: ["ssat-upper-format", "ssat-score-report"] },
+          { cells: [t("Elementary", "Elementary"), t("3–4", "3–4"), t("三科各 300–600；总分 900–1800", "300–600 per section; total 900–1800"), t("Quantitative、Verbal、Reading、写作样本与实验题；约 2 小时 5 分含休息", "Quantitative, Verbal, Reading, writing sample and experimental items; about 2h05 including break")], sourceIds: ["ssat-overview", "ssat-scoring"] },
+          { cells: [t("Middle", "Middle"), t("5–7", "5–7"), t("三科各 440–710；总分 1320–2130", "440–710 per section; total 1320–2130"), t("与 Upper 相同顺序和时长：写作、两次数学、阅读、词汇与实验题；约 3 小时 10 分含休息", "Same order and timing as Upper: writing, two quantitative sections, reading, verbal and experimental; about 3h10 including breaks")], sourceIds: ["ssat-overview", "ssat-upper-format", "ssat-scoring"] },
+          { cells: [t("Upper", "Upper"), t("8–11", "8–11"), t("三科各 500–800；总分 1500–2400", "500–800 per section; total 1500–2400"), t("写作 25 分钟；数学 50 题／60 分钟；阅读 40／40；词汇 60／30；实验题 16／15", "Writing 25 minutes; Quantitative 50/60; Reading 40/40; Verbal 60/30; Experimental 16/15")], sourceIds: ["ssat-upper-format", "ssat-scoring"] },
         ],
         note: t("百分位比较的是同年级、近三年首次参加 SSAT 的美国和加拿大考生；不是对所有同龄学生的全国百分位。", "Percentiles compare same-grade, first-time SSAT test takers in the United States and Canada over the prior three years; they are not percentiles among all students of that age."),
       }],
@@ -1095,13 +1117,14 @@ const ssatProject: ProjectRecord = {
       tables: [{
         columns: [t("材料", "Resource"), t("内容", "Contents")],
         rows: [
+          { cells: [t("2026–27 Candidate Handbook", "2026–27 Candidate Handbook"), t("2026 年 8 月 3 日起生效的正式规则，含报名、考试次数、改期、费用、考试日要求、违规调查和申诉。报名与考试前均应阅读最新版本。", "The binding rules effective from 3 August 2026, covering registration, attempt limits, changes, fees, test-day requirements, violations, investigations and disputes. Read the current version before registration and testing.")], sourceIds: ["ssat-candidate-handbook-2026-27"] },
           { cells: [t("免费 Mini-Practice Test", "Free Mini-Practice Test"), t("30 道官方题并提供即时诊断报告，适合确认题型和薄弱板块。", "Thirty official questions with an immediate diagnostic report for format familiarisation and identifying weaker areas.")], sourceIds: ["ssat-official-practice"] },
           { cells: [t("Official Online Practice", "Official Online Practice"), t("Middle 与 Upper 分级订阅；含 4 套完整模考、15 套分项测试、50 余项专题练习及解析。", "Separate Middle and Upper subscriptions with four full tests, 15 section tests, 50+ topic quizzes and explanations.")], sourceIds: ["ssat-official-practice"] },
         ],
       }],
     },
   ],
-  sourceIds: ["ssat-overview", "ssat-options-fees", "ssat-upper-format", "ssat-scoring", "ssat-score-report", "ssat-prometric-registration", "ssat-china-cycle-2026-27", "ssat-china-registration-rule", "ssat-china-support", "ssat-official-practice"],
+  sourceIds: ["ssat-overview", "ssat-upper-format", "ssat-scoring", "ssat-candidate-handbook-2026-27", "ssat-prometric-registration", "ssat-china-cycle-2026-27", "ssat-china-registration-rule", "ssat-china-support", "ssat-official-practice"],
   relatedIds: ["isee", "ukiset", "cat4", "map-growth"],
   searchTerms: ["SSAT", "Secondary School Admission Test", "SSAT 中国", "ssatchina", "美国寄宿学校", "私立中学入学", "Upper Level", "Middle Level", "Prometric SSAT"],
 };
@@ -1207,13 +1230,13 @@ const ukisetProject: ProjectRecord = {
   costBand: "medium",
   status: "confirmed",
   cycle: "year-round appointments",
-  lastVerified: VERIFIED_AT,
+  lastVerified: "2026-08-25",
   facts: [
     { label: t("用途", "Purpose"), value: t("主要供英国独立学校和部分英式国际学校评估国际申请者。学校可将其作为初筛、单独入学测评或补充材料，也可能另设校考和面试。", "Used mainly by UK independent schools and some British-curriculum international schools for international applicants. A school may use it for screening, as its assessment or as supplementary evidence, and may still require its own tests and interview."), sourceIds: ["ukiset-overview", "ukiset-reports"] },
     { label: t("年龄", "Age range"), value: t("9.5–18 岁；官方建议至少具备基础英语。", "Ages 9.5–18; basic English is recommended."), sourceIds: ["ukiset-overview"] },
     { label: t("形式", "Format"), value: t("推理约 40–45 分钟；英语阅读与听力约 80 分钟；英文手写议论文 30 分钟。各部分间可安排 5–10 分钟休息。", "Reasoning takes about 40–45 minutes, English reading/listening about 80 minutes, and the handwritten English essay 30 minutes. A 5–10 minute break may be offered between parts."), sourceIds: ["ukiset-administration"] },
     { label: t("费用", "Fee"), value: t("£295，含报名、安排、监考、考生／顾问结果及向最多五所学校发送完整 Profile；周末考试加收 10%。", "£295, including registration, administration, invigilation, candidate/adviser results and the full Profile sent to up to five schools; weekend testing adds 10%."), sourceIds: ["ukiset-overview"] },
-    { label: t("出分与有效期", "Results and validity"), value: t("通常三个工作日处理；成绩有效一年，满三个月可重考。", "Results are normally processed within three business days, remain valid for one year and may be retaken after three months."), sourceIds: ["ukiset-overview"] },
+    { label: t("出分与有效期", "Results and validity"), value: t("通常三个工作日处理，成绩有效一年。UKiset 面向家庭的说明页写满三个月可重考，合作机构页写四个月；两处官方口径不一致，计划重考前应直接向 UKiset 确认。", "Results are normally processed within three business days and remain valid for one year. The family overview says candidates may retest after three months, while the partner-agent page says four months; confirm directly with UKiset before scheduling a retest."), status: "conflict", sourceIds: ["ukiset-overview", "ukiset-agent-policy"] },
     { label: t("评分", "Reporting"), value: t("推理部分报告 Verbal、Non-verbal、Mathematics 标准分、英国同龄常模百分位及 stanine；英语部分报告 CEFR 和 raw score；写作原文随学校版报告提供。", "The reasoning report includes standardised Verbal, Non-verbal and Mathematics scores, UK age-norm percentiles and stanines. English reports CEFR and a raw score, while the essay is included in the school report."), sourceIds: ["ukiset-reports", "ukiset-welcome-guide-2025"] },
   ],
   dates: [],
@@ -1261,7 +1284,7 @@ const ukisetProject: ProjectRecord = {
       ],
     },
   ],
-  sourceIds: ["ukiset-overview", "ukiset-process", "ukiset-administration", "ukiset-reports", "ukiset-preparation", "ukiset-welcome-guide-2025"],
+  sourceIds: ["ukiset-overview", "ukiset-agent-policy", "ukiset-process", "ukiset-administration", "ukiset-reports", "ukiset-preparation", "ukiset-welcome-guide-2025"],
   relatedIds: ["ssat", "isee", "cat4", "map-growth"],
   searchTerms: ["UKiset", "UK independent schools", "英国私校", "英国寄宿学校", "在线监考", "CEFR", "非语言推理"],
 };
@@ -1763,7 +1786,7 @@ export const assessmentThresholds: ThresholdRecord[] = [
     value: "900–1800",
     maxScore: "1800",
     status: "confirmed",
-    sourceIds: ["ssat-score-report"],
+    sourceIds: ["ssat-scoring"],
     note: t("Quantitative、Verbal、Reading 三科相加；学校自行制定使用标准。", "Sum of Quantitative, Verbal and Reading; schools set their own use criteria."),
   },
   {
@@ -1775,7 +1798,7 @@ export const assessmentThresholds: ThresholdRecord[] = [
     value: "1320–2130",
     maxScore: "2130",
     status: "confirmed",
-    sourceIds: ["ssat-score-report"],
+    sourceIds: ["ssat-scoring"],
     note: t("量尺范围，不是所有寄宿学校的录取线。", "A reporting scale, not an admission cutoff for all boarding schools."),
   },
   {
@@ -1787,7 +1810,7 @@ export const assessmentThresholds: ThresholdRecord[] = [
     value: "1500–2400",
     maxScore: "2400",
     status: "confirmed",
-    sourceIds: ["ssat-score-report"],
+    sourceIds: ["ssat-scoring"],
     note: t("量尺范围，不是所有寄宿学校的录取线。", "A reporting scale, not an admission cutoff for all boarding schools."),
   },
   {

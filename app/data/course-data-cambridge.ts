@@ -224,10 +224,10 @@ const thresholdSection = (
         ),
         row(
           [
-            ["官方分数线档案", "Official threshold archive"],
+            ["最新已收录考季", "Latest included series"],
             [
-              "公开总目录当前可见 2022 年 3 月至 2026 年 3 月各考季；2026 年 6 月分数线截至核查日尚未出现在总目录。",
-              "The public index currently exposes series from March 2022 through March 2026; June 2026 thresholds were not yet listed on the verification date.",
+              "2026 年 6 月；下方按官方 component combination 分列资格总分线。单个 component 的分数线可在对应官方 PDF 中查阅。",
+              "June 2026. Qualification thresholds below are separated by official component combination. Individual-component boundaries remain available in the corresponding official PDF.",
             ],
           ],
           [archiveSourceId],
@@ -495,6 +495,11 @@ export const cambridgeCourseSources: SourceRecord[] = [
     "official",
     "Restricted teaching and assessment resources for registered Cambridge schools",
   ),
+  { ...source("cie-0580-thresholds-2026-06", "0580 2026 年 6 月等级分数线", "0580 June 2026 grade thresholds", "https://www.cambridgeinternational.org/Images/762852-mathematics-without-coursework-0580-june-2026-grade-threshold-table.pdf", "official-data", "0580 June 2026 component and syllabus grade thresholds"), verifiedAt: "2026-08-25" },
+  { ...source("cie-0606-thresholds-2026-06", "0606 2026 年 6 月等级分数线", "0606 June 2026 grade thresholds", "https://www.cambridgeinternational.org/Images/762853-additional-mathematics-0606-june-2026-grade-threshold-table.pdf", "official-data", "0606 June 2026 component and syllabus grade thresholds"), verifiedAt: "2026-08-25" },
+  { ...source("cie-0607-thresholds-2026-06", "0607 2026 年 6 月等级分数线", "0607 June 2026 grade thresholds", "https://www.cambridgeinternational.org/Images/762854-cambridge-international-mathematics-0607-june-2026-grade-threshold-table.pdf", "official-data", "0607 June 2026 component and syllabus grade thresholds"), verifiedAt: "2026-08-25" },
+  { ...source("cie-9709-thresholds-2026-06", "9709 2026 年 6 月等级分数线", "9709 June 2026 grade thresholds", "https://www.cambridgeinternational.org/Images/761530-mathematics-9709-june-2026-grade-threshold-table.pdf", "official-data", "9709 June 2026 linear, staged and AS Level syllabus thresholds"), verifiedAt: "2026-08-25" },
+  { ...source("cie-9231-thresholds-2026-06", "9231 2026 年 6 月等级分数线", "9231 June 2026 grade thresholds", "https://www.cambridgeinternational.org/Images/761495-further-mathematics-a-level-9231-june-2026-grade-threshold-table.pdf", "official-data", "9231 June 2026 linear, staged and AS Level syllabus thresholds"), verifiedAt: "2026-08-25" },
 ];
 
 const project0580: ProjectRecord = {
@@ -515,7 +520,7 @@ const project0580: ProjectRecord = {
   costBand: "varies",
   status: "confirmed",
   cycle: "2025-2027",
-  lastVerified: VERIFIED_AT,
+  lastVerified: "2026-08-25",
   facts: [
     fact("官方名称", "Official name", "Cambridge IGCSE Mathematics 0580", "Cambridge IGCSE Mathematics 0580", ["cie-0580-syllabus"]),
     fact("现行考纲", "Current syllabus", "2025–2027，Version 3，2024 年 5 月发布", "2025–2027, Version 3, published May 2024", ["cie-0580-syllabus"]),
@@ -557,7 +562,7 @@ const project0580: ProjectRecord = {
     chinaEntrySection("0580", "cie-0580-syllabus"),
     thresholdSection("cie-0580-syllabus", "cambridge-igcse-thresholds", "Core：C–G；Extended：A*–E。", "Core: C–G; Extended: A*–E.", "2025 年考试结构调整，历史档案应在 2024／2025 之间标记结构断点。", "The assessment structure changed in 2025; historical tables should mark a structural break between 2024 and 2025."),
   ],
-  sourceIds: ["cie-0580-overview", "cie-0580-syllabus", "cie-0580-papers", "cie-0580-resources", "cambridge-igcse-thresholds", "cambridge-private-candidates", "cambridge-private-registration", "cambridge-zone5-entry-guide-2026", "cambridge-zone5-nov-2026-timetable"],
+  sourceIds: ["cie-0580-overview", "cie-0580-syllabus", "cie-0580-papers", "cie-0580-resources", "cambridge-igcse-thresholds", "cie-0580-thresholds-2026-06", "cambridge-private-candidates", "cambridge-private-registration", "cambridge-zone5-entry-guide-2026", "cambridge-zone5-nov-2026-timetable"],
   relatedIds: ["cie-igcse-additional-mathematics-0606", "cie-igcse-international-mathematics-0607", "cie-as-a-level-mathematics-9709"],
   searchTerms: ["Cambridge", "IGCSE", "0580", "Core", "Extended", "剑桥数学", "CIE Mathematics"],
 };
@@ -580,7 +585,7 @@ const project0607: ProjectRecord = {
   costBand: "varies",
   status: "confirmed",
   cycle: "2025-2027",
-  lastVerified: VERIFIED_AT,
+  lastVerified: "2026-08-25",
   facts: [
     fact("官方名称", "Official name", "Cambridge IGCSE International Mathematics 0607", "Cambridge IGCSE International Mathematics 0607", ["cie-0607-syllabus"]),
     fact("现行考纲", "Current syllabus", "2025–2027，Version 3，2023 年 10 月发布", "2025–2027, Version 3, published October 2023", ["cie-0607-syllabus"]),
@@ -625,7 +630,7 @@ const project0607: ProjectRecord = {
     chinaEntrySection("0607", "cie-0607-syllabus"),
     thresholdSection("cie-0607-syllabus", "cambridge-igcse-thresholds", "Core：C–G；Extended：A*–E。", "Core: C–G; Extended: A*–E.", "2025 年评估结构重新平衡，跨 2024／2025 比较时应标记版本变化。", "The assessment was rebalanced for 2025; comparisons across 2024 and 2025 should mark the specification change."),
   ],
-  sourceIds: ["cie-0607-overview", "cie-0607-syllabus", "cie-0607-papers", "cie-0607-resources", "cambridge-igcse-thresholds", "cambridge-private-candidates", "cambridge-private-registration", "cambridge-zone5-entry-guide-2026", "cambridge-zone5-nov-2026-timetable"],
+  sourceIds: ["cie-0607-overview", "cie-0607-syllabus", "cie-0607-papers", "cie-0607-resources", "cambridge-igcse-thresholds", "cie-0607-thresholds-2026-06", "cambridge-private-candidates", "cambridge-private-registration", "cambridge-zone5-entry-guide-2026", "cambridge-zone5-nov-2026-timetable"],
   relatedIds: ["cie-igcse-mathematics-0580", "cie-igcse-additional-mathematics-0606", "cie-as-a-level-mathematics-9709"],
   searchTerms: ["Cambridge", "IGCSE", "0607", "International Mathematics", "GDC", "investigation", "modelling", "国际数学"],
 };
@@ -648,7 +653,7 @@ const project0606: ProjectRecord = {
   costBand: "varies",
   status: "confirmed",
   cycle: "2025-2027",
-  lastVerified: VERIFIED_AT,
+  lastVerified: "2026-08-25",
   facts: [
     fact("官方名称", "Official name", "Cambridge IGCSE Additional Mathematics 0606", "Cambridge IGCSE Additional Mathematics 0606", ["cie-0606-syllabus"]),
     fact("现行考纲", "Current syllabus", "2025–2027，Version 1；文件版权日期为 2022 年 9 月", "2025–2027, Version 1; document copyright dated September 2022", ["cie-0606-syllabus"]),
@@ -688,7 +693,7 @@ const project0606: ProjectRecord = {
     chinaEntrySection("0606", "cie-0606-syllabus"),
     thresholdSection("cie-0606-syllabus", "cambridge-igcse-thresholds", "全课程成绩范围 A*–E。", "The qualification grade range is A*–E.", "2025 年 P1 改为无计算器卷，历史档案应在 2024／2025 之间标记结构断点。", "P1 became a non-calculator paper in 2025; historical tables should mark a structural break between 2024 and 2025."),
   ],
-  sourceIds: ["cie-0606-overview", "cie-0606-syllabus", "cie-0606-papers", "cie-0606-resources", "cie-0606-factsheet", "cambridge-igcse-thresholds", "cambridge-private-candidates", "cambridge-private-registration", "cambridge-zone5-entry-guide-2026", "cambridge-zone5-nov-2026-timetable"],
+  sourceIds: ["cie-0606-overview", "cie-0606-syllabus", "cie-0606-papers", "cie-0606-resources", "cie-0606-factsheet", "cambridge-igcse-thresholds", "cie-0606-thresholds-2026-06", "cambridge-private-candidates", "cambridge-private-registration", "cambridge-zone5-entry-guide-2026", "cambridge-zone5-nov-2026-timetable"],
   relatedIds: ["cie-igcse-mathematics-0580", "cie-as-a-level-mathematics-9709"],
   searchTerms: ["Cambridge", "IGCSE", "0606", "Additional Mathematics", "附加数学", "微积分"],
 };
@@ -711,7 +716,7 @@ const project9709: ProjectRecord = {
   costBand: "varies",
   status: "confirmed",
   cycle: "2026-2027",
-  lastVerified: VERIFIED_AT,
+  lastVerified: "2026-08-25",
   facts: [
     fact("官方名称", "Official name", "Cambridge International AS & A Level Mathematics 9709", "Cambridge International AS & A Level Mathematics 9709", ["cie-9709-syllabus"]),
     fact("现行考纲", "Current syllabus", "2026–2027，Version 4，2025 年 12 月发布", "2026–2027, Version 4, published December 2025", ["cie-9709-syllabus"]),
@@ -764,7 +769,7 @@ const project9709: ProjectRecord = {
     chinaEntrySection("9709", "cie-9709-syllabus"),
     thresholdSection("cie-9709-syllabus", "cambridge-alevel-thresholds", "AS Level：a–e；A Level：A*–E。", "AS Level: a–e; A Level: A*–E."),
   ],
-  sourceIds: ["cie-9709-overview", "cie-9709-syllabus", "cie-9709-papers", "cie-9709-resources", "cie-9709-support", "cambridge-alevel-thresholds", "cambridge-private-candidates", "cambridge-private-registration", "cambridge-zone5-entry-guide-2026", "cambridge-zone5-nov-2026-timetable"],
+  sourceIds: ["cie-9709-overview", "cie-9709-syllabus", "cie-9709-papers", "cie-9709-resources", "cie-9709-support", "cambridge-alevel-thresholds", "cie-9709-thresholds-2026-06", "cambridge-private-candidates", "cambridge-private-registration", "cambridge-zone5-entry-guide-2026", "cambridge-zone5-nov-2026-timetable"],
   relatedIds: ["cie-igcse-additional-mathematics-0606", "cie-as-a-level-further-mathematics-9231"],
   searchTerms: ["Cambridge", "A Level", "AS Level", "9709", "Pure Mathematics", "Mechanics", "Statistics", "剑桥Alevel数学"],
 };
@@ -787,7 +792,7 @@ const project9231: ProjectRecord = {
   costBand: "varies",
   status: "confirmed",
   cycle: "2026-2027",
-  lastVerified: VERIFIED_AT,
+  lastVerified: "2026-08-25",
   facts: [
     fact("官方名称", "Official name", "Cambridge International AS & A Level Further Mathematics 9231", "Cambridge International AS & A Level Further Mathematics 9231", ["cie-9231-syllabus"]),
     fact("现行考纲", "Current syllabus", "2026–2027，Version 3；官方 PDF 对发布日期月份存在 2025 年 7 月／8 月两种写法", "2026–2027, Version 3; the official PDF gives July and August 2025 in different places", ["cie-9231-syllabus"], "conflict"),
@@ -838,7 +843,7 @@ const project9231: ProjectRecord = {
     chinaEntrySection("9231", "cie-9231-syllabus"),
     thresholdSection("cie-9231-syllabus", "cambridge-alevel-thresholds", "AS Level：a–e；A Level：A*–E。", "AS Level: a–e; A Level: A*–E."),
   ],
-  sourceIds: ["cie-9231-overview", "cie-9231-syllabus", "cie-9231-papers", "cie-9231-resources", "cambridge-alevel-thresholds", "cambridge-private-candidates", "cambridge-private-registration", "cambridge-zone5-entry-guide-2026", "cambridge-zone5-nov-2026-timetable"],
+  sourceIds: ["cie-9231-overview", "cie-9231-syllabus", "cie-9231-papers", "cie-9231-resources", "cambridge-alevel-thresholds", "cie-9231-thresholds-2026-06", "cambridge-private-candidates", "cambridge-private-registration", "cambridge-zone5-entry-guide-2026", "cambridge-zone5-nov-2026-timetable"],
   relatedIds: ["cie-as-a-level-mathematics-9709"],
   searchTerms: ["Cambridge", "A Level", "Further Mathematics", "9231", "Further Pure", "Further Mechanics", "Further Statistics", "进阶数学"],
 };
@@ -850,6 +855,159 @@ export const cambridgeCourseProjects: ProjectRecord[] = [
   project9709,
   project9231,
 ];
+
+type CambridgeJune2026Row = [
+  code: string,
+  projectId: string,
+  route: string,
+  components: string,
+  value: string,
+  maxScore: string,
+  sourceId: string,
+];
+
+const cambridgeJuneRow = (...row: CambridgeJune2026Row): CambridgeJune2026Row => row;
+
+const cambridgeJune2026Rows: CambridgeJune2026Row[] = [
+  cambridgeJuneRow("0580", "cie-igcse-mathematics-0580", "Core", "11+31", "C:82; D:68; E:55; F:42; G:29", "160", "cie-0580-thresholds-2026-06"),
+  cambridgeJuneRow("0580", "cie-igcse-mathematics-0580", "Core", "12+32", "C:83; D:67; E:52; F:37; G:22", "160", "cie-0580-thresholds-2026-06"),
+  cambridgeJuneRow("0580", "cie-igcse-mathematics-0580", "Core", "13+33", "C:83; D:69; E:55; F:42; G:29", "160", "cie-0580-thresholds-2026-06"),
+  cambridgeJuneRow("0580", "cie-igcse-mathematics-0580", "Extended", "21+41", "A*:162; A:138; B:114; C:90; D:73; E:56", "200", "cie-0580-thresholds-2026-06"),
+  cambridgeJuneRow("0580", "cie-igcse-mathematics-0580", "Extended", "22+42", "A*:177; A:154; B:120; C:87; D:68; E:49", "200", "cie-0580-thresholds-2026-06"),
+  cambridgeJuneRow("0580", "cie-igcse-mathematics-0580", "Extended", "23+43", "A*:177; A:154; B:124; C:94; D:71; E:49", "200", "cie-0580-thresholds-2026-06"),
+  cambridgeJuneRow("0580", "cie-igcse-mathematics-0580", "Single-component", "50", "A*:82; A:75; B:63; C:52; D:45; E:39; F:33; G:27", "90", "cie-0580-thresholds-2026-06"),
+
+  cambridgeJuneRow("0607", "cie-igcse-international-mathematics-0607", "Core", "11+31+51", "C:129; D:109; E:90; F:70; G:50", "200", "cie-0607-thresholds-2026-06"),
+  cambridgeJuneRow("0607", "cie-igcse-international-mathematics-0607", "Core", "12+32+52", "C:130; D:110; E:91; F:70; G:49", "200", "cie-0607-thresholds-2026-06"),
+  cambridgeJuneRow("0607", "cie-igcse-international-mathematics-0607", "Core", "13+33+53", "C:128; D:106; E:85; F:63; G:41", "200", "cie-0607-thresholds-2026-06"),
+  cambridgeJuneRow("0607", "cie-igcse-international-mathematics-0607", "Extended", "21+41+61", "A*:224; A:198; B:152; C:107; D:83; E:59", "250", "cie-0607-thresholds-2026-06"),
+  cambridgeJuneRow("0607", "cie-igcse-international-mathematics-0607", "Extended", "22+42+62", "A*:219; A:189; B:145; C:101; D:81; E:61", "250", "cie-0607-thresholds-2026-06"),
+  cambridgeJuneRow("0607", "cie-igcse-international-mathematics-0607", "Extended", "23+43+63", "A*:220; A:191; B:146; C:102; D:81; E:60", "250", "cie-0607-thresholds-2026-06"),
+  cambridgeJuneRow("0607", "cie-igcse-international-mathematics-0607", "Single-component", "50", "A*:77; A:67; B:57; C:48; D:40; E:32; F:24; G:16", "90", "cie-0607-thresholds-2026-06"),
+
+  cambridgeJuneRow("0606", "cie-igcse-additional-mathematics-0606", "Syllabus", "11+21", "A*:141; A:122; B:92; C:62; D:49; E:36", "160", "cie-0606-thresholds-2026-06"),
+  cambridgeJuneRow("0606", "cie-igcse-additional-mathematics-0606", "Syllabus", "12+22", "A*:138; A:117; B:88; C:59; D:46; E:33", "160", "cie-0606-thresholds-2026-06"),
+  cambridgeJuneRow("0606", "cie-igcse-additional-mathematics-0606", "Syllabus", "13+23", "A*:138; A:117; B:88; C:59; D:46; E:33", "160", "cie-0606-thresholds-2026-06"),
+  cambridgeJuneRow("0606", "cie-igcse-additional-mathematics-0606", "Single-component", "50", "A*:78; A:69; B:60; C:51; D:42; E:33", "90", "cie-0606-thresholds-2026-06"),
+
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Linear", "11+31+41+51", "A*:223; A:197; B:163; C:128; D:94; E:60", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Linear", "11+31+51+61", "A*:222; A:194; B:163; C:129; D:95; E:62", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Linear", "12+32+42+52", "A*:222; A:194; B:161; C:124; D:88; E:52", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Linear", "12+32+52+62", "A*:223; A:196; B:166; C:131; D:96; E:61", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Linear", "13+33+43+53", "A*:231; A:212; B:186; C:149; D:113; E:77", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Linear", "13+33+53+63", "A*:234; A:218; B:194; C:155; D:116; E:77", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Linear", "15+35+45+55", "A*:226; A:202; B:175; C:136; D:98; E:60", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Linear", "15+35+55+65", "A*:227; A:204; B:178; C:138; D:98; E:58", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Linear", "59+60", "A*:136; A:126; B:108; C:87; D:66; E:46", "150", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Linear", "59+69", "A*:136; A:126; B:108; C:87; D:66; E:46", "150", "cie-9709-thresholds-2026-06"),
+
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "31+41+87", "A*:224; A:199; B:169; C:133; D:97; E:61", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "31+41+97", "A*:225; A:200; B:172; C:135; D:99; E:63", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "31+51+84", "A*:223; A:197; B:166; C:129; D:93; E:57", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "31+51+94", "A*:221; A:193; B:162; C:127; D:92; E:58", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "31+61+87", "A*:223; A:196; B:169; C:133; D:98; E:63", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "31+61+97", "A*:222; A:197; B:172; C:136; D:100; E:65", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "32+42+88", "A*:221; A:192; B:160; C:125; D:90; E:56", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "32+42+98", "A*:220; A:190; B:159; C:124; D:89; E:55", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "32+52+85", "A*:224; A:199; B:172; C:140; D:108; E:77", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "32+52+95", "A*:219; A:190; B:161; C:127; D:93; E:59", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "32+62+88", "A*:222; A:194; B:165; C:131; D:98; E:65", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "32+62+98", "A*:220; A:192; B:164; C:130; D:97; E:64", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "33+43+89", "A*:229; A:209; B:182; C:147; D:112; E:77", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "33+43+99", "A*:230; A:211; B:186; C:152; D:118; E:84", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "33+53+86", "A*:232; A:215; B:189; C:150; D:111; E:73", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "33+53+96", "A*:229; A:209; B:183; C:148; D:113; E:79", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "33+63+89", "A*:232; A:215; B:190; C:152; D:114; E:77", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "33+63+99", "A*:233; A:217; B:194; C:157; D:120; E:84", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "35+45+83", "A*:226; A:202; B:174; C:137; D:100; E:63", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "35+45+93", "A*:226; A:203; B:177; C:141; D:105; E:70", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "35+55+82", "A*:227; A:205; B:178; C:137; D:96; E:56", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "35+55+92", "A*:225; A:201; B:175; C:136; D:97; E:58", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "35+65+83", "A*:227; A:204; B:177; C:138; D:99; E:61", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "35+65+93", "A*:227; A:205; B:180; C:142; D:105; E:68", "250", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "60+81", "A*:136; A:123; B:107; C:89; D:71; E:53", "150", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "68+80", "A*:136; A:123; B:107; C:89; D:71; E:53", "150", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "Staged", "69+81", "A*:136; A:123; B:107; C:89; D:71; E:53", "150", "cie-9709-thresholds-2026-06"),
+
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "AS Level", "11+21", "a:99; b:83; c:65; d:47; e:30", "125", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "AS Level", "11+41", "a:102; b:84; c:66; d:48; e:30", "125", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "AS Level", "11+51", "a:98; b:79; c:62; d:45; e:28", "125", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "AS Level", "12+22", "a:101; b:87; c:67; d:47; e:27", "125", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "AS Level", "12+42", "a:99; b:80; c:60; d:40; e:20", "125", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "AS Level", "12+52", "a:102; b:86; c:65; d:44; e:23", "125", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "AS Level", "13+23", "a:101; b:88; c:68; d:49; e:30", "125", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "AS Level", "13+43", "a:100; b:85; c:66; d:47; e:29", "125", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "AS Level", "13+53", "a:107; b:94; c:72; d:50; e:29", "125", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "AS Level", "15+25", "a:100; b:87; c:68; d:49; e:31", "125", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "AS Level", "15+45", "a:102; b:86; c:67; d:49; e:31", "125", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "AS Level", "15+55", "a:105; b:92; c:70; d:48; e:27", "125", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "AS Level", "50", "a:63; b:54; c:43; d:33; e:23", "75", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "AS Level", "58", "a:63; b:54; c:43; d:33; e:23", "75", "cie-9709-thresholds-2026-06"),
+  cambridgeJuneRow("9709", "cie-as-a-level-mathematics-9709", "AS Level", "59", "a:63; b:54; c:43; d:33; e:23", "75", "cie-9709-thresholds-2026-06"),
+
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Linear", "11+21+31+41", "A*:214; A:181; B:148; C:125; D:103; E:81", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Linear", "12+22+32+42", "A*:214; A:181; B:148; C:125; D:103; E:81", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Linear", "13+23+33+43", "A*:214; A:180; B:146; C:124; D:102; E:81", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Linear", "14+24+34+44", "A*:217; A:185; B:151; C:128; D:106; E:84", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Linear", "51+60", "A*:126; A:108; B:90; C:72; D:54; E:36", "150", "cie-9231-thresholds-2026-06"),
+
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "21+31+87", "A*:211; A:177; B:143; C:119; D:96; E:73", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "21+31+97", "A*:211; A:178; B:145; C:122; D:99; E:77", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "21+31+99", "A*:211; A:178; B:145; C:122; D:99; E:77", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "21+41+84", "A*:214; A:181; B:148; C:125; D:103; E:81", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "21+41+94", "A*:210; A:176; B:142; C:121; D:100; E:79", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "21+41+96", "A*:210; A:176; B:142; C:121; D:100; E:79", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "22+32+88", "A*:211; A:177; B:143; C:119; D:96; E:73", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "22+32+97", "A*:211; A:178; B:145; C:122; D:99; E:77", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "22+32+98", "A*:205; A:175; B:145; C:122; D:100; E:78", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "22+42+85", "A*:214; A:181; B:148; C:125; D:103; E:81", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "22+42+94", "A*:210; A:176; B:142; C:121; D:100; E:79", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "22+42+95", "A*:205; A:172; B:139; C:118; D:97; E:76", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "23+33+89", "A*:214; A:180; B:146; C:122; D:98; E:74", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "23+33+91", "A*:203; A:171; B:139; C:117; D:95; E:73", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "23+33+98", "A*:202; A:172; B:142; C:120; D:98; E:77", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "23+33+99", "A*:208; A:175; B:142; C:120; D:98; E:76", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "23+43+86", "A*:217; A:185; B:152; C:128; D:105; E:82", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "23+43+92", "A*:208; A:174; B:140; C:119; D:98; E:77", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "23+43+95", "A*:208; A:174; B:140; C:119; D:98; E:77", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "23+43+96", "A*:213; A:178; B:143; C:122; D:101; E:80", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "24+34+63", "A*:222; A:195; B:161; C:136; D:112; E:88", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "24+34+73", "A*:212; A:180; B:148; C:126; D:104; E:82", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "24+44+62", "A*:223; A:197; B:160; C:136; D:113; E:90", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "24+44+72", "A*:213; A:177; B:141; C:121; D:101; E:81", "250", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "60+81", "A*:130; A:114; B:98; C:81; D:64; E:48", "150", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "Staged", "61+80", "A*:130; A:114; B:98; C:81; D:64; E:48", "150", "cie-9231-thresholds-2026-06"),
+
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "AS Level", "11+31", "a:79; b:62; c:51; d:40; e:30", "125", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "AS Level", "11+41", "a:90; b:73; c:61; d:49; e:38", "125", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "AS Level", "12+32", "a:79; b:62; c:51; d:40; e:30", "125", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "AS Level", "12+42", "a:90; b:73; c:61; d:49; e:38", "125", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "AS Level", "13+33", "a:76; b:59; c:49; d:39; e:29", "125", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "AS Level", "13+43", "a:92; b:74; c:62; d:50; e:39", "125", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "AS Level", "14+34", "a:82; b:66; c:54; d:42; e:31", "125", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "AS Level", "14+44", "a:94; b:76; c:64; d:52; e:40", "125", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "AS Level", "50", "a:54; b:45; c:36; d:27; e:18", "75", "cie-9231-thresholds-2026-06"),
+  cambridgeJuneRow("9231", "cie-as-a-level-further-mathematics-9231", "AS Level", "51", "a:54; b:45; c:36; d:27; e:18", "75", "cie-9231-thresholds-2026-06"),
+];
+
+const cambridgeJune2026Thresholds: ThresholdRecord[] = cambridgeJune2026Rows.map(
+  ([code, projectId, route, components, value, maxScore, sourceId]) => ({
+    id: `cie-${code}-2026-06-${route.toLowerCase().replaceAll(" ", "-")}-${components.replaceAll("+", "-")}`,
+    projectId,
+    year: "2026",
+    sitting: `June · ${route} · ${components}`,
+    metric: t("资格组合原始分等级线", "Syllabus grade thresholds by component combination"),
+    value,
+    maxScore,
+    status: "confirmed",
+    sourceIds: [sourceId],
+    note: route === "Staged"
+      ? t("官方 staged assessment 组合；80–99 系列代码包含 carry-forward 成绩，须按考生实际 entry option 查询。", "Official staged-assessment combination. Codes in the 80–99 range include carried-forward results; use the candidate's actual entry option.")
+      : route === "Single-component"
+        ? t("官方组合表将 Component 50 作为单组件资格路径列出；适用报名选项须由考试中心确认。", "The official table lists Component 50 as a single-component qualification route; confirm the applicable entry option with the centre.")
+        : t("这是该 component combination 的资格总分线，不是单个 component 分数线。", "This is the qualification threshold for the component combination, not an individual-component boundary."),
+  }),
+);
 
 export const cambridgeCourseThresholds: ThresholdRecord[] = [
   {
@@ -950,6 +1108,7 @@ export const cambridgeCourseThresholds: ThresholdRecord[] = [
     sourceIds: ["cie-9231-syllabus", "cambridge-alevel-thresholds"],
     note: t("这是成绩等级范围，不是原始分线；完整 A Level 使用四个组件。", "This is a grade range, not a raw-mark cutoff; the full A Level uses all four components."),
   },
+  ...cambridgeJune2026Thresholds,
 ];
 
 const syllabusTranslationNote = t(

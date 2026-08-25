@@ -346,26 +346,34 @@ export const ukSingaporeDestinationSources: SourceRecord[] = [
     "official",
     "2025 年 12 月更新；专业选择与文件上传",
   ),
-  source(
-    "sg-ntu-admission-guide-2026",
-    "NTU 本科申请总览",
-    "NTU undergraduate admission guide",
-    "南洋理工大学招生办公室",
-    "NTU Office of Admissions",
-    "https://www.ntu.edu.sg/admissions/undergraduate/admission-guide",
-    "official",
-    "AY2026/2027；按高中资格选择申请组别",
-  ),
-  source(
-    "sg-ntu-international-qualifications-2026",
-    "NTU 国际资格与申请周期",
-    "NTU international qualifications and application periods",
-    "南洋理工大学招生办公室",
-    "NTU Office of Admissions",
-    "https://www.ntu.edu.sg/admissions/undergraduate/admission-guide/international-qualifications",
-    "official",
-    "AY2026/2027 国际资格、文件与成绩更新",
-  ),
+  {
+    ...source(
+      "sg-ntu-admission-guide-current",
+      "NTU 本科申请总览（AY2027/28）",
+      "NTU undergraduate admission guide (AY2027/28)",
+      "南洋理工大学招生办公室",
+      "NTU Office of Admissions",
+      "https://www.ntu.edu.sg/admissions/undergraduate/admission-guide",
+      "official",
+      "AY2027/2028 application groups and broad application windows",
+    ),
+    verifiedAt: "2026-08-25",
+  },
+  {
+    ...source(
+      "sg-ntu-international-qualifications-2026",
+      "NTU 国际资格与申请周期",
+      "NTU international qualifications and application periods",
+      "南洋理工大学招生办公室",
+      "NTU Office of Admissions",
+      "https://www.ntu.edu.sg/admissions/undergraduate/admission-guide/international-qualifications",
+      "official",
+      "AY2026/2027 detailed qualification-specific dates and document rules",
+      "该详细页仍显示 AY2026/27，与已切换至 AY2027/28 的本科申请总览尚未同步。",
+      "This detailed page still shows AY2026/27 and has not yet caught up with the AY2027/28 undergraduate admission guide.",
+    ),
+    verifiedAt: "2026-08-25",
+  },
   source(
     "sg-ntu-gaokao-2027",
     "NTU 中国高考申请要求",
@@ -834,14 +842,14 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
       "Application system",
       "NUS、NTU 等大学分别开设申请门户；须逐校申请和上传材料。",
       "NUS, NTU and other universities operate separate application portals; applications and documents are submitted to each institution.",
-      ["sg-moe-autonomous-universities", "sg-nus-international-qualifications-2026", "sg-ntu-admission-guide-2026"],
+      ["sg-moe-autonomous-universities", "sg-nus-international-qualifications-2026", "sg-ntu-admission-guide-current"],
     ),
     fact(
       "申请组别",
       "Applicant category",
       "申请表按高中资格而非单按国籍选择。International A Level、IB、美国高中课程和高考使用不同入口与材料清单。",
       "The application category follows the school qualification rather than nationality alone. International A Level, IB, US High School and Gaokao routes use different forms and document lists.",
-      ["sg-nus-international-qualifications-2026", "sg-ntu-admission-guide-2026"],
+      ["sg-nus-international-qualifications-2026", "sg-ntu-admission-guide-current"],
     ),
     fact(
       "统一数学考试",
@@ -863,6 +871,14 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
       "NUS 采用“高考良好成绩”表述但未公布统一百分比；NTU 的最低申请条件为高考总分平均达到满分的 80%。",
       "NUS states a 'good pass' in Gaokao without publishing a uniform percentage; NTU sets a minimum application threshold of 80% of the total Gaokao score.",
       ["sg-nus-gaokao-2026", "sg-ntu-gaokao-2027"],
+    ),
+    fact(
+      "NTU AY2027/28 申请周期",
+      "NTU AY2027/28 application cycle",
+      "NTU 总览已发布 AY2027/28，国际资格申请组的总窗口为 2026-10-15 至 2027-03-19；具体资格可能采用不同截止日。",
+      "NTU has published its AY2027/28 overview, with a broad international-qualifications window from 15 October 2026 to 19 March 2027; qualification-specific closing dates may differ.",
+      ["sg-ntu-admission-guide-current"],
+      "confirmed",
     ),
   ],
   sections: [
@@ -889,7 +905,7 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
                 ["申请组别、开放期、最低资格、成绩核验与文件上传", "Applicant category, application window, minimum qualification, score verification and document upload"],
                 ["先按所持高中资格找到对应页面。", "First locate the page matching the school qualification held."],
               ],
-              ["sg-nus-international-qualifications-2026", "sg-ntu-admission-guide-2026", "sg-ntu-international-qualifications-2026"],
+              ["sg-nus-international-qualifications-2026", "sg-ntu-admission-guide-current", "sg-ntu-international-qualifications-2026"],
             ),
             row(
               [
@@ -957,7 +973,7 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
                 ["按 NTU 的 American High School／AP 资格页申请；不得将自行参加的 AP 自动当作另一申请组别。", "Apply through NTU's American High School / AP qualification page; self-taken APs do not automatically change the applicant category."],
                 ["Calculus BC 成绩和官方 College Board 送分是 NUS 数学证据的核心。", "Calculus BC and official College Board score delivery are central mathematics evidence for NUS."],
               ],
-              ["sg-nus-standardised-tests-2026", "sg-ntu-admission-guide-2026", "sg-ntu-gaokao-2027"],
+              ["sg-nus-standardised-tests-2026", "sg-ntu-admission-guide-current", "sg-ntu-gaokao-2027"],
             ),
             row(
               [
@@ -1066,7 +1082,7 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
                 ["通过 NUS 国际资格申请入口，选择实际高中资格。", "Use NUS International Qualifications and select the actual school qualification."],
                 ["通过 NTU 对应资格表格申请。就读高考课程但不参加高考、或自行参加 AP／SAT 的学生，NTU 仍要求使用高考类别。", "Use the NTU form for the relevant qualification. Students enrolled in the Gaokao curriculum who do not sit Gaokao or independently take AP/SAT must still use NTU's Gaokao category."],
               ],
-              ["sg-nus-international-qualifications-2026", "sg-ntu-admission-guide-2026", "sg-ntu-gaokao-2027"],
+              ["sg-nus-international-qualifications-2026", "sg-ntu-admission-guide-current", "sg-ntu-gaokao-2027"],
             ),
             row(
               [
@@ -1140,22 +1156,22 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
             ),
             row(
               [
-                ["NTU 国际资格", "NTU International Qualifications"],
-                ["AY2026/2027", "AY2026/2027"],
-                ["按资格不同，自 2025-10-15 起开放，主要截止于 2026-01-20 或 2026-03-19。", "Qualification-dependent, opening from 15 October 2025 with principal closing dates of 20 January or 19 March 2026."],
-                ["必须进入具体资格页核对，不使用单一总截止日。", "Check the specific qualification page; do not use one universal closing date."],
+                ["NTU 国际资格总览", "NTU International Qualifications overview"],
+                ["AY2027/2028", "AY2027/2028"],
+                ["国际资格申请组总窗口为 2026-10-15 至 2027-03-19；具体截止日因资格而异。", "The broad international-qualifications window is 15 October 2026 to 19 March 2027; the closing date varies by qualification."],
+                ["详细国际资格页仍显示 AY2026/2027，不能据总窗口推定高考申请人的最终截止日。", "The detailed international-qualifications page still shows AY2026/2027, so the final Gaokao deadline must not be inferred from the broad window."],
               ],
-              ["sg-ntu-international-qualifications-2026", "sg-ntu-admission-guide-2026"],
-              "historical",
+              ["sg-ntu-international-qualifications-2026", "sg-ntu-admission-guide-current"],
+              "confirmed",
             ),
             row(
               [
                 ["NTU 2027 高考申请人", "NTU applicants sitting Gaokao in 2027"],
                 ["AY2027 起规则已预告", "Rule announced from AY2027"],
                 ["高考出分后 3 日内提交；面试在 7 月。具体申请开放与截止时间待当年入口。", "Submit results within three days of release; interviews take place in July. The application opening and closing dates await the current-cycle page."],
-                ["同时核对 Gaokao 页面和 NTU Admission Guide。", "Check both the Gaokao page and NTU Admission Guide."],
+                ["总览已公布国际资格组总窗口；高考资格的确切开放与截止日仍待详细页同步。", "The overview now gives the broad international-qualifications window; the exact opening and closing dates for Gaokao applicants still await the detailed-page update."],
               ],
-              ["sg-ntu-gaokao-2027", "sg-ntu-admission-guide-2026"],
+              ["sg-ntu-gaokao-2027", "sg-ntu-admission-guide-current", "sg-ntu-international-qualifications-2026"],
               "pending",
             ),
           ],
@@ -1179,7 +1195,7 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
                 ["一份 UCAS 申请，可列最多五个专业选择。", "One UCAS application with up to five course choices."],
                 ["分别进入 NUS、NTU 等大学门户，各校独立提交。", "Submit separately through each university portal, including NUS and NTU."],
               ],
-              ["uk-ucas-how-to-apply", "sg-nus-international-qualifications-2026", "sg-ntu-admission-guide-2026"],
+              ["uk-ucas-how-to-apply", "sg-nus-international-qualifications-2026", "sg-ntu-admission-guide-current"],
             ),
             row(
               [
@@ -1222,7 +1238,7 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
     "ib-dp-math-ai-hl",
     "ap-calculus-bc",
   ],
-  lastVerified: VERIFIED_AT,
+  lastVerified: "2026-08-25",
 };
 
 export const ukSingaporeDestinationGuides: DestinationGuideRecord[] = [

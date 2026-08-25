@@ -162,9 +162,12 @@ export const edexcelCourseSources: SourceRecord[] = [
   source("edexcel-ial-jan-2027-timetable", "International A Level 2027 年 1 月最终时间表", "International A Level January 2027 final timetable", "https://qualifications.pearson.com/content/dam/pdf/Support/Examination-timetables-for-International-Advanced-Levels/ial-january-2027-final.pdf", "official", "January 2027 IAL"),
   source("edexcel-ial-summer-2027-timetable", "International A Level 2027 年夏季最终时间表", "International A Level Summer 2027 final timetable", "https://qualifications.pearson.com/content/dam/pdf/Support/Examination-timetables-for-International-Advanced-Levels/ial-summer-2027-final.pdf", "official", "Summer 2027 IAL"),
   source("edexcel-grade-boundaries", "Pearson 等级分数线总档案", "Pearson grade-boundary archive", "https://qualifications.pearson.com/en/support/support-topics/results-certification/grade-boundaries.html", "official-archive", "All Pearson Edexcel qualifications"),
-  source("edexcel-igcse-boundaries-2025-11", "International GCSE 2025 年 11 月资格分数线", "International GCSE November 2025 qualification grade boundaries", "https://qualifications.pearson.com/content/dam/pdf/Support/Grade-boundaries/International-GCSE/2511-international-gcse-subject-grade-boundaries.pdf", "official-data", "4MA1, 4MB1 and 4PM1; latest published series before verification"),
+  source("edexcel-igcse-boundaries-2025-11", "International GCSE 2025 年 11 月资格分数线", "International GCSE November 2025 qualification grade boundaries", "https://qualifications.pearson.com/content/dam/pdf/Support/Grade-boundaries/International-GCSE/2511-international-gcse-subject-grade-boundaries.pdf", "official-data", "4MA1, 4MB1 and 4PM1; November 2025 series"),
   source("edexcel-igcse-modular-boundaries-2025-11", "International GCSE Modular 2025 年 11 月分数线", "International GCSE Modular November 2025 grade boundaries", "https://qualifications.pearson.com/content/dam/pdf/Support/Grade-boundaries/International-GCSE/2511-international-gcse-modular-subject-grade-boundaries.pdf", "official-data", "4WM1/4WM2 and 4XMAF/4XMAH"),
-  source("edexcel-ial-boundaries-2026-01", "International A Level 2026 年 1 月分数线", "International A Level January 2026 grade boundaries", "https://qualifications.pearson.com/content/dam/pdf/Support/Grade-boundaries/International-A-level/2601-ial-subject-grade-boundaries.pdf", "official-data", "All IAL mathematics units and cash-ins; latest published series before verification"),
+  source("edexcel-ial-boundaries-2026-01", "International A Level 2026 年 1 月分数线", "International A Level January 2026 grade boundaries", "https://qualifications.pearson.com/content/dam/pdf/Support/Grade-boundaries/International-A-level/2601-ial-subject-grade-boundaries.pdf", "official-data", "All IAL mathematics units and cash-ins; January 2026 series"),
+  { ...source("edexcel-igcse-boundaries-2026-06", "International GCSE 2026 年 6 月资格分数线", "International GCSE June 2026 qualification grade boundaries", "https://qualifications.pearson.com/content/dam/pdf/Support/Grade-boundaries/International-GCSE/grade-boundaries-june-2026-international-gcse.pdf", "official-data", "4MA1, 4MB1 and 4PM1; standard and R papers"), verifiedAt: "2026-08-25" },
+  { ...source("edexcel-igcse-modular-boundaries-2026-06", "International GCSE Modular 2026 年 6 月分数线", "International GCSE Modular June 2026 grade boundaries", "https://qualifications.pearson.com/content/dam/pdf/Support/Grade-boundaries/International-GCSE/grade-boundaries-june-2026-international-gcse-modular.pdf", "official-data", "4WM1/4WM2 standard and R units; 4XMAF/4XMAH cash-ins"), verifiedAt: "2026-08-25" },
+  { ...source("edexcel-ial-boundaries-2026-06", "International A Level 2026 年 6 月分数线", "International A Level June 2026 grade boundaries", "https://qualifications.pearson.com/content/dam/pdf/Support/Grade-boundaries/International-A-level/grade-boundaries-june-2026-international-advanced-level.pdf", "official-data", "All IAL Mathematics, Pure Mathematics and Further Mathematics units, Unit A variants and cash-ins"), verifiedAt: "2026-08-25" },
   source("edexcel-past-paper-search", "Pearson 官方真题搜索", "Pearson official past-paper search", "https://qualifications.pearson.com/en/support/support-topics/exams/past-papers.html", "official-archive", "All Pearson Edexcel qualifications"),
   source("edexcel-assessment-publication-policy", "Pearson 试卷资料发布政策", "Pearson qualification and assessment publication policy", "https://qualifications.pearson.com/content/dam/pdf/Support/policies-for-centres-learners-and-employees/qualification-assessment-publication-policy.pdf", "official", "Assessment-material access and copyright; Version 2.2, 23 May 2025", "试卷、评分标准和 examiner reports 受版权保护；最新材料通常锁定十二个月。", "Question papers, mark schemes and examiner reports remain copyrighted; the newest materials are normally locked for twelve months."),
   source("edexcel-private-candidates", "Pearson 社会考生报名说明", "Pearson private-candidate guidance", "https://qualifications.pearson.com/en/support/support-for-you/students/private-candidates.html", "official", "Private-candidate entries"),
@@ -528,7 +531,7 @@ const igcseSections = (spec: IGCSESpec): ContentSection[] => [
     paragraphs: [
       t(spec.gradeZh, spec.gradeEn),
       t("Pearson 每个考季公布资格总分线；paper-level notional boundary 只用于理解单卷表现，不是证书等级线。不同考季、普通卷与 R 卷、Foundation 与 Higher 的边界不得合并为固定分数线。", "Pearson publishes qualification boundaries after each series. Paper-level notional boundaries describe performance on an individual paper but do not determine the certificate grade. Boundaries from different series, standard and R papers, and Foundation and Higher must not be merged into one fixed cutoff."),
-      t("截至 2026-08-05，2026 年夏季成绩与分数线尚未发布；本数据采用当时最新可用的 2025 年 11 月官方文件。", "As of 5 August 2026, Summer 2026 results and boundaries had not yet been published; this dataset uses the latest available November 2025 official files."),
+      t("Pearson 已发布 2026 年 6 月官方分数线。本页分别保留普通卷与 R 卷、Foundation 与 Higher、模块单元原始分与固定 UMS；这些边界不得跨卷型或考季混用。", "Pearson has published the official June 2026 boundaries. This page keeps standard and R papers, Foundation and Higher tiers, unit raw marks and fixed UMS separate; boundaries must not be reused across forms or series."),
     ],
   },
   accessSection(spec),
@@ -549,7 +552,7 @@ const igcseProjects: ProjectRecord[] = igcseSpecs.map((spec) => ({
   costBand: "varies",
   status: "confirmed",
   cycle: "November 2026 / Summer 2027",
-  lastVerified: VERIFIED_AT,
+  lastVerified: "2026-08-25",
   facts: [
     fact("资格代码", "Qualification code", spec.code, spec.code, [spec.specId]),
     fact("规范版本", "Specification version", spec.specVersionZh, spec.specVersionEn, [spec.specId]),
@@ -573,6 +576,7 @@ const igcseProjects: ProjectRecord[] = igcseSpecs.map((spec) => ({
     "edexcel-igcse-r-summer-2027-timetable",
     "edexcel-grade-boundaries",
     spec.id.includes("modular") ? "edexcel-igcse-modular-boundaries-2025-11" : "edexcel-igcse-boundaries-2025-11",
+    spec.id.includes("modular") ? "edexcel-igcse-modular-boundaries-2026-06" : "edexcel-igcse-boundaries-2026-06",
     "edexcel-past-paper-search",
     "edexcel-assessment-publication-policy",
     "edexcel-private-candidates",
@@ -796,6 +800,7 @@ const ialRegistrationDate = (
   date: string,
   noteZh: string,
   noteEn: string,
+  status: DateRecord["status"] = "confirmed",
 ): DateRecord => ({
   id: `${projectId}-${suffix}`,
   label: t(labelZh, labelEn),
@@ -803,7 +808,7 @@ const ialRegistrationDate = (
   time: "17:00",
   timezone: "Asia/Shanghai",
   region: t("英国文化教育协会中国", "British Council China"),
-  status: "confirmed",
+  status,
   sourceIds: ["british-council-china-pearson"],
   note: t(noteZh, noteEn),
 });
@@ -884,7 +889,7 @@ const ialProjects: ProjectRecord[] = ialSpecs.map((spec) => ({
   costBand: "varies",
   status: "confirmed",
   cycle: "October 2026 / January 2027 / Summer 2027",
-  lastVerified: VERIFIED_AT,
+  lastVerified: "2026-08-25",
   facts: [
     fact("IAS / IAL 资格代码", "IAS / IAL qualification codes", `${spec.iasCode} / ${spec.ialCode}`, `${spec.iasCode} / ${spec.ialCode}`, ["edexcel-ial-maths-spec"]),
     fact("规范版本", "Specification version", "Issue 3，2019 年 4 月", "Issue 3, April 2019", ["edexcel-ial-maths-spec"]),
@@ -895,7 +900,7 @@ const ialProjects: ProjectRecord[] = ialSpecs.map((spec) => ({
     fact("中国报名", "Registration in China", "由学校 exams officer、接收社会考生的获批中心或当届英国文化教育协会中国服务报名", "Through a school exams officer, an approved centre accepting private candidates, or the current British Council China service", ["edexcel-private-candidates", "british-council-china-pearson"]),
   ],
   dates: [
-    ialRegistrationDate(spec.id, "oct-2026-standard-entry", "2026 年 10 月 IAL 标准报名截止", "October 2026 IAL standard-entry deadline", "2026-08-21", "英国文化教育协会中国公开截止；学校内部日期可能更早。", "Published British Council China deadline; a school's internal date may be earlier."),
+    ialRegistrationDate(spec.id, "oct-2026-standard-entry", "2026 年 10 月 IAL 标准报名截止", "October 2026 IAL standard-entry deadline", "2026-08-21", "英国文化教育协会中国公开截止；学校内部日期可能更早。", "Published British Council China deadline; a school's internal date may be earlier.", "historical"),
     ialRegistrationDate(spec.id, "oct-2026-late-entry", "2026 年 10 月 IAL 晚报名截止", "October 2026 IAL late-entry deadline", "2026-09-15", "晚报名通常产生附加费用；以实时报名页为准。", "Late entry normally incurs additional fees; use the live registration page."),
     ialSeriesDate(spec.id, "october-2026-series", `${spec.shortTitle} 2026 年 10 月考季`, `${spec.shortTitle} October 2026 series`, "2026-10-09", "2026-10-28", "edexcel-ial-oct-2026-timetable"),
     ialSeriesDate(spec.id, "january-2027-series", `${spec.shortTitle} 2027 年 1 月考季`, `${spec.shortTitle} January 2027 series`, "2027-01-08", "2027-01-25", "edexcel-ial-jan-2027-timetable"),
@@ -916,6 +921,7 @@ const ialProjects: ProjectRecord[] = ialSpecs.map((spec) => ({
     "edexcel-ial-summer-2027-timetable",
     "edexcel-grade-boundaries",
     "edexcel-ial-boundaries-2026-01",
+    "edexcel-ial-boundaries-2026-06",
     "edexcel-past-paper-search",
     "edexcel-assessment-publication-policy",
     "edexcel-private-candidates",
@@ -960,6 +966,17 @@ const igcseLinearThresholds: ThresholdRecord[] = [
   threshold("edexcel-4pm1-2025-11", "edexcel-igcse-further-pure-mathematics", "2025", "November · Paper 01+02", "资格原始分等级线", "Qualification raw-mark grade boundaries", "9:166; 8:141; 7:117; 6:93; 5:70; 4:47; 3:35", "200", ["edexcel-igcse-boundaries-2025-11"], "普通卷资格总分线；不同考季及 R 卷须另查。", "Standard-paper qualification boundaries; consult the separate file for another series or R paper."),
 ];
 
+const igcseJune2026Thresholds: ThresholdRecord[] = [
+  threshold("edexcel-4ma1-2026-06-foundation", "edexcel-igcse-mathematics-a-linear", "2026", "June · Foundation · 1F+2F", "资格原始分等级线", "Qualification raw-mark grade boundaries", "5:148; 4:125; 3:90; 2:56; 1:22", "200", ["edexcel-igcse-boundaries-2026-06"], "普通卷资格总分线；中国 6 月适用 R 卷时不得使用此行。", "Standard-paper qualification boundaries; do not use this row where the June R paper applies."),
+  threshold("edexcel-4ma1-2026-06-higher", "edexcel-igcse-mathematics-a-linear", "2026", "June · Higher · 1H+2H", "资格原始分等级线", "Qualification raw-mark grade boundaries", "9:165; 8:138; 7:111; 6:87; 5:64; 4:41; 3:29", "200", ["edexcel-igcse-boundaries-2026-06"], "普通卷资格总分线；中国 6 月适用 R 卷时不得使用此行。", "Standard-paper qualification boundaries; do not use this row where the June R paper applies."),
+  threshold("edexcel-4ma1-2026-06-foundation-r", "edexcel-igcse-mathematics-a-linear", "2026", "June · Foundation R · 1FR+2FR", "资格原始分等级线", "Qualification raw-mark grade boundaries", "5:147; 4:125; 3:90; 2:55; 1:21", "200", ["edexcel-igcse-boundaries-2026-06"], "R 卷资格总分线；中国属于适用科目的强制 R 卷地区。", "R-paper qualification boundaries; China is a mandatory R-paper region where applicable."),
+  threshold("edexcel-4ma1-2026-06-higher-r", "edexcel-igcse-mathematics-a-linear", "2026", "June · Higher R · 1HR+2HR", "资格原始分等级线", "Qualification raw-mark grade boundaries", "9:171; 8:145; 7:119; 6:94; 5:69; 4:45; 3:33", "200", ["edexcel-igcse-boundaries-2026-06"], "R 卷资格总分线；中国属于适用科目的强制 R 卷地区。", "R-paper qualification boundaries; China is a mandatory R-paper region where applicable."),
+  threshold("edexcel-4mb1-2026-06", "edexcel-igcse-mathematics-b", "2026", "June · Paper 01+02", "资格缩放分等级线", "Qualification scaled-mark grade boundaries", "9:246; 8:209; 7:173; 6:142; 5:112; 4:82; 3:67", "300", ["edexcel-igcse-boundaries-2026-06"], "普通卷资格缩放分总分线；两卷权重为 33⅓% 与 66⅔%。", "Standard-paper qualification scaled-mark boundaries; the two papers are weighted 33⅓% and 66⅔%."),
+  threshold("edexcel-4mb1-2026-06-r", "edexcel-igcse-mathematics-b", "2026", "June · Paper 01R+02R", "资格缩放分等级线", "Qualification scaled-mark grade boundaries", "9:262; 8:223; 7:185; 6:154; 5:124; 4:94; 3:79", "300", ["edexcel-igcse-boundaries-2026-06"], "R 卷资格缩放分总分线；中国 6 月应查此行。", "R-paper qualification scaled-mark boundaries; use this row for China in June."),
+  threshold("edexcel-4pm1-2026-06", "edexcel-igcse-further-pure-mathematics", "2026", "June · Paper 01+02", "资格原始分等级线", "Qualification raw-mark grade boundaries", "9:180; 8:166; 7:152; 6:122; 5:92; 4:62; 3:47", "200", ["edexcel-igcse-boundaries-2026-06"], "普通卷资格原始分总分线。", "Standard-paper qualification raw-mark boundaries."),
+  threshold("edexcel-4pm1-2026-06-r", "edexcel-igcse-further-pure-mathematics", "2026", "June · Paper 01R+02R", "资格原始分等级线", "Qualification raw-mark grade boundaries", "9:175; 8:154; 7:134; 6:108; 5:82; 4:56; 3:43", "200", ["edexcel-igcse-boundaries-2026-06"], "R 卷资格原始分总分线；中国 6 月应查此行。", "R-paper qualification raw-mark boundaries; use this row for China in June."),
+];
+
 const igcseModularThresholds: ThresholdRecord[] = [
   threshold("edexcel-4wm1f-2025-11-raw", "edexcel-igcse-mathematics-a-modular", "2025", "November · Unit 1F", "单元原始分等级线", "Unit raw-mark grade boundaries", "5:75; 4:63; 3:47; 2:31; 1:15", "100", ["edexcel-igcse-modular-boundaries-2025-11"], "原始分会按当届边界换算为 UMS。", "Raw marks are converted to UMS using the boundary for that series."),
   threshold("edexcel-4wm2f-2025-11-raw", "edexcel-igcse-mathematics-a-modular", "2025", "November · Unit 2F", "单元原始分等级线", "Unit raw-mark grade boundaries", "5:76; 4:64; 3:47; 2:30; 1:14", "100", ["edexcel-igcse-modular-boundaries-2025-11"], "原始分会按当届边界换算为 UMS。", "Raw marks are converted to UMS using the boundary for that series."),
@@ -967,6 +984,17 @@ const igcseModularThresholds: ThresholdRecord[] = [
   threshold("edexcel-4wm2h-2025-11-raw", "edexcel-igcse-mathematics-a-modular", "2025", "November · Unit 2H", "单元原始分等级线", "Unit raw-mark grade boundaries", "9:84; 8:69; 7:54; 6:43; 5:33; 4:23; 3:18", "100", ["edexcel-igcse-modular-boundaries-2025-11"], "原始分会按当届边界换算为 UMS。", "Raw marks are converted to UMS using the boundary for that series."),
   threshold("edexcel-4xmaf-current-ums", "edexcel-igcse-mathematics-a-modular", "Current UMS scale", "Foundation cash-in · 4XMAF", "固定资格 UMS 等级线", "Fixed qualification UMS grade boundaries", "5:120; 4:96; 3:72; 2:48; 1:24", "240", ["edexcel-igcse-math-a-modular-spec", "edexcel-igcse-modular-boundaries-2025-11"], "cash-in 只报告 UMS；两个单元成绩合并后必须申请 4XMAF。", "Cash-in is reported only in UMS; the two units must be claimed under 4XMAF."),
   threshold("edexcel-4xmah-current-ums", "edexcel-igcse-mathematics-a-modular", "Current UMS scale", "Higher cash-in · 4XMAH", "固定资格 UMS 等级线", "Fixed qualification UMS grade boundaries", "9:216; 8:192; 7:168; 6:144; 5:120; 4:96; 3:84", "240", ["edexcel-igcse-math-a-modular-spec", "edexcel-igcse-modular-boundaries-2025-11"], "cash-in 只报告 UMS；两个单元成绩合并后必须申请 4XMAH。", "Cash-in is reported only in UMS; the two units must be claimed under 4XMAH."),
+];
+
+const igcseModularJune2026Thresholds: ThresholdRecord[] = [
+  threshold("edexcel-4wm1f-2026-06-raw", "edexcel-igcse-mathematics-a-modular", "2026", "June · Unit 1F", "单元原始分等级线", "Unit raw-mark grade boundaries", "5:72; 4:62; 3:45; 2:28; 1:11", "100", ["edexcel-igcse-modular-boundaries-2026-06"], "普通卷单元原始分线；原始分按本考季边界换算为 UMS。", "Standard unit raw boundaries; raw marks are converted to UMS using this series."),
+  threshold("edexcel-4wm1h-2026-06-raw", "edexcel-igcse-mathematics-a-modular", "2026", "June · Unit 1H", "单元原始分等级线", "Unit raw-mark grade boundaries", "9:80; 8:67; 7:55; 6:45; 5:35; 4:25; 3:20", "100", ["edexcel-igcse-modular-boundaries-2026-06"], "普通卷单元原始分线；原始分按本考季边界换算为 UMS。", "Standard unit raw boundaries; raw marks are converted to UMS using this series."),
+  threshold("edexcel-4wm1fr-2026-06-raw", "edexcel-igcse-mathematics-a-modular", "2026", "June · Unit 1FR", "单元原始分等级线", "Unit raw-mark grade boundaries", "5:73; 4:62; 3:45; 2:28; 1:12", "100", ["edexcel-igcse-modular-boundaries-2026-06"], "R 卷单元原始分线；中国 6 月应查 R 卷行。", "R-paper unit raw boundaries; use the R-paper row for China in June."),
+  threshold("edexcel-4wm1hr-2026-06-raw", "edexcel-igcse-mathematics-a-modular", "2026", "June · Unit 1HR", "单元原始分等级线", "Unit raw-mark grade boundaries", "9:86; 8:71; 7:56; 6:44; 5:32; 4:20; 3:14", "100", ["edexcel-igcse-modular-boundaries-2026-06"], "R 卷单元原始分线；中国 6 月应查 R 卷行。", "R-paper unit raw boundaries; use the R-paper row for China in June."),
+  threshold("edexcel-4wm2f-2026-06-raw", "edexcel-igcse-mathematics-a-modular", "2026", "June · Unit 2F", "单元原始分等级线", "Unit raw-mark grade boundaries", "5:74; 4:62; 3:44; 2:27; 1:10", "100", ["edexcel-igcse-modular-boundaries-2026-06"], "普通卷单元原始分线；原始分按本考季边界换算为 UMS。", "Standard unit raw boundaries; raw marks are converted to UMS using this series."),
+  threshold("edexcel-4wm2h-2026-06-raw", "edexcel-igcse-mathematics-a-modular", "2026", "June · Unit 2H", "单元原始分等级线", "Unit raw-mark grade boundaries", "9:77; 8:66; 7:55; 6:44; 5:34; 4:24; 3:19", "100", ["edexcel-igcse-modular-boundaries-2026-06"], "普通卷单元原始分线；原始分按本考季边界换算为 UMS。", "Standard unit raw boundaries; raw marks are converted to UMS using this series."),
+  threshold("edexcel-4wm2fr-2026-06-raw", "edexcel-igcse-mathematics-a-modular", "2026", "June · Unit 2FR", "单元原始分等级线", "Unit raw-mark grade boundaries", "5:74; 4:63; 3:45; 2:27; 1:9", "100", ["edexcel-igcse-modular-boundaries-2026-06"], "R 卷单元原始分线；中国 6 月应查 R 卷行。", "R-paper unit raw boundaries; use the R-paper row for China in June."),
+  threshold("edexcel-4wm2hr-2026-06-raw", "edexcel-igcse-mathematics-a-modular", "2026", "June · Unit 2HR", "单元原始分等级线", "Unit raw-mark grade boundaries", "9:81; 8:68; 7:56; 6:43; 5:31; 4:19; 3:13", "100", ["edexcel-igcse-modular-boundaries-2026-06"], "R 卷单元原始分线；中国 6 月应查 R 卷行。", "R-paper unit raw boundaries; use the R-paper row for China in June."),
 ];
 
 type IALRawBoundary = {
@@ -1012,6 +1040,70 @@ const ialRawThresholds: ThresholdRecord[] = ialSpecs.flatMap((spec) =>
     }),
 );
 
+type IALJune2026Boundary = {
+  unit: IALUnitKey;
+  slug: string;
+  paper: string;
+  value: string;
+  alternative?: boolean;
+};
+
+const ialJune2026RawBoundaries: IALJune2026Boundary[] = [
+  { unit: "P1", slug: "p1", paper: "WMA11 · Unit 1", value: "A:54; B:47; C:40; D:33; E:26" },
+  { unit: "P1", slug: "p1a", paper: "WMA11 · Unit 1A", value: "A:46; B:40; C:34; D:28; E:22", alternative: true },
+  { unit: "P2", slug: "p2", paper: "WMA12 · Unit 2", value: "A:48; B:42; C:36; D:31; E:26" },
+  { unit: "P2", slug: "p2a", paper: "WMA12 · Unit 2A", value: "A:56; B:49; C:43; D:37; E:31", alternative: true },
+  { unit: "P3", slug: "p3", paper: "WMA13 · Unit 3", value: "a*:63; A:57; B:51; C:45; D:39; E:33" },
+  { unit: "P3", slug: "p3a", paper: "WMA13 · Unit 3A", value: "a*:61; A:55; B:49; C:43; D:37; E:32", alternative: true },
+  { unit: "P4", slug: "p4", paper: "WMA14 · Unit 4", value: "a*:65; A:58; B:51; C:44; D:37; E:31" },
+  { unit: "P4", slug: "p4a", paper: "WMA14 · Unit 4A", value: "a*:66; A:58; B:50; C:42; D:34; E:27", alternative: true },
+  { unit: "FP1", slug: "fp1", paper: "WFM01 · Unit 1", value: "A:63; B:57; C:51; D:45; E:40" },
+  { unit: "FP1", slug: "fp1a", paper: "WFM01 · Unit 1A", value: "A:61; B:54; C:47; D:41; E:35", alternative: true },
+  { unit: "FP2", slug: "fp2", paper: "WFM02 · Unit 2", value: "a*:68; A:62; B:55; C:48; D:41; E:35" },
+  { unit: "FP2", slug: "fp2a", paper: "WFM02 · Unit 2A", value: "a*:64; A:57; B:50; C:44; D:38; E:32", alternative: true },
+  { unit: "FP3", slug: "fp3", paper: "WFM03 · Unit 3", value: "a*:62; A:57; B:52; C:47; D:43; E:39" },
+  { unit: "FP3", slug: "fp3a", paper: "WFM03 · Unit 3A", value: "a*:62; A:56; B:50; C:44; D:38; E:33", alternative: true },
+  { unit: "M1", slug: "m1", paper: "WME01 · Unit 1", value: "A:57; B:50; C:43; D:36; E:29" },
+  { unit: "M1", slug: "m1a", paper: "WME01 · Unit 1A", value: "A:57; B:49; C:41; D:33; E:25", alternative: true },
+  { unit: "M2", slug: "m2", paper: "WME02 · Unit 2", value: "a*:58; A:52; B:46; C:40; D:34; E:28" },
+  { unit: "M2", slug: "m2a", paper: "WME02 · Unit 2A", value: "a*:55; A:49; B:43; C:37; D:32; E:27", alternative: true },
+  { unit: "M3", slug: "m3", paper: "WME03 · Unit 3", value: "a*:70; A:66; B:58; C:50; D:43; E:36" },
+  { unit: "M3", slug: "m3a", paper: "WME03 · Unit 3A", value: "a*:58; A:51; B:44; C:37; D:30; E:23", alternative: true },
+  { unit: "S1", slug: "s1", paper: "WST01 · Unit 1", value: "A:65; B:56; C:47; D:39; E:31" },
+  { unit: "S1", slug: "s1a", paper: "WST01 · Unit 1A", value: "A:55; B:46; C:37; D:28; E:20", alternative: true },
+  { unit: "S2", slug: "s2", paper: "WST02 · Unit 2", value: "a*:68; A:61; B:53; C:46; D:39; E:32" },
+  { unit: "S2", slug: "s2a", paper: "WST02 · Unit 2A", value: "a*:67; A:59; B:50; C:41; D:33; E:25", alternative: true },
+  { unit: "S3", slug: "s3", paper: "WST03 · Unit 3", value: "a*:70; A:66; B:57; C:49; D:41; E:33" },
+  { unit: "S3", slug: "s3a", paper: "WST03 · Unit 3A", value: "a*:70; A:66; B:57; C:48; D:40; E:32", alternative: true },
+  { unit: "D1", slug: "d1", paper: "WDM11 · Unit 1", value: "A:58; B:51; C:44; D:38; E:32" },
+  { unit: "D1", slug: "d1a", paper: "WDM11 · Unit 1A", value: "A:49; B:43; C:37; D:31; E:25", alternative: true },
+];
+
+const ialJune2026RawThresholds: ThresholdRecord[] = ialSpecs.flatMap((spec) =>
+  ialJune2026RawBoundaries
+    .filter((boundary) => spec.units.includes(boundary.unit))
+    .map((boundary) => {
+      const unit = ialUnits.find((entry) => entry.key === boundary.unit)!;
+      return threshold(
+        `${spec.id}-2026-06-${boundary.slug}-raw`,
+        spec.id,
+        "2026",
+        `June · ${boundary.paper}`,
+        `${unit.titleZh}${boundary.alternative ? " A 卷" : ""}原始分等级线`,
+        `${unit.titleEn}${boundary.alternative ? " alternative form" : ""} raw-mark grade boundaries`,
+        boundary.value,
+        "75",
+        ["edexcel-ial-boundaries-2026-06"],
+        boundary.alternative
+          ? "官方 Unit A 替代卷行；不得与同考季标准卷边界混用。小写 a* 只表示 IA2 理论线，单元成绩仍报告 A–E。"
+          : "官方标准单元行；不得与 Unit A 替代卷边界混用。小写 a* 只表示 IA2 理论线，单元成绩仍报告 A–E。",
+        boundary.alternative
+          ? "Official Unit A alternative-form row; do not mix it with the standard form. Lower-case a* is the theoretical IA2 boundary; unit results remain A–E."
+          : "Official standard-unit row; do not mix it with the Unit A alternative form. Lower-case a* is the theoretical IA2 boundary; unit results remain A–E.",
+      );
+    }),
+);
+
 const ialFixedThresholds: ThresholdRecord[] = ialSpecs.flatMap((spec) => [
   threshold(`${spec.id}-unit-current-ums`, spec.id, "Current UMS scale", "Each unit", "固定单元 UMS 等级线", "Fixed unit UMS grade boundaries", "A:80; B:70; C:60; D:50; E:40", "100", ["edexcel-ial-maths-spec", "edexcel-ial-boundaries-2026-01"], "原始分线每考季变化；此处是固定 UMS 标尺。", "Raw boundaries vary by series; these are the fixed UMS points."),
   threshold(`${spec.id}-ias-current-ums`, spec.id, "Current UMS scale", `IAS cash-in · ${spec.iasCode}`, "IAS 固定 UMS 等级线", "IAS fixed UMS grade boundaries", "A:240; B:210; C:180; D:150; E:120", "300", ["edexcel-ial-maths-spec", "edexcel-ial-boundaries-2026-01"], "必须提交相应 IAS cash-in 才生成资格等级。", "The relevant IAS cash-in must be entered for a qualification grade."),
@@ -1021,9 +1113,12 @@ const ialFixedThresholds: ThresholdRecord[] = ialSpecs.flatMap((spec) => [
 
 export const edexcelCourseThresholds: ThresholdRecord[] = [
   ...igcseLinearThresholds,
+  ...igcseJune2026Thresholds,
   ...igcseModularThresholds,
+  ...igcseModularJune2026Thresholds,
   ...ialFixedThresholds,
   ...ialRawThresholds,
+  ...ialJune2026RawThresholds,
 ];
 
 const igcseSyllabi: AssessmentSyllabusRecord[] = igcseSpecs.map((spec) => ({

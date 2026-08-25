@@ -84,13 +84,13 @@ export const programSources: SourceRecord[] = [
   },
   {
     id: "immc-greater-china-edb-2026",
-    label: t("IMMC 2025/26 中华区报名与赛程", "IMMC Greater China 2025/26 Entry and Schedule"),
+    label: t("香港教育局通函 175/2025 查询入口", "Hong Kong EDB Circular 175/2025 Search Entry"),
     owner: t("香港特别行政区政府教育局", "Education Bureau, HKSAR Government"),
-    url: "https://applications.edb.gov.hk/circular/upload/EDBCM/EDBCM25175E.pdf",
+    url: "https://applications.edb.gov.hk/circular/circular.aspx?langno=1",
     kind: "official",
-    verifiedAt: VERIFIED_AT,
+    verifiedAt: "2026-08-25",
     appliesTo: "IMMC Greater China 2025/26",
-    note: t("附件 20 说明中华区组织者、参赛地区、学校报名入口，以及地区赛、中华区国际赛和答辩决赛之间的关系。", "Annex 20 identifies the Greater China organizer, eligible areas, school registration portal, and progression from regional contests to the Greater China international round and final presentation."),
+    note: t("在通函编号栏输入 175/2025 查询。该通知附件 20 说明中华区组织者、参赛地区、学校报名入口及各轮关系；原附件直链目前返回 404。", "Search for circular number 175/2025. Annex 20 identifies the Greater China organizer, eligible areas, school registration portal, and progression between rounds; the former direct attachment currently returns 404."),
   },
   {
     id: "immc-greater-china-results-2025",

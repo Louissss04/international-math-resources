@@ -202,8 +202,8 @@ export const assessmentPastPaperArchives: PastPaperArchiveRecord[] = [
     projectId: "ukiset",
     availability: "restricted",
     summary: t(
-      "截至核验日，UKiset 未公开 Mathematics／数量推理的正式历年卷、可下载样卷或公共题库。官方准备页只有一般说明及付费辅导入口；未采用第三方所谓“真题”。此项暂留空缺。",
-      "As of verification, UKiset publishes no operational Mathematics/quantitative-reasoning past papers, downloadable sample paper, or public question bank. Its preparation page provides general guidance and paid tutoring only; unverified third-party ‘past papers’ are not listed. This entry remains a placeholder.",
+      "UKiset 未公开 Mathematics／数量推理的正式历年卷、可下载样卷或公共题库。官方准备页只有一般说明及付费辅导入口；本站不收录来源不明的第三方所谓“真题”。",
+      "UKiset publishes no operational Mathematics/quantitative-reasoning past papers, downloadable sample paper, or public question bank. Its preparation page provides general guidance and paid tutoring only; unverified third-party ‘past papers’ are not listed.",
     ),
     links: [],
     lastVerified: VERIFIED_AT,
@@ -213,8 +213,8 @@ export const assessmentPastPaperArchives: PastPaperArchiveRecord[] = [
     projectId: "cat4",
     availability: "restricted",
     summary: t(
-      "CAT4 是学校采购并组织的安全测评，GL Assessment 明确不建议考前刷题，也不认可第三方 CAT4 练习材料。正式测评各部分自带可重复、无计时的熟悉示例，但没有面向个人公开的 Quantitative 真题或样卷下载页。此项暂留空缺。",
-      "CAT4 is a secure school-administered assessment. GL Assessment explicitly advises against advance practice and does not endorse third-party CAT4 materials. Each live section contains repeatable untimed familiarisation examples, but no public Quantitative past-paper or sample-paper download page is available to individuals. This entry remains a placeholder.",
+      "CAT4 是学校采购并组织的安全测评，GL Assessment 明确不建议考前刷题，也不认可第三方 CAT4 练习材料。正式测评各部分自带可重复、无计时的熟悉示例，但没有面向个人公开的 Quantitative 真题或样卷下载页。",
+      "CAT4 is a secure school-administered assessment. GL Assessment explicitly advises against advance practice and does not endorse third-party CAT4 materials. Each live section contains repeatable untimed familiarisation examples, but no public Quantitative past-paper or sample-paper download page is available to individuals.",
     ),
     links: [],
     lastVerified: VERIFIED_AT,
