@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: "数学竞赛、国际课程统考、入学考试数学模块及学校定量测评的官方考纲、内容范围、样卷和官方教材中文整理。",
 };
 
-const LAST_UPDATED = "2026-08-05";
+const LAST_UPDATED = "2026-08-29";
 const classificationOrder: SyllabusClassification[] = ["formal-specification", "content-framework", "structure-only"];
 const trackOrder: Track[] = ["competition", "curriculum", "assessment"];
 const projectById = new Map(allProjects.map((project) => [project.id, project]));

@@ -353,6 +353,13 @@ export interface ThresholdRecord {
   note?: LocalizedText;
 }
 
+export interface ProjectAlertRecord {
+  title: LocalizedText;
+  body: LocalizedText;
+  sourceIds: string[];
+  tone?: "warning" | "critical";
+}
+
 export interface ProjectRecord {
   id: string;
   slug: string;
@@ -369,6 +376,7 @@ export interface ProjectRecord {
   status: InformationStatus;
   cycle: string;
   lastVerified: string;
+  alerts?: ProjectAlertRecord[];
   facts: FactRecord[];
   dates: DateRecord[];
   sections: ContentSection[];

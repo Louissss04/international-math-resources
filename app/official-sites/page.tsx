@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description: "数学竞赛、建模、科研项目、数学期刊、夏校、国际数学课程、数学考试和大学本科申请的官方入口。",
 };
 
-const LAST_UPDATED = "2026-08-06";
+const LAST_UPDATED = "2026-08-29";
 const sourceById = new Map(allSources.map((source) => [source.id, source]));
 
 const primarySourceOverrides: Record<string, string[]> = {
@@ -24,6 +24,7 @@ const primarySourceOverrides: Record<string, string[]> = {
   "ap-calculus-bc": ["ap-bc-exam"],
   tmua: ["uat-tmua"],
   esat: ["uat-esat"],
+  aime: ["maa-aime-current"],
   cmo: ["cms-cmo"],
   "china-league": ["cms-league"],
   "math-kangaroo": ["aksf-home"],

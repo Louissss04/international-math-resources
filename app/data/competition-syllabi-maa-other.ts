@@ -6,6 +6,7 @@ import {
 } from "@/app/lib/types";
 
 const VERIFIED_AT = "2026-08-05";
+const AIME_VERIFIED_AT = "2026-08-29";
 const HMMT_VERIFIED_AT = "2026-08-11";
 
 const fact = (
@@ -928,16 +929,17 @@ export const maaOtherCompetitionSyllabi: AssessmentSyllabusRecord[] = [
     applicableCycle: t("2026–27 MAA AMC 邀请赛周期", "2026–27 MAA AMC invitational cycle"),
     status: "confirmed",
     summary: t(
-      "MAA 当前只公布 AIME 的邀请关系、题量、时长、答案形式和场次规则，没有发布可约束命题的正式内容考纲、主题清单或权重。AIME 因此归为“仅结构”；MAA Press 的 AIME 题书是官方出版的学习材料，但不能替代竞赛考纲。",
-      "MAA currently publishes AIME qualification, item count, duration, answer format and administration rules, but no formal content specification, topic list or weighting blueprint binding the competition. AIME is therefore classified as structure-only. The MAA Press AIME problem book is an official learning resource, not a substitute for a competition syllabus.",
+      "MAA 已公布 2027 年美国、加拿大 AIME 的资格、机考结构和考务规则，但仍没有正式内容考纲、主题清单或权重。本页因此只整理官方结构；中国等国际赛区的实际考务须等待所在地 IGL 通知。",
+      "MAA has published the qualification, computer-based format and administration rules for the 2027 AIME in the US and Canada, but still provides no formal content specification, topic list or weighting. This page therefore records official structure only; delivery in China and other international regions awaits the local IGL notice.",
     ),
     facts: [
       fact("考纲性质", "Specification type", "仅有官方结构；未公开内容考纲", "Official structure only; no public content syllabus"),
       fact("题量", "Items", "15 题", "15 questions"),
-      fact("时长", "Duration", "3 小时", "3 hours"),
+      fact("美加时长", "US/Canada timing", "两段各 90 分钟，中间可休息 10 分钟", "Two 90-minute parts with an optional 10-minute break"),
       fact("答案形式", "Answer format", "每题答案为 000 至 999 的整数", "Each answer is an integer from 000 to 999"),
       fact("难度关系", "Difficulty relationship", "官方说明题目显著难于 AMC 10 与 AMC 12", "MAA states that the questions are much more difficult than AMC 10 and AMC 12"),
-      fact("场次", "Administrations", "AIME I 为主场、AIME II 为备用场；每名学生只能参加一次", "AIME I is the primary administration and AIME II the alternate; a student may take AIME only once"),
+      fact("2027 美加场次", "2027 US/Canada administration", "2 月 5—6 日单一窗口；取消 AIME I／II，每名学生只能参加一次", "One 5–6 February window; AIME I/II retired and one attempt per student"),
+      fact("适用范围", "Scope of administration rules", "Pearson、费用、年龄和固定资格线目前明确适用于美国／加拿大；国际赛区按 IGL", "Pearson delivery, fee, age and fixed qualification scores currently govern the US/Canada; international regions follow their IGL"),
     ],
     sections: [
       {
@@ -962,9 +964,12 @@ export const maaOtherCompetitionSyllabi: AssessmentSyllabusRecord[] = [
             columns: [t("项目", "Element"), t("官方规定", "Official rule")],
             rows: [
               row(["题量", "Item count"], ["15 题", "15 questions"]),
-              row(["时长", "Duration"], ["3 小时", "3 hours"]),
+              row(["第一段", "Part 1"], ["8 题／90 分钟", "8 questions / 90 minutes"]),
+              row(["第二段", "Part 2"], ["7 题／90 分钟；开始后不能返回第一段", "7 questions / 90 minutes; Part 1 cannot be reopened once Part 2 begins"]),
+              row(["休息", "Break"], ["两段之间最多 10 分钟", "Up to 10 minutes between the two parts"]),
               row(["作答", "Response"], ["每题填写 000—999 的整数答案", "Enter an integer answer from 000 to 999 for each question"]),
               row(["证明要求", "Proof requirement"], ["官方现行结构说明只规定整数答案，不要求提交证明", "The current official format requires integer answers and does not require submitted proofs"]),
+              row(["美加考务", "US/Canada delivery"], ["Pearson Professional Centers 英文机考；不得自带纸笔、计算器、尺规、公式表或翻译词典", "English computer-based testing at Pearson Professional Centers; no personal paper, writing tools, calculator, ruler, compass, formula sheet or translation dictionary"]),
             ],
           },
         ],
@@ -976,8 +981,10 @@ export const maaOtherCompetitionSyllabi: AssessmentSyllabusRecord[] = [
           {
             columns: [t("来源", "Qualifying route"), t("官方参数", "Official parameter")],
             rows: [
-              row(["AMC 10", "AMC 10"], ["A、B 各场至少前 2.5% 的参赛者获邀；实际数值线按当届成绩确定", "At least the top 2.5% on each A and B administration are invited; numerical cutoffs depend on that year's results"]),
-              row(["AMC 12", "AMC 12"], ["A、B 各场至少前 5% 的参赛者获邀；实际数值线按当届成绩确定", "At least the top 5% on each A and B administration are invited; numerical cutoffs depend on that year's results"]),
+              row(["AMC 10（美加）", "AMC 10 (US/Canada)"], ["2027 AIME：AMC 10A 或 10B 至少 100 分", "2027 AIME: at least 100 on AMC 10A or 10B"]),
+              row(["AMC 12（美加）", "AMC 12 (US/Canada)"], ["2027 AIME：AMC 12A 或 12B 至少 85 分", "2027 AIME: at least 85 on AMC 12A or 12B"]),
+              row(["其他资格", "Other conditions"], ["AIME 当日十二年级及以下且年满 13 岁，晋级 AMC 当日不超过 19.5 岁，并满足美加学籍和实际就读条件", "Grade 12 or below and at least age 13 on AIME day, no older than 19.5 on the qualifying AMC day, and meeting US/Canada enrolment and physical-attendance conditions"]),
+              row(["国际赛区", "International regions"], ["固定分数及 Pearson 考务不能直接外推；按居住地 IGL 当届政策", "The fixed scores and Pearson administration cannot be extrapolated; follow the current policy of the IGL for the place of residence"]),
               row(["难度关系", "Difficulty relationship"], ["AIME 题目显著难于 AMC 10/12", "AIME questions are much more difficult than AMC 10/12 questions"]),
             ],
           },
@@ -985,11 +992,12 @@ export const maaOtherCompetitionSyllabi: AssessmentSyllabusRecord[] = [
       },
       {
         id: "aime-administration-boundary",
-        title: t("场次边界", "Administration boundary"),
+        title: t("2027 场次与地区边界", "2027 administration and regional boundary"),
         bullets: [
-          t("AIME I 是主场，AIME II 用于无法参加主场的合资格学生。", "AIME I is the primary administration; AIME II is for eligible students unable to take the primary administration."),
-          t("学生只能参加 AIME I 或 AIME II 其中一次；参加两场会被取消资格。", "A student may take either AIME I or AIME II once; taking both results in disqualification."),
-          t("AIME 是邀请赛，不是面向所有学生直接报名的独立考试。", "AIME is invitational rather than a separately open-registration examination."),
+          t("美国、加拿大 2027 AIME 在 2 月 5—6 日窗口举行，不再设 AIME I 与 AIME II；考生预约一个时段且只能参加一次，没有补考。", "The 2027 AIME in the US and Canada uses a 5–6 February window rather than AIME I and AIME II. A candidate books one appointment, has one attempt and has no makeup."),
+          t("中国国籍但从报名至 AIME 均全日制并实际在美国或加拿大合规学校就读者，按美加规则；在中国境内就读者按所在地 IGL。", "A Chinese national enrolled full-time and physically attending an eligible US or Canadian school from registration through AIME follows the US/Canada rules; a student studying in China follows the local IGL."),
+          t("截至 2026 年 8 月 29 日，中国承办页尚未发布 2027 AIME 的日期、形式、费用或资格实施细则。", "As of 29 August 2026, the China organiser pages had not published the 2027 AIME date, delivery, fee or qualification arrangements."),
+          t("AIME 是邀请赛，不接受学生个人直接报名。", "AIME is invitational and does not accept direct student registration."),
         ],
       },
     ],
@@ -1001,8 +1009,18 @@ export const maaOtherCompetitionSyllabi: AssessmentSyllabusRecord[] = [
         "Mathematical Association of America (MAA)",
         "https://maa.org/maa-invitational-competitions/",
         "webpage",
-        "截至 2026 年 8 月现行页面",
-        "Current page as of August 2026",
+        "2027 AIME 现行页面（2026 年 8 月 29 日核验）",
+        "Current 2027 AIME page verified 29 August 2026",
+      ),
+      syllabusSource(
+        "2026–27 AIME 官方规则",
+        "Official 2026–27 AIME Rules",
+        "美国数学协会（MAA）",
+        "Mathematical Association of America (MAA)",
+        "https://maa.org/wp-content/uploads/2026/08/2026-27-AIME-Policies.pdf",
+        "pdf",
+        "2026 年 8 月 26 日更新；适用于美国／加拿大考务",
+        "Updated 26 August 2026; US/Canada administration",
       ),
       maaAmcPolicies,
     ],
@@ -1010,7 +1028,7 @@ export const maaOtherCompetitionSyllabi: AssessmentSyllabusRecord[] = [
       "AIME 的 examination 译为“考试”，但其在 MAA 体系中属于邀请赛；integer between 0 and 999 按答题卡习惯表述为“000—999 的整数答案”。本页不把官方出版题书的章节目录改写成命题考纲。",
       "AIME is rendered as an examination while retaining its invitational status in the MAA sequence. “Integer between 0 and 999” is expressed as an integer answer from 000–999 to match answer-entry convention. The chapter list of an official problem book is not recast as a test syllabus.",
     ),
-    lastVerified: VERIFIED_AT,
+    lastVerified: AIME_VERIFIED_AT,
   },
   {
     id: "syllabus-hmmt-published-format",

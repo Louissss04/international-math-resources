@@ -1,6 +1,7 @@
 import { t, type PastPaperArchiveRecord } from "@/app/lib/types";
 
 const VERIFIED_AT = "2026-08-05";
+const AIME_VERIFIED_AT = "2026-08-29";
 const HMMT_VERIFIED_AT = "2026-08-11";
 const MAA = t("美国数学协会（MAA）", "Mathematical Association of America (MAA)");
 const HMMT = t(
@@ -118,24 +119,24 @@ export const maaOtherPastPaperArchives: PastPaperArchiveRecord[] = [
     projectId: "aime",
     availability: "secondary",
     summary: t(
-      "截至核验日，MAA 未提供可直接打开的免费 AIME 样卷、历年试题或官方解答库；AoPS Wiki 的公开索引按年份整理 AIME I、AIME II 题目与社区解答。",
-      "As of verification, MAA does not provide a directly accessible free AIME sample, past-paper archive, or official solution archive. The public AoPS Wiki index organizes AIME I and AIME II problems and community solutions by year.",
+      "截至核验日，MAA 未提供可直接打开的免费 AIME 样卷、历年试题或官方解答库；AoPS Wiki 按年份整理截至 2026 年的 AIME I、AIME II 历史题目与社区解答。2027 起美加赛区不再设 AIME I／II。",
+      "As of verification, MAA does not provide a directly accessible free AIME sample, past-paper archive or official solution archive. The AoPS Wiki organizes historical AIME I and AIME II problems and community solutions through 2026. The US/Canada administration retires AIME I/II from 2027.",
     ),
     links: [
       {
-        title: t("AIME I、II 历年题目与解答索引", "AIME I/II problems and solutions index"),
+        title: t("AIME I、II 历史题目与解答索引（截至 2026）", "Historical AIME I/II problems and solutions index (through 2026)"),
         provider: AOPS,
         url: "https://artofproblemsolving.com/wiki/index.php/AIME_Problems_and_Solutions",
         authority: "secondary",
         kind: "index",
         access: "free",
         note: t(
-          "第三方社区索引，并非 MAA 官方档案；题目版权归原权利人，社区解答应与可信来源交叉核对。",
-          "This is a third-party community index, not an MAA archive. Problem rights remain with their owners, and community solutions should be cross-checked against reliable sources.",
+          "第三方社区索引，并非 MAA 官方档案；题目版权归原权利人，社区解答应与可信来源交叉核对。旧题仍可用于内容训练，但 I／II 场次与连续三小时的考务已不代表 2027 美加流程。",
+          "This is a third-party community index, not an MAA archive. Problem rights remain with their owners, and community solutions should be cross-checked against reliable sources. The problems remain useful practice, but the I/II sittings and single three-hour administration no longer represent the 2027 US/Canada process.",
         ),
       },
     ],
-    lastVerified: VERIFIED_AT,
+    lastVerified: AIME_VERIFIED_AT,
   },
   {
     id: "ppa-competition-hmmt",

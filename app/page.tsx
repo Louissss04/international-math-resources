@@ -5,7 +5,7 @@ import { allProjects, destinationGuides } from "./data";
 import { projectHref } from "./lib/paths";
 import type { Track } from "./lib/types";
 
-const LAST_UPDATED = "2026-08-11";
+const LAST_UPDATED = "2026-08-29";
 
 const programTracks: Array<{ track: Track; href: string; zh: string; en: string; fieldsZh: string; fieldsEn: string }> = [
   { track: "competition", href: "/competitions", zh: "数学竞赛", en: "Competitions", fieldsZh: "赛制、日期、报名、奖项线、考纲与历年题", fieldsEn: "Format, dates, registration, thresholds, scope and past papers" },
@@ -52,6 +52,12 @@ export default function Home() {
           </nav>
         </div>
       </section>
+
+      <Link className="home-policy-alert page-container" href="/competitions/aime">
+        <strong><span className="lang-zh">重要变更｜2027 AIME</span><span className="lang-en">Major update | 2027 AIME</span></strong>
+        <span><span className="lang-zh">美国、加拿大改为 Pearson 机考，取消 AIME I／II，并采用固定晋级线；中国境内实施方式尚待本地 IGL 公布。</span><span className="lang-en">The US and Canada move to Pearson computer-based testing, retire AIME I/II and use fixed qualification scores; arrangements in China are still awaiting local IGL publication.</span></span>
+        <em><span className="lang-zh">查看适用范围</span><span className="lang-en">Read the scope</span></em>
+      </Link>
 
       <section className="home-section page-container">
         <div className="section-heading"><h2><span className="lang-zh">竞赛与项目</span><span className="lang-en">Competitions and programs</span></h2><Link href="/programs"><span className="lang-zh">全部</span><span className="lang-en">All</span></Link></div>

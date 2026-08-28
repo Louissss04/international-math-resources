@@ -192,7 +192,7 @@ const satSessions = [
 ] as const;
 
 const satDates: DateRecord[] = satSessions.flatMap(([exam, regular, late], index) => [
-  dateRecord(`sat-${index + 1}-registration`, "SAT 常规报名截止", "SAT regular registration deadline", regular, index === 0 ? "historical" : "confirmed", ["sat-dates"], {
+  dateRecord(`sat-${index + 1}-registration`, "SAT 常规报名截止", "SAT regular registration deadline", regular, index <= 1 ? "historical" : "confirmed", ["sat-dates"], {
     time: "23:59",
     timezone: "America/New_York",
     region: t("全球周末场", "Worldwide weekend administration"),

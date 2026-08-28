@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: "集中查阅数学竞赛、课程和考试的考纲、真题、分数线档案、官网与资料来源。",
 };
 
-const LAST_UPDATED = "2026-08-06";
+const LAST_UPDATED = "2026-08-29";
 
 const projectById = new Map(allProjects.map((project) => [project.id, project]));
 const groups = trackOrder

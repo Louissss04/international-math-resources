@@ -164,6 +164,12 @@ export function ProjectDetail({
             </a>
           </div>
         </div>
+        {project.alerts?.map((alert, index) => (
+          <aside className={`policy-alert policy-alert-${alert.tone ?? "warning"}`} key={`${project.id}-alert-${index}`} role="note">
+            <strong><Localized text={alert.title} /></strong>
+            <p><Localized text={alert.body} /><SourceCitations ids={alert.sourceIds} sources={sources} /></p>
+          </aside>
+        ))}
         <dl className="fact-grid">
           {project.facts.map((fact) => (
             <div key={fact.label.en}>

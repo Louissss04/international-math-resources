@@ -244,6 +244,13 @@ test("static payload has valid IDs, references and route records", async () => {
     for (const sourceId of project.sourceIds) {
       assert.ok(sourceIds.has(sourceId), `${project.id} refers to missing source ${sourceId}`);
     }
+    for (const alert of project.alerts ?? []) {
+      assert.ok(alert.title?.zh && alert.title?.en && alert.body?.zh && alert.body?.en, `${project.id} has an incomplete bilingual alert`);
+      assert.ok(alert.sourceIds?.length > 0, `${project.id} has an unsourced alert`);
+      for (const sourceId of alert.sourceIds) {
+        assert.ok(sourceIds.has(sourceId), `${project.id} alert refers to missing source ${sourceId}`);
+      }
+    }
     for (const relatedId of project.relatedIds ?? []) {
       assert.ok(projectIds.has(relatedId), `${project.id} refers to missing related project ${relatedId}`);
     }
@@ -318,6 +325,31 @@ test("static payload has valid IDs, references and route records", async () => {
     assert.match(route, /^\//, `routeMap contains a non-rooted route: ${route}`);
     assert.match(file, /^[^/\\]+\.html$/i, `routeMap target must be a flat HTML filename: ${file}`);
   }
+});
+
+test("publishes the 2027 AIME policy change with a China-specific boundary", async () => {
+  const data = await loadStaticData();
+  const aime = data.projects.find((project) => project.id === "aime");
+  const amc10 = data.projects.find((project) => project.id === "amc10");
+  const amc12 = data.projects.find((project) => project.id === "amc12");
+  assert.ok(aime && amc10 && amc12, "AIME or AMC project record is missing");
+
+  const currentAimeEvents = aime.dates.filter((item) => item.status !== "historical");
+  assert.equal(currentAimeEvents.filter((item) => item.id === "aime-2027-us-window").length, 1, "2027 AIME must have one US/Canada testing-window record");
+  assert.equal(currentAimeEvents.some((item) => item.id === "aime1-2027" || item.id === "aime2-2027"), false, "retired 2027 AIME I/II events remain in the calendar data");
+  assert.ok(aime.alerts?.some((alert) => alert.body.zh.includes("中国境内") && alert.body.en.includes("studying in China")), "AIME lacks the China-specific policy warning");
+
+  const aimeText = visibleText(await readRoute(projectRoute(aime), data));
+  for (const phrase of ["Pearson", "100", "85", "13 岁", "中国境内", "one attempt"]) {
+    assert.ok(aimeText.includes(phrase), `AIME page is missing '${phrase}'`);
+  }
+  assert.equal(aimeText.includes("AIME I 是主场"), false, "AIME page still presents AIME I as the current primary sitting");
+  assert.equal(aimeText.includes("Invitees normally sit AIME I"), false, "AIME page still presents AIME I as the current primary sitting in English");
+
+  const amc10Text = visibleText(await readRoute(projectRoute(amc10), data));
+  const amc12Text = visibleText(await readRoute(projectRoute(amc12), data));
+  assert.ok(amc10Text.includes("100") && amc10Text.includes("local IGL"), "AMC 10 page does not distinguish the fixed US/Canada score from international IGL policy");
+  assert.ok(amc12Text.includes("85") && amc12Text.includes("local IGL"), "AMC 12 page does not distinguish the fixed US/Canada score from international IGL policy");
 });
 
 test("routeMap exactly matches the flat HTML export", async () => {
