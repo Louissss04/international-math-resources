@@ -1268,8 +1268,8 @@ export const competitionProjects: ProjectRecord[] = [
         tables: [{
           columns: [t("竞赛", "Competition"), t("2027 官方奖项口径", "Official 2027 awards")],
           rows: [
-            { cells: ["USAMO", t("约 6% 获 Gold、约 12% 获 Silver、约 18% 获 Bronze；未获上述奖项且总分至少 14 分者获 Honorable Mention。", "Approximately 6% receive Gold, 12% Silver and 18% Bronze; remaining participants scoring at least 14 receive Honorable Mention.")], sourceIds: ["maa-usamo-usajmo-2026-27-policies"] },
-            { cells: ["USAJMO", t("约 7% 获 Top Honors、约 13% 获 Honors；未获上述奖项且总分至少 14 分者获 Honorable Mention。", "Approximately 7% receive Top Honors and 13% Honors; remaining participants scoring at least 14 receive Honorable Mention.")], sourceIds: ["maa-usamo-usajmo-2026-27-policies"] },
+            { cells: [t("USAMO", "USAMO"), t("约 6% 获 Gold、约 12% 获 Silver、约 18% 获 Bronze；未获上述奖项且总分至少 14 分者获 Honorable Mention。", "Approximately 6% receive Gold, 12% Silver and 18% Bronze; remaining participants scoring at least 14 receive Honorable Mention.")], sourceIds: ["maa-usamo-usajmo-2026-27-policies"] },
+            { cells: [t("USAJMO", "USAJMO"), t("约 7% 获 Top Honors、约 13% 获 Honors；未获上述奖项且总分至少 14 分者获 Honorable Mention。", "Approximately 7% receive Top Honors and 13% Honors; remaining participants scoring at least 14 receive Honorable Mention.")], sourceIds: ["maa-usamo-usajmo-2026-27-policies"] },
           ],
           note: t("比例为 MAA 公布的近似值；实际人数按当届结果确定。", "The percentages are approximate figures published by MAA; final recipient counts follow the current results."),
         }],
