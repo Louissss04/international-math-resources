@@ -914,7 +914,7 @@ const actDates: DateRecord[] = actInternationalSessions.flatMap(([start, regular
   dateRecord(`act-intl-${index + 1}-late`, "ACT 国际场晚报名截止", "ACT international late-registration deadline", late, index === 0 ? "historical" : "confirmed", ["act-intl-dates-2026-27"], {
     region: t("美国境外国际考点", "International test centers outside the United States"),
   }),
-  dateRecord(`act-intl-${index + 1}-test`, "ACT 国际考试", "ACT international test", start, "confirmed", ["act-intl-dates-2026-27"], {
+  dateRecord(`act-intl-${index + 1}-test`, "ACT 国际考试", "ACT international test", start, index === 0 ? "historical" : "confirmed", ["act-intl-dates-2026-27"], {
     ...(end ? { endDate: end } : {}),
     region: t("仅限报名系统显示可预约的考点和时段", "Only at centers and sessions displayed as bookable in registration"),
   }),

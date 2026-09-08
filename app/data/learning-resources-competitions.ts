@@ -115,6 +115,18 @@ export const competitionLearningResources: LearningResourceRecord[] = [
     verifiedAt: "2026-08-04",
   },
   {
+    id: "ukmt-smc-2026-sample-answer-sheet",
+    projectIds: ["smc"],
+    title: t("SMC 2026 官方答题卡示例", "Official SMC 2026 sample answer sheet"),
+    provider: t("英国数学信托（UKMT）", "United Kingdom Mathematics Trust (UKMT)"),
+    url: "https://ukmt.org.uk/wp-content/uploads/2026/07/SMC-Example-Answer-Sheet-1-3.pdf",
+    kind: "official-guide",
+    description: t("展示前 22 题 A–E 选项及第 23–25 题的三位数字填涂区。数字不足三位须在前面补零，如 004、044；改答案须擦净，不能重复填涂。这是答题卡示例，不是样卷、真题或答案。", "Shows A–E response rows for questions 1–22 and three-digit grids for questions 23–25. Pad shorter answers with leading zeros, such as 004 or 044; erase changes thoroughly and do not make double selections. This is an answer-sheet sample, not a specimen paper, past exam or answer key."),
+    access: "free",
+    note: t("仅链接 UKMT 公开文件，版权归 UKMT 所有，不在本站托管副本。中国赛区实际使用的答题卡及提交要求以承办方和学校通知为准。", "Links to UKMT's public file; copyright belongs to UKMT and no copy is hosted here. For the China route, follow the organiser and school instructions for the actual answer sheet and submission."),
+    verifiedAt: "2026-09-08",
+  },
+  {
     id: "ukmt-video-solutions",
     projectIds: ["jmc", "imc", "smc", "bmo1", "bmo2"],
     title: t("UKMT 官方视频解答", "UKMT official video solutions"),
