@@ -50,8 +50,8 @@ export const assessmentSources: SourceRecord[] = [
   source("ap-bc-exam", "AP Calculus BC 考试", "AP Calculus BC Exam", "College Board", "College Board", "https://apcentral.collegeboard.org/courses/ap-calculus-bc/exam", "official", "AP Calculus BC"),
   source("ap-registration", "AP 考试报名", "Register for AP Exams", "College Board", "College Board", "https://apstudents.collegeboard.org/register-for-ap-exams", "official", "AP registration"),
   source("ap-china", "在中国参加 AP 考试", "Taking AP in China", "College Board 国际部", "College Board International", "https://international.collegeboard.org/students/ap/taking-ap-china", "official", "AP testing routes in mainland China"),
-  { ...source("ap-china-registration-2027", "Prometric 中国 2027 AP 报名须知", "Prometric China 2027 AP Exam Registration", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/apregistration-y27/", "official", "AP China 2027 registration, eligibility, fees, ID rules and exam schedule"), verifiedAt: "2026-08-25" },
-  { ...source("ap-china-timeline-2027", "Prometric 中国 2027 AP 报名流程", "Prometric China 2027 AP Registration Timeline", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/aptimeline-y27/", "official", "AP China 2027 roster, registration, payment, correction and admission-ticket deadlines", "页面日期对应 2026–27 周期，但部分下载链接名称仍写 2025–26；操作时应以页面当前日期并复核最新手册。", "The page dates correspond to the 2026–27 cycle, but some linked guide names still say 2025–26; use the live dates and recheck the latest guide before acting."), verifiedAt: "2026-08-25" },
+  { ...source("ap-china-registration-2027", "Prometric 中国 2027 AP 报名须知", "Prometric China 2027 AP Exam Registration", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/apregistration/", "official", "AP China 2027 registration, eligibility, fees, ID rules and exam schedule"), verifiedAt: "2026-09-10" },
+  { ...source("ap-china-timeline-2027", "Prometric 中国 2027 AP 报名流程", "Prometric China 2027 AP Registration Timeline", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/aptimeline/", "official", "AP China 2027 roster, registration, payment, confirmation and admission-ticket deadlines"), verifiedAt: "2026-09-10" },
   source("ap-score-data", "AP 2026 成绩分布", "2026 AP Score Distributions", "College Board", "College Board", "https://apstudents.collegeboard.org/about-ap-scores/score-distributions", "official-data", "AP 2026 score distributions"),
   source("ap-ab-score-distributions", "AP Calculus AB 历年成绩分布", "Past AP Calculus AB Score Distributions", "College Board", "College Board", "https://apstudents.collegeboard.org/about-ap-scores/score-distributions/ap-calculus-ab", "official-data", "AP Calculus AB score distributions 2020-2026"),
   source("ap-bc-score-distributions", "AP Calculus BC 历年成绩分布", "Past AP Calculus BC Score Distributions", "College Board", "College Board", "https://apstudents.collegeboard.org/about-ap-scores/score-distributions/ap-calculus-bc", "official-data", "AP Calculus BC score distributions 2020-2026"),
@@ -328,7 +328,7 @@ const apProject: ProjectRecord = {
   costBand: "varies",
   status: "confirmed",
   cycle: "2026-27 course / May 2027 exam",
-  lastVerified: "2026-08-25",
+  lastVerified: "2026-09-10",
   facts: [
     { label: t("用途", "Purpose"), value: t("反映微积分课程学习；大学分别制定学分、分班和专业先修政策。", "Documents calculus coursework; universities set their own credit, placement and prerequisite policies."), sourceIds: ["ap-ab-exam", "ap-bc-exam"] },
     { label: t("AB / BC", "AB / BC"), value: t("AB 对应第一学期单变量微积分；BC 覆盖 AB 核心并增加后续单变量微积分、参数／极坐标与无穷级数。", "AB approximates first-semester single-variable calculus; BC includes the AB core plus subsequent calculus, parametric/polar topics and infinite series."), sourceIds: ["ap-ab-exam", "ap-bc-exam"] },
@@ -337,7 +337,7 @@ const apProject: ProjectRecord = {
     { label: t("2027 结构", "2027 format"), value: t("42 MCQ／100 分钟 + 6 FRQ／90 分钟；MCQ 与 FRQ 各占 50%。", "42 MCQs in 100 minutes plus 6 FRQs in 90 minutes; MCQ and FRQ each contribute 50%."), sourceIds: ["ap-clarifications-2027"] },
     { label: t("作答方式", "Delivery"), value: t("Hybrid digital：Bluebook 完成 MCQ；FRQ 在屏幕看题并写入纸质答题册。", "Hybrid digital: MCQs are completed in Bluebook; FRQs are viewed on screen and handwritten in a paper booklet."), sourceIds: ["ap-ab-exam", "ap-bc-exam"] },
     { label: t("评分", "Scoring"), value: t("报告 1–5；BC 另有 AB subscore。原始分到 1–5 的 cut points 不作为赛前固定线公布。", "Scores are reported on a 1–5 scale; BC also reports an AB subscore. Raw-to-1–5 cut points are not published as fixed pre-exam thresholds."), sourceIds: ["ap-score-data", "ap-ab-score-distributions", "ap-bc-score-distributions"] },
-    { label: t("2027 日期与中国费用", "2027 date and China fee"), value: t("AB 与 BC 均于 2027 年 5 月 10 日举行；Prometric 中国考点每科 1475 元，其中 88 元手续费及税费不退。", "AB and BC are both scheduled for 10 May 2027. At Prometric China centres, the fee is CNY 1,475 per exam, including a non-refundable CNY 88 processing fee and tax."), sourceIds: ["ap-2027-exam-dates", "ap-china-registration-2027"] },
+    { label: t("2027 日期与中国费用", "2027 date and China fee"), value: t("AB 与 BC 均于 2027 年 5 月 10 日举行；Prometric 中国考点每科 1525 元，其中 133 元手续费及税费不退。", "AB and BC are both scheduled for 10 May 2027. At Prometric China centres, the fee is CNY 1,525 per exam, including a non-refundable CNY 133 processing fee and tax."), sourceIds: ["ap-2027-exam-dates", "ap-china-registration-2027"] },
   ],
   dates: [
     dateRecord("ap-2027-coordinator-open", "Prometric 中国 AP 管理员系统开放", "Prometric China AP coordinator system opens", "2026-09-15", "confirmed", ["ap-china-timeline-2027"], {
@@ -359,7 +359,7 @@ const apProject: ProjectRecord = {
     dateRecord("ap-2027-myap-check", "AP 学生核对 My AP 科目与资料", "AP students verify My AP subjects and details", "2026-12-01", "confirmed", ["ap-china-timeline-2027"], {
       region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
     }),
-    dateRecord("ap-2027-correction-deadline", "Prometric 中国 AP 资料及科目更正截止", "Prometric China AP correction deadline", "2027-03-12", "confirmed", ["ap-china-timeline-2027"], {
+    dateRecord("ap-2027-order-confirmation", "Prometric 中国 AP 考试订单确认截止", "Prometric China AP exam-order confirmation deadline", "2027-01-31", "confirmed", ["ap-china-timeline-2027"], {
       region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
     }),
     dateRecord("ap-2027-admission-letter", "Prometric 中国 AP 准考信开放下载", "Prometric China AP admission letter available", "2027-04-03", "confirmed", ["ap-china-timeline-2027"], {

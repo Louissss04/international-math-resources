@@ -149,9 +149,9 @@ export const competitionSources: SourceRecord[] = [
     owner: t("阿思丹国际理科测评", "ASEEDER"),
     url: "https://www.seedasdan.asia/en/amc10-en/",
     kind: "official",
-    verifiedAt: "2026-08-29",
+    verifiedAt: "2026-09-10",
     appliesTo: "AMC 10 and AIME in mainland China",
-    note: t("MAA 国际赛区名单列出的中国私立学校 IGL 页面。截至 2026 年 8 月 29 日仍保留旧制 AIME 信息，尚未发布 2027 中国实施细则。", "Page of the China private-schools IGL listed by MAA. As of 29 August 2026 it still retained the former AIME arrangements and had not published the 2027 China administration rules."),
+    note: t("页面页首已列 2026 年中国合作赛区 A、B 卷日期；报名开放日、截止日和费用尚未以当届信息列明。下方仍保留旧制 AIME 内容，不能作为 2027 中国实施细则。", "The page header now lists 2026 China partner-route A/B dates; it does not yet state current-cycle registration opening, deadline or fee. Older AIME content remains below and is not a 2027 China implementation rule."),
   },
   {
     id: "aseeder-amc12-mainland",
@@ -159,9 +159,9 @@ export const competitionSources: SourceRecord[] = [
     owner: t("阿思丹国际理科测评", "ASEEDER"),
     url: "https://www.seedasdan.asia/en/amc12-en/",
     kind: "official",
-    verifiedAt: "2026-08-29",
+    verifiedAt: "2026-09-10",
     appliesTo: "AMC 12 and AIME in mainland China",
-    note: t("MAA 国际赛区名单列出的中国私立学校 IGL 页面。截至 2026 年 8 月 29 日仍保留旧制 AIME 信息，尚未发布 2027 中国实施细则。", "Page of the China private-schools IGL listed by MAA. As of 29 August 2026 it still retained the former AIME arrangements and had not published the 2027 China administration rules."),
+    note: t("页面页首已列 2026 年中国合作赛区 A、B 卷日期；报名开放日、截止日和费用尚未以当届信息列明。下方仍保留旧制 AIME 内容，不能作为 2027 中国实施细则。", "The page header now lists 2026 China partner-route A/B dates; it does not yet state current-cycle registration opening, deadline or fee. Older AIME content remains below and is not a 2027 China implementation rule."),
   },
   {
     id: "mathhub-amc-history",
@@ -933,7 +933,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026–27",
-    lastVerified: "2026-09-05",
+    lastVerified: "2026-09-10",
     facts: [
       { label: t("参赛资格", "Eligibility"), value: t("竞赛当天就读八年级及以下，且未满 15.5 周岁", "Grade 8 or below and under age 15.5 on the competition day"), sourceIds: ["maa-amc-policies"] },
       { label: t("题量与时长", "Questions and duration"), value: t("25 题，40 分钟", "25 questions, 40 minutes"), sourceIds: ["maa-amc-policies"] },
@@ -1027,14 +1027,16 @@ export const competitionProjects: ProjectRecord[] = [
       { label: t("美国／加拿大赛点费用", "US/Canada competition-centre fees"), value: t("早鸟／常规／逾期赛点注册费分别为 55／75／115 美元，另按每 10 个学生名额 30 美元购买；国际赛区不适用该价格", "Early, regular and late competition-centre registration fees are US$55, US$75 and US$115, plus US$30 per bundle of 10 student licences; these prices do not apply to international IGL regions"), sourceIds: ["maa-amc-registration-2026-27"] },
     ],
     dates: [
-      { id: "amc10a-2026", label: t("AMC 10A", "AMC 10A"), date: "2026-11-05", status: "confirmed", sourceIds: ["maa-amc-current"] },
-      { id: "amc10b-2026", label: t("AMC 10B", "AMC 10B"), date: "2026-11-13", status: "confirmed", sourceIds: ["maa-amc-current"] },
+      { id: "amc10a-2026", label: t("AMC 10A（美国／加拿大赛点）", "AMC 10A (US/Canada centres)"), date: "2026-11-05", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-current"] },
+      { id: "amc10b-2026", label: t("AMC 10B（美国／加拿大赛点）", "AMC 10B (US/Canada centres)"), date: "2026-11-13", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-current"] },
       { id: "amc10-2026-us-early", label: t("美国／加拿大早鸟报名截止", "US/Canada early-registration deadline"), date: "2026-09-30", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"] },
       { id: "amc10-2026-us-regular", label: t("美国／加拿大常规报名截止", "US/Canada regular-registration deadline"), date: "2026-10-15", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"] },
       { id: "amc10-2026-us-late", label: t("美国／加拿大逾期报名截止", "US/Canada late-registration deadline"), date: "2026-10-28", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"], note: t("逾期阶段仅限已回归的 Competition Manager；新赛点最晚须在常规截止日前完成。", "The late window is for returning Competition Managers only; new competition centres must complete registration by the regular deadline.") },
       { id: "amc10a-2026-us-bundles", label: t("美国／加拿大 AMC 10A 追加学生名额购买截止", "US/Canada AMC 10A additional-bundles deadline"), date: "2026-11-04", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"], note: t("只适用于已注册赛点追加学生名额。", "For registered competition centres purchasing additional student bundles only.") },
       { id: "amc10b-2026-us-bundles", label: t("美国／加拿大 AMC 10B 追加学生名额购买截止", "US/Canada AMC 10B additional-bundles deadline"), date: "2026-11-12", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"], note: t("只适用于已注册赛点追加学生名额。", "For registered competition centres purchasing additional student bundles only.") },
-      { id: "amc10-2026-cn-local", label: t("中国大陆本地竞赛时间与报名截止", "Mainland China local competition time and registration deadline"), date: "TBD", region: t("中国大陆", "Mainland China"), status: "pending", sourceIds: ["aseeder-amc10-mainland"], note: t("截至 2026 年 8 月 29 日，承办页尚未发布 2026–27 中国本地时间、报名截止及新 AIME 规则。", "As of 29 August 2026, the organiser page had not published the 2026–27 local time, registration deadline or new AIME rule for China.") },
+      { id: "amc10a-2026-cn", label: t("AMC 10A（中国合作赛区）", "AMC 10A (China partner route)"), date: "2026-11-06", time: "17:00–18:15", timezone: "Asia/Shanghai", region: t("中国大陆 ASEEDER／ASDAN China 路径", "Mainland China ASEEDER/ASDAN China route"), status: "confirmed", sourceIds: ["aseeder-amc10-mainland"], note: t("中国大陆统一时间。", "Mainland China uniform local time.") },
+      { id: "amc10b-2026-cn", label: t("AMC 10B（中国合作赛区）", "AMC 10B (China partner route)"), date: "2026-11-14", time: "17:00–18:15", timezone: "Asia/Shanghai", region: t("中国大陆 ASEEDER／ASDAN China 路径", "Mainland China ASEEDER/ASDAN China route"), status: "confirmed", sourceIds: ["aseeder-amc10-mainland"], note: t("中国大陆统一时间。", "Mainland China uniform local time.") },
+      { id: "amc10-2026-cn-registration", label: t("中国合作赛区报名开放、截止与费用", "China partner-route registration opening, deadline and fee"), date: "TBD", region: t("中国大陆 ASEEDER／ASDAN China 路径", "Mainland China ASEEDER/ASDAN China route"), status: "pending", sourceIds: ["aseeder-amc10-mainland"], note: t("当届页面已给出考试日期，但未以 2026 年信息列出报名开放日、截止日或费用；旧年表格不可沿用。", "The current page gives exam dates but not a 2026 registration opening, deadline or fee; older tables must not be reused.") },
     ],
     sections: [
       {
@@ -1052,6 +1054,7 @@ export const competitionProjects: ProjectRecord[] = [
         bullets: [
           t("MAA 要求国际参赛者通过居住地 IGL 报名；官方名单分别列出中国公立学校、私立学校及上海地区联系人。", "MAA requires international participants to register through the IGL for their country of residence; its official list gives separate contacts for Chinese public schools, private schools and Shanghai."),
           t("中国大陆私立学校路径由 MAA 列出的 ASEEDER／ASDAN China 承办。其 AMC 10 公告要求学生通过学校报名；如学校尚未承办，应由本校学科教师联系申请，不接受培训机构代报。", "For mainland Chinese private schools, MAA lists ASEEDER/ASDAN China as the organiser. Its AMC 10 notice requires students to enter through their school; if the school is not yet a host, a subject teacher should apply, and training-centre registration is not accepted."),
+          t("2026 中国合作赛区考试已定为 A 卷 11 月 6 日、B 卷 11 月 14 日，均为 17:00–18:15（北京时间）；报名开放日、截止日和费用仍以学校当届通知为准。", "The 2026 China partner-route papers are set for 6 November (A) and 14 November (B), both 17:00–18:15 Beijing time; registration opening, deadline and fee still await the current school notice."),
           t("参赛凭证、比赛地点及所需证件按学校／IGL 当届通知执行；公开页面未列全国统一的中国学生证件清单。", "Competition pass, venue and required documents follow the school/IGL's current notice; the public pages do not give a uniform document list for students in China."),
         ],
       },
@@ -1096,7 +1099,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026–27",
-    lastVerified: "2026-09-05",
+    lastVerified: "2026-09-10",
     alerts: [{
       title: t("2027 AIME 晋级规则已变", "2027 AIME qualification has changed"),
       body: t("美国、加拿大考生在 AMC 12A 或 12B 达到 85 分即可取得 AIME 分数资格，不再等待按百分位生成的当卷资格线；仍须满足 AIME 学籍、年龄等条件。在中国境内参赛者须等待所在地 IGL 公布 2026–27 规则，不能先把 85 分视为中国赛区已确认资格线。", "In the US and Canada, a score of 85 on AMC 12A or 12B meets the AIME score requirement; candidates no longer wait for a paper-specific percentile cutoff. All AIME enrolment, age and other conditions still apply. Students competing in China must wait for their local IGL's 2026–27 rule and should not yet treat 85 as a confirmed China-region cutoff."),
@@ -1112,14 +1115,16 @@ export const competitionProjects: ProjectRecord[] = [
       { label: t("美国／加拿大赛点费用", "US/Canada competition-centre fees"), value: t("早鸟／常规／逾期赛点注册费分别为 55／75／115 美元，另按每 10 个学生名额 30 美元购买；国际赛区不适用该价格", "Early, regular and late competition-centre registration fees are US$55, US$75 and US$115, plus US$30 per bundle of 10 student licences; these prices do not apply to international IGL regions"), sourceIds: ["maa-amc-registration-2026-27"] },
     ],
     dates: [
-      { id: "amc12a-2026", label: t("AMC 12A", "AMC 12A"), date: "2026-11-05", status: "confirmed", sourceIds: ["maa-amc-current"] },
-      { id: "amc12b-2026", label: t("AMC 12B", "AMC 12B"), date: "2026-11-13", status: "confirmed", sourceIds: ["maa-amc-current"] },
+      { id: "amc12a-2026", label: t("AMC 12A（美国／加拿大赛点）", "AMC 12A (US/Canada centres)"), date: "2026-11-05", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-current"] },
+      { id: "amc12b-2026", label: t("AMC 12B（美国／加拿大赛点）", "AMC 12B (US/Canada centres)"), date: "2026-11-13", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-current"] },
       { id: "amc12-2026-us-early", label: t("美国／加拿大早鸟报名截止", "US/Canada early-registration deadline"), date: "2026-09-30", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"] },
       { id: "amc12-2026-us-regular", label: t("美国／加拿大常规报名截止", "US/Canada regular-registration deadline"), date: "2026-10-15", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"] },
       { id: "amc12-2026-us-late", label: t("美国／加拿大逾期报名截止", "US/Canada late-registration deadline"), date: "2026-10-28", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"], note: t("逾期阶段仅限已回归的 Competition Manager；新赛点最晚须在常规截止日前完成。", "The late window is for returning Competition Managers only; new competition centres must complete registration by the regular deadline.") },
       { id: "amc12a-2026-us-bundles", label: t("美国／加拿大 AMC 12A 追加学生名额购买截止", "US/Canada AMC 12A additional-bundles deadline"), date: "2026-11-04", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"], note: t("只适用于已注册赛点追加学生名额。", "For registered competition centres purchasing additional student bundles only.") },
       { id: "amc12b-2026-us-bundles", label: t("美国／加拿大 AMC 12B 追加学生名额购买截止", "US/Canada AMC 12B additional-bundles deadline"), date: "2026-11-12", region: t("美国／加拿大赛点", "US/Canada competition centres"), status: "confirmed", sourceIds: ["maa-amc-registration-2026-27"], note: t("只适用于已注册赛点追加学生名额。", "For registered competition centres purchasing additional student bundles only.") },
-      { id: "amc12-2026-cn-local", label: t("中国大陆本地竞赛时间与报名截止", "Mainland China local competition time and registration deadline"), date: "TBD", region: t("中国大陆", "Mainland China"), status: "pending", sourceIds: ["aseeder-amc12-mainland"], note: t("截至 2026 年 8 月 29 日，承办页尚未发布 2026–27 中国本地时间、报名截止及新 AIME 规则。", "As of 29 August 2026, the organiser page had not published the 2026–27 local time, registration deadline or new AIME rule for China.") },
+      { id: "amc12a-2026-cn", label: t("AMC 12A（中国合作赛区）", "AMC 12A (China partner route)"), date: "2026-11-06", time: "17:00–18:15", timezone: "Asia/Shanghai", region: t("中国大陆 ASEEDER／ASDAN China 路径", "Mainland China ASEEDER/ASDAN China route"), status: "confirmed", sourceIds: ["aseeder-amc12-mainland"], note: t("中国大陆统一时间。", "Mainland China uniform local time.") },
+      { id: "amc12b-2026-cn", label: t("AMC 12B（中国合作赛区）", "AMC 12B (China partner route)"), date: "2026-11-14", time: "17:00–18:15", timezone: "Asia/Shanghai", region: t("中国大陆 ASEEDER／ASDAN China 路径", "Mainland China ASEEDER/ASDAN China route"), status: "confirmed", sourceIds: ["aseeder-amc12-mainland"], note: t("中国大陆统一时间。", "Mainland China uniform local time.") },
+      { id: "amc12-2026-cn-registration", label: t("中国合作赛区报名开放、截止与费用", "China partner-route registration opening, deadline and fee"), date: "TBD", region: t("中国大陆 ASEEDER／ASDAN China 路径", "Mainland China ASEEDER/ASDAN China route"), status: "pending", sourceIds: ["aseeder-amc12-mainland"], note: t("当届页面已给出考试日期，但未以 2026 年信息列出报名开放日、截止日或费用；旧年表格不可沿用。", "The current page gives exam dates but not a 2026 registration opening, deadline or fee; older tables must not be reused.") },
     ],
     sections: [
       {
@@ -1137,6 +1142,7 @@ export const competitionProjects: ProjectRecord[] = [
         bullets: [
           t("MAA 要求国际参赛者通过居住地 IGL 报名；官方名单分别列出中国公立学校、私立学校及上海地区联系人。", "MAA requires international participants to register through the IGL for their country of residence; its official list gives separate contacts for Chinese public schools, private schools and Shanghai."),
           t("中国大陆私立学校路径由 MAA 列出的 ASEEDER／ASDAN China 承办。其 AMC 12 公告要求学生通过学校报名；如学校尚未承办，应由本校学科教师联系申请，不接受培训机构代报。", "For mainland Chinese private schools, MAA lists ASEEDER/ASDAN China as the organiser. Its AMC 12 notice requires students to enter through their school; if the school is not yet a host, a subject teacher should apply, and training-centre registration is not accepted."),
+          t("2026 中国合作赛区考试已定为 A 卷 11 月 6 日、B 卷 11 月 14 日，均为 17:00–18:15（北京时间）；报名开放日、截止日和费用仍以学校当届通知为准。", "The 2026 China partner-route papers are set for 6 November (A) and 14 November (B), both 17:00–18:15 Beijing time; registration opening, deadline and fee still await the current school notice."),
           t("参赛凭证、比赛地点及所需证件按学校／IGL 当届通知执行；公开页面未列全国统一的中国学生证件清单。", "Competition pass, venue and required documents follow the school/IGL's current notice; the public pages do not give a uniform document list for students in China."),
         ],
       },
@@ -1181,7 +1187,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "pending",
     cycle: "2026–27",
-    lastVerified: "2026-09-05",
+    lastVerified: "2026-09-10",
     alerts: [
       {
         title: t("特别提示｜中国境内考生不要直接套用美加新规", "Important | Do not apply the US/Canada rules directly to students studying in China"),
@@ -1253,7 +1259,7 @@ export const competitionProjects: ProjectRecord[] = [
         bullets: [
           t("AIME 为邀请制，不接受自行直报。先通过所在学校／地区 IGL 参加 AMC 10／12，再由原报名路径确认是否取得 AIME 资格。", "AIME is invitation-only and does not accept self-registration. Enter AMC 10/12 through the school or regional IGL, then use the same route to confirm AIME qualification."),
           t("MAA 现行国际名单分别列出中国公立学校、中国私立学校以及上海与台湾的联系人；条目存在地区交叠，学生应让学校向对应 IGL 书面确认，本站不代替主办方判定。", "MAA's current international directory lists separate contacts for China public schools, China private schools, and Shanghai and Taiwan. Because the entries overlap geographically, the school should obtain written confirmation from the relevant IGL; this site does not decide the organiser on MAA's behalf."),
-          t("ASEEDER 现有 AMC 10／12 页面仍写旧制 AIME 在 3 月举行，并保留旧日期和旧考务；这些内容不能用来判断 2027 场次、机考、费用、年龄或固定资格线。", "The existing ASEEDER AMC 10/12 pages still describe the former March AIME and retain older dates and administration. They cannot establish the 2027 date, computer delivery, fee, age rule or fixed qualification scores."),
+          t("ASEEDER 的 AMC 10／12 页面已公布 2026 中国合作赛区日期；但仍保留旧制 AIME 内容，AMC 日期不等于 2027 AIME 的场次、机考、费用、年龄或固定资格线已经公布。", "ASEEDER's AMC 10/12 pages now publish 2026 China partner-route dates, but still retain former AIME content. AMC dates do not establish the 2027 AIME session, computer delivery, fee, age rule or fixed qualification scores."),
           t("收到学校或 IGL 的 2026–27 通知前，不应自行在 Pearson 预约、付款或购买赴美加行程。", "Until a 2026–27 notice arrives from the school or IGL, do not book or pay Pearson independently or purchase travel to the US or Canada."),
         ],
       },
@@ -1741,7 +1747,7 @@ export const competitionProjects: ProjectRecord[] = [
       { label: t("2026 中国赛区", "2026 Mainland China administration"), value: t("2026 年 10 月 8 日 17:00–18:30，面向 Grade 12 及以下；合作学校纸笔考试，接受线上服务申请。报名截止 9 月 28 日。", "October 8, 2026, 17:00–18:30, for Grade 12 or below; paper-based at partner schools, with online service applications accepted. Registration closes September 28."), status: "confirmed", sourceIds: ["aseeder-smc-2026"] },
     ],
     dates: [
-      { id: "smc-2026-access", label: t("英国无障碍试卷申请截止", "UK accessible-paper request deadline"), date: "2026-09-09", region: t("英国", "United Kingdom"), status: "confirmed", sourceIds: ["ukmt-smc"] },
+      { id: "smc-2026-access", label: t("英国无障碍试卷申请截止", "UK accessible-paper request deadline"), date: "2026-09-09", region: t("英国", "United Kingdom"), status: "historical", sourceIds: ["ukmt-smc"] },
       { id: "smc-2026-paper-order", label: t("英国纸质试卷购买截止", "UK physical-paper order deadline"), date: "2026-09-16", region: t("英国", "United Kingdom"), status: "confirmed", sourceIds: ["ukmt-smc"] },
       { id: "smc-2026-uk", label: t("英国主竞赛日", "UK competition date"), date: "2026-10-07", region: t("英国", "United Kingdom"), status: "confirmed", sourceIds: ["ukmt-smc", "ukmt-calendar-2026-27"] },
       { id: "smc-2026-upload", label: t("英国纸质答题表上传截止", "UK paper answer-sheet upload deadline"), date: "2026-10-08", time: "23:59", timezone: "Europe/London", region: t("英国", "United Kingdom"), status: "confirmed", sourceIds: ["ukmt-smc"] },

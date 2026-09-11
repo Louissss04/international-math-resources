@@ -672,7 +672,7 @@ export const modelingCatalogProjects: ProjectRecord[] = [
     ],
     dates: [
       { id: "mtfc-registration-open-2026", label: t("报名开放", "Registration opens"), date: "2026-08-24", region: t("美国线上", "U.S. online"), status: "historical", sourceIds: ["mtfc-timeline-2026-27"] },
-      { id: "mtfc-scenario-posted-2026", label: t("Scenario 发布", "Scenario posted"), date: "2026-09-08", region: t("官网", "Official site"), status: "confirmed", sourceIds: ["mtfc-timeline-2026-27"] },
+      { id: "mtfc-scenario-posted-2026", label: t("Scenario 发布", "Scenario posted"), date: "2026-09-08", region: t("官网", "Official site"), status: "historical", sourceIds: ["mtfc-timeline-2026-27"] },
       { id: "mtfc-scenario-workshop-2026", label: t("Scenario Phase 工作坊", "Scenario Phase workshop"), date: "2026-10-07", region: t("线上", "Online"), status: "confirmed", sourceIds: ["mtfc-timeline-2026-27"] },
       { id: "mtfc-registration-close-2026", label: t("报名截止", "Registration closes"), date: "2026-11-08", region: t("美国线上", "U.S. online"), status: "confirmed", sourceIds: ["mtfc-timeline-2026-27"] },
       { id: "mtfc-team-office-hours-2026", label: t("队伍线上答疑", "Team office hours"), date: "2026-11-18", region: t("线上", "Online"), status: "confirmed", sourceIds: ["mtfc-timeline-2026-27"] },

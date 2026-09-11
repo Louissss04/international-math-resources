@@ -213,7 +213,7 @@ function apChinaRegistrationDates(projectId: string): DateRecord[] {
     { id: `${projectId}-china-roster-deadline`, label: t("AP 学校花名册截止", "AP school roster deadline"), date: "2026-10-16", region, status: "confirmed", sourceIds, note: t("中午 12:00 截止。", "Deadline is 12:00 noon.") },
     { id: `${projectId}-china-payment-deadline`, label: t("AP 报名缴费截止", "AP registration and payment deadline"), date: "2026-11-09", region, status: "confirmed", sourceIds, note: t("中午 12:00 截止。", "Deadline is 12:00 noon.") },
     { id: `${projectId}-china-myap-check`, label: t("核对 My AP 科目与资料", "Verify My AP subjects and details"), date: "2026-12-01", region, status: "confirmed", sourceIds },
-    { id: `${projectId}-china-correction-deadline`, label: t("资料及科目更正截止", "Details and subject correction deadline"), date: "2027-03-12", region, status: "confirmed", sourceIds },
+    { id: `${projectId}-china-order-confirmation`, label: t("AP 考试订单确认截止", "AP exam-order confirmation deadline"), date: "2027-01-31", region, status: "confirmed", sourceIds },
     { id: `${projectId}-china-admission-letter`, label: t("准考信开放下载", "Admission letter available"), date: "2027-04-03", region, status: "confirmed", sourceIds },
   ];
 }
@@ -225,7 +225,7 @@ function chinaRegistrationSection(): ContentSection {
     bullets: [
       t("AP 授权学校学生通过本校 AP coordinator 和 My AP class／exam-only section 报名；学校决定开考科目及是否接收外校考生。", "Students at AP-authorized schools register through their AP coordinator and a My AP class or exam-only section; each school decides which subjects it offers and whether it accepts external candidates."),
       t("中国大陆指定考务路线、公开考点、资格和证件要求按 Prometric 中国 2027 通知执行；AP 授权学校学生由本校 AP coordinator 先提交名单。", "Mainland-China administration routes, public centres, eligibility and ID requirements follow the 2027 Prometric China notice; students at AP-authorized schools must first be placed on the roster by their AP coordinator."),
-      t("学生自 2026 年 9 月 16 日起办理，全部科目确认与缴费在 11 月 9 日中午 12:00 截止；每科 1475 元，其中 88 元手续费及税费不退。", "Student registration begins on 16 September 2026, with all subject confirmation and payment due by 12:00 noon on 9 November. The fee is CNY 1,475 per exam, including a non-refundable CNY 88 processing fee and tax."),
+      t("学生自 2026 年 9 月 16 日起办理，全部科目确认与缴费在 11 月 9 日中午 12:00 截止；每科 1525 元，其中 133 元手续费及税费不退。", "Student registration begins on 16 September 2026, with all subject confirmation and payment due by 12:00 noon on 9 November. The fee is CNY 1,525 per exam, including a non-refundable CNY 133 processing fee and tax."),
       t("社会考生须符合 Prometric 列明的高中在读、自主学习／网校或因大学录取需要指定 AP 成绩等条件；已由本校提供 AP 报名的学生必须通过本校报考。", "Unaffiliated candidates must meet Prometric's listed conditions, such as current high-school, home/independent/online study, or needing a specified AP score for university admission. Students whose AP school offers registration must register through that school."),
       t("同一科目不得在不同学校或考点重复报名。缴费完成后不得取消或退款，缺考没有补考或退款；只有主办方无法正常组织考试等规定情形可扣除手续费后退款。", "The same subject must not be registered at multiple schools or centres. After payment, cancellation and refunds are unavailable, and there is no make-up or refund for absence; only specified organizer-side disruptions may qualify for a refund less the processing charge."),
       t("Prometric 中国考点不支持 Chromebook；iPad 或 Windows 平板须配实体键盘，设备至少可续航 4 小时。", "Prometric China centres do not support Chromebooks. An iPad or Windows tablet requires a physical keyboard, and the device must have at least four hours of battery life."),
@@ -281,7 +281,7 @@ export const apCourseProjects: ProjectRecord[] = apSpecs.map((spec) => ({
   costBand: "varies",
   status: "confirmed",
   cycle: spec.cycle,
-  lastVerified: "2026-08-25",
+  lastVerified: "2026-09-10",
   facts: [
     { label: t("课程层级", "Course level"), value: t("高中阶段的大学先修课程与统一考试", "College-level high-school course and standardized subject exam"), sourceIds: [spec.cedSourceId] },
     { label: t("考查范围", "Assessed scope"), value: spec.assessedScope, sourceIds: [spec.cedSourceId] },
@@ -290,7 +290,7 @@ export const apCourseProjects: ProjectRecord[] = apSpecs.map((spec) => ({
     { label: t("计算器", "Calculator"), value: spec.calculator, sourceIds: [spec.cedSourceId, spec.examSourceId] },
     { label: t("考试日期", "Exam date"), value: t(`${spec.examDate}；${spec.examSession.zh}`, `${spec.examDate}; ${spec.examSession.en}`), sourceIds: ["ap-2027-exam-dates"] },
     { label: t("成绩", "Score"), value: t("1–5；原始分转换线不预先固定公布", "1–5; raw-score conversion points are not published as fixed advance cutoffs"), sourceIds: [spec.scoreSourceId] },
-    { label: t("中国报名", "Registration in China"), value: t("授权学校学生先由 AP coordinator 提交名单；符合条件的社会考生通过 MyAPChina 申请。2026 年 11 月 9 日中午 12:00 截止缴费，每科 1475 元", "Authorized-school students must first be rostered by their AP coordinator; eligible unaffiliated candidates apply through MyAPChina. Payment is due by 12:00 noon on 9 November 2026 at CNY 1,475 per exam"), sourceIds: ["ap-registration", "ap-china", "ap-china-registration-2027", "ap-china-timeline-2027"] },
+    { label: t("中国报名", "Registration in China"), value: t("授权学校学生先由 AP coordinator 提交名单；符合条件的社会考生通过 MyAPChina 申请。2026 年 11 月 9 日中午 12:00 截止缴费，每科 1525 元", "Authorized-school students must first be rostered by their AP coordinator; eligible unaffiliated candidates apply through MyAPChina. Payment is due by 12:00 noon on 9 November 2026 at CNY 1,525 per exam"), sourceIds: ["ap-registration", "ap-china", "ap-china-registration-2027", "ap-china-timeline-2027"] },
   ],
   dates: [...(spec.id === "ap-calculus-ab" ? apChinaRegistrationDates(spec.id) : []), {
     id: `${spec.id}-2027-exam`,
