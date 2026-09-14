@@ -113,6 +113,7 @@ export function ProjectDetail({
   const projectThresholds = thresholds.filter((item) => item.projectId === project.id);
   const pageLastUpdated = [
     project.lastVerified,
+    ...projectThresholds.flatMap((record) => record.sourceIds.map((id) => sources.find((source) => source.id === id)?.verifiedAt)),
     ...learningResources.map((resource) => resource.verifiedAt),
     ...videoResources.map((resource) => resource.verifiedAt),
     ...bookResources.map((resource) => resource.verifiedAt),
