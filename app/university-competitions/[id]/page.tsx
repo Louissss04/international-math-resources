@@ -83,6 +83,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   const resultLinks = record.officialLinks.filter((link) => matchesLink(link, resultLinkPattern));
   const primaryOfficialLink = record.officialLinks[0];
   const historical = record.status === "historical";
+  const scoreHistory = record.scoreHistory ?? [];
 
   return (
     <main
@@ -140,6 +141,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           <strong><span className="lang-zh">本页内容</span><span className="lang-en">On this page</span></strong>
           <a href="#organizer"><span className="lang-zh">主办机构与状态</span><span className="lang-en">Organizer and status</span></a>
           <a href="#entry-format"><span className="lang-zh">资格、赛制与费用</span><span className="lang-en">Eligibility, format and fee</span></a>
+          {scoreHistory.length > 0 && <a href="#score-history"><span className="lang-zh">历年分数记录</span><span className="lang-en">Historical score records</span></a>}
           <a href="#china-access"><span className="lang-zh">中国学生路径</span><span className="lang-en">Access from China</span></a>
           <a href="#official-links"><span className="lang-zh">官方链接与材料</span><span className="lang-en">Official links and materials</span></a>
           {record.internalHref && <a href="#site-record"><span className="lang-zh">本站专项档案</span><span className="lang-en">Dedicated site record</span></a>}
@@ -167,6 +169,26 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
               <div><dt><span className="lang-zh">费用</span><span className="lang-en">Fee</span></dt><dd><Localized text={record.fee} /></dd></div>
             </dl>
           </section>
+
+          {scoreHistory.length > 0 && (
+            <section id="score-history" className="record-section">
+              <h2><span className="lang-zh">官方历年分数记录</span><span className="lang-en">Official historical score records</span></h2>
+              <p className="section-intro"><span className="lang-zh">固定奖项线、同届名次分数和归一化分数分别标注。</span><span className="lang-en">Fixed cutoffs, same-year rank scores, and normalized scores are labeled separately.</span></p>
+              <div className="threshold-years">
+                {scoreHistory.map((entry, index) => (
+                  <details className="threshold-year" key={`${entry.year}-${entry.division.en}`} open={index === 0}>
+                    <summary><strong>{entry.year}</strong><span><Localized text={entry.division} /></span></summary>
+                    <p><Localized text={entry.note} /></p>
+                    <div className="table-scroll"><table>
+                      <thead><tr><th><span className="lang-zh">指标</span><span className="lang-en">Metric</span></th><th><span className="lang-zh">分数</span><span className="lang-en">Score</span></th><th><span className="lang-zh">说明</span><span className="lang-en">Note</span></th></tr></thead>
+                      <tbody>{entry.metrics.map((metric) => <tr key={`${metric.label.en}-${metric.value}`}><td><Localized text={metric.label} /></td><td>{metric.value}</td><td>{metric.note ? <Localized text={metric.note} /> : "—"}</td></tr>)}</tbody>
+                    </table></div>
+                    <div className="requirement-tests"><a href={entry.resultLink.url} target="_blank" rel="noreferrer"><Localized text={entry.resultLink.label} /></a></div>
+                  </details>
+                ))}
+              </div>
+            </section>
+          )}
 
           <section id="china-access" className="record-section">
             <h2><span className="lang-zh">中国学生参与路径</span><span className="lang-en">Participation route from China</span></h2>

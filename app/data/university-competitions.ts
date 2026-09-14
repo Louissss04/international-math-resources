@@ -24,6 +24,20 @@ export interface UniversityCompetitionLink {
   url: string;
 }
 
+export interface UniversityCompetitionScoreMetric {
+  label: LocalizedText;
+  value: string;
+  note?: LocalizedText;
+}
+
+export interface UniversityCompetitionScoreHistory {
+  year: string;
+  division: LocalizedText;
+  note: LocalizedText;
+  metrics: UniversityCompetitionScoreMetric[];
+  resultLink: UniversityCompetitionLink;
+}
+
 export interface UniversityCompetitionRecord {
   id: string;
   shortTitle: string;
@@ -43,6 +57,7 @@ export interface UniversityCompetitionRecord {
   fee: LocalizedText;
   note?: LocalizedText;
   officialLinks: UniversityCompetitionLink[];
+  scoreHistory?: UniversityCompetitionScoreHistory[];
   internalHref?: string;
   lastVerified: string;
 }
@@ -50,6 +65,11 @@ export interface UniversityCompetitionRecord {
 const VERIFIED_AT = "2026-08-11";
 const l = (zh: string, en: string): LocalizedText => ({ zh, en });
 const link = (zh: string, en: string, url: string): UniversityCompetitionLink => ({ label: l(zh, en), url });
+const scoreMetric = (zh: string, en: string, value: string, noteZh?: string, noteEn?: string): UniversityCompetitionScoreMetric => ({
+  label: l(zh, en),
+  value,
+  ...(noteZh && noteEn ? { note: l(noteZh, noteEn) } : {}),
+});
 
 export const organizerTypeLabels: Record<UniversityCompetitionOrganizerType, LocalizedText> = {
   "university-unit": l("大学院系／直属中心", "University department or centre"),
@@ -159,7 +179,129 @@ export const universityCompetitions: UniversityCompetitionRecord[] = [
       link("竞赛规则", "Competition rules", "https://pumac.princeton.edu/competition-rules"),
       link("题目档案", "Archive", "https://pumac.princeton.edu/archives"),
     ],
-    lastVerified: "2026-08-25",
+    scoreHistory: [
+      {
+        year: "2025",
+        division: l("A 组", "Division A"),
+        note: l("Individual Test 按当届各题正确率动态计分。下列为官方前十名列表的最后列示分数（含并列），不是下一届获奖线。", "Individual Test scores use weights based on current-year item performance. These are the last displayed scores in the official top-ten list, including ties, not next-year award cutoffs."),
+        metrics: [
+          scoreMetric("Algebra 前十名列示分数", "Algebra last displayed top-ten score", "10.406", "第 8 名并列", "Tied at rank 8"),
+          scoreMetric("Combinatorics 前十名列示分数", "Combinatorics last displayed top-ten score", "8.571"),
+          scoreMetric("Geometry 前十名列示分数", "Geometry last displayed top-ten score", "7.485", "第 9 名并列", "Tied at rank 9"),
+          scoreMetric("Number Theory 前十名列示分数", "Number Theory last displayed top-ten score", "11.780"),
+        ],
+        resultLink: link("2025 A 组官方个人成绩", "2025 Division A official individual results", "https://pumac.princeton.edu/results/2025/IndividualsA.html"),
+      },
+      {
+        year: "2025",
+        division: l("B 组", "Division B"),
+        note: l("Individual Test 按当届各题正确率动态计分。下列为官方前十名列表的最后列示分数（含并列），不是下一届获奖线。", "Individual Test scores use weights based on current-year item performance. These are the last displayed scores in the official top-ten list, including ties, not next-year award cutoffs."),
+        metrics: [
+          scoreMetric("Algebra 前十名列示分数", "Algebra last displayed top-ten score", "8.458"),
+          scoreMetric("Combinatorics 前十名列示分数", "Combinatorics last displayed top-ten score", "10.051"),
+          scoreMetric("Geometry 前十名列示分数", "Geometry last displayed top-ten score", "8.531", "第 9 名并列", "Tied at rank 9"),
+          scoreMetric("Number Theory 前十名列示分数", "Number Theory last displayed top-ten score", "9.346"),
+        ],
+        resultLink: link("2025 B 组官方个人成绩", "2025 Division B official individual results", "https://pumac.princeton.edu/results/2025/IndividualsB.html"),
+      },
+      {
+        year: "2024",
+        division: l("A 组", "Division A"),
+        note: l("Individual Test 按当届各题正确率动态计分。下列为官方前十名列表的最后列示分数（含并列），不是下一届获奖线。", "Individual Test scores use weights based on current-year item performance. These are the last displayed scores in the official top-ten list, including ties, not next-year award cutoffs."),
+        metrics: [
+          scoreMetric("Algebra 前十名列示分数", "Algebra last displayed top-ten score", "7.887"),
+          scoreMetric("Combinatorics 前十名列示分数", "Combinatorics last displayed top-ten score", "11.367", "第 9 名并列", "Tied at rank 9"),
+          scoreMetric("Geometry 前十名列示分数", "Geometry last displayed top-ten score", "9.567", "第 3 名起大规模并列", "Large tie beginning at rank 3"),
+          scoreMetric("Number Theory 前十名列示分数", "Number Theory last displayed top-ten score", "8.815"),
+        ],
+        resultLink: link("2024 A 组官方个人成绩", "2024 Division A official individual results", "https://pumac.princeton.edu/results/2024/IndividualsA.html"),
+      },
+      {
+        year: "2024",
+        division: l("B 组", "Division B"),
+        note: l("Individual Test 按当届各题正确率动态计分。下列为官方前十名列表的最后列示分数（含并列），不是下一届获奖线。", "Individual Test scores use weights based on current-year item performance. These are the last displayed scores in the official top-ten list, including ties, not next-year award cutoffs."),
+        metrics: [
+          scoreMetric("Algebra 前十名列示分数", "Algebra last displayed top-ten score", "7.255", "第 8 名并列", "Tied at rank 8"),
+          scoreMetric("Combinatorics 前十名列示分数", "Combinatorics last displayed top-ten score", "8.825"),
+          scoreMetric("Geometry 前十名列示分数", "Geometry last displayed top-ten score", "8.816", "第 9 名并列", "Tied at rank 9"),
+          scoreMetric("Number Theory 前十名列示分数", "Number Theory last displayed top-ten score", "7.782", "第 8 名并列", "Tied at rank 8"),
+        ],
+        resultLink: link("2024 B 组官方个人成绩", "2024 Division B official individual results", "https://pumac.princeton.edu/results/2024/IndividualsB.html"),
+      },
+      {
+        year: "2023",
+        division: l("A 组", "Division A"),
+        note: l("Individual Test 按当届各题正确率动态计分。下列为官方前十名列表的最后列示分数（含并列），不是下一届获奖线。", "Individual Test scores use weights based on current-year item performance. These are the last displayed scores in the official top-ten list, including ties, not next-year award cutoffs."),
+        metrics: [
+          scoreMetric("Algebra 前十名列示分数", "Algebra last displayed top-ten score", "7.671", "第 8 名并列", "Tied at rank 8"),
+          scoreMetric("Combinatorics 前十名列示分数", "Combinatorics last displayed top-ten score", "7.694", "第 6 名并列", "Tied at rank 6"),
+          scoreMetric("Geometry 前十名列示分数", "Geometry last displayed top-ten score", "8.667"),
+          scoreMetric("Number Theory 前十名列示分数", "Number Theory last displayed top-ten score", "8.198"),
+        ],
+        resultLink: link("2023 A 组官方个人成绩", "2023 Division A official individual results", "https://pumac.princeton.edu/results/2023/IndividualsA.html"),
+      },
+      {
+        year: "2023",
+        division: l("B 组", "Division B"),
+        note: l("Individual Test 按当届各题正确率动态计分。下列为官方前十名列表的最后列示分数（含并列），不是下一届获奖线。", "Individual Test scores use weights based on current-year item performance. These are the last displayed scores in the official top-ten list, including ties, not next-year award cutoffs."),
+        metrics: [
+          scoreMetric("Algebra 前十名列示分数", "Algebra last displayed top-ten score", "6.694"),
+          scoreMetric("Combinatorics 前十名列示分数", "Combinatorics last displayed top-ten score", "7.701"),
+          scoreMetric("Geometry 前十名列示分数", "Geometry last displayed top-ten score", "5.194", "第 8 名并列", "Tied at rank 8"),
+          scoreMetric("Number Theory 前十名列示分数", "Number Theory last displayed top-ten score", "6.783"),
+        ],
+        resultLink: link("2023 B 组官方个人成绩", "2023 Division B official individual results", "https://pumac.princeton.edu/results/2023/IndividualsB.html"),
+      },
+      {
+        year: "2022",
+        division: l("A 组", "Division A"),
+        note: l("Individual Test 按当届各题正确率动态计分。下列为官方前十名列表的最后列示分数（含并列），不是下一届获奖线。", "Individual Test scores use weights based on current-year item performance. These are the last displayed scores in the official top-ten list, including ties, not next-year award cutoffs."),
+        metrics: [
+          scoreMetric("Algebra 前十名列示分数", "Algebra last displayed top-ten score", "9.798", "列表末位为第 9 名", "The last listed rank is 9"),
+          scoreMetric("Combinatorics 前十名列示分数", "Combinatorics last displayed top-ten score", "8.374"),
+          scoreMetric("Geometry 前十名列示分数", "Geometry last displayed top-ten score", "8.319"),
+          scoreMetric("Number Theory 前十名列示分数", "Number Theory last displayed top-ten score", "9.916"),
+        ],
+        resultLink: link("2022 A 组官方个人成绩", "2022 Division A official individual results", "https://pumac.princeton.edu/results/2022/IndividualsA.html"),
+      },
+      {
+        year: "2022",
+        division: l("B 组", "Division B"),
+        note: l("Individual Test 按当届各题正确率动态计分。下列为官方前十名列表的最后列示分数（含并列），不是下一届获奖线。", "Individual Test scores use weights based on current-year item performance. These are the last displayed scores in the official top-ten list, including ties, not next-year award cutoffs."),
+        metrics: [
+          scoreMetric("Algebra 前十名列示分数", "Algebra last displayed top-ten score", "7.339"),
+          scoreMetric("Combinatorics 前十名列示分数", "Combinatorics last displayed top-ten score", "7.610"),
+          scoreMetric("Geometry 前十名列示分数", "Geometry last displayed top-ten score", "6.750"),
+          scoreMetric("Number Theory 前十名列示分数", "Number Theory last displayed top-ten score", "8.358"),
+        ],
+        resultLink: link("2022 B 组官方个人成绩", "2022 Division B official individual results", "https://pumac.princeton.edu/results/2022/IndividualsB.html"),
+      },
+      {
+        year: "2021",
+        division: l("A 组", "Division A"),
+        note: l("Individual Test 按当届各题正确率动态计分。下列为官方前十名列表的最后列示分数（含并列），不是下一届获奖线。", "Individual Test scores use weights based on current-year item performance. These are the last displayed scores in the official top-ten list, including ties, not next-year award cutoffs."),
+        metrics: [
+          scoreMetric("Algebra 前十名列示分数", "Algebra last displayed top-ten score", "10.905", "列表末位为第 8 名", "The last listed rank is 8"),
+          scoreMetric("Combinatorics 前十名列示分数", "Combinatorics last displayed top-ten score", "10.888"),
+          scoreMetric("Geometry 前十名列示分数", "Geometry last displayed top-ten score", "11.121", "第 5 名并列", "Tied at rank 5"),
+          scoreMetric("Number Theory 前十名列示分数", "Number Theory last displayed top-ten score", "10.532", "第 8 名并列", "Tied at rank 8"),
+        ],
+        resultLink: link("2021 A 组官方个人成绩", "2021 Division A official individual results", "https://pumac.princeton.edu/results/2021/IndividualsA.html"),
+      },
+      {
+        year: "2021",
+        division: l("B 组", "Division B"),
+        note: l("Individual Test 按当届各题正确率动态计分。下列为官方前十名列表的最后列示分数（含并列），不是下一届获奖线。", "Individual Test scores use weights based on current-year item performance. These are the last displayed scores in the official top-ten list, including ties, not next-year award cutoffs."),
+        metrics: [
+          scoreMetric("Algebra 前十名列示分数", "Algebra last displayed top-ten score", "10.309"),
+          scoreMetric("Combinatorics 前十名列示分数", "Combinatorics last displayed top-ten score", "9.241"),
+          scoreMetric("Geometry 前十名列示分数", "Geometry last displayed top-ten score", "12.299"),
+          scoreMetric("Number Theory 前十名列示分数", "Number Theory last displayed top-ten score", "9.405", "第 9 名并列", "Tied at rank 9"),
+        ],
+        resultLink: link("2021 B 组官方个人成绩", "2021 Division B official individual results", "https://pumac.princeton.edu/results/2021/IndividualsB.html"),
+      },
+    ],
+    lastVerified: "2026-09-14",
   },
   {
     id: "stanford-math-tournament",
@@ -210,7 +352,57 @@ export const universityCompetitions: UniversityCompetitionRecord[] = [
       link("题目与结果", "Problems and results", "https://berkeley.mt/resources/"),
       link("校内组织记录", "Campus organization record", "https://callink.berkeley.edu/organization/mathtournament"),
     ],
-    lastVerified: "2026-08-25",
+    scoreHistory: [
+      {
+        year: "2025",
+        division: l("BMT 现场赛", "BMT in-person"),
+        note: l("下列为官方 Top Scores 列表的第十名或最后并列组。General 与专题轮为作答得分，Power／Guts 为轮次积分，Team Overall 为归一化综合分；均不是下一届固定奖项线。", "These are rank-10 or last-tied-group values from the official Top Scores list. General and subject rounds are response scores; Power and Guts are round points; Team Overall is normalized. None is a fixed cutoff for a later year."),
+        metrics: [
+          scoreMetric("General 前十名列示分数", "General last displayed top-ten score", "23"),
+          scoreMetric("Algebra 前十名列示分数", "Algebra last displayed top-ten score", "8", "第 7 名并列", "Tied at rank 7"),
+          scoreMetric("Calculus 前十名列示分数", "Calculus last displayed top-ten score", "6", "第 10 名并列", "Tied at rank 10"),
+          scoreMetric("Discrete 前十名列示分数", "Discrete last displayed top-ten score", "7", "第 9 名并列", "Tied at rank 9"),
+          scoreMetric("Geometry 前十名列示分数", "Geometry last displayed top-ten score", "7", "第 8 名并列", "Tied at rank 8"),
+          scoreMetric("Power 前十名列示分数", "Power last displayed top-ten score", "91", "第 9 名并列", "Tied at rank 9"),
+          scoreMetric("Guts 第 10 名分数", "Guts rank-10 score", "219"),
+          scoreMetric("Team Overall 第 10 名分数", "Team Overall rank-10 score", "88.278", "归一化综合分", "Normalized aggregate score"),
+        ],
+        resultLink: link("2025 BMT 官方结果", "2025 BMT official results", "https://berkeley.mt/archives/bmt-2025/results.pdf"),
+      },
+      {
+        year: "2024",
+        division: l("BMT 现场赛", "BMT in-person"),
+        note: l("下列为官方 Top Scores 列表的第十名或最后并列组。General 与专题轮为作答得分，Power／Guts 为轮次积分，Team Overall 为归一化综合分；均不是下一届固定奖项线。", "These are rank-10 or last-tied-group values from the official Top Scores list. General and subject rounds are response scores; Power and Guts are round points; Team Overall is normalized. None is a fixed cutoff for a later year."),
+        metrics: [
+          scoreMetric("General 第 10 名分数", "General rank-10 score", "16"),
+          scoreMetric("Algebra 第 10 名分数", "Algebra rank-10 score", "6"),
+          scoreMetric("Calculus 第 10 名分数", "Calculus rank-10 score", "6"),
+          scoreMetric("Discrete 第 10 名分数", "Discrete rank-10 score", "7"),
+          scoreMetric("Geometry 前十名列示分数", "Geometry last displayed top-ten score", "6", "第 10 名大规模并列", "Large tie at rank 10"),
+          scoreMetric("Power 第 10 名分数", "Power rank-10 score", "86"),
+          scoreMetric("Guts 第 10 名分数", "Guts rank-10 score", "177"),
+          scoreMetric("Team Overall 第 10 名分数", "Team Overall rank-10 score", "82.450", "归一化综合分", "Normalized aggregate score"),
+        ],
+        resultLink: link("2024 BMT 官方结果", "2024 BMT official results", "https://berkeley.mt/archives/bmt-2024/results.pdf"),
+      },
+      {
+        year: "2023",
+        division: l("BMT 现场赛", "BMT in-person"),
+        note: l("下列为官方 Top Scores 列表的第十名或最后并列组。General 与专题轮为作答得分，Power／Guts 为轮次积分，Team Overall 为归一化综合分；均不是下一届固定奖项线。", "These are rank-10 or last-tied-group values from the official Top Scores list. General and subject rounds are response scores; Power and Guts are round points; Team Overall is normalized. None is a fixed cutoff for a later year."),
+        metrics: [
+          scoreMetric("General 第 10 名分数", "General rank-10 score", "21"),
+          scoreMetric("Algebra 第 10 名分数", "Algebra rank-10 score", "8"),
+          scoreMetric("Calculus 前十名列示分数", "Calculus last displayed top-ten score", "7", "第 8 名大规模并列", "Large tie at rank 8"),
+          scoreMetric("Discrete 前十名列示分数", "Discrete last displayed top-ten score", "7", "第 8 名大规模并列", "Large tie at rank 8"),
+          scoreMetric("Geometry 前十名列示分数", "Geometry last displayed top-ten score", "7", "第 8 名大规模并列", "Large tie at rank 8"),
+          scoreMetric("Power 第 10 名分数", "Power rank-10 score", "85"),
+          scoreMetric("Guts 第 10 名分数", "Guts rank-10 score", "201"),
+          scoreMetric("Team Overall 第 10 名分数", "Team Overall rank-10 score", "287.520", "归一化综合分；本届计分制不同，不能与 2024/25 直接比较", "Normalized aggregate; the scoring system differs and cannot be compared directly with 2024/25"),
+        ],
+        resultLink: link("2023 BMT 官方结果", "2023 BMT official results", "https://berkeley.mt/archives/bmt-2023/results.pdf"),
+      },
+    ],
+    lastVerified: "2026-09-14",
   },
   {
     id: "cmimc-math",
@@ -285,7 +477,32 @@ export const universityCompetitions: UniversityCompetitionRecord[] = [
       link("2025 题目与结果", "2025 problems and results", "https://dukemathmeet.org/archive/2025"),
       link("杜克数学系说明", "Duke department page", "https://math.duke.edu/duke-math-meet"),
     ],
-    lastVerified: VERIFIED_AT,
+    scoreHistory: [
+      {
+        year: "2025",
+        division: l("个人轮", "Individual round"),
+        note: l("这是官方个人成绩页前十名列表的最后列示分数；第 9 名并列。不是下一届固定奖项线。", "This is the last displayed score in the official individual top-ten list; rank 9 is tied. It is not a fixed cutoff for a later year."),
+        metrics: [
+          scoreMetric("Individual 前十名列示分数", "Individual last displayed top-ten score", "7 / 10", "第 9 名并列", "Tied at rank 9"),
+        ],
+        resultLink: link("2025 Duke Math Meet 个人成绩", "2025 Duke Math Meet individual results", "https://dukemathmeet.org/2025/indiv.html"),
+      },
+      {
+        year: "2025",
+        division: l("团队排名", "Team standings"),
+        note: l("以下为官方团队结果页同届第十名的各项分数。Team、Power、Guts、Individual 与 Relay 为当届轮次分；Overall 为混合加权总分。均不是下一届固定奖项线。", "These are rank-10 scores from the official team-results page. Team, Power, Guts, Individual, and Relay are current-year round scores; Overall is a weighted aggregate. None is a fixed cutoff for a later year."),
+        metrics: [
+          scoreMetric("Overall 第 10 名分数", "Overall rank-10 score", "81", "混合加权总分", "Weighted aggregate score"),
+          scoreMetric("Power 第 10 名分数", "Power rank-10 score", "25"),
+          scoreMetric("Team 第 10 名分数", "Team rank-10 score", "6"),
+          scoreMetric("Guts 第 10 名分数", "Guts rank-10 score", "26"),
+          scoreMetric("Relay 第 10 名分数", "Relay rank-10 score", "3"),
+          scoreMetric("Individual 第 10 名分数", "Individual rank-10 score", "32", "Team standings 的个人轮累计分", "Individual-round aggregate in team standings"),
+        ],
+        resultLink: link("2025 Duke Math Meet 官方结果", "2025 Duke Math Meet official results", "https://dukemathmeet.org/2025/team.html"),
+      },
+    ],
+    lastVerified: "2026-09-14",
   },
   {
     id: "johns-hopkins-math-tournament",
