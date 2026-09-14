@@ -224,7 +224,7 @@ export const researchProgramSources: SourceRecord[] = [
     owner: t("清华大学丘成桐数学科学中心", "Yau Mathematical Sciences Center, Tsinghua University"),
     url: "https://www.yau-awards.com/",
     kind: "official",
-    verifiedAt: VERIFIED_AT,
+    verifiedAt: "2026-09-14",
     appliesTo: "2026 S.-T. Yau High School Science Award",
   },
   {
@@ -233,7 +233,7 @@ export const researchProgramSources: SourceRecord[] = [
     owner: t("清华大学丘成桐数学科学中心", "Yau Mathematical Sciences Center, Tsinghua University"),
     url: "https://www.yau-awards.com/page-rule.html",
     kind: "official",
-    verifiedAt: VERIFIED_AT,
+    verifiedAt: "2026-09-14",
     appliesTo: "2026 Mainland China region",
   },
   {
@@ -242,7 +242,7 @@ export const researchProgramSources: SourceRecord[] = [
     owner: t("清华大学丘成桐数学科学中心", "Yau Mathematical Sciences Center, Tsinghua University"),
     url: "https://www.yau-awards.com/page-schedule.html",
     kind: "official",
-    verifiedAt: "2026-08-15",
+    verifiedAt: "2026-09-14",
     appliesTo: "2026 Mainland China region",
   },
   {
@@ -924,7 +924,13 @@ export const researchProgramProjects: ProjectRecord[] = [
     costBand: "free",
     status: "confirmed",
     cycle: "2026",
-    lastVerified: "2026-08-15",
+    lastVerified: "2026-09-14",
+    alerts: [{
+      title: t("报名链接异常", "Registration-link alert"),
+      body: t("日程页显示为 www.yau-awards.science 的外链目前跳转至无关网站。不要在该地址登录或提交材料。官方规则和报名公告均写明应通过 www.yau-awards.com；若官网“报名通道”无法使用，请在 9 月 15 日 24:00 截止前联系 yau-award@tsinghua.edu.cn 或 010-62797299／62797260 核实。", "The www.yau-awards.science external link shown on the schedule currently redirects to an unrelated website. Do not log in or submit materials there. The official rules and registration announcement direct entrants to www.yau-awards.com; if its Registration route is unavailable, confirm with yau-award@tsinghua.edu.cn or +86 10 6279 7299 / 6279 7260 before the 15 September, 24:00 deadline."),
+      sourceIds: ["research-yau-home", "research-yau-rules", "research-yau-schedule-2026"],
+      tone: "critical",
+    }],
     facts: [
       { label: t("主办性质", "Organizer type"), value: t("由清华大学主办、丘成桐数学科学中心承办的中学生科研竞赛；不是提供导师匹配的研究课程。", "A high-school research competition sponsored by Tsinghua University and organized by the Yau Mathematical Sciences Center; it is not a mentor-matching course."), sourceIds: ["research-yau-home", "research-yau-rules"] },
       { label: t("研究性质", "Research character"), value: t("参赛者提交已完成的研究成果，评审关注研究问题、数学方法与创新；学生可接受合规指导，但须独立完成项目并完整披露贡献和外部协助。", "Entrants submit completed research. Judging considers the question, mathematical methods, and innovation. Guidance is allowed, but students must complete the work independently and disclose contributions and external assistance."), sourceIds: ["research-yau-rules", "research-yau-criteria"] },
