@@ -524,7 +524,7 @@ test("separates research programs by access and organizer type", async () => {
 
   for (const [path, pattern] of [
     ["/research/crowdmath", /可直接注册 AoPS 账户/],
-    ["/research/mit-primes", /仅限实际居住并在美国就读的学生/],
+    ["/research/mit-primes", /仅限居住在美国的高中 10–11 年级学生/],
     ["/research/pioneer-research-institute", /收费在线项目/],
     ["/research/yau-high-school-mathematics-award", /研究成果竞赛|科研竞赛/],
   ]) {

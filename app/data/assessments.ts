@@ -505,7 +505,7 @@ const tmuaProject: ProjectRecord = {
   dates: [
     dateRecord("tmua-oct-account", "October 场账户及支持申请开放", "October account and support applications open", "2026-06-01", "historical", ["uat-dates-2027"], { time: "15:00", timezone: "Europe/London" }),
     dateRecord("tmua-oct-booking-open", "October 场预约开放", "October booking opens", "2026-07-20", "historical", ["uat-dates-2027"], { time: "15:00", timezone: "Europe/London" }),
-    dateRecord("tmua-oct-access-deadline", "October 特殊安排截止", "October access-arrangements deadline", "2026-09-14", "confirmed", ["uat-dates-2027"], { time: "18:00", timezone: "Europe/London" }),
+    dateRecord("tmua-oct-access-deadline", "October 特殊安排截止", "October access-arrangements deadline", "2026-09-14", "historical", ["uat-dates-2027"], { time: "18:00", timezone: "Europe/London" }),
     dateRecord("tmua-oct-bursary-deadline", "October 助学金申请截止", "October bursary deadline", "2026-09-21", "confirmed", ["uat-dates-2027"], { time: "18:00", timezone: "Europe/London", region: t("仅符合条件的英国考生", "Eligible UK candidates only") }),
     dateRecord("tmua-oct-booking-close", "October 场预约截止", "October booking closes", "2026-09-28", "confirmed", ["uat-dates-2027"], { time: "18:00", timezone: "Europe/London" }),
     dateRecord("tmua-oct-china", "TMUA October 中国大陆／港澳场", "TMUA October mainland-China/Hong Kong/Macau dates", "2026-10-15", "confirmed", ["uat-dates-2027"], { endDate: "2026-10-16", region: t("中国大陆、香港、澳门", "Mainland China, Hong Kong and Macau") }),
@@ -640,7 +640,7 @@ const esatProject: ProjectRecord = {
   dates: [
     dateRecord("esat-oct-account", "October 场账户及支持申请开放", "October account and support applications open", "2026-06-01", "historical", ["uat-dates-2027"], { time: "15:00", timezone: "Europe/London" }),
     dateRecord("esat-oct-booking-open", "October 场预约开放", "October booking opens", "2026-07-20", "historical", ["uat-dates-2027"], { time: "15:00", timezone: "Europe/London" }),
-    dateRecord("esat-oct-access-deadline", "October 特殊安排截止", "October access-arrangements deadline", "2026-09-14", "confirmed", ["uat-dates-2027"], { time: "18:00", timezone: "Europe/London" }),
+    dateRecord("esat-oct-access-deadline", "October 特殊安排截止", "October access-arrangements deadline", "2026-09-14", "historical", ["uat-dates-2027"], { time: "18:00", timezone: "Europe/London" }),
     dateRecord("esat-oct-bursary-deadline", "October 助学金申请截止", "October bursary deadline", "2026-09-21", "confirmed", ["uat-dates-2027"], { time: "18:00", timezone: "Europe/London", region: t("仅符合条件的英国考生", "Eligible UK candidates only") }),
     dateRecord("esat-oct-booking-close", "October 场预约截止", "October booking closes", "2026-09-28", "confirmed", ["uat-dates-2027"], { time: "18:00", timezone: "Europe/London" }),
     dateRecord("esat-oct-china", "ESAT October 中国大陆／港澳场", "ESAT October mainland-China/Hong Kong/Macau dates", "2026-10-12", "confirmed", ["uat-dates-2027"], { endDate: "2026-10-13", region: t("中国大陆、香港、澳门", "Mainland China, Hong Kong and Macau") }),
