@@ -10,6 +10,7 @@ const ALL_CEMC_PROJECTS = [
   "fermat",
   "gauss",
   "csmc",
+  "cimc",
   "fryer",
   "galois",
   "hypatia",
@@ -129,7 +130,7 @@ export const cemcCompetitionMaterials: LearningResourceRecord[] = [
   },
   {
     id: "cemc-grade-9-11-courseware-curriculum-map",
-    projectIds: ["pascal", "cayley", "fermat", "fryer", "galois", "hypatia", "csmc", "euclid"],
+    projectIds: ["pascal", "cayley", "fermat", "fryer", "galois", "hypatia", "csmc", "cimc", "euclid"],
     title: t("CEMC 9—11 年级课程单元与学习目标表", "CEMC Grade 9–11 Courseware Lesson and Goal Map"),
     provider: CEMC,
     url: "https://cemc.uwaterloo.ca/sites/default/files/documents/2024/AllLessonsWithGoals.pdf",

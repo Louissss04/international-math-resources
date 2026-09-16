@@ -61,7 +61,7 @@ export const competitionLearningResources: LearningResourceRecord[] = [
   },
   {
     id: "cemc-past-contests",
-    projectIds: ["euclid", "pascal", "cayley", "fermat", "gauss", "csmc", "fryer", "galois", "hypatia"],
+    projectIds: ["euclid", "pascal", "cayley", "fermat", "gauss", "csmc", "cimc", "fryer", "galois", "hypatia"],
     title: t("CEMC 历年试题、解答与结果", "CEMC past contests, solutions and results"),
     provider: t("滑铁卢大学 CEMC", "University of Waterloo CEMC"),
     url: "https://cemc.uwaterloo.ca/resources/past-contests",
@@ -94,7 +94,7 @@ export const competitionLearningResources: LearningResourceRecord[] = [
   },
   {
     id: "cemc-math-courseware",
-    projectIds: ["euclid", "pascal", "cayley", "fermat", "gauss", "csmc", "fryer", "galois", "hypatia"],
+    projectIds: ["euclid", "pascal", "cayley", "fermat", "gauss", "csmc", "cimc", "fryer", "galois", "hypatia"],
     title: t("CEMC 免费数学课程资源", "Free CEMC mathematics courseware"),
     provider: t("滑铁卢大学 CEMC", "University of Waterloo CEMC"),
     url: "https://cemc.uwaterloo.ca/resources/courseware",
@@ -239,5 +239,17 @@ export const competitionLearningResources: LearningResourceRecord[] = [
     description: t("按 COMC 的 A、B、C 三部分难度组织赛前练习，并配套后续解答。", "Provides preparation problems aligned with COMC Parts A, B and C, followed by solutions."),
     access: "free",
     verifiedAt: "2026-08-04",
+  },
+  {
+    id: "yau-noether-2026-official-guide",
+    projectIds: ["yau-noether-mathematics-award"],
+    title: t("诺特数学奖 2026 官方报名与范围说明", "Noether Mathematics Award 2026 official registration and scope"),
+    provider: t("清华大学丘成桐数学科学中心", "Yau Mathematical Sciences Center, Tsinghua University"),
+    url: "https://yau-girls-contest.tsinghua.edu.cn/info/1012/1051.htm",
+    kind: "official-guide",
+    description: t("当前周期公告列明资格、报名、笔试与面试、五个数学方向、赛程、费用和诚信规定。", "The current-cycle notice gives eligibility, registration, the written-test/interview format, five mathematics areas, schedule, fee and integrity rules."),
+    access: "free",
+    note: t("专属网站的通用报名简章／竞赛日程仍显示 2025 年，备考和报名以此 2026 年公告为准。", "The dedicated site's generic registration-guide and schedule pages still display 2025; use this 2026 notice for current registration and preparation."),
+    verifiedAt: "2026-09-16",
   },
 ];

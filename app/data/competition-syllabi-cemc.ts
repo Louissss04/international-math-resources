@@ -212,6 +212,83 @@ const fghSyllabus = ({
   lastVerified: VERIFIED_AT,
 });
 
+const cimcSyllabus: AssessmentSyllabusRecord = {
+  id: "syllabus-cemc-cimc",
+  slug: "cimc-content-framework",
+  projectId: "cimc",
+  classification: "structure-only",
+  title: t("CIMC 官方范围说明", "CIMC Published Scope"),
+  officialName: t("加拿大中级数学竞赛（CIMC）", "Canadian Intermediate Mathematics Contest (CIMC)"),
+  applicableCycle: t("2026 CEMC 竞赛年度", "2026 CEMC contest year"),
+  status: "confirmed",
+  summary: t(
+    "CEMC 未为 CIMC 发布逐知识点或固定题量的考纲。官方竞赛页明确了年级、试卷结构、作答形式和书面解答评分要求；CEMC 的九、十年级课程资源可用于补足基础，但不能当作必考清单。",
+    "CEMC does not publish a topic-by-topic CIMC syllabus or a fixed topic allocation. Its contest page specifies the grades, paper structure, response format, and written-solution marking; CEMC Grade 9–10 courseware can support foundation review but is not a must-test list.",
+  ),
+  facts: [
+    { label: t("主要年级", "Primary audience"), value: t("9–10 年级；有能力的低年级学生可参加", "Grades 9–10; motivated younger students may participate") },
+    { label: t("结构", "Structure"), value: t("9 题：6 题只写答案，3 题完整解答", "9 questions: 6 answer-only and 3 full-solution") },
+    { label: t("用时／满分", "Time / score"), value: t("2 小时／60 分", "2 hours / 60 points") },
+    { label: t("官方逐点考纲", "Official itemized syllabus"), value: t("未发布", "Not published") },
+  ],
+  sections: [
+    {
+      id: "published-boundary",
+      title: t("官方已发布范围", "What the organiser publishes"),
+      bullets: [
+        t("CEMC 将 CIMC 定位为 9–10 年级竞赛，同时允许有能力的低年级学生参加。", "CEMC positions CIMC for Grades 9–10 and permits motivated younger students to participate."),
+        t("官方没有公布按代数、几何、数论、概率等分类的完整知识点表，也没有承诺各类题目的数量或分值。", "The organiser publishes no complete algebra/geometry/number-theory/probability topic list and no promised count or weighting by topic."),
+        t("因此，历年题可以用来熟悉题型与难度，不能被改写成未来试卷的固定范围。", "Past papers can familiarize students with format and difficulty, but cannot be rewritten as a fixed scope for future papers."),
+      ],
+    },
+    {
+      id: "paper-and-writing",
+      title: t("试卷与书面表达", "Paper structure and mathematical writing"),
+      tables: [
+        {
+          columns: [t("项目", "Feature"), t("官方说明", "Published specification")],
+          rows: [
+            { cells: [t("题量", "Questions"), t("9 题：6 道只写答案题，3 道完整解答题", "9 questions: 6 answer-only and 3 full-solution")] },
+            { cells: [t("用时／满分", "Time / score"), t("2 小时／60 分", "2 hours / 60 points")] },
+            { cells: [t("完整解答", "Full solutions"), t("按正确性、完整性、清晰度与表达评分；正确答案本身不等于满分", "Marked for correctness, completeness, clarity, and presentation; a correct answer alone does not guarantee full credit")] },
+            { cells: [t("实施", "Delivery"), t("学校组织的个人纸笔作答；境外学校按 CEMC 规则下载、保密打印和回寄材料", "School-administered individual paper writing; outside-Canada schools download, securely print, and return materials under CEMC rules")] },
+          ],
+        },
+      ],
+    },
+    {
+      id: "review-materials-boundary",
+      title: t("复习资料的使用边界", "How to use review materials"),
+      bullets: [
+        t("CEMC 的九、十年级 Courseware 可按薄弱点复习基础概念；它是课程资源，并非 CIMC 官方考纲。", "CEMC Grade 9–10 Courseware can be used to review foundational weak points; it is courseware, not an official CIMC syllabus."),
+        t("优先完成官方历年题和解答，特别注意完整解答题中定义变量、呈现推理和解释结论的要求。", "Start with official past papers and solutions, paying particular attention to variable definitions, reasoning, and conclusions in full-solution questions."),
+      ],
+    },
+  ],
+  sources: [
+    {
+      title: t("CIMC／CSMC 官方竞赛页", "Official CIMC / CSMC Contest Page"),
+      provider: t("滑铁卢大学 CEMC", "University of Waterloo CEMC"),
+      url: "https://cemc.uwaterloo.ca/contests/csimc",
+      format: "webpage",
+      version: t("2026 竞赛年度", "2026 contest year"),
+      note: t("参赛年级、题型、时长、评分与实施规则；页面未发布逐知识点 CIMC 考纲。", "Audience, format, timing, marking, and administration; the page does not publish an itemized CIMC syllabus."),
+    },
+    {
+      title: t("CEMC 9／10／11 年级课程单元与学习目标表", "CEMC Grade 9/10/11 Courseware Lesson and Goal Map"),
+      provider: t("滑铁卢大学 CEMC", "University of Waterloo CEMC"),
+      url: "https://cemc.uwaterloo.ca/sites/default/files/documents/2024/AllLessonsWithGoals.pdf",
+      format: "pdf",
+      note: t("用于选择课程复习材料，不是 CIMC 的正式考纲。", "For choosing course-review materials; not a formal CIMC syllabus."),
+    },
+  ],
+  translationNote: t(
+    "“full-solution”译为“完整解答”：除答案外，还需使关键理由和过程可供阅卷者核验。由于 CEMC 未发布逐点 CIMC 考纲，本页只翻译已发布的范围与形式，不根据历年题补造范围。",
+    "‘Full-solution’ means a complete solution: beyond an answer, its key reasons and working must be verifiable by a marker. Since CEMC does not publish an itemized CIMC syllabus, this page translates only the published scope and format rather than inventing a scope from past papers.",
+  ),
+  lastVerified: "2026-09-16",
+};
+
 const csmcSyllabus: AssessmentSyllabusRecord = {
   id: "syllabus-cemc-csmc",
   slug: "csmc-content-framework",
@@ -464,6 +541,7 @@ export const cemcCompetitionSyllabi: AssessmentSyllabusRecord[] = [
   pcfSyllabus({ id: "syllabus-cemc-fermat", slug: "fermat-content-framework", projectId: "fermat", nameZh: "Fermat", nameEn: "Fermat", grade: "11" }),
   gaussSyllabus,
   csmcSyllabus,
+  cimcSyllabus,
   fghSyllabus({ id: "syllabus-cemc-fryer", slug: "fryer-content-framework", projectId: "fryer", nameZh: "Fryer", nameEn: "Fryer", grade: "9" }),
   fghSyllabus({ id: "syllabus-cemc-galois", slug: "galois-content-framework", projectId: "galois", nameZh: "Galois", nameEn: "Galois", grade: "10" }),
   fghSyllabus({ id: "syllabus-cemc-hypatia", slug: "hypatia-content-framework", projectId: "hypatia", nameZh: "Hypatia", nameEn: "Hypatia", grade: "11" }),

@@ -164,6 +164,7 @@ export const cemcUkmtPastPaperArchives: PastPaperArchiveRecord[] = [
   cemcArchive("fermat", "Fermat"),
   cemcArchive("gauss", "Gauss"),
   cemcArchive("csmc", "CSMC"),
+  cemcArchive("cimc", "CIMC"),
   cemcArchive("fryer", "Fryer"),
   cemcArchive("galois", "Galois"),
   cemcArchive("hypatia", "Hypatia"),

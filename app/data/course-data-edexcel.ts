@@ -901,7 +901,7 @@ const ialProjects: ProjectRecord[] = ialSpecs.map((spec) => ({
   ],
   dates: [
     ialRegistrationDate(spec.id, "oct-2026-standard-entry", "2026 年 10 月 IAL 标准报名截止", "October 2026 IAL standard-entry deadline", "2026-08-21", "英国文化教育协会中国公开截止；学校内部日期可能更早。", "Published British Council China deadline; a school's internal date may be earlier.", "historical"),
-    ialRegistrationDate(spec.id, "oct-2026-late-entry", "2026 年 10 月 IAL 晚报名截止", "October 2026 IAL late-entry deadline", "2026-09-15", "晚报名通常产生附加费用；以实时报名页为准。", "Late entry normally incurs additional fees; use the live registration page."),
+    ialRegistrationDate(spec.id, "oct-2026-late-entry", "2026 年 10 月 IAL 晚报名截止", "October 2026 IAL late-entry deadline", "2026-09-15", "晚报名通常产生附加费用；以实时报名页为准。", "Late entry normally incurs additional fees; use the live registration page.", "historical"),
     ialSeriesDate(spec.id, "october-2026-series", `${spec.shortTitle} 2026 年 10 月考季`, `${spec.shortTitle} October 2026 series`, "2026-10-09", "2026-10-28", "edexcel-ial-oct-2026-timetable"),
     ialSeriesDate(spec.id, "january-2027-series", `${spec.shortTitle} 2027 年 1 月考季`, `${spec.shortTitle} January 2027 series`, "2027-01-08", "2027-01-25", "edexcel-ial-jan-2027-timetable"),
     ialSeriesDate(spec.id, "summer-2027-series", `${spec.shortTitle} 2027 年夏季考季`, `${spec.shortTitle} Summer 2027 series`, "2027-05-06", "2027-06-10", "edexcel-ial-summer-2027-timetable"),

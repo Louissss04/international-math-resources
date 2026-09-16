@@ -8,6 +8,7 @@ import {
 const VERIFIED_AT = "2026-08-05";
 const AIME_VERIFIED_AT = "2026-08-29";
 const HMMT_VERIFIED_AT = "2026-08-11";
+const NOETHER_VERIFIED_AT = "2026-09-16";
 
 const fact = (
   labelZh: string,
@@ -1170,5 +1171,84 @@ export const maaOtherCompetitionSyllabi: AssessmentSyllabusRecord[] = [
       "Official round names such as General, Theme, Team Round, Guts Round and Sweepstakes are retained; Theme is not recast as a fixed content topic. Algebra test is presented as Algebra & Number Theory following the official description. The dynamic weight formula is preserved from the official PDF, and no fixed cutoff is inferred from historical results.",
     ),
     lastVerified: HMMT_VERIFIED_AT,
+  },
+  {
+    id: "syllabus-yau-noether-2026",
+    slug: "yau-noether-mathematics-award-2026-scope",
+    projectId: "yau-noether-mathematics-award",
+    classification: "content-framework",
+    title: t("诺特数学奖 2026 官方内容范围", "Noether Mathematics Award 2026 Official Content Framework"),
+    officialName: t("丘成桐中学科学奖（诺特数学奖）", "S.-T. Yau High School Science Award: Noether Mathematics Award"),
+    applicableCycle: "2026",
+    status: "confirmed",
+    summary: t(
+      "2026 年报名公告列出笔试和面试，以及中学数学基础之上的五个方向；没有公布题型数量、时长、各方向权重或样题。本页只翻译和组织该届公告明确给出的范围。",
+      "The 2026 registration announcement gives a written test and interview plus five areas beyond secondary-school mathematics. It does not publish item counts, timing, weights by area or sample papers. This page translates and organizes only the scope explicitly stated for the cycle.",
+    ),
+    facts: [
+      fact("范围性质", "Scope type", "当届公告列出的内容框架；不是逐题蓝图", "A current-cycle content framework, not an item-by-item blueprint"),
+      fact("考核形式", "Assessment form", "笔试与面试", "Written test and interview"),
+      fact("基础范围", "Baseline", "中学数学全部内容", "All secondary-school mathematics"),
+      fact("扩展方向", "Extended areas", "分析、线性代数、几何与拓扑、概率统计与组合、数值／应用数学", "Analysis, linear algebra, geometry/topology, probability/statistics/combinatorics, and numerical/applied mathematics"),
+      fact("未公布项目", "Not published", "题量、时长、题型比例、各方向权重、样题及评分细则", "Item count, time, format weighting, area weights, sample papers and scoring details"),
+    ],
+    sections: [
+      {
+        id: "noether-2026-stated-scope",
+        title: t("公告列明范围", "Scope stated in the announcement"),
+        tables: [{
+          columns: [t("方向", "Area"), t("公告列明内容", "Content stated in the notice")],
+          rows: [
+            row(["基础", "Foundation"], ["中学数学全部内容", "All secondary-school mathematics"]),
+            row(["分析", "Analysis"], ["单变量与多变量微积分等数学分析内容", "Single- and multivariable calculus and related analysis"]),
+            row(["线性代数", "Linear algebra"], ["矩阵、向量空间、线性算子、特征值、内积空间、二次型、张量积等", "Matrices, vector spaces, linear operators, eigenvalues, inner-product spaces, quadratic forms and tensor products"]),
+            row(["几何与拓扑", "Geometry and topology"], ["凸性、染色、三角剖分、欧拉数、图论、结与亏格，以及实数轴拓扑", "Convexity, colouring, triangulations, Euler characteristic, graph theory, knots and genus, and topology of the real line"]),
+            row(["概率、统计与组合", "Probability, statistics and combinatorics"], ["概率模型、随机变量、随机游走与极限定理；抽样、估计、检验与回归；计数、容斥与递推", "Probability models, random variables, random walks and limit theorems; sampling, estimation, testing and regression; counting, inclusion-exclusion and recurrences"]),
+            row(["数值／应用数学", "Numerical / applied mathematics"], ["数值分析、误差、插值、数值积分／微分、线性方程组、矩阵分解和特征值计算", "Numerical analysis, error, interpolation, numerical integration/differentiation, linear systems, matrix factorizations and eigenvalue computation"]),
+          ],
+        }],
+      },
+      {
+        id: "noether-2026-publication-boundary",
+        title: t("未公布的考试信息", "Exam details not published"),
+        paragraphs: [
+          t("公告没有给出笔试的题量、时长、题型、允许工具、面试时长、各方向比重、评分标准或 specimen／sample paper。因此不能从网站仍保留的 2025 年通用页面推断 2026 赛制。", "The notice gives no written-test item count, duration, question types, permitted tools, interview duration, area weighting, scoring rubric, or specimen/sample paper. The dedicated site's still-visible generic 2025 pages therefore cannot be used to infer the 2026 format."),
+        ],
+      },
+      {
+        id: "noether-2026-integrity-boundary",
+        title: t("诚信规则", "Integrity rule boundary"),
+        paragraphs: [
+          t("2026 公告明确：作弊、违反考试纪律或提交虚假材料将取消资格。该公告没有单列 AI 使用规则；不能把丘成桐中学科学奖研究报告项目的 AI 要求直接套用于本项笔试／面试。", "The 2026 notice states that cheating, examination-discipline violations, or false materials lead to disqualification. It does not state a separate AI-use rule; the research-report AI policy for other Yau Award projects should not be applied to this written-test/interview award without a current official statement."),
+        ],
+      },
+    ],
+    sources: [
+      syllabusSource(
+        "2026 诺特数学奖报名公告",
+        "2026 Noether Mathematics Award registration announcement",
+        "清华大学丘成桐数学科学中心",
+        "Yau Mathematical Sciences Center, Tsinghua University",
+        "https://yau-girls-contest.tsinghua.edu.cn/info/1012/1051.htm",
+        "webpage",
+        "2026 年 9 月 15 日发布",
+        "Published 15 September 2026",
+      ),
+      syllabusSource(
+        "诺特数学奖官方报名门户",
+        "Noether Mathematics Award official registration portal",
+        "清华大学丘成桐数学科学中心",
+        "Yau Mathematical Sciences Center, Tsinghua University",
+        "https://yau-girls-contest.tsinghua.edu.cn/",
+        "webpage",
+        "2026 报名门户",
+        "2026 registration portal",
+      ),
+    ],
+    translationNote: t(
+      "各方向名称和举例均根据 2026 年 9 月 15 日公告翻译；公告未设题量或权重，故不从 2025 年通用页面、历届题目或常见竞赛范围推断。",
+      "Area names and examples are translated from the 15 September 2026 announcement. Since it provides no item counts or weights, none are inferred from the generic 2025 pages, past papers or common competition practice.",
+    ),
+    lastVerified: NOETHER_VERIFIED_AT,
   },
 ];

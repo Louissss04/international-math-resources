@@ -64,7 +64,7 @@ export const competitionSources: SourceRecord[] = [
     owner: t("美国数学协会", "Mathematical Association of America"),
     url: "https://maa.edvistas.com/eduview/report.aspx?mode=6&view=1561",
     kind: "official-data",
-    verifiedAt: "2026-09-14",
+    verifiedAt: "2026-09-16",
     appliesTo: "AMC 8, AMC 10, AMC 12 and AIME score distributions and percentile thresholds, including 2023–2026 historical data",
   },
   {
@@ -102,6 +102,50 @@ export const competitionSources: SourceRecord[] = [
     kind: "official-data",
     verifiedAt: "2026-09-14",
     appliesTo: "2022 AMC 12B percentile-to-raw-score boundaries",
+  },
+  ...[
+    ["maa-amc8-2023-distribution", "AMC 8", "2023", "2023", "31265"],
+    ["maa-amc8-2024-distribution", "AMC 8", "2024", "2024", "37433"],
+    ["maa-amc8-2025-distribution", "AMC 8", "2025", "2025", "53956"],
+    ["maa-amc8-2026-distribution", "AMC 8", "2026", "2026", "81060"],
+    ["maa-amc10a-2023-distribution", "AMC 10A", "2023", "2024", "37434"],
+    ["maa-amc10b-2023-distribution", "AMC 10B", "2023", "2024", "37435"],
+    ["maa-amc12a-2023-distribution", "AMC 12A", "2023", "2024", "37437"],
+    ["maa-amc12b-2023-distribution", "AMC 12B", "2023", "2024", "37436"],
+    ["maa-amc10a-2024-distribution", "AMC 10A", "2024", "2025", "53664"],
+    ["maa-amc10b-2024-distribution", "AMC 10B", "2024", "2025", "53951"],
+    ["maa-amc12a-2024-distribution", "AMC 12A", "2024", "2025", "53952"],
+    ["maa-amc12b-2024-distribution", "AMC 12B", "2024", "2025", "53953"],
+    ["maa-amc10a-2025-distribution", "AMC 10A", "2025", "2026", "81054"],
+    ["maa-amc10b-2025-distribution", "AMC 10B", "2025", "2026", "81055"],
+    ["maa-amc12a-2025-distribution", "AMC 12A", "2025", "2026", "81057"],
+    ["maa-amc12b-2025-distribution", "AMC 12B", "2025", "2026", "81058"],
+    ["maa-aime1-2023-distribution", "AIME I", "2023", "2023", "33542"],
+    ["maa-aime2-2023-distribution", "AIME II", "2023", "2023", "33598"],
+    ["maa-aime1-2024-distribution", "AIME I", "2024", "2024", "41994"],
+    ["maa-aime2-2024-distribution", "AIME II", "2024", "2024", "41995"],
+    ["maa-aime1-2025-distribution", "AIME I", "2025", "2025", "53962"],
+    ["maa-aime2-2025-distribution", "AIME II", "2025", "2025", "53963"],
+    ["maa-aime1-2026-distribution", "AIME I", "2026", "2026", "81061"],
+    ["maa-aime2-2026-distribution", "AIME II", "2026", "2026", "81062"],
+  ].map(([id, competition, year, schoolYear, competitionId]) => ({
+    id,
+    label: t(`${year} ${competition} 官方成绩分布`, `${year} ${competition} official score distribution`),
+    owner: t("美国数学协会", "Mathematical Association of America"),
+    url: `https://maa.edvistas.com/eduview/report.aspx?self=&view=1561&mode=6&viewClicked=true&schoolyear=${schoolYear}&amccomp=${competitionId}`,
+    kind: "official-data" as const,
+    verifiedAt: "2026-09-16",
+    appliesTo: `${year} ${competition} percentile-to-raw-score boundaries`,
+  })),
+  {
+    id: "maa-archived-statistics-portal",
+    label: t("MAA 历史成绩统计门户（存档）", "Archived MAA historical statistics portal"),
+    owner: t("美国数学协会（通过网页存档保存）", "Mathematical Association of America, preserved by web archive"),
+    url: "https://web.archive.org/web/20200101000000id_/http://amc-reg.maa.org/reports/generalreports.aspx",
+    kind: "official-archive",
+    verifiedAt: "2026-09-16",
+    appliesTo: "Historic AMC award definitions and score standards; not current policy",
+    note: t("内容为原 MAA 页面存档。仅用于说明报告时代的历史标准，不能替代现行 MAA 或国际赛区规则。", "This preserves an original MAA page. It documents report-era standards only and does not replace current MAA or international-region rules."),
   },
   {
     id: "maa-amc-international",
@@ -161,6 +205,57 @@ export const competitionSources: SourceRecord[] = [
     verifiedAt: "2026-08-04",
     appliesTo: "2025 AMC 10/12 AIME qualification",
   },
+  {
+    id: "maa-usamo-usajmo-2025-index-thresholds",
+    label: t("2025 USAMO／USAJMO 晋级指数线", "2025 USAMO/USAJMO invitation-index thresholds"),
+    owner: t("美国数学协会", "Mathematical Association of America"),
+    url: "https://maa.org/news/2025-usamo-and-usajmo-thresholds-now-available/",
+    kind: "official-data",
+    verifiedAt: "2026-09-16",
+    appliesTo: "2025 USAMO and USAJMO invitation-index thresholds",
+    note: t("指数为 AMC 原始分 + 10 × AIME 分数；不是 AMC 原始分数线，也不是奥赛奖项分数线。", "The index is the AMC raw score plus 10 times the AIME score; it is neither an AMC raw-score cutoff nor an olympiad award cutoff."),
+  },
+  {
+    id: "maa-usamo-usajmo-2025-index-chart",
+    label: t("2025 USAMO／USAJMO 分组指数图", "2025 USAMO/USAJMO index chart by route"),
+    owner: t("美国数学协会", "Mathematical Association of America"),
+    url: "https://maa.org/wp-content/uploads/2025/02/2025-USAMO-and-USAJMO-Thresholds-1-1024x555.png",
+    kind: "official-data",
+    verifiedAt: "2026-09-16",
+    appliesTo: "2025 AMC 10A/10B and AMC 12A/12B invitation-index thresholds",
+  },
+  ...[
+    ["maa-usamo-2023-distribution", "2023 USAMO 官方成绩分布", "2023 USAMO official score distribution", "https://maa.edvistas.com/eduview/report.aspx?self=&view=1561&mode=6&viewClicked=true&schoolyear=2023&amccomp=34432", "2023 USAMO percentile-to-raw-score boundaries"],
+    ["maa-usajmo-2023-distribution", "2023 USAJMO 官方成绩分布", "2023 USAJMO official score distribution", "https://maa.edvistas.com/eduview/report.aspx?self=&view=1561&mode=6&viewClicked=true&schoolyear=2023&amccomp=34433", "2023 USAJMO percentile-to-raw-score boundaries"],
+    ["maa-usamo-2024-distribution", "2024 USAMO 官方成绩分布", "2024 USAMO official score distribution", "https://maa.edvistas.com/eduview/report.aspx?self=&view=1561&mode=6&viewClicked=true&schoolyear=2024&amccomp=45473", "2024 USAMO percentile-to-raw-score boundaries"],
+    ["maa-usajmo-2024-distribution", "2024 USAJMO 官方成绩分布", "2024 USAJMO official score distribution", "https://maa.edvistas.com/eduview/report.aspx?self=&view=1561&mode=6&viewClicked=true&schoolyear=2024&amccomp=45474", "2024 USAJMO percentile-to-raw-score boundaries"],
+    ["maa-usamo-2025-distribution", "2025 USAMO 官方成绩分布", "2025 USAMO official score distribution", "https://maa.edvistas.com/eduview/report.aspx?self=&view=1561&mode=6&viewClicked=true&schoolyear=2025&amccomp=53964", "2025 USAMO percentile-to-raw-score boundaries"],
+    ["maa-usajmo-2025-distribution", "2025 USAJMO 官方成绩分布", "2025 USAJMO official score distribution", "https://maa.edvistas.com/eduview/report.aspx?self=&view=1561&mode=6&viewClicked=true&schoolyear=2025&amccomp=53965", "2025 USAJMO percentile-to-raw-score boundaries"],
+  ].map(([id, zh, en, url, appliesTo]) => ({
+    id,
+    label: t(zh, en),
+    owner: t("美国数学协会", "Mathematical Association of America"),
+    url,
+    kind: "official-data" as const,
+    verifiedAt: "2026-09-16",
+    appliesTo,
+  })),
+  ...[
+    ["maa-usamo-2024-awards", "2024 USAMO 获奖名单", "2024 USAMO award list", "https://maa.org/wp-content/uploads/2024/11/2024-USAMO-Awardees-FINAL.pdf", "2024 USAMO Honorable Mention threshold"],
+    ["maa-usajmo-2024-awards", "2024 USAJMO 获奖名单", "2024 USAJMO award list", "https://maa.org/wp-content/uploads/2024/11/2024-USAJMO-Awardees-updated.pdf", "2024 USAJMO Honorable Mention threshold"],
+    ["maa-usamo-2025-awards", "2025 USAMO 获奖名单", "2025 USAMO award list", "https://maa.org/wp-content/uploads/2025/05/2025-USAMO-Award-Winners.pdf", "2025 USAMO Honorable Mention threshold"],
+    ["maa-usajmo-2025-awards", "2025 USAJMO 获奖名单", "2025 USAJMO award list", "https://maa.org/wp-content/uploads/2025/08/2025-USAJMO-Award-Winner-List.pdf", "2025 USAJMO Honorable Mention threshold"],
+    ["maa-usamo-2026-awards", "2026 USAMO 获奖名单", "2026 USAMO award list", "https://maa.org/wp-content/uploads/2026/05/2026-USAMO-Award-List.pdf", "2026 USAMO award criteria"],
+    ["maa-usajmo-2026-awards", "2026 USAJMO 获奖名单", "2026 USAJMO award list", "https://maa.org/wp-content/uploads/2026/05/2026-USAJMO-Award-List.pdf", "2026 USAJMO Honorable Mention threshold"],
+  ].map(([id, zh, en, url, appliesTo]) => ({
+    id,
+    label: t(zh, en),
+    owner: t("美国数学协会", "Mathematical Association of America"),
+    url,
+    kind: "official-data" as const,
+    verifiedAt: "2026-09-16",
+    appliesTo,
+  })),
   {
     id: "aseeder-amc8-2027",
     label: t("2027 AMC 8 中国大陆考务信息", "2027 AMC 8 administration in mainland China"),
@@ -244,7 +339,7 @@ export const competitionSources: SourceRecord[] = [
     url: "https://cemc.uwaterloo.ca/resources/past-contests",
     kind: "official-archive",
     verifiedAt: "2026-08-04",
-    appliesTo: "Euclid, Pascal, Cayley, Fermat historical records",
+    appliesTo: "Euclid, Pascal, Cayley, Fermat, CSMC, CIMC, Fryer, Galois and Hypatia historical records",
   },
   {
     id: "cemc-euclid-2026-results",
@@ -509,6 +604,24 @@ export const competitionSources: SourceRecord[] = [
     appliesTo: "BMO1 and BMO2 papers, reports and history",
   },
   {
+    id: "bmos-bmo1-2025-markers-report",
+    label: t("2025 BMO1 阅卷报告与分数线", "2025 BMO1 markers' report and thresholds"),
+    owner: t("British Mathematical Olympiad Subtrust", "British Mathematical Olympiad Subtrust"),
+    url: "https://bmos.ukmt.org.uk/home/bmo1-2026-report.pdf",
+    kind: "official-data",
+    verifiedAt: "2026-09-16",
+    appliesTo: "2025 BMO1 UK BMO2, Medal and book-prize, Distinction and Merit thresholds",
+  },
+  {
+    id: "bmos-bmo1-2024-markers-report",
+    label: t("2024 BMO1 阅卷报告与分数线", "2024 BMO1 markers' report and thresholds"),
+    owner: t("British Mathematical Olympiad Subtrust", "British Mathematical Olympiad Subtrust"),
+    url: "https://bmos.ukmt.org.uk/home/bmo1-2025-report.pdf",
+    kind: "official-data",
+    verifiedAt: "2026-09-16",
+    appliesTo: "2024 BMO1 UK BMO2, Medal and book-prize, Distinction and Merit thresholds",
+  },
+  {
     id: "bmos-eligibility",
     label: t("英国 IMO 代表资格规则", "Eligibility for UK olympiad selection"),
     owner: t("British Mathematical Olympiad Subtrust", "British Mathematical Olympiad Subtrust"),
@@ -637,6 +750,15 @@ export const competitionSources: SourceRecord[] = [
     appliesTo: "2024 CSMC statistics and cutoffs",
   },
   {
+    id: "cemc-csimc-2025-results",
+    label: t("2025 CIMC／CSMC 官方结果册", "2025 CIMC/CSMC official results booklet"),
+    owner: t("滑铁卢大学 CEMC", "University of Waterloo CEMC"),
+    url: "https://cemc.uwaterloo.ca/sites/default/files/documents/2025/2025CSIMCResultsBooklet.pdf",
+    kind: "official-data",
+    verifiedAt: "2026-09-16",
+    appliesTo: "2025 CSMC and CIMC direct award cutoffs",
+  },
+  {
     id: "cemc-csimc-2023-results",
     label: t("2023 CIMC／CSMC 官方结果册", "2023 CIMC/CSMC official results booklet"),
     owner: t("滑铁卢大学 CEMC", "University of Waterloo CEMC"),
@@ -710,6 +832,26 @@ export const competitionSources: SourceRecord[] = [
     appliesTo: "JMC certificate and follow-on-round thresholds, 1997–2026",
   },
   {
+    id: "ukmt-junior-kangaroo-awards",
+    label: t("Junior Kangaroo 奖项与历年分数线", "Junior Kangaroo awards and historical thresholds"),
+    owner: t("英国数学基金会", "UK Mathematics Trust"),
+    url: "https://ukmt.org.uk/junior-challenges/junior-kangaroo-awards",
+    kind: "official-data",
+    verifiedAt: "2026-09-16",
+    appliesTo: "Junior Kangaroo award thresholds; UK-school route",
+    note: t("该轮次仅面向英国学校，不能把英国奖项线当作中国 JMC 后续轮次资格。", "This round is restricted to UK schools and its award thresholds must not be treated as China JMC progression criteria."),
+  },
+  {
+    id: "ukmt-jmo-awards",
+    label: t("Junior Mathematical Olympiad 奖项与历年分数线", "Junior Mathematical Olympiad awards and historical thresholds"),
+    owner: t("英国数学基金会", "UK Mathematics Trust"),
+    url: "https://ukmt.org.uk/junior-challenges/junior-mathematical-olympiad-awards",
+    kind: "official-data",
+    verifiedAt: "2026-09-16",
+    appliesTo: "Junior Mathematical Olympiad award thresholds",
+    note: t("中国合作方将 JMO 作为独立报名活动，并说明奖项按英国分数线评定；当地日期和报名规则仍以当届通知为准。", "The China partner offers JMO as a separately entered activity and says awards use UK cutoffs; local dates and registration still follow the current notice."),
+  },
+  {
     id: "ukmt-imc",
     label: t("UKMT Intermediate Mathematical Challenge 规则", "UKMT Intermediate Mathematical Challenge rules"),
     owner: t("英国数学基金会", "UK Mathematics Trust"),
@@ -727,6 +869,26 @@ export const competitionSources: SourceRecord[] = [
     kind: "official-data",
     verifiedAt: "2026-08-04",
     appliesTo: "IMC certificate and follow-on-round thresholds, 1997–2026",
+  },
+  {
+    id: "ukmt-grey-pink-kangaroo-awards",
+    label: t("Grey／Pink Kangaroo 奖项与历年分数线", "Grey/Pink Kangaroo awards and historical thresholds"),
+    owner: t("英国数学基金会", "UK Mathematics Trust"),
+    url: "https://ukmt.org.uk/intermediate-challenges/grey-and-pink-kangaroos-awards",
+    kind: "official-data",
+    verifiedAt: "2026-09-16",
+    appliesTo: "Grey and Pink Kangaroo award thresholds; UK-school route",
+    note: t("Grey／Pink Kangaroo 仅面向英国学校，不能把英国奖项线当作中国 IMC 后续轮次资格。", "Grey/Pink Kangaroo are restricted to UK schools and their award thresholds must not be treated as China IMC progression criteria."),
+  },
+  {
+    id: "ukmt-intermediate-olympiad-awards",
+    label: t("Cayley／Hamilton／Maclaurin Olympiad 奖项与历年分数线", "Cayley/Hamilton/Maclaurin Olympiad awards and historical thresholds"),
+    owner: t("英国数学基金会", "UK Mathematics Trust"),
+    url: "https://ukmt.org.uk/intermediate-challenges/cayley-hamilton-maclaurin-mathematical-olympiad-awards",
+    kind: "official-data",
+    verifiedAt: "2026-09-16",
+    appliesTo: "Cayley, Hamilton and Maclaurin Mathematical Olympiad award thresholds",
+    note: t("中国合作方将 CMO／HMO／MMO 作为独立报名活动，并说明奖项按英国分数线评定；中国学生仍应按合作方当届规则理解报名。", "The China partner offers CMO/HMO/MMO as separately entered activities and says awards use UK cutoffs; students in China should still follow the partner's current registration rules."),
   },
   {
     id: "aseeder-ukmt-jmc",
@@ -775,6 +937,26 @@ export const competitionSources: SourceRecord[] = [
     note: t("中国合作赛区采用 2026 年 10 月 11 日独立竞赛安排，与 AMT 面向澳大利亚及一般国际学校的 8 月窗口不同。", "The China partner region uses a separate 11 October 2026 competition schedule, distinct from AMT's August window for Australia and general international schools."),
   },
   {
+    id: "aseeder-australian-amc-2025-analysis",
+    label: t("2025 澳大利亚 AMC 中国赛区成绩与奖项线", "2025 Australian AMC China score and award boundaries"),
+    owner: t("阿思丹国际理科测评（AMT 中国合作方）", "ASEEDER, AMT China partner"),
+    url: "https://attach.seedasdan.com/%E6%B5%8B%E8%AF%84%E5%88%86%E6%9E%90/2025%E6%BE%B3%E6%B4%B2AMC%E5%85%A8%E5%9B%BD%E6%B5%8B%E8%AF%84%E5%88%86%E6%9E%90-%E4%B8%AD%E8%8B%B1%E6%96%87%E7%89%88.pdf",
+    kind: "official-data",
+    verifiedAt: "2026-09-16",
+    appliesTo: "2025 Australian AMC raw-score award boundaries for the Mainland China administration only",
+    note: t("这是中国合作赛区按年级发布的当届结果资料，不适用于 AMT 其他国家、地区或后续年度。", "This is a year-and-grade-specific result record for the Mainland China partner administration, not for other AMT regions or later years."),
+  },
+  {
+    id: "aseeder-australian-amc-2024-analysis",
+    label: t("2024 澳大利亚 AMC 中国赛区成绩与奖项线", "2024 Australian AMC China score and award boundaries"),
+    owner: t("阿思丹国际理科测评（AMT 中国合作方）", "ASEEDER, AMT China partner"),
+    url: "https://attach.seedasdan.com/2024-2025%E7%A7%8B%E5%AD%A3%E5%AD%A6%E6%9C%9F%E6%B5%8B%E8%AF%84%E5%88%86%E6%9E%90/2024%20AMC%20Performance%20Report.pdf",
+    kind: "official-data",
+    verifiedAt: "2026-09-16",
+    appliesTo: "2024 Australian AMC raw-score award boundaries for the Mainland China administration only",
+    note: t("这是中国合作赛区按年级发布的当届结果资料，不适用于 AMT 其他国家、地区或后续年度。", "This is a year-and-grade-specific result record for the Mainland China partner administration, not for other AMT regions or later years."),
+  },
+  {
     id: "aksf-home",
     label: t("袋鼠无国界协会官网", "Association Kangourou Sans Frontières Official Site"),
     owner: t("袋鼠无国界协会", "Association Kangourou sans Frontieres"),
@@ -798,7 +980,7 @@ export const competitionSources: SourceRecord[] = [
     owner: t("阿思丹国际理科测评", "ASEEDER"),
     url: "https://www.seedasdan.asia/en/mkchina-en/",
     kind: "official",
-    verifiedAt: "2026-08-04",
+    verifiedAt: "2026-09-16",
     appliesTo: "2026 Math Kangaroo administration, scoring and awards in China",
   },
   {
@@ -847,6 +1029,34 @@ export const competitionSources: SourceRecord[] = [
     kind: "official-archive",
     verifiedAt: "2026-08-25",
     appliesTo: "Historical 2025 CMO and CMOQR invitation rules only",
+  },
+  {
+    id: "cms-comc-advancing-archive",
+    label: t("COMC 2011–2025 后续邀请档案", "COMC 2011–2025 progression archive"),
+    owner: t("加拿大数学学会", "Canadian Mathematical Society"),
+    url: "https://cms.math.ca/competitions/comc/comc2022/advancing/",
+    kind: "official-archive",
+    verifiedAt: "2026-09-16",
+    appliesTo: "Historical CMO and CMOQR invitation thresholds; use the year selector on the official archive",
+    note: t("CMO／CMOQR 是加拿大代表队选拔链条中的历史规则，资格另受加拿大公民或永久居民等条件限制；CMOQR 自 2026 年起取消。", "CMO/CMOQR were historical Team Canada progression rules with separate Canadian citizen or permanent-resident eligibility; CMOQR ended in 2026."),
+  },
+  {
+    id: "cms-cmo-report-2008",
+    label: t("2007 COMC 至 2008 CMO 官方报告", "2007 COMC to 2008 CMO official report"),
+    owner: t("加拿大数学学会", "Canadian Mathematical Society"),
+    url: "https://www2.cms.math.ca/Reports/cmo/2008-cmo-report-en.pdf",
+    kind: "official-archive",
+    verifiedAt: "2026-09-16",
+    appliesTo: "2007 COMC direct CMO and CMO Repêchage raw-score invitation bands",
+  },
+  {
+    id: "cms-cmo-report-2009",
+    label: t("2008 COMC 至 2009 CMO 官方报告", "2008 COMC to 2009 CMO official report"),
+    owner: t("加拿大数学学会", "Canadian Mathematical Society"),
+    url: "https://www2.cms.math.ca/Reports/cmo/2009-cmo-report-en.pdf",
+    kind: "official-archive",
+    verifiedAt: "2026-09-16",
+    appliesTo: "2008 COMC direct CMO and CMO Repêchage raw-score invitation bands",
   },
   {
     id: "cms-comc-changes-2026",
@@ -1165,6 +1375,34 @@ export const competitionSources: SourceRecord[] = [
     verifiedAt: "2026-08-11",
     appliesTo: "February 2026 HMIC top-50 retrospective score boundary",
   },
+  {
+    id: "yau-noether-portal",
+    label: t("丘成桐中学科学奖（诺特数学奖）官方报名门户", "Noether Mathematics Award official portal"),
+    owner: t("清华大学丘成桐数学科学中心", "Yau Mathematical Sciences Center, Tsinghua University"),
+    url: "https://yau-girls-contest.tsinghua.edu.cn/",
+    kind: "official",
+    verifiedAt: "2026-09-16",
+    appliesTo: "2026 Noether Mathematics Award information and online registration",
+  },
+  {
+    id: "yau-noether-2026-announcement",
+    label: t("2026 诺特数学奖报名开启公告", "2026 Noether Mathematics Award registration announcement"),
+    owner: t("清华大学丘成桐数学科学中心", "Yau Mathematical Sciences Center, Tsinghua University"),
+    url: "https://yau-girls-contest.tsinghua.edu.cn/info/1012/1051.htm",
+    kind: "official",
+    verifiedAt: "2026-09-16",
+    appliesTo: "2026 Noether Mathematics Award eligibility, schedule, scope, awards and integrity rules",
+    note: t("该公告发布于 2026 年 9 月 15 日；专属网站的通用“报名简章／竞赛日程”页面仍为 2025 年内容，不能替代本届公告。", "Published 15 September 2026. The dedicated site's generic registration-guide and schedule pages still describe 2025 and do not replace this cycle's notice."),
+  },
+  {
+    id: "yau-noether-2026-parent-notice",
+    label: t("丘成桐中学科学奖官网：2026 诺特数学奖报名公告", "Yau Award site: 2026 Noether Mathematics Award registration notice"),
+    owner: t("丘成桐中学科学奖", "S.-T. Yau High School Science Award"),
+    url: "https://www.yau-awards.com/show-86-60.html",
+    kind: "official",
+    verifiedAt: "2026-09-16",
+    appliesTo: "2026 Noether Mathematics Award parent-site announcement",
+  },
 ];
 
 const LAST_VERIFIED = "2026-08-04";
@@ -1230,7 +1468,7 @@ export const competitionProjects: ProjectRecord[] = [
           columns: [t("记录", "Record"), t("条件", "Condition")],
           rows: [
             { cells: [t("Distinguished Honor Roll", "Distinguished Honor Roll"), t("达到当届 Top 1% 分数线", "Meets the current Top 1% threshold")], sourceIds: ["maa-amc-dashboard"] },
-            { cells: [t("Certificate of Distinction", "Certificate of Distinction"), t("达到当届 Top 5% 分数线", "Meets the current Top 5% threshold")], sourceIds: ["maa-amc-dashboard"] },
+            { cells: [t("Top 5% 原始分边界", "Top 5% raw-score boundary"), t("官方成绩仪表板列出 Top 5% 原始分；该页不将其标注为奖项证书分数线", "The official dashboard lists a Top 5% raw score; it does not label it as a certificate-award cutoff")], sourceIds: ["maa-amc-dashboard"] },
             { cells: [t("Certificate of Achievement", "Certificate of Achievement"), t("六年级及以下且达到当届规定分数；近年标准为 15 分", "Grade 6 or below and the score specified for that year; the recent standard is 15")], sourceIds: ["maa-amc-policies"] },
           ],
         }],
@@ -1317,7 +1555,7 @@ export const competitionProjects: ProjectRecord[] = [
           columns: [t("记录", "Record"), t("定义", "Definition")],
           rows: [
             { cells: [t("Distinguished Honor Roll", "Distinguished Honor Roll"), t("当卷 Top 1% 分数线", "Current paper's Top 1% threshold")], sourceIds: ["maa-amc-dashboard"] },
-            { cells: [t("Certificate of Distinction", "Certificate of Distinction"), t("当卷 Top 5% 分数线", "Current paper's Top 5% threshold")], sourceIds: ["maa-amc-dashboard"] },
+            { cells: [t("Top 5% 原始分边界", "Top 5% raw-score boundary"), t("官方成绩仪表板列出当卷 Top 5% 原始分；该页不将其标注为奖项证书分数线", "The official dashboard lists the paper's Top 5% raw score; it does not label it as a certificate-award cutoff")], sourceIds: ["maa-amc-dashboard"] },
             { cells: [t("Certificate of Achievement", "Certificate of Achievement"), t("八年级及以下且原始分至少 90", "Grade 8 or below with a raw score of at least 90")], sourceIds: ["maa-amc-policies"] },
             { cells: [t("2027 美加 AIME 资格", "2027 US/Canada AIME qualification"), t("AMC 10A 或 10B 原始分至少 100；国际赛区按当地 IGL 规则", "Raw score of at least 100 on AMC 10A or 10B; international regions follow local IGL rules")], sourceIds: ["maa-aime-2026-27-policies", "maa-amc-international"] },
           ],
@@ -1405,7 +1643,7 @@ export const competitionProjects: ProjectRecord[] = [
           columns: [t("记录", "Record"), t("定义", "Definition")],
           rows: [
             { cells: [t("Distinguished Honor Roll", "Distinguished Honor Roll"), t("当卷 Top 1% 分数线", "Current paper's Top 1% threshold")], sourceIds: ["maa-amc-dashboard"] },
-            { cells: [t("Certificate of Distinction", "Certificate of Distinction"), t("当卷 Top 5% 分数线", "Current paper's Top 5% threshold")], sourceIds: ["maa-amc-dashboard"] },
+            { cells: [t("Top 5% 原始分边界", "Top 5% raw-score boundary"), t("官方成绩仪表板列出当卷 Top 5% 原始分；该页不将其标注为奖项证书分数线", "The official dashboard lists the paper's Top 5% raw score; it does not label it as a certificate-award cutoff")], sourceIds: ["maa-amc-dashboard"] },
             { cells: [t("Certificate of Achievement", "Certificate of Achievement"), t("十年级及以下且原始分至少 90", "Grade 10 or below with a raw score of at least 90")], sourceIds: ["maa-amc-policies"] },
             { cells: [t("2027 美加 AIME 资格", "2027 US/Canada AIME qualification"), t("AMC 12A 或 12B 原始分至少 85；国际赛区按当地 IGL 规则", "Raw score of at least 85 on AMC 12A or 12B; international regions follow local IGL rules")], sourceIds: ["maa-aime-2026-27-policies", "maa-amc-international"] },
           ],
@@ -1439,7 +1677,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "pending",
     cycle: "2026–27",
-    lastVerified: "2026-09-10",
+    lastVerified: "2026-09-16",
     alerts: [
       {
         title: t("特别提示｜中国境内考生不要直接套用美加新规", "Important | Do not apply the US/Canada rules directly to students studying in China"),
@@ -1541,7 +1779,7 @@ export const competitionProjects: ProjectRecord[] = [
         ],
       },
     ],
-    sourceIds: ["maa-aime-2027-announcement", "maa-aime-2026-27-policies", "maa-aime-current", "maa-usamo-usajmo-2026-27-policies", "maa-amc-policies", "maa-amc-dashboard", "maa-amc-international", "maa-amc-registration-2026-27", "maa-amc-resources", "maa-aime-2025-cutoffs", "aseeder-amc10-mainland", "aseeder-amc12-mainland"],
+    sourceIds: ["maa-aime-2027-announcement", "maa-aime-2026-27-policies", "maa-aime-current", "maa-usamo-usajmo-2026-27-policies", "maa-usamo-usajmo-2025-index-thresholds", "maa-usamo-usajmo-2025-index-chart", "maa-usamo-2023-distribution", "maa-usajmo-2023-distribution", "maa-usamo-2024-distribution", "maa-usajmo-2024-distribution", "maa-usamo-2025-distribution", "maa-usajmo-2025-distribution", "maa-usamo-2024-awards", "maa-usajmo-2024-awards", "maa-usamo-2025-awards", "maa-usajmo-2025-awards", "maa-usamo-2026-awards", "maa-usajmo-2026-awards", "maa-amc-policies", "maa-amc-dashboard", "maa-amc-international", "maa-amc-registration-2026-27", "maa-amc-resources", "maa-aime-2025-cutoffs", "aseeder-amc10-mainland", "aseeder-amc12-mainland"],
     relatedIds: ["amc10", "amc12"],
     searchTerms: ["AIME", "American Invitational Mathematics Examination", "Pearson", "2027 AIME", "USAJMO", "USAMO", "资格线", "机考"],
   },
@@ -1696,7 +1934,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026–27",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-09-16",
     facts: [
       { label: t("适用年级", "Intended level"), value: t("主要面向中学最后一年或 CÉGEP 学生；低年级学生也可参加", "Primarily for final-year secondary or CÉGEP students; younger students may also participate"), sourceIds: ["cemc-euclid"] },
       { label: t("题量与时长", "Questions and duration"), value: t("10 题，每题 10 分；2.5 小时，满分 100", "10 questions worth 10 points each; 2.5 hours, maximum 100"), sourceIds: ["cemc-euclid"] },
@@ -1768,7 +2006,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026–27",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-09-16",
     facts: [
       { label: t("正式参赛年级", "Official grade limit"), value: t("九年级及以下", "Grade 9 or below"), sourceIds: ["cemc-pcf"] },
       { label: t("题量与时长", "Questions and duration"), value: t("25 题，60 分钟；满分 150", "25 questions, 60 minutes; maximum 150"), sourceIds: ["cemc-pcf"] },
@@ -1841,7 +2079,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026–27",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-09-16",
     facts: [
       { label: t("正式参赛年级", "Official grade limit"), value: t("十年级及以下", "Grade 10 or below"), sourceIds: ["cemc-pcf"] },
       { label: t("题量与时长", "Questions and duration"), value: t("25 题，60 分钟；满分 150", "25 questions, 60 minutes; maximum 150"), sourceIds: ["cemc-pcf"] },
@@ -1914,7 +2152,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026–27",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-09-16",
     facts: [
       { label: t("正式参赛年级", "Official grade limit"), value: t("十一年级及以下", "Grade 11 or below"), sourceIds: ["cemc-pcf"] },
       { label: t("题量与时长", "Questions and duration"), value: t("25 题，60 分钟；满分 150", "25 questions, 60 minutes; maximum 150"), sourceIds: ["cemc-pcf"] },
@@ -2128,7 +2366,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026–27",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-09-16",
     facts: [
       { label: t("题量与时长", "Questions and duration"), value: t("6 道证明题，3.5 小时；满分 60", "6 proof problems, 3.5 hours; maximum 60"), sourceIds: ["ukmt-bmo1"] },
       { label: t("评分", "Marking"), value: t("每题 10 分，按数学进展与证明完整度评分", "10 points per problem, awarded for mathematical progress and completeness of proof"), sourceIds: ["ukmt-bmo1-awards"] },
@@ -2183,7 +2421,7 @@ export const competitionProjects: ProjectRecord[] = [
         ],
       },
     ],
-    sourceIds: ["ukmt-bmo1", "ukmt-bmo1-awards", "ukmt-calendar-2026-27", "ukmt-overseas-handbook", "ukmt-china-partnership", "ukmt-account-registration", "ukmt-competitions-handbook", "ukmt-competition-papers", "aseeder-bmo-china", "bmos-bmo-archive", "bmos-eligibility"],
+    sourceIds: ["ukmt-bmo1", "ukmt-bmo1-awards", "ukmt-calendar-2026-27", "ukmt-overseas-handbook", "ukmt-china-partnership", "ukmt-account-registration", "ukmt-competitions-handbook", "ukmt-competition-papers", "aseeder-bmo-china", "bmos-bmo-archive", "bmos-bmo1-2025-markers-report", "bmos-bmo1-2024-markers-report", "bmos-eligibility"],
     relatedIds: ["smc", "senior-kangaroo", "bmo2"],
     searchTerms: ["BMO1", "British Mathematical Olympiad", "proof", "Merit", "Distinction", "medal", "BMO2 cutoff"],
   },
@@ -2441,12 +2679,13 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "low",
     status: "confirmed",
     cycle: "2026–27",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-09-16",
     facts: [
       { label: t("参赛对象", "Audience"), value: t("十一、十二年级及 CÉGEP；有能力的低年级学生可参加", "Grades 11–12 and CÉGEP; motivated younger students may participate"), sourceIds: ["cemc-csimc"] },
       { label: t("正式参赛资格", "Official-participant rule"), value: t("境外学校参赛者须正确填写 Student Information Form，且出生于 2007 年 1 月 1 日或之后，方计入官方排名与团体分", "At schools outside Canada, a participant must complete the Student Information Form and be born on or after 1 January 2007 to count in official rankings and team scores"), sourceIds: ["cemc-csimc"] },
       { label: t("题型与时长", "Format and duration"), value: t("6 道仅填答案题、3 道完整解答题；2 小时，满分 60", "Six answer-only questions and three full-solution questions; two hours, maximum 60"), sourceIds: ["cemc-csimc"] },
       { label: t("2026 费用", "2026 fees"), value: t("每名 14 加元，每单另收 5 加元处理费；境外订单另收订单金额 15% 的寄送费，最低 10 加元", "CAD 14 per participant plus a CAD 5 processing fee; international orders incur shipping at 15% of order value, minimum CAD 10"), sourceIds: ["cemc-csimc"] },
+      { label: t("2025 官方结果", "2025 official results"), value: t("15,153 人参赛，平均分 28.6；Certificate of Distinction 线 35，School Champion Medal 线 28", "15,153 participants, mean 28.6; Certificate of Distinction cutoff 35 and School Champion Medal cutoff 28"), sourceIds: ["cemc-csimc-2025-results", "cemc-csimc"] },
       { label: t("滑铁卢数学学院", "Waterloo Faculty of Mathematics"), value: t("CSMC 不是入学必需，但数学学院说明高分可支持录取；申请入学奖学金者被强烈建议在申请学年参加 CSMC 或 Euclid 至少一项", "CSMC is not required for admission, but the Faculty states that strong performance may support admission; entrance-scholarship applicants are strongly encouraged to write at least one of CSMC or Euclid in the application year"), sourceIds: ["cemc-csimc"] },
     ],
     dates: [
@@ -2486,9 +2725,73 @@ export const competitionProjects: ProjectRecord[] = [
         bullets: [t("CEMC 提供历年 CSMC 试题、完整解答和按主题整理的 CSMC／Euclid Preparation Materials。", "CEMC provides past CSMC papers, full solutions and topic-based CSMC/Euclid preparation materials.")],
       },
     ],
-    sourceIds: ["cemc-csimc", "cemc-csimc-2024-results", "cemc-past-contests", "cemc-euclid-prep", "cemc-how-contests-work"],
-    relatedIds: ["euclid", "fermat", "hypatia"],
+    sourceIds: ["cemc-csimc", "cemc-csimc-2025-results", "cemc-csimc-2024-results", "cemc-past-contests", "cemc-euclid-prep", "cemc-how-contests-work"],
+    relatedIds: ["cimc", "euclid", "fermat", "hypatia"],
     searchTerms: ["CSMC", "Canadian Senior Mathematics Contest", "加拿大高级数学竞赛", "Waterloo", "Distinction"],
+  },
+  {
+    id: "cimc",
+    slug: "cimc",
+    track: "competition",
+    title: t("加拿大中级数学竞赛 CIMC", "Canadian Intermediate Mathematics Contest (CIMC)"),
+    shortTitle: "CIMC",
+    organizer: t("滑铁卢大学数学与计算教育中心（CEMC）", "Centre for Education in Mathematics and Computing, University of Waterloo"),
+    summary: t("面向九、十年级学生的书面解答型竞赛；9 题、2 小时、满分 60，含短答题和完整解答题。", "A written-solution contest for Grades 9–10: nine questions in two hours, worth 60 points, with answer-only and full-solution items."),
+    regions: ["Global", "Canada", "Mainland China"],
+    gradeBands: ["Grade 9", "Grade 10", "Younger students permitted"],
+    eligibilityTags: ["grade-9-or-10", "younger-students-permitted", "school-administered"],
+    formatTags: ["individual", "paper", "answer-only", "full-solution", "calculator-restricted"],
+    costBand: "low",
+    status: "confirmed",
+    cycle: "2026",
+    lastVerified: "2026-09-16",
+    facts: [
+      { label: t("参赛对象", "Audience"), value: t("九、十年级学生；有能力的低年级学生也可参加", "Students in Grades 9–10; motivated younger students may also participate"), sourceIds: ["cemc-csimc"] },
+      { label: t("正式参赛资格", "Official-participant rule"), value: t("在加拿大境内或境外学校参赛，十年级及以下且完整填写 Student Information Form，即计入荣誉榜和团体分", "At a school inside or outside Canada, a Grade 10-or-below student who properly completes the Student Information Form is an official participant for honour rolls and team scores"), sourceIds: ["cemc-csimc"] },
+      { label: t("题型与时长", "Format and duration"), value: t("6 道仅填答案题、3 道完整解答题；2 小时，满分 60", "Six answer-only questions and three full-solution questions; two hours, maximum 60"), sourceIds: ["cemc-csimc"] },
+      { label: t("2026 费用", "2026 fees"), value: t("每名 14 加元，每单另收 5 加元处理费；境外订单另收订单金额 15% 的寄送费，最低 10 加元", "CAD 14 per participant plus a CAD 5 processing fee; international orders incur shipping at 15% of order value, minimum CAD 10"), sourceIds: ["cemc-csimc"] },
+      { label: t("2025 官方结果", "2025 official results"), value: t("13,039 人参赛，平均分 29.1；Certificate of Distinction 线 35，School Champion Medal 线 29", "13,039 participants, mean 29.1; Certificate of Distinction cutoff 35 and School Champion Medal cutoff 29"), sourceIds: ["cemc-csimc-2025-results", "cemc-csimc"] },
+    ],
+    dates: [
+      { id: "cimc-2026-order", label: t("学校订购截止", "School ordering deadline"), date: "2026-10-22", status: "confirmed", sourceIds: ["cemc-csimc"] },
+      { id: "cimc-2026-americas", label: t("美洲竞赛日", "Competition date in the Americas"), date: "2026-11-18", region: t("北美洲和南美洲", "North and South America"), status: "confirmed", sourceIds: ["cemc-csimc"] },
+      { id: "cimc-2026-international", label: t("中国所在区域竞赛日", "Competition date for China region"), date: "2026-11-19", region: t("北美洲和南美洲以外", "Outside North and South America"), status: "confirmed", sourceIds: ["cemc-csimc"] },
+    ],
+    sections: [
+      {
+        id: "administration",
+        title: t("组织、作答与阅卷", "Administration, writing and marking"),
+        bullets: [
+          t("由学校订购并安排校内纸笔监考。境外学校在竞赛日前约一天从 Contest Material Repository 下载并保密打印题册；Student Information Form 与 Solution Booklet 等材料仍按订单寄送。", "The school orders and supervises the paper contest. Outside Canada, the school downloads and securely prints the paper from the Contest Material Repository about one day before the contest; Student Information Forms and Solution Booklets are still shipped with the order."),
+          t("完整解答题按正确性、完整性、清晰度和表达评分；只写正确答案不能获得完整分数。", "Full-solution work is assessed for correctness, completeness, clarity and presentation; a correct answer alone does not earn full credit."),
+          t("所有答卷由学校统一寄回 CEMC；结果通常在竞赛后约四周发布到 Contest Supervisor Portal。", "The school returns all scripts together to CEMC; results are normally posted in the Contest Supervisor Portal about four weeks after the contest."),
+        ],
+      },
+      {
+        id: "china-registration",
+        title: t("中国学生如何报名", "Registration for students in China"),
+        bullets: [
+          t("学生通过本校报名。中国学校可直接建立 CEMC 账户、订购名额并指定监考；CEMC 不接受学生个人报名。", "Students enter through their school. A school in China may create a CEMC account, order entries and appoint a supervisor; CEMC does not accept individual student registration."),
+          t("中国学校属于北美和南美以外赛区，应按 11 月 19 日安排，并预留材料寄送、保密打印和答卷回寄时间。", "Schools in China are outside the North/South America region and should use the 19 November administration date, allowing time for materials, secure printing and script return."),
+        ],
+      },
+      {
+        id: "awards",
+        title: t("奖项与分数线", "Awards and score boundaries"),
+        bullets: [
+          t("当届总参赛者前 25% 获 Certificate of Distinction。School Champion Medal 还要求是本校最高分者并达到年度奖牌线；并列时最多可发两枚。", "The top 25% of all contestants receive a Certificate of Distinction. A School Champion Medal additionally requires being the school's top scorer and meeting the annual medal cutoff; up to two medals may be issued for a tie."),
+          t("历史表中的“Top 25% 重建值”来自 CEMC 公布的排名表，不是主办方逐年直接命名为 Distinction 分数线的数值。", "A historical “Reconstructed Top-25% boundary” is derived from a CEMC-published ranking table, not a value explicitly named by the organiser as that year's Distinction cutoff."),
+        ],
+      },
+      {
+        id: "official-resources",
+        title: t("官方资料", "Official resources"),
+        bullets: [t("CEMC 免费公开历年 CIMC 试题与解答、CSIMC 备赛资料和中学数学 Courseware。", "CEMC freely publishes past CIMC papers and solutions, CSIMC preparation materials and secondary-school courseware.")],
+      },
+    ],
+    sourceIds: ["cemc-csimc", "cemc-csimc-2025-results", "cemc-csimc-2024-results", "cemc-past-contests", "cemc-euclid-prep", "cemc-courseware", "cemc-how-contests-work"],
+    relatedIds: ["csmc", "pascal", "cayley", "fermat"],
+    searchTerms: ["CIMC", "Canadian Intermediate Mathematics Contest", "加拿大中级数学竞赛", "Waterloo", "CEMC", "Distinction"],
   },
   {
     id: "fryer",
@@ -2505,7 +2808,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "low",
     status: "confirmed",
     cycle: "2026–27",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-09-16",
     facts: [
       { label: t("正式资格", "Official eligibility"), value: t("九年级及以下；低年级学生可选择越级，但同一学年只能参加 Fryer、Galois、Hypatia 中一项", "Grade 9 or below; younger students may enter a higher level, but may write only one of Fryer, Galois and Hypatia in a school year"), sourceIds: ["cemc-fgh"] },
       { label: t("形式", "Format"), value: t("4 题，兼有最终答案部分与完整解答部分；75 分钟，满分 40", "Four questions mixing final-answer and full-solution parts; 75 minutes, maximum 40"), sourceIds: ["cemc-fgh"] },
@@ -2541,7 +2844,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "low",
     status: "confirmed",
     cycle: "2026–27",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-09-16",
     facts: [
       { label: t("正式资格", "Official eligibility"), value: t("十年级及以下；同一学年只能参加 Fryer、Galois、Hypatia 中一项", "Grade 10 or below; a participant may write only one of Fryer, Galois and Hypatia in a school year"), sourceIds: ["cemc-fgh"] },
       { label: t("形式", "Format"), value: t("4 题，兼有最终答案部分与完整解答部分；75 分钟，满分 40", "Four questions mixing final-answer and full-solution parts; 75 minutes, maximum 40"), sourceIds: ["cemc-fgh"] },
@@ -2577,7 +2880,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "low",
     status: "confirmed",
     cycle: "2026–27",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-09-16",
     facts: [
       { label: t("正式资格", "Official eligibility"), value: t("十一年级及以下；同一学年只能参加 Fryer、Galois、Hypatia 中一项", "Grade 11 or below; a participant may write only one of Fryer, Galois and Hypatia in a school year"), sourceIds: ["cemc-fgh"] },
       { label: t("形式", "Format"), value: t("4 题，兼有最终答案部分与完整解答部分；75 分钟，满分 40", "Four questions mixing final-answer and full-solution parts; 75 minutes, maximum 40"), sourceIds: ["cemc-fgh"] },
@@ -2651,7 +2954,7 @@ export const competitionProjects: ProjectRecord[] = [
         bullets: [
           t("成绩最高的 50% 按 1:2:3 比例获得 Gold、Silver、Bronze；未达到证书线者获得 Participation。", "The top-scoring 50% receive Gold, Silver and Bronze in a 1:2:3 ratio; other entrants receive Participation."),
           t("英国路径中，约 1,000–1,200 名最高分学生获邀 JMO，随后约 10,000 人获邀 Junior Kangaroo；Junior Kangaroo 仅面向英国学校。", "In the UK route, roughly 1,000–1,200 top scorers qualify for JMO and the next roughly 10,000 for Junior Kangaroo; Junior Kangaroo is open to UK schools only."),
-          t("中国合作页将 JMO 作为可直接报名的独立活动，不应把参加中国 JMC 解释为自动获得 JMO 资格。", "The China partner page offers JMO as a separately enterable event, so taking JMC in China should not be interpreted as automatic JMO qualification."),
+          t("中国合作页将 JMO 作为可直接报名的独立活动，并说明奖项按英国分数线评定；参加中国 JMC 不等于自动获得 JMO 资格。", "The China partner page offers JMO as a separately enterable event and says awards use UK cutoffs; taking JMC in China does not mean automatic JMO qualification."),
         ],
       },
       {
@@ -2660,7 +2963,7 @@ export const competitionProjects: ProjectRecord[] = [
         bullets: [t("UKMT 免费公开历年 JMC 试题、简答解答和部分视频解答；分数线以 JMC Awards 页为准。", "UKMT freely publishes past JMC papers, short solutions and some video solutions; thresholds are maintained on the JMC Awards page.")],
       },
     ],
-    sourceIds: ["ukmt-jmc", "ukmt-jmc-awards", "ukmt-calendar-2026-27", "ukmt-competitions-handbook", "ukmt-competition-papers", "ukmt-china-partnership", "aseeder-ukmt-jmc"],
+    sourceIds: ["ukmt-jmc", "ukmt-jmc-awards", "ukmt-junior-kangaroo-awards", "ukmt-jmo-awards", "ukmt-calendar-2026-27", "ukmt-competitions-handbook", "ukmt-competition-papers", "ukmt-china-partnership", "aseeder-ukmt-jmc"],
     relatedIds: ["imc", "smc"],
     searchTerms: ["JMC", "Junior Mathematical Challenge", "英国初级数学挑战", "UKMT", "Junior Maths Challenge"],
   },
@@ -2717,7 +3020,7 @@ export const competitionProjects: ProjectRecord[] = [
         bullets: [
           t("成绩最高的 50% 按 1:2:3 比例获得 Gold、Silver、Bronze；中国合作赛区采用英国分数线。", "The top-scoring 50% receive Gold, Silver and Bronze in a 1:2:3 ratio; the China partner route uses UK thresholds."),
           t("英国按年级分别邀请 Cayley、Hamilton、Maclaurin Olympiad，并邀请后续学生参加 Grey／Pink Kangaroo；Kangaroo 轮仅限英国学校。", "UKMT invites students by year group to the Cayley, Hamilton or Maclaurin Olympiad, followed by Grey/Pink Kangaroo invitations; the Kangaroo rounds are restricted to UK schools."),
-          t("中国合作页将 CMO／HMO／MMO 作为可报名的后续活动；是否取得英国自动邀请资格仍应以 UKMT 结果通知为准。", "The China partner page offers CMO/HMO/MMO as follow-on events; any UKMT automatic invitation remains governed by the official UKMT results notice."),
+          t("中国合作页将 CMO／HMO／MMO 作为可直接报名的后续活动，并说明奖项按英国分数线评定；英国自动邀请机制不等于中国的报名资格。", "The China partner page offers CMO/HMO/MMO as directly enterable follow-on events and says awards use UK cutoffs; UK automatic invitations are not China registration eligibility."),
         ],
       },
       {
@@ -2726,7 +3029,7 @@ export const competitionProjects: ProjectRecord[] = [
         bullets: [t("UKMT 免费公开历年 IMC 试题、解答与延伸探究；奖项页保存 1997 年以来证书线及后续轮次资格线。", "UKMT freely publishes past IMC papers, solutions and investigations; the awards page preserves certificate and follow-on thresholds from 1997 onward.")],
       },
     ],
-    sourceIds: ["ukmt-imc", "ukmt-imc-awards", "ukmt-calendar-2026-27", "ukmt-competitions-handbook", "ukmt-competition-papers", "ukmt-china-partnership", "aseeder-ukmt-imc"],
+    sourceIds: ["ukmt-imc", "ukmt-imc-awards", "ukmt-grey-pink-kangaroo-awards", "ukmt-intermediate-olympiad-awards", "ukmt-calendar-2026-27", "ukmt-competitions-handbook", "ukmt-competition-papers", "ukmt-china-partnership", "aseeder-ukmt-imc"],
     relatedIds: ["jmc", "smc", "bmo1"],
     searchTerms: ["IMC", "Intermediate Mathematical Challenge", "英国中级数学挑战", "UKMT", "Cayley Olympiad", "Hamilton", "Maclaurin"],
   },
@@ -2745,13 +3048,14 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-09-16",
     facts: [
       { label: t("赛事识别", "Identity"), value: t("由 Australian Maths Trust 主办，始于 1978 年；与美国 MAA 的 AMC 8／10／12 没有晋级关系", "Run by the Australian Maths Trust since 1978; it has no progression link to the MAA AMC 8/10/12"), sourceIds: ["amt-australian-amc"] },
       { label: t("AMT 全球分组", "AMT global divisions"), value: t("Middle Primary（澳洲 3–4 年级）、Upper Primary（5–6）、Junior（7–8）、Intermediate（9–10）、Senior（11–12）", "Middle Primary (Australian Years 3–4), Upper Primary (5–6), Junior (7–8), Intermediate (9–10) and Senior (11–12)"), sourceIds: ["amt-australian-amc"] },
       { label: t("中国分组", "China divisions"), value: t("Pre-A：1–2 年级；A：3–5；B：6–7；C：8–9；D：10–11；E：12。按 2026 年 9 月后的实际年级报名", "Pre-A: Grades 1–2; A: 3–5; B: 6–7; C: 8–9; D: 10–11; E: 12. Entry uses the student's grade after September 2026"), sourceIds: ["aseeder-australian-amc"] },
       { label: t("主卷形式", "Main-paper format"), value: t("30 题：25 道选择题、5 道整数答案题；满分 135，无答错扣分", "30 questions: 25 multiple choice and five integer answer; maximum 135, with no penalty for incorrect responses"), sourceIds: ["amt-australian-amc"] },
       { label: t("2026 AMT 标准价格", "2026 AMT standard price"), value: t("每名 9.30 澳元，可用组合折扣；中国合作赛区费用由本地报名系统另行显示", "AUD 9.30 per student, with bundle discounts; the China partner-region fee is displayed separately in its registration system"), sourceIds: ["amt-australian-amc", "aseeder-australian-amc"] },
+      { label: t("2024–2025 中国赛区原始分数线", "2024–2025 China raw-score boundaries"), value: t("十个实际年级的 Prize、High Distinction、Distinction、Credit、Proficiency 最低原始分，见本页“历年结果数据”中的年度表；只适用于对应届次的中国合作赛区", "Minimum raw scores for Prize, High Distinction, Distinction, Credit and Proficiency by each of ten actual grades appear in the annual tables below; they apply only to the corresponding China partner administration"), sourceIds: ["aseeder-australian-amc-2024-analysis", "aseeder-australian-amc-2025-analysis"] },
     ],
     dates: [
       { id: "australian-amc-2026-intl-paper", label: t("AMT 国际学校纸质卷报名截止", "AMT international printed-entry deadline"), date: "2026-06-26", region: t("一般国际学校路径", "General international-school route"), status: "historical", sourceIds: ["amt-australian-amc"] },
@@ -2799,7 +3103,7 @@ export const competitionProjects: ProjectRecord[] = [
         bullets: [t("AMT 赛事页提供各组别六题样题与完整解答；更多练习可使用官方 Problemo 学生平台或购买正版历年卷。", "The AMT contest page provides six-question sample sets with worked solutions for each division; further practice is available through the official Problemo student portal or licensed past papers.")],
       },
     ],
-    sourceIds: ["amt-australian-amc", "amt-competition-registration", "aseeder-australian-amc"],
+    sourceIds: ["amt-australian-amc", "amt-competition-registration", "aseeder-australian-amc", "aseeder-australian-amc-2024-analysis", "aseeder-australian-amc-2025-analysis"],
     relatedIds: ["amc8", "amc10", "amc12", "math-kangaroo"],
     searchTerms: ["Australian AMC", "澳洲AMC", "澳大利亚数学竞赛", "AMT", "Australian Mathematics Competition", "Peter O'Halloran"],
   },
@@ -2818,7 +3122,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "pending",
     cycle: "2027",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-09-16",
     facts: [
       { label: t("国际组织方式", "International structure"), value: t("袋鼠无国界协会组织成员国代表共同遴选年度题目；比赛在各国的具体实施由当地成员机构负责", "Association members jointly select the annual problems; each national member is responsible for local delivery"), sourceIds: ["aksf-regulations"] },
       { label: t("最近公布的中国分级（2026）", "Latest published China levels (2026)"), value: t("A：1–2 年级，B：3–4，C：5–6，D：7–8，E：9–10，F：11–12；可越级但不能降级", "A: Grades 1–2, B: 3–4, C: 5–6, D: 7–8, E: 9–10, F: 11–12; students may enter a higher but not a lower level"), status: "historical", sourceIds: ["aseeder-math-kangaroo"] },
@@ -2881,7 +3185,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026",
-    lastVerified: "2026-09-02",
+    lastVerified: "2026-09-16",
     facts: [
       { label: t("2026 日期与报名", "2026 dates and registration"), value: t("学校报名已开放；邮寄试卷的订购／报名截止为 10 月 14 日，PDF 配送截止为 10 月 21 日。独立考生报名尚未开放，官网预计约 9 月 16 日开放。美洲于 10 月 29 日比赛，其他地区于 10 月 30 日比赛。", "School registration is open. Shipped-exam orders/registration close October 14, and PDF delivery closes October 21. Independent registration is not yet open and is expected around September 16. The contest is held October 29 in the Americas and October 30 elsewhere."), status: "confirmed", sourceIds: ["cms-comc-current", "cms-competitions-2026"] },
       { label: t("付款截止表述冲突", "Conflicting payment deadlines"), value: t("同一官方页面一处写全部付款须在 10 月 22 日前完成，另一处写 PDF 付款截止 10 月 21 日、邮寄试卷付款截止 10 月 14 日；页面还把 2026 年 10 月 21 日误标为 Thursday。缴费前应在 CMS Portal 或向主办方确认。", "The same official page says in one place that all payments are due by October 22, but elsewhere gives October 21 for PDF delivery and October 14 for shipped exams; it also incorrectly labels October 21, 2026 as Thursday. Confirm the payment deadline in the CMS Portal or with the organiser before paying."), status: "conflict", sourceIds: ["cms-comc-current"] },
@@ -2948,9 +3252,86 @@ export const competitionProjects: ProjectRecord[] = [
         bullets: [t("CMS 免费公开 COMC 历年题目、解答和 Problem of the Week；先按 2.5 小时完成整卷，再对照官方解答检查证明表达。", "CMS freely publishes past COMC papers, solutions and Problem of the Week; students can write a full paper in 2.5 hours and then review proof presentation against official solutions.")],
       },
     ],
-    sourceIds: ["cms-comc-current", "cms-competitions-2026", "cms-comc-eligibility", "cms-comc-student-faq", "cms-comc-advancing", "cms-comc-changes-2026", "cms-comc-prizes-2026", "cms-comc-results-2025", "aseeder-comc"],
+    sourceIds: ["cms-comc-current", "cms-competitions-2026", "cms-comc-eligibility", "cms-comc-student-faq", "cms-comc-advancing", "cms-comc-advancing-archive", "cms-cmo-report-2008", "cms-cmo-report-2009", "cms-comc-changes-2026", "cms-comc-prizes-2026", "cms-comc-results-2025", "aseeder-comc"],
     relatedIds: ["csmc", "euclid", "china-league"],
     searchTerms: ["COMC", "Canadian Open Mathematics Challenge", "加拿大数学公开挑战", "Canadian Mathematical Society", "CMS", "CMOQR"],
+  },
+  {
+    id: "yau-noether-mathematics-award",
+    slug: "yau-noether-mathematics-award",
+    track: "competition",
+    title: t("丘成桐中学科学奖（诺特数学奖）", "S.-T. Yau High School Science Award: Noether Mathematics Award"),
+    shortTitle: "Noether Mathematics Award",
+    organizer: t("清华大学丘成桐数学科学中心", "Yau Mathematical Sciences Center, Tsinghua University"),
+    summary: t("面向全球高中女生的个人数学竞赛，以笔试和面试选拔；2026 年报名开放至 10 月 7 日。", "An individual mathematics competition for female high-school students worldwide, selected through a written test and interview; 2026 registration is open through 7 October."),
+    regions: ["Global", "Mainland China"],
+    gradeBands: ["Female high-school students"],
+    eligibilityTags: ["female-high-school-students", "global-entry", "individual-registration"],
+    formatTags: ["individual", "written-test", "interview", "online-registration"],
+    costBand: "free",
+    status: "confirmed",
+    cycle: "2026",
+    lastVerified: "2026-09-16",
+    alerts: [{
+      title: t("2026 报名已开放", "2026 registration is open"),
+      body: t("网上报名期为 2026 年 9 月 15 日至 10 月 7 日。公告没有给出截止的具体时刻或时区，应尽早在官方系统完成账户注册与信息提交。", "Online registration runs from 15 September through 7 October 2026. The notice gives no exact cutoff time or time zone, so complete account creation and submission early in the official system."),
+      sourceIds: ["yau-noether-2026-announcement", "yau-noether-portal"],
+      tone: "warning",
+    }],
+    facts: [
+      { label: t("参赛资格", "Eligibility"), value: t("全球在读女中学生，限高中女生参赛；本届公告未列国籍或居住地限制。", "Globally enrolled female secondary-school students, limited to high-school girls; the current notice states no nationality or residence restriction."), sourceIds: ["yau-noether-2026-announcement"] },
+      { label: t("中国学生路径", "Route for students in China"), value: t("中国大陆高中女生可直接在专属官网注册账户并在线提交信息；报名表按个人填写，本届公告未另行规定团队参赛。", "Female high-school students in mainland China may create an account and submit information on the dedicated official site; the form is individual and the current notice does not set a separate team-entry rule."), sourceIds: ["yau-noether-2026-announcement", "yau-noether-portal"] },
+      { label: t("竞赛形式", "Format"), value: t("笔试与面试；通过资格审核后通知入围总决赛名单。", "Written test and interview; finalists are notified after eligibility review."), sourceIds: ["yau-noether-2026-announcement"] },
+      { label: t("考查范围", "Scope"), value: t("中学数学全部内容，并覆盖分析、线性代数、几何与拓扑、概率统计与组合、数值／应用数学。", "All secondary-school mathematics plus analysis, linear algebra, geometry and topology, probability/statistics and combinatorics, and numerical/applied mathematics."), sourceIds: ["yau-noether-2026-announcement"] },
+      { label: t("费用", "Fee"), value: t("全程不收费；因家庭经济原因参赛困难者可按官网邮箱申请资助。", "No fee; students with financial difficulty may request assistance through the official email."), sourceIds: ["yau-noether-2026-announcement"] },
+      { label: t("奖项", "Awards"), value: t("按成绩颁发金、银、铜奖及优胜奖若干名；2026 公告未公布固定获奖人数或分数线。", "Gold, Silver, Bronze and Merit awards are granted according to results; the 2026 notice does not publish fixed award counts or score cutoffs."), sourceIds: ["yau-noether-2026-announcement"] },
+    ],
+    dates: [
+      { id: "yau-noether-2026-registration", label: t("网上报名", "Online registration"), date: "2026-09-15", endDate: "2026-10-07", region: t("全球高中女生", "Female high-school students worldwide"), status: "confirmed", sourceIds: ["yau-noether-2026-announcement", "yau-noether-portal"], note: t("官网未公布截止具体时刻或时区。", "The official notice does not state a cutoff time or time zone.") },
+      { id: "yau-noether-2026-review", label: t("资格审核", "Eligibility review"), date: "2026-10-08", endDate: "2026-10-13", status: "confirmed", sourceIds: ["yau-noether-2026-announcement"] },
+      { id: "yau-noether-2026-finalist-notice", label: t("入围总决赛通知", "Finalist notification"), date: "2026-10-14", status: "confirmed", sourceIds: ["yau-noether-2026-announcement"], note: t("通过报名系统及电子邮件通知。", "Notification is sent through the registration system and email.") },
+      { id: "yau-noether-2026-final", label: t("总决赛", "Final"), date: "2026-10-24", endDate: "2026-10-25", region: t("北京市第一〇一中学", "Beijing No. 101 Middle School"), status: "confirmed", sourceIds: ["yau-noether-2026-announcement"] },
+      { id: "yau-noether-2026-ceremony", label: t("颁奖典礼", "Award ceremony"), date: "2026-12-06", region: t("清华大学", "Tsinghua University"), status: "confirmed", sourceIds: ["yau-noether-2026-announcement"] },
+    ],
+    sections: [
+      {
+        id: "registration",
+        title: t("报名与中国学生", "Registration and students in China"),
+        bullets: [
+          t("使用专属官网注册账户并在线填写参赛信息；当前公告的报名期为 9 月 15 日至 10 月 7 日。", "Create an account on the dedicated official site and submit information online; the current registration window is 15 September to 7 October."),
+          t("中国大陆不需要通过常规丘成桐中学科学奖的研究报告报名入口。诺特数学奖有单独门户，适用于符合条件的高中女生。", "Students in mainland China do not use the regular Yau Award research-report portal. The Noether Mathematics Award has its own portal for eligible high-school girls."),
+          t("报名系统要求学校、证件、年级和在学证明等个人材料。公告没有规定团队参赛，报名表也按个人信息设计；不要以其他丘奖项目的 1—3 人研究团队规则代替本项目。", "The registration system asks for individual school, identity, grade and enrolment materials. The notice does not set a team-entry rule and the form is individual; do not substitute the 1–3-person research-team rules used by other Yau Award programs."),
+        ],
+      },
+      {
+        id: "format-and-scope",
+        title: t("形式与官方范围", "Format and official scope"),
+        intro: t("2026 公告给出笔试、面试和五个拓展方向；未公布题量、时长、权重、样卷或固定难度比例。", "The 2026 notice gives the written-test/interview structure and five extended areas; it does not publish item counts, timings, weights, sample papers or a fixed difficulty distribution."),
+        tables: [{
+          columns: [t("方向", "Area"), t("公告列明内容", "Content stated in the notice")],
+          rows: [
+            { cells: [t("基础", "Foundation"), t("中学数学全部内容", "All secondary-school mathematics")], sourceIds: ["yau-noether-2026-announcement"] },
+            { cells: [t("分析", "Analysis"), t("单变量与多变量微积分等数学分析内容", "Single- and multivariable calculus and related analysis")], sourceIds: ["yau-noether-2026-announcement"] },
+            { cells: [t("代数", "Algebra"), t("线性代数：矩阵、向量空间、线性算子、特征值、内积空间、二次型、张量积等", "Linear algebra: matrices, vector spaces, linear operators, eigenvalues, inner-product spaces, quadratic forms and tensor products")], sourceIds: ["yau-noether-2026-announcement"] },
+            { cells: [t("几何与拓扑", "Geometry and topology"), t("凸性、染色、三角剖分、欧拉数、图论、结与亏格，以及实数轴拓扑", "Convexity, colouring, triangulations, Euler characteristic, graph theory, knots and genus, plus topology of the real line")], sourceIds: ["yau-noether-2026-announcement"] },
+            { cells: [t("概率、统计与组合", "Probability, statistics and combinatorics"), t("概率模型、随机变量、随机游走与极限定理；抽样、估计、检验与回归；计数、容斥与递推", "Probability models, random variables, random walks and limit theorems; sampling, estimation, testing and regression; counting, inclusion-exclusion and recurrences")], sourceIds: ["yau-noether-2026-announcement"] },
+            { cells: [t("应用数学", "Applied mathematics"), t("数值分析、误差、插值、数值积分／微分、线性方程组、矩阵分解和特征值计算", "Numerical analysis, error, interpolation, numerical integration/differentiation, linear systems, matrix factorizations and eigenvalue computation")], sourceIds: ["yau-noether-2026-announcement"] },
+          ],
+        }],
+      },
+      {
+        id: "results-and-integrity",
+        title: t("奖项与诚信", "Awards and integrity"),
+        bullets: [
+          t("本届公告仅说明金、银、铜奖及优胜奖按成绩颁发若干名，没有公布固定奖项数量、百分位或原始分数线。", "The current notice says that Gold, Silver, Bronze and Merit awards are granted in unspecified numbers according to results; it does not publish fixed counts, percentiles or raw-score cutoffs."),
+          t("考试作弊、违反考试纪律或提交虚假材料将被取消成绩。", "Cheating, examination-discipline violations or false materials result in cancellation of the result."),
+          t("2026 诺特数学奖公告未说明 AI 使用规则。不要把常规丘成桐中学科学奖研究报告的 AI 规则套用于本项目；以本届报名系统和后续通知为准。", "The 2026 Noether notice does not state an AI-use rule. Do not apply the regular Yau Award research-report AI rules to this contest; follow the current registration system and later official notices."),
+        ],
+      },
+    ],
+    sourceIds: ["yau-noether-portal", "yau-noether-2026-announcement", "yau-noether-2026-parent-notice"],
+    relatedIds: ["yau-high-school-math-award", "china-league", "cmo"],
+    searchTerms: ["诺特数学奖", "Noether Mathematics Award", "丘成桐女子数学竞赛", "丘成桐中学科学奖", "女生数学竞赛", "Yau girls contest"],
   },
 ];
 
@@ -3004,12 +3385,35 @@ const expandThresholds = (
   };
 }));
 
+const cemcReconstructedTopQuarterNote = t(
+  "按 CEMC 官方年度结果册的排名表重建 eligible／official participants 前 25% 原始分边界；结果册未将其作为 Certificate of Distinction 的固定分数线公布。",
+  "Reconstructed from the CEMC annual results-booklet ranking as the raw-score boundary for the top 25% of eligible/official participants; the booklet does not publish it as a fixed Certificate of Distinction cutoff.",
+);
+
+const cemcHistoricalTopQuarter = (
+  projectId: string,
+  maxScore: string,
+  rows: Array<[string, string]>,
+) => expandThresholds(projectId, ["cemc-past-contests"], rows.map(([year, value]) => ({
+  year,
+  note: cemcReconstructedTopQuarterNote,
+  metrics: [metric("Top 25% 重建值", "Reconstructed Top-25% boundary", value, maxScore)],
+})));
+
 const amc8Thresholds = expandThresholds("amc8", ["maa-amc-dashboard"], [
   { year: "2027", sitting: "Mainland China", status: "confirmed", sourceIds: ["aseeder-amc8-2027"], metrics: [metric("六年级及以下 Achievement", "Achievement, grade 6 or below", "15", "25", t("中国承办页公布的 2027 年级奖项标准；其他赛区的证书名称和规则以当地当届结果页为准。", "The grade-based award standard published by the China organiser for 2027; certificate naming and rules in other regions follow their current local results page."))] },
-  { year: "2026", status: "confirmed", metrics: [metric("满分", "Perfect score", "25", "25"), metric("Top 1%／Distinguished Honor Roll", "Top 1% / Distinguished Honor Roll", "24", "25"), metric("Top 2.5%", "Top 2.5%", "23", "25"), metric("Top 5%／Certificate of Distinction", "Top 5% / Certificate of Distinction", "21", "25"), metric("Top 10%", "Top 10%", "19", "25"), metric("Top 25%", "Top 25%", "16", "25")] },
-  { year: "2025", metrics: [metric("Top 1%", "Top 1%", "23", "25"), metric("Top 2.5%", "Top 2.5%", "21", "25"), metric("Top 5%", "Top 5%", "19", "25"), metric("Top 10%", "Top 10%", "17", "25"), metric("Top 25%", "Top 25%", "14", "25")] },
-  { year: "2024", metrics: [metric("Top 1%", "Top 1%", "22", "25"), metric("Top 2.5%", "Top 2.5%", "20", "25"), metric("Top 5%", "Top 5%", "18", "25"), metric("Top 10%", "Top 10%", "16", "25"), metric("Top 25%", "Top 25%", "13", "25")] },
-  { year: "2023", metrics: [metric("Top 1%", "Top 1%", "21", "25"), metric("Top 2.5%", "Top 2.5%", "19", "25"), metric("Top 5%", "Top 5%", "17", "25"), metric("Top 10%", "Top 10%", "15", "25"), metric("Top 25%", "Top 25%", "13", "25")] },
+  { year: "2026", status: "confirmed", sourceIds: ["maa-amc8-2026-distribution"], metrics: [metric("满分", "Perfect score", "25", "25"), metric("Top 1%／Distinguished Honor Roll", "Top 1% / Distinguished Honor Roll", "24", "25"), metric("Top 2.5%", "Top 2.5%", "23", "25"), metric("Top 5%", "Top 5%", "21", "25"), metric("Top 10%", "Top 10%", "19", "25"), metric("Top 25%", "Top 25%", "16", "25")] },
+  { year: "2025", sourceIds: ["maa-amc8-2025-distribution"], metrics: [metric("Top 1%", "Top 1%", "23", "25"), metric("Top 2.5%", "Top 2.5%", "21", "25"), metric("Top 5%", "Top 5%", "19", "25"), metric("Top 10%", "Top 10%", "17", "25"), metric("Top 25%", "Top 25%", "14", "25")] },
+  { year: "2024", sourceIds: ["maa-amc8-2024-distribution"], metrics: [metric("Top 1%", "Top 1%", "22", "25"), metric("Top 2.5%", "Top 2.5%", "20", "25"), metric("Top 5%", "Top 5%", "18", "25"), metric("Top 10%", "Top 10%", "16", "25"), metric("Top 25%", "Top 25%", "13", "25")] },
+  { year: "2023", sourceIds: ["maa-amc8-2023-distribution"], metrics: [metric("Top 1%", "Top 1%", "21", "25"), metric("Top 2.5%", "Top 2.5%", "19", "25"), metric("Top 5%", "Top 5%", "17", "25"), metric("Top 10%", "Top 10%", "15", "25"), metric("Top 25%", "Top 25%", "13", "25")] },
+  {
+    year: "2011–2018",
+    sitting: "MAA report era",
+    status: "historical",
+    sourceIds: ["maa-archived-statistics-portal"],
+    note: t("原 MAA 报告时代统计门户列出的历史标准；仅说明当时的成绩报告口径，并非现行奖项规则。", "Historic standards listed by MAA's report-era statistics portal. They describe the reporting convention of that period and are not current award rules."),
+    metrics: [metric("六年级及以下 Achievement Roll", "Achievement Roll, grade 6 or below", "≥15", "25")],
+  },
   ...[
     ["2022", "22", "19"], ["2020", "21", "18"], ["2019", "23", "19"], ["2018", "19", "15"],
     ["2017", "20", "17"], ["2016", "22", "18"], ["2015", "21", "16"], ["2014", "23", "19"],
@@ -3025,15 +3429,27 @@ const amc8Thresholds = expandThresholds("amc8", ["maa-amc-dashboard"], [
 ]);
 
 const amc10AwardThresholds = expandThresholds("amc10", ["maa-amc-dashboard"], [
-  { year: "2025", sitting: "A", status: "confirmed", metrics: [metric("Top 1%／Distinguished Honor Roll", "Top 1% / Distinguished Honor Roll", "136.5", "150"), metric("Top 2.5%", "Top 2.5%", "124.5", "150"), metric("Top 5%／Certificate of Distinction", "Top 5% / Certificate of Distinction", "112.5", "150"), metric("Top 10%", "Top 10%", "94.5", "150"), metric("Top 25%", "Top 25%", "69", "150")] },
-  { year: "2025", sitting: "B", status: "confirmed", metrics: [metric("Top 1%／Distinguished Honor Roll", "Top 1% / Distinguished Honor Roll", "133.5", "150"), metric("Top 2.5%", "Top 2.5%", "120", "150"), metric("Top 5%／Certificate of Distinction", "Top 5% / Certificate of Distinction", "105", "150"), metric("Top 10%", "Top 10%", "87", "150"), metric("Top 25%", "Top 25%", "66", "150")] },
+  { year: "2025", sitting: "A", status: "confirmed", sourceIds: ["maa-amc10a-2025-distribution"], metrics: [metric("Top 1%／Distinguished Honor Roll", "Top 1% / Distinguished Honor Roll", "136.5", "150"), metric("Top 2.5%", "Top 2.5%", "124.5", "150"), metric("Top 5%", "Top 5%", "112.5", "150"), metric("Top 10%", "Top 10%", "94.5", "150"), metric("Top 25%", "Top 25%", "69", "150")] },
+  { year: "2025", sitting: "B", status: "confirmed", sourceIds: ["maa-amc10b-2025-distribution"], metrics: [metric("Top 1%／Distinguished Honor Roll", "Top 1% / Distinguished Honor Roll", "133.5", "150"), metric("Top 2.5%", "Top 2.5%", "120", "150"), metric("Top 5%", "Top 5%", "105", "150"), metric("Top 10%", "Top 10%", "87", "150"), metric("Top 25%", "Top 25%", "66", "150")] },
   { year: "2025", sitting: "A/B", status: "confirmed", sourceIds: ["maa-amc-policies"], metrics: [metric("八年级及以下 Achievement", "Achievement, grade 8 or below", "90", "150")] },
-  { year: "2024", sitting: "A", metrics: [metric("Top 1%", "Top 1%", "132", "150"), metric("Top 2.5%", "Top 2.5%", "118.5", "150"), metric("Top 5%", "Top 5%", "105", "150"), metric("Top 10%", "Top 10%", "88.5", "150"), metric("Top 25%", "Top 25%", "69", "150")] },
-  { year: "2024", sitting: "B", metrics: [metric("Top 1%", "Top 1%", "138", "150"), metric("Top 2.5%", "Top 2.5%", "126", "150"), metric("Top 5%", "Top 5%", "114", "150"), metric("Top 10%", "Top 10%", "99", "150"), metric("Top 25%", "Top 25%", "76.5", "150")] },
-  { year: "2023", sitting: "A", metrics: [metric("Top 1%", "Top 1%", "136.5", "150"), metric("Top 2.5%", "Top 2.5%", "123", "150"), metric("Top 5%", "Top 5%", "111", "150"), metric("Top 10%", "Top 10%", "97.5", "150"), metric("Top 25%", "Top 25%", "78", "150")] },
-  { year: "2023", sitting: "B", metrics: [metric("Top 1%", "Top 1%", "135", "150"), metric("Top 2.5%", "Top 2.5%", "123", "150"), metric("Top 5%", "Top 5%", "112.5", "150"), metric("Top 10%", "Top 10%", "100.5", "150"), metric("Top 25%", "Top 25%", "82.5", "150")] },
+  { year: "2024", sitting: "A", sourceIds: ["maa-amc10a-2024-distribution"], metrics: [metric("Top 1%", "Top 1%", "132", "150"), metric("Top 2.5%", "Top 2.5%", "118.5", "150"), metric("Top 5%", "Top 5%", "105", "150"), metric("Top 10%", "Top 10%", "88.5", "150"), metric("Top 25%", "Top 25%", "69", "150")] },
+  { year: "2024", sitting: "B", sourceIds: ["maa-amc10b-2024-distribution"], metrics: [metric("Top 1%", "Top 1%", "138", "150"), metric("Top 2.5%", "Top 2.5%", "126", "150"), metric("Top 5%", "Top 5%", "114", "150"), metric("Top 10%", "Top 10%", "99", "150"), metric("Top 25%", "Top 25%", "76.5", "150")] },
+  { year: "2023", sitting: "A", sourceIds: ["maa-amc10a-2023-distribution"], metrics: [metric("Top 1%", "Top 1%", "136.5", "150"), metric("Top 2.5%", "Top 2.5%", "123", "150"), metric("Top 5%", "Top 5%", "111", "150"), metric("Top 10%", "Top 10%", "97.5", "150"), metric("Top 25%", "Top 25%", "78", "150")] },
+  { year: "2023", sitting: "B", sourceIds: ["maa-amc10b-2023-distribution"], metrics: [metric("Top 1%", "Top 1%", "135", "150"), metric("Top 2.5%", "Top 2.5%", "123", "150"), metric("Top 5%", "Top 5%", "112.5", "150"), metric("Top 10%", "Top 10%", "100.5", "150"), metric("Top 25%", "Top 25%", "82.5", "150")] },
   { year: "2022", sitting: "A", sourceIds: ["maa-amc10a-2022-distribution"], metrics: [metric("Top 1%", "Top 1%", "120", "150"), metric("Top 2.5%", "Top 2.5%", "109.5", "150"), metric("Top 5%", "Top 5%", "99", "150"), metric("Top 10%", "Top 10%", "88.5", "150"), metric("Top 25%", "Top 25%", "69", "150")] },
   { year: "2022", sitting: "B", sourceIds: ["maa-amc10b-2022-distribution"], metrics: [metric("Top 1%", "Top 1%", "114", "150"), metric("Top 2.5%", "Top 2.5%", "106.5", "150"), metric("Top 5%", "Top 5%", "100.5", "150"), metric("Top 10%", "Top 10%", "90", "150"), metric("Top 25%", "Top 25%", "73.5", "150")] },
+  {
+    year: "2009–2019",
+    sitting: "MAA report era",
+    status: "historical",
+    sourceIds: ["maa-archived-statistics-portal"],
+    note: t("原 MAA 报告时代统计门户列出的历史标准；仅说明当时的成绩报告口径，并非现行奖项或国际赛区规则。", "Historic standards listed by MAA's report-era statistics portal. They describe the reporting convention of that period and are not current award or international-region rules."),
+    metrics: [
+      metric("八年级及以下 Achievement Roll", "Achievement Roll, grade 8 or below", "≥90", "150"),
+      metric("学校 Honor Roll（三人总分）", "School Honor Roll (top-three team total)", "≥400", "450"),
+      metric("学校 Merit Roll（三人总分）", "School Merit Roll (top-three team total)", "300–399", "450"),
+    ],
+  },
   ...[
     ["2021 Fall", "A", "117", "100.5"], ["2021 Fall", "B", "120", "100.5"],
     ["2021 Spring", "A", "132", "112.5"], ["2021 Spring", "B", "126", "108"],
@@ -3068,15 +3484,27 @@ const amc10AwardThresholds = expandThresholds("amc10", ["maa-amc-dashboard"], [
 ]);
 
 const amc12AwardThresholds = expandThresholds("amc12", ["maa-amc-dashboard"], [
-  { year: "2025", sitting: "A", status: "confirmed", metrics: [metric("Top 1%／Distinguished Honor Roll", "Top 1% / Distinguished Honor Roll", "150", "150"), metric("Top 2.5%", "Top 2.5%", "141", "150"), metric("Top 5%／Certificate of Distinction", "Top 5% / Certificate of Distinction", "127.5", "150"), metric("Top 10%", "Top 10%", "106.5", "150"), metric("Top 25%", "Top 25%", "78", "150")] },
-  { year: "2025", sitting: "B", status: "confirmed", metrics: [metric("Top 1%／Distinguished Honor Roll", "Top 1% / Distinguished Honor Roll", "145.5", "150"), metric("Top 2.5%", "Top 2.5%", "139.5", "150"), metric("Top 5%／Certificate of Distinction", "Top 5% / Certificate of Distinction", "127.5", "150"), metric("Top 10%", "Top 10%", "109.5", "150"), metric("Top 25%", "Top 25%", "81", "150")] },
+  { year: "2025", sitting: "A", status: "confirmed", sourceIds: ["maa-amc12a-2025-distribution"], metrics: [metric("Top 1%／Distinguished Honor Roll", "Top 1% / Distinguished Honor Roll", "150", "150"), metric("Top 2.5%", "Top 2.5%", "141", "150"), metric("Top 5%", "Top 5%", "127.5", "150"), metric("Top 10%", "Top 10%", "106.5", "150"), metric("Top 25%", "Top 25%", "78", "150")] },
+  { year: "2025", sitting: "B", status: "confirmed", sourceIds: ["maa-amc12b-2025-distribution"], metrics: [metric("Top 1%／Distinguished Honor Roll", "Top 1% / Distinguished Honor Roll", "145.5", "150"), metric("Top 2.5%", "Top 2.5%", "139.5", "150"), metric("Top 5%", "Top 5%", "127.5", "150"), metric("Top 10%", "Top 10%", "109.5", "150"), metric("Top 25%", "Top 25%", "81", "150")] },
   { year: "2025", sitting: "A/B", status: "confirmed", sourceIds: ["maa-amc-policies"], metrics: [metric("十年级及以下 Achievement", "Achievement, grade 10 or below", "90", "150")] },
-  { year: "2024", sitting: "A", metrics: [metric("Top 1%", "Top 1%", "133.5", "150"), metric("Top 2.5%", "Top 2.5%", "123", "150"), metric("Top 5%", "Top 5%", "108", "150"), metric("Top 10%", "Top 10%", "88.5", "150"), metric("Top 25%", "Top 25%", "66", "150")] },
-  { year: "2024", sitting: "B", metrics: [metric("Top 1%", "Top 1%", "139.5", "150"), metric("Top 2.5%", "Top 2.5%", "132", "150"), metric("Top 5%", "Top 5%", "118.5", "150"), metric("Top 10%", "Top 10%", "100.5", "150"), metric("Top 25%", "Top 25%", "75", "150")] },
-  { year: "2023", sitting: "A", metrics: [metric("Top 1%", "Top 1%", "136.5", "150"), metric("Top 2.5%", "Top 2.5%", "126", "150"), metric("Top 5%", "Top 5%", "112.5", "150"), metric("Top 10%", "Top 10%", "96", "150"), metric("Top 25%", "Top 25%", "73.5", "150")] },
-  { year: "2023", sitting: "B", metrics: [metric("Top 1%", "Top 1%", "139.5", "150"), metric("Top 2.5%", "Top 2.5%", "127.5", "150"), metric("Top 5%", "Top 5%", "114", "150"), metric("Top 10%", "Top 10%", "99", "150"), metric("Top 25%", "Top 25%", "76.5", "150")] },
+  { year: "2024", sitting: "A", sourceIds: ["maa-amc12a-2024-distribution"], metrics: [metric("Top 1%", "Top 1%", "133.5", "150"), metric("Top 2.5%", "Top 2.5%", "123", "150"), metric("Top 5%", "Top 5%", "108", "150"), metric("Top 10%", "Top 10%", "88.5", "150"), metric("Top 25%", "Top 25%", "66", "150")] },
+  { year: "2024", sitting: "B", sourceIds: ["maa-amc12b-2024-distribution"], metrics: [metric("Top 1%", "Top 1%", "139.5", "150"), metric("Top 2.5%", "Top 2.5%", "132", "150"), metric("Top 5%", "Top 5%", "118.5", "150"), metric("Top 10%", "Top 10%", "100.5", "150"), metric("Top 25%", "Top 25%", "75", "150")] },
+  { year: "2023", sitting: "A", sourceIds: ["maa-amc12a-2023-distribution"], metrics: [metric("Top 1%", "Top 1%", "136.5", "150"), metric("Top 2.5%", "Top 2.5%", "126", "150"), metric("Top 5%", "Top 5%", "112.5", "150"), metric("Top 10%", "Top 10%", "96", "150"), metric("Top 25%", "Top 25%", "73.5", "150")] },
+  { year: "2023", sitting: "B", sourceIds: ["maa-amc12b-2023-distribution"], metrics: [metric("Top 1%", "Top 1%", "139.5", "150"), metric("Top 2.5%", "Top 2.5%", "127.5", "150"), metric("Top 5%", "Top 5%", "114", "150"), metric("Top 10%", "Top 10%", "99", "150"), metric("Top 25%", "Top 25%", "76.5", "150")] },
   { year: "2022", sitting: "A", sourceIds: ["maa-amc12a-2022-distribution"], metrics: [metric("Top 1%", "Top 1%", "126", "150"), metric("Top 2.5%", "Top 2.5%", "115.5", "150"), metric("Top 5%", "Top 5%", "106.5", "150"), metric("Top 10%", "Top 10%", "96", "150"), metric("Top 25%", "Top 25%", "73.5", "150")] },
   { year: "2022", sitting: "B", sourceIds: ["maa-amc12b-2022-distribution"], metrics: [metric("Top 1%", "Top 1%", "129", "150"), metric("Top 2.5%", "Top 2.5%", "117", "150"), metric("Top 5%", "Top 5%", "103.5", "150"), metric("Top 10%", "Top 10%", "90", "150"), metric("Top 25%", "Top 25%", "70.5", "150")] },
+  {
+    year: "2009–2019",
+    sitting: "MAA report era",
+    status: "historical",
+    sourceIds: ["maa-archived-statistics-portal"],
+    note: t("原 MAA 报告时代统计门户列出的历史标准；仅说明当时的成绩报告口径，并非现行奖项或国际赛区规则。", "Historic standards listed by MAA's report-era statistics portal. They describe the reporting convention of that period and are not current award or international-region rules."),
+    metrics: [
+      metric("十年级及以下 Achievement Roll", "Achievement Roll, grade 10 or below", "≥90", "150"),
+      metric("学校 Honor Roll（三人总分）", "School Honor Roll (top-three team total)", "≥400", "450"),
+      metric("学校 Merit Roll（三人总分）", "School Merit Roll (top-three team total)", "300–399", "450"),
+    ],
+  },
   ...[
     ["2021 Fall", "A", "130.5", "111"], ["2021 Fall", "B", "130.5", "103.5"],
     ["2021 Spring", "A", "133.5", "114"], ["2021 Spring", "B", "132", "109.5"],
@@ -3178,15 +3606,77 @@ const aimeQualificationThresholds = [
 ];
 
 const aimeResultThresholds = expandThresholds("aime", ["maa-amc-dashboard"], [
-  { year: "2026", sitting: "AIME I", status: "historical", metrics: [metric("Top 1%", "Top 1%", "14", "15"), metric("Top 2.5%", "Top 2.5%", "14", "15"), metric("Top 5%", "Top 5%", "13", "15"), metric("Top 10%", "Top 10%", "11", "15"), metric("Top 25%", "Top 25%", "9", "15")] },
-  { year: "2026", sitting: "AIME II", status: "historical", metrics: [metric("Top 1%", "Top 1%", "15", "15"), metric("Top 2.5%", "Top 2.5%", "14", "15"), metric("Top 5%", "Top 5%", "13", "15"), metric("Top 10%", "Top 10%", "12", "15"), metric("Top 25%", "Top 25%", "9", "15")] },
-  { year: "2025", sitting: "AIME I", metrics: [metric("Top 1%", "Top 1%", "13", "15"), metric("Top 2.5%", "Top 2.5%", "12", "15"), metric("Top 5%", "Top 5%", "11", "15"), metric("Top 10%", "Top 10%", "10", "15"), metric("Top 25%", "Top 25%", "8", "15")] },
-  { year: "2025", sitting: "AIME II", metrics: [metric("Top 1%", "Top 1%", "13", "15"), metric("Top 2.5%", "Top 2.5%", "12", "15"), metric("Top 5%", "Top 5%", "12", "15"), metric("Top 10%", "Top 10%", "11", "15"), metric("Top 25%", "Top 25%", "8", "15")] },
-  { year: "2024", sitting: "AIME I", metrics: [metric("Top 1%", "Top 1%", "14", "15"), metric("Top 2.5%", "Top 2.5%", "13", "15"), metric("Top 5%", "Top 5%", "12", "15"), metric("Top 10%", "Top 10%", "10", "15"), metric("Top 25%", "Top 25%", "8", "15")] },
-  { year: "2024", sitting: "AIME II", metrics: [metric("Top 1%", "Top 1%", "14", "15"), metric("Top 2.5%", "Top 2.5%", "11", "15"), metric("Top 5%", "Top 5%", "10", "15"), metric("Top 10%", "Top 10%", "9", "15"), metric("Top 25%", "Top 25%", "7", "15")] },
-  { year: "2023", sitting: "AIME I", metrics: [metric("Top 1%", "Top 1%", "13", "15"), metric("Top 2.5%", "Top 2.5%", "11", "15"), metric("Top 5%", "Top 5%", "10", "15"), metric("Top 10%", "Top 10%", "8", "15"), metric("Top 25%", "Top 25%", "6", "15")] },
-  { year: "2023", sitting: "AIME II", metrics: [metric("Top 1%", "Top 1%", "13", "15"), metric("Top 2.5%", "Top 2.5%", "11", "15"), metric("Top 5%", "Top 5%", "9", "15"), metric("Top 10%", "Top 10%", "8", "15"), metric("Top 25%", "Top 25%", "5", "15")] },
+  { year: "2026", sitting: "AIME I", status: "historical", sourceIds: ["maa-aime1-2026-distribution"], metrics: [metric("Top 1%", "Top 1%", "14", "15"), metric("Top 2.5%", "Top 2.5%", "14", "15"), metric("Top 5%", "Top 5%", "13", "15"), metric("Top 10%", "Top 10%", "11", "15"), metric("Top 25%", "Top 25%", "9", "15")] },
+  { year: "2026", sitting: "AIME II", status: "historical", sourceIds: ["maa-aime2-2026-distribution"], metrics: [metric("Top 1%", "Top 1%", "15", "15"), metric("Top 2.5%", "Top 2.5%", "14", "15"), metric("Top 5%", "Top 5%", "13", "15"), metric("Top 10%", "Top 10%", "12", "15"), metric("Top 25%", "Top 25%", "9", "15")] },
+  { year: "2025", sitting: "AIME I", sourceIds: ["maa-aime1-2025-distribution"], metrics: [metric("Top 1%", "Top 1%", "13", "15"), metric("Top 2.5%", "Top 2.5%", "12", "15"), metric("Top 5%", "Top 5%", "11", "15"), metric("Top 10%", "Top 10%", "10", "15"), metric("Top 25%", "Top 25%", "8", "15")] },
+  { year: "2025", sitting: "AIME II", sourceIds: ["maa-aime2-2025-distribution"], metrics: [metric("Top 1%", "Top 1%", "13", "15"), metric("Top 2.5%", "Top 2.5%", "12", "15"), metric("Top 5%", "Top 5%", "12", "15"), metric("Top 10%", "Top 10%", "11", "15"), metric("Top 25%", "Top 25%", "8", "15")] },
+  { year: "2024", sitting: "AIME I", sourceIds: ["maa-aime1-2024-distribution"], metrics: [metric("Top 1%", "Top 1%", "14", "15"), metric("Top 2.5%", "Top 2.5%", "13", "15"), metric("Top 5%", "Top 5%", "12", "15"), metric("Top 10%", "Top 10%", "10", "15"), metric("Top 25%", "Top 25%", "8", "15")] },
+  { year: "2024", sitting: "AIME II", sourceIds: ["maa-aime2-2024-distribution"], metrics: [metric("Top 1%", "Top 1%", "14", "15"), metric("Top 2.5%", "Top 2.5%", "11", "15"), metric("Top 5%", "Top 5%", "10", "15"), metric("Top 10%", "Top 10%", "9", "15"), metric("Top 25%", "Top 25%", "7", "15")] },
+  { year: "2023", sitting: "AIME I", sourceIds: ["maa-aime1-2023-distribution"], metrics: [metric("Top 1%", "Top 1%", "13", "15"), metric("Top 2.5%", "Top 2.5%", "11", "15"), metric("Top 5%", "Top 5%", "10", "15"), metric("Top 10%", "Top 10%", "8", "15"), metric("Top 25%", "Top 25%", "6", "15")] },
+  { year: "2023", sitting: "AIME II", sourceIds: ["maa-aime2-2023-distribution"], metrics: [metric("Top 1%", "Top 1%", "13", "15"), metric("Top 2.5%", "Top 2.5%", "11", "15"), metric("Top 5%", "Top 5%", "9", "15"), metric("Top 10%", "Top 10%", "8", "15"), metric("Top 25%", "Top 25%", "5", "15")] },
 ]);
+
+const usamoUsajmoThresholds = [
+  ...expandThresholds("aime", ["maa-usamo-usajmo-2025-index-thresholds", "maa-usamo-usajmo-2025-index-chart"], [
+    {
+      year: "2025",
+      sitting: "USAMO／USAJMO invitation index",
+      note: t("指数 = AMC 原始分 + 10 × AIME 分数。这是 2025 年美国／加拿大选拔路径的历史线；不适用于中国赛区资格判断。", "Index = AMC raw score + 10 × AIME score. These are historical 2025 thresholds for the US/Canada selection route, not a China-region qualification rule."),
+      metrics: [
+        metric("USAJMO · AMC 10A + AIME I", "USAJMO · AMC 10A + AIME I", "233", "300"),
+        metric("USAJMO · AMC 10A + AIME II", "USAJMO · AMC 10A + AIME II", "233.5", "300"),
+        metric("USAJMO · AMC 10B + AIME I", "USAJMO · AMC 10B + AIME I", "243", "300"),
+        metric("USAJMO · AMC 10B + AIME II", "USAJMO · AMC 10B + AIME II", "241", "300"),
+        metric("USAMO · AMC 12A + AIME I", "USAMO · AMC 12A + AIME I", "237", "300"),
+        metric("USAMO · AMC 12A + AIME II", "USAMO · AMC 12A + AIME II", "242", "300"),
+        metric("USAMO · AMC 12B + AIME I", "USAMO · AMC 12B + AIME I", "249.5", "300"),
+        metric("USAMO · AMC 12B + AIME II", "USAMO · AMC 12B + AIME II", "251.5", "300"),
+      ],
+    },
+  ]),
+  ...[
+    ["2025", "USAMO", "36", "35", "30", "28", "22", "maa-usamo-2025-distribution"],
+    ["2025", "USAJMO", "42", "37", "35", "34", "25", "maa-usajmo-2025-distribution"],
+    ["2024", "USAMO", "35", "30", "26", "22", "16", "maa-usamo-2024-distribution"],
+    ["2024", "USAJMO", "35", "34", "30", "28", "22", "maa-usajmo-2024-distribution"],
+    ["2023", "USAMO", "42", "42", "39", "34", "28", "maa-usamo-2023-distribution"],
+    ["2023", "USAJMO", "38", "35", "34", "30", "25", "maa-usajmo-2023-distribution"],
+  ].flatMap(([year, sitting, top1, top25, top5, top10, top25Percent, sourceId]) => expandThresholds("aime", [sourceId], [{
+    year,
+    sitting: `${sitting} score distribution`,
+    note: t("MAA 官方成绩分布中的原始分数边界，不是 Gold／Silver／Bronze 或 Top Honors／Honors 奖项线。", "Raw-score boundaries from MAA's official score distribution, not Gold/Silver/Bronze or Top Honors/Honors award cutoffs."),
+    metrics: [
+      metric("Top 1%", "Top 1%", top1, "42"),
+      metric("Top 2.5%", "Top 2.5%", top25, "42"),
+      metric("Top 5%", "Top 5%", top5, "42"),
+      metric("Top 10%", "Top 10%", top10, "42"),
+      metric("Top 25%", "Top 25%", top25Percent, "42"),
+    ],
+  }])),
+  ...expandThresholds("aime", ["maa-usamo-2026-awards", "maa-usajmo-2026-awards"], [
+    {
+      year: "2026",
+      sitting: "USAMO／USAJMO awards",
+      note: t("奖项名单未公布 Gold／Silver／Bronze 或 Top Honors／Honors 的统一原始分数线。", "The award lists do not publish common raw-score cutoffs for Gold/Silver/Bronze or Top Honors/Honors."),
+      metrics: [
+        metric("USAMO Honorable Mention", "USAMO Honorable Mention", "未设 / Not awarded", undefined, t("MAA 因当届分数分布未授予 USAMO Honorable Mention。", "MAA did not award USAMO Honorable Mention because of that year's score distribution.")),
+        metric("USAJMO Honorable Mention", "USAJMO Honorable Mention", "14", "42"),
+      ],
+    },
+  ]),
+  ...[
+    ["2025", "maa-usamo-2025-awards", "maa-usajmo-2025-awards"],
+    ["2024", "maa-usamo-2024-awards", "maa-usajmo-2024-awards"],
+  ].flatMap(([year, usamoSourceId, usajmoSourceId]) => expandThresholds("aime", [usamoSourceId, usajmoSourceId], [{
+    year,
+    sitting: "USAMO／USAJMO awards",
+    note: t("奖项名单未公布 Gold／Silver／Bronze 或 Top Honors／Honors 的统一原始分数线。", "The award lists do not publish common raw-score cutoffs for Gold/Silver/Bronze or Top Honors/Honors."),
+    metrics: [
+      metric("USAMO Honorable Mention", "USAMO Honorable Mention", "14", "42", undefined),
+      metric("USAJMO Honorable Mention", "USAJMO Honorable Mention", "14", "42", undefined),
+    ],
+  }])),
+];
 
 const waterlooThresholds = [
   ...expandThresholds("euclid", ["cemc-euclid-2026-results"], [
@@ -3195,11 +3685,17 @@ const waterlooThresholds = [
     { year: "2024", sourceIds: ["cemc-euclid-2024-results"], note: t("CEMC 结果册公布 eligible contestants 的按分排名，但未直接写出 Distinction 原始分线。按 23,327 名 eligible contestants 的前 25% 与排名表重建，69 分为边界；不能视为主办方直接公布的固定分数线。", "The CEMC booklet gives a score ranking for eligible contestants but does not state a raw Distinction cutoff. Reconstructed from the top quarter of 23,327 eligible contestants and the ranking table, the boundary is 69; it is not an organiser-published fixed cutoff."), metrics: [metric("Top 25% 重建值", "Reconstructed Top-25% boundary", "69", "100")] },
     { year: "2023", sourceIds: ["cemc-euclid-2023-results"], note: t("CEMC 结果册公布 eligible contestants 的按分排名，但未直接写出 Distinction 原始分线。按 20,357 名 eligible contestants 的前 25% 与排名表重建，65 分为边界；不能视为主办方直接公布的固定分数线。", "The CEMC booklet gives a score ranking for eligible contestants but does not state a raw Distinction cutoff. Reconstructed from the top quarter of 20,357 eligible contestants and the ranking table, the boundary is 65; it is not an organiser-published fixed cutoff."), metrics: [metric("Top 25% 重建值", "Reconstructed Top-25% boundary", "65", "100")] },
   ]),
+  ...cemcHistoricalTopQuarter("euclid", "100", [
+    ["2022", "68"], ["2021", "70"], ["2019", "68"], ["2018", "64"], ["2017", "64"], ["2016", "65"],
+  ]),
   ...expandThresholds("pascal", ["cemc-pcf-2026-results"], [
     { year: "2026", status: "confirmed", metrics: [metric("Certificate of Distinction", "Certificate of Distinction cutoff", "110", "150"), metric("School Champion Medal", "School Champion Medal cutoff", "93", "150")] },
     { year: "2025", sourceIds: ["cemc-past-contests"], metrics: [metric("Certificate of Distinction", "Certificate of Distinction cutoff", "112", "150"), metric("School Champion Medal", "School Champion Medal cutoff", "94", "150")] },
     { year: "2024", sourceIds: ["cemc-pcf-2024-results"], note: t("CEMC 结果册公布 eligible contestants 的按分排名，但未直接写出 Distinction 原始分线。按 22,318 名 eligible contestants 的前 25% 与排名表重建，103 分为边界；不能视为主办方直接公布的固定分数线。", "The CEMC booklet gives a score ranking for eligible contestants but does not state a raw Distinction cutoff. Reconstructed from the top quarter of 22,318 eligible contestants and the ranking table, the boundary is 103; it is not an organiser-published fixed cutoff."), metrics: [metric("Top 25% 重建值", "Reconstructed Top-25% boundary", "103", "150")] },
     { year: "2023", sourceIds: ["cemc-pcf-2023-results"], note: t("CEMC 结果册公布 eligible contestants 的按分排名，但未直接写出 Distinction 原始分线。按 19,722 名 eligible contestants 的前 25% 与排名表重建，104 分为边界；不能视为主办方直接公布的固定分数线。", "The CEMC booklet gives a score ranking for eligible contestants but does not state a raw Distinction cutoff. Reconstructed from the top quarter of 19,722 eligible contestants and the ranking table, the boundary is 104; it is not an organiser-published fixed cutoff."), metrics: [metric("Top 25% 重建值", "Reconstructed Top-25% boundary", "104", "150")] },
+  ]),
+  ...cemcHistoricalTopQuarter("pascal", "150", [
+    ["2022", "102"], ["2021", "118"], ["2020", "114"], ["2019", "104"], ["2018", "105"], ["2017", "112"], ["2016", "101"],
   ]),
   ...expandThresholds("cayley", ["cemc-pcf-2026-results"], [
     { year: "2026", status: "confirmed", metrics: [metric("Certificate of Distinction", "Certificate of Distinction cutoff", "106", "150"), metric("School Champion Medal", "School Champion Medal cutoff", "90", "150")] },
@@ -3213,11 +3709,17 @@ const waterlooThresholds = [
       metrics: [metric("Top 25% 重建值", "Reconstructed Top 25% boundary", value, "150")],
     })),
   ]),
+  ...cemcHistoricalTopQuarter("cayley", "150", [
+    ["2022", "104"], ["2021", "114"], ["2020", "114"], ["2019", "112"], ["2018", "106"], ["2017", "103"], ["2016", "106"],
+  ]),
   ...expandThresholds("fermat", ["cemc-pcf-2026-results"], [
     { year: "2026", status: "confirmed", metrics: [metric("Certificate of Distinction", "Certificate of Distinction cutoff", "102", "150", t("采用 CEMC 2026 年 5 月 26 日修正版；早期版本曾列 103。", "Uses CEMC's 26 May 2026 revision; an earlier version listed 103.")), metric("School Champion Medal", "School Champion Medal cutoff", "88", "150")] },
     { year: "2025", sourceIds: ["cemc-past-contests"], metrics: [metric("Certificate of Distinction", "Certificate of Distinction cutoff", "110", "150"), metric("School Champion Medal", "School Champion Medal cutoff", "92", "150")] },
     { year: "2024", sourceIds: ["cemc-pcf-2024-results"], note: t("CEMC 结果册公布 eligible contestants 的按分排名，但未直接写出 Distinction 原始分线。按 16,702 名 eligible contestants 的前 25% 与排名表重建，107 分为边界；不能视为主办方直接公布的固定分数线。", "The CEMC booklet gives a score ranking for eligible contestants but does not state a raw Distinction cutoff. Reconstructed from the top quarter of 16,702 eligible contestants and the ranking table, the boundary is 107; it is not an organiser-published fixed cutoff."), metrics: [metric("Top 25% 重建值", "Reconstructed Top-25% boundary", "107", "150")] },
     { year: "2023", sourceIds: ["cemc-pcf-2023-results"], note: t("CEMC 结果册公布 eligible contestants 的按分排名，但未直接写出 Distinction 原始分线。按 13,568 名 eligible contestants 的前 25% 与排名表重建，102 分为边界；不能视为主办方直接公布的固定分数线。", "The CEMC booklet gives a score ranking for eligible contestants but does not state a raw Distinction cutoff. Reconstructed from the top quarter of 13,568 eligible contestants and the ranking table, the boundary is 102; it is not an organiser-published fixed cutoff."), metrics: [metric("Top 25% 重建值", "Reconstructed Top-25% boundary", "102", "150")] },
+  ]),
+  ...cemcHistoricalTopQuarter("fermat", "150", [
+    ["2022", "100"], ["2021", "112"], ["2020", "106"], ["2019", "108"], ["2018", "101"], ["2017", "104"], ["2016", "106"],
   ]),
 ];
 
@@ -3277,34 +3779,67 @@ const bmo1Thresholds = expandThresholds("bmo1", ["ukmt-bmo1-awards", "bmos-bmo-a
     metrics: [metric("中国区 BMO2 资格线", "Mainland China BMO2 qualification cutoff", "7", "60")],
     note: t("中国承办页公布“2026 BMO Round 2 cutoff scores: 7+”。该线仅用于中国承办路径，不替代 UKMT 按年级公布的英国自动晋级线。", "The China organiser publishes '2026 BMO Round 2 cutoff scores: 7+'. This applies only to the China administration route and does not replace UKMT's UK automatic-qualification cutoffs by year group."),
   },
-  ...[
-    ["2025", "7", "18", "31", "30", "27", "27", "31", "37", "48"],
-    ["2024", "10", "26", "43", "40", "38", "38", "43", "48", "50"],
-    ["2023", "13", "30", "43", "42", "39", "37", "44", "49", "58"],
-    ["2022", "12", "25", "38", "36", "34", "33", "39", "43", "51"],
-    ["2021", "11", "21", "33", "32", "31", "29", "33", "38", "45"],
-    ["2020", "10", "18", "27", "26", "24", "", "29", "34", "40"],
-    ["2018", "9", "22", "35", "32", "29", "26", "35", "41", "48"],
-  ].map(([year, merit, distinction, y13, y12, y11, y10, bronze, silver, gold]) => ({
-    year,
-    status: year === "2025" ? "confirmed" as const : "historical" as const,
-    note: year === "2020" ? t("2020 为特殊 50 分卷；UKMT 表未给 Year 10 及以下列出 BMO2 自动晋级线。其他所列年份为 60 分卷。", "2020 used a special 50-point paper; UKMT lists no automatic BMO2 threshold for Year 10 and below. The other listed years use 60-point papers.") : undefined,
+  {
+    year: "2025",
+    sourceIds: ["ukmt-bmo1-awards", "bmos-bmo1-2025-markers-report"],
+    status: "confirmed",
+    note: t("UKMT 奖项页给出各枚牌的原始分线；BMOS 阅卷报告另给出“Medal and book prize”合并线。", "The UKMT awards page gives raw cutoffs for each medal; the BMOS markers' report separately gives a combined Medal and book-prize threshold."),
     metrics: [
-      metric("Merit", "Merit cutoff", merit, year === "2020" ? "50" : "60"),
-      metric("Distinction", "Distinction cutoff", distinction, year === "2020" ? "50" : "60"),
-      metric("BMO2 Year 13", "BMO2 Year 13 cutoff", y13, year === "2020" ? "50" : "60"),
-      metric("BMO2 Year 12", "BMO2 Year 12 cutoff", y12, year === "2020" ? "50" : "60"),
-      metric("BMO2 Year 11", "BMO2 Year 11 cutoff", y11, year === "2020" ? "50" : "60"),
-      ...(y10 ? [metric("BMO2 Year 10 及以下", "BMO2 Year 10 and below cutoff", y10, year === "2020" ? "50" : "60")] : [metric("BMO2 Year 10 及以下", "BMO2 Year 10 and below cutoff", "不适用 / N/A")]),
-      metric("Bronze medal", "Bronze medal cutoff", bronze, year === "2020" ? "50" : "60"),
-      metric("Silver medal", "Silver medal cutoff", silver, year === "2020" ? "50" : "60"),
-      metric("Gold medal", "Gold medal cutoff", gold, year === "2020" ? "50" : "60"),
+      metric("Merit", "Merit cutoff", "7", "60"), metric("Distinction", "Distinction cutoff", "18", "60"), metric("Bronze medal", "Bronze medal cutoff", "31", "60"), metric("Silver medal", "Silver medal cutoff", "37", "60"), metric("Gold medal", "Gold medal cutoff", "48", "60"), metric("Medal and book prize", "Medal and book-prize cutoff", "31", "60"),
+      metric("BMO2 Year 13", "BMO2 Year 13 cutoff", "31", "60"), metric("BMO2 Year 12", "BMO2 Year 12 cutoff", "30", "60"), metric("BMO2 Year 11 及以下", "BMO2 Year 11 and below cutoff", "27", "60"),
     ],
-  })),
+  },
+  {
+    year: "2024",
+    sourceIds: ["ukmt-bmo1-awards", "bmos-bmo1-2024-markers-report"],
+    note: t("UKMT 奖项页给出各枚牌的原始分线；BMOS 阅卷报告另给出“Medal and book prize”合并线。", "The UKMT awards page gives raw cutoffs for each medal; the BMOS markers' report separately gives a combined Medal and book-prize threshold."),
+    metrics: [
+      metric("Merit", "Merit cutoff", "10", "60"), metric("Distinction", "Distinction cutoff", "26", "60"), metric("Bronze medal", "Bronze medal cutoff", "43", "60"), metric("Silver medal", "Silver medal cutoff", "48", "60"), metric("Gold medal", "Gold medal cutoff", "50", "60"), metric("Medal and book prize", "Medal and book-prize cutoff", "43", "60"),
+      metric("BMO2 Year 13", "BMO2 Year 13 cutoff", "43", "60"), metric("BMO2 Year 12", "BMO2 Year 12 cutoff", "40", "60"), metric("BMO2 Year 11 及以下", "BMO2 Year 11 and below cutoff", "38", "60"),
+    ],
+  },
+  {
+    year: "2023",
+    metrics: [
+      metric("Merit", "Merit cutoff", "13", "60"), metric("Distinction", "Distinction cutoff", "30", "60"), metric("Bronze medal", "Bronze medal cutoff", "44", "60"), metric("Silver medal", "Silver medal cutoff", "49", "60"), metric("Gold medal", "Gold medal cutoff", "58", "60"), metric("Medal and book prize", "Medal and book-prize cutoff", "44", "60"),
+      metric("BMO2 Year 13", "BMO2 Year 13 cutoff", "43", "60"), metric("BMO2 Year 12", "BMO2 Year 12 cutoff", "42", "60"), metric("BMO2 Year 11", "BMO2 Year 11 cutoff", "39", "60"), metric("BMO2 Year 10 及以下", "BMO2 Year 10 and below cutoff", "37", "60"),
+    ],
+  },
+  {
+    year: "2022",
+    metrics: [
+      metric("Merit", "Merit cutoff", "12", "60"), metric("Distinction", "Distinction cutoff", "25", "60"), metric("Bronze medal", "Bronze medal cutoff", "39", "60"), metric("Silver medal", "Silver medal cutoff", "43", "60"), metric("Gold medal", "Gold medal cutoff", "51", "60"), metric("Medal and book prize", "Medal and book-prize cutoff", "39", "60"),
+      metric("BMO2 Year 13", "BMO2 Year 13 cutoff", "38", "60"), metric("BMO2 Year 12", "BMO2 Year 12 cutoff", "36", "60"), metric("BMO2 Year 11", "BMO2 Year 11 cutoff", "34", "60"), metric("BMO2 Year 10 及以下", "BMO2 Year 10 and below cutoff", "33", "60"),
+    ],
+  },
+  {
+    year: "2021",
+    metrics: [
+      metric("Merit", "Merit cutoff", "11", "60"), metric("Distinction", "Distinction cutoff", "21", "60"), metric("Bronze medal", "Bronze medal cutoff", "33", "60"), metric("Silver medal", "Silver medal cutoff", "38", "60"), metric("Gold medal", "Gold medal cutoff", "45", "60"), metric("Medal and book prize", "Medal and book-prize cutoff", "33", "60"),
+      metric("BMO2 Year 13", "BMO2 Year 13 cutoff", "33", "60"), metric("BMO2 Year 12", "BMO2 Year 12 cutoff", "32", "60"), metric("BMO2 Year 11", "BMO2 Year 11 cutoff", "31", "60"), metric("BMO2 Year 10 及以下", "BMO2 Year 10 and below cutoff", "29", "60"),
+    ],
+  },
+  {
+    year: "2020",
+    note: t("2020 为特殊 50 分卷；Year 10 当届无 BMO2 自动晋级线。", "2020 used a special 50-point paper; there was no Year 10 automatic BMO2 qualification threshold that year."),
+    metrics: [
+      metric("Merit", "Merit cutoff", "10", "50"), metric("Distinction", "Distinction cutoff", "18", "50"), metric("Bronze medal", "Bronze medal cutoff", "29", "50"), metric("Silver medal", "Silver medal cutoff", "34", "50"), metric("Gold medal", "Gold medal cutoff", "40", "50"), metric("BMO2 Year 13", "BMO2 Year 13 cutoff", "27", "50"), metric("BMO2 Year 12", "BMO2 Year 12 cutoff", "26", "50"), metric("BMO2 Year 11", "BMO2 Year 11 cutoff", "24", "50"),
+    ],
+  },
   {
     year: "2019",
-    metrics: [metric("BMO2 全年级", "BMO2 all-year cutoff", "40", "60")],
-    note: t("公开报告给出统一 BMO2 线；未见当届证书或奖牌线。", "The public report gives a single BMO2 cutoff; current certificate and medal thresholds were not located."),
+    metrics: [
+      metric("Merit", "Merit range", "9–21", "60"), metric("Distinction", "Distinction cutoff", "22", "60"), metric("Bronze medal", "Bronze medal range", "35–40", "60"), metric("Silver medal", "Silver medal range", "41–47", "60"), metric("Gold medal", "Gold medal cutoff", "48", "60"),
+      metric("BMO2 Year 13", "BMO2 Year 13 cutoff", "35", "60"), metric("BMO2 Year 12", "BMO2 Year 12 cutoff", "32", "60"), metric("BMO2 Year 11", "BMO2 Year 11 cutoff", "29", "60"), metric("BMO2 Year 10 及以下", "BMO2 Year 10 and below cutoff", "26", "60"),
+    ],
+  },
+  {
+    year: "2018",
+    note: t("当届官方材料未公布 Merit 原始分数线。", "The official material for this year does not publish a Merit raw-score threshold."),
+    metrics: [
+      metric("Distinction", "Distinction cutoff", "28", "60"), metric("Bronze medal", "Bronze medal range", "42–49", "60"), metric("Silver medal", "Silver medal range", "50–58", "60"), metric("Gold medal", "Gold medal cutoff", "59", "60"),
+      metric("BMO2 Year 13", "BMO2 Year 13 cutoff", "47", "60"), metric("BMO2 Year 12", "BMO2 Year 12 cutoff", "42", "60"), metric("BMO2 Year 11", "BMO2 Year 11 cutoff", "37", "60"), metric("BMO2 Year 10 及以下", "BMO2 Year 10 and below cutoff", "35", "60"),
+    ],
   },
   {
     year: "2017",
@@ -3585,16 +4120,63 @@ const awardAvailabilityThresholds = [
       year: "2026",
       sitting: "年级／国家或地区",
       status: "confirmed",
-      note: t("AMT 按年级与国家／地区分别形成奖项线；中国学生不应套用澳大利亚州或其他国家的原始分。", "AMT sets award boundaries separately by year group and country/region; students in China should not reuse raw scores from an Australian state or another country."),
+      note: t("AMT 按年级与国家／地区分别形成奖项线；中国学生不应套用澳大利亚州或其他国家的原始分。2024–2025 中国赛区已另列于本页历史档案。", "AMT sets award boundaries separately by year group and country/region; students in China should not reuse raw scores from an Australian state or another country. The 2024–2025 China-region values are separately listed in this archive."),
       metrics: [
         metric("Prize", "Prize", "通常每年级／地区不超过约每 300 人 1 名 / Generally ≤1 per 300"),
         metric("High Distinction", "High Distinction", "前 3%；Senior 前 5% / Top 3%; Senior top 5%"),
         metric("Distinction", "Distinction", "前 20%；Senior 前 25% / Top 20%; Senior top 25%"),
         metric("Credit", "Credit", "前 55%；Senior 前 60% / Top 55%; Senior top 60%"),
-        metric("统一原始分数线", "Single raw-score cutoff", "官方不发布 / Not published"),
+        metric("跨地区统一原始分数线", "Cross-region unified raw-score cutoff", "官方不发布 / Not published"),
       ],
     },
   ]),
+];
+
+const australianAmcChinaThresholds = [
+  ...[
+    ["Grade 3", "124", "102", "75", "56", "32"],
+    ["Grade 4", "132", "110", "83", "66", "32"],
+    ["Grade 5", "135", "118", "92", "75", "32"],
+    ["Grade 6", "128", "111", "91", "74", "32"],
+    ["Grade 7", "128", "111", "94", "79", "32"],
+    ["Grade 8", "130", "111", "89", "73", "32"],
+    ["Grade 9", "130", "112", "91", "74", "32"],
+    ["Grade 10", "122", "101", "80", "62", "32"],
+    ["Grade 11", "127", "109", "84", "65", "32"],
+    ["Grade 12", "130", "116", "90", "67", "32"],
+  ].flatMap(([grade, prize, highDistinction, distinction, credit, proficiency]) => expandThresholds("australian-amc", ["aseeder-australian-amc-2025-analysis"], [{
+    year: "2025",
+    sitting: `Mainland China · ${grade}`,
+    metrics: [
+      metric("Prize", "Prize", prize, "135", t("2025 中国合作赛区按实际年级发布的最低原始分；不是 AMT 全球或其他赛区的奖项线。", "Minimum raw score published for this grade in the 2025 China partner region; not an AMT global or other-region award boundary.")),
+      metric("High Distinction", "High Distinction", highDistinction, "135"),
+      metric("Distinction", "Distinction", distinction, "135"),
+      metric("Credit", "Credit", credit, "135"),
+      metric("Proficiency", "Proficiency", proficiency, "135"),
+    ],
+  }])),
+  ...[
+    ["Grade 3", "126", "104", "83", "63", "32"],
+    ["Grade 4", "130", "111", "93", "76", "32"],
+    ["Grade 5", "125", "112", "91", "71", "32"],
+    ["Grade 6", "125", "112", "94", "75", "32"],
+    ["Grade 7", "128", "111", "90", "72", "32"],
+    ["Grade 8", "128", "111", "91", "73", "32"],
+    ["Grade 9", "119", "96", "73", "56", "32"],
+    ["Grade 10", "123", "97", "74", "57", "32"],
+    ["Grade 11", "123", "99", "74", "55", "32"],
+    ["Grade 12", "126", "110", "90", "62", "32"],
+  ].flatMap(([grade, prize, highDistinction, distinction, credit, proficiency]) => expandThresholds("australian-amc", ["aseeder-australian-amc-2024-analysis"], [{
+    year: "2024",
+    sitting: `Mainland China · ${grade}`,
+    metrics: [
+      metric("Prize", "Prize", prize, "135", t("2024 中国合作赛区按实际年级发布的最低原始分；不是 AMT 全球或其他赛区的奖项线。", "Minimum raw score published for this grade in the 2024 China partner region; not an AMT global or other-region award boundary.")),
+      metric("High Distinction", "High Distinction", highDistinction, "135"),
+      metric("Distinction", "Distinction", distinction, "135"),
+      metric("Credit", "Credit", credit, "135"),
+      metric("Proficiency", "Proficiency", proficiency, "135"),
+    ],
+  }])),
 ];
 
 const chinaLeagueThresholds = expandThresholds("china-league", ["imms-league-archive"], [
@@ -3609,11 +4191,27 @@ const chinaLeagueThresholds = expandThresholds("china-league", ["imms-league-arc
   })),
 ]);
 
-const csmcThresholds = expandThresholds("csmc", ["cemc-csimc"], [
-  { year: "2025", status: "confirmed", metrics: [metric("Certificate of Distinction", "Certificate of Distinction cutoff", "35", "60"), metric("School Champion Medal", "School Champion Medal cutoff", "28", "60"), metric("平均分", "Mean score", "28.6", "60")] },
+const csmcThresholds = [
+  ...expandThresholds("csmc", ["cemc-csimc"], [
+  { year: "2025", status: "confirmed", sourceIds: ["cemc-csimc-2025-results"], metrics: [metric("Certificate of Distinction", "Certificate of Distinction cutoff", "35", "60"), metric("School Champion Medal", "School Champion Medal cutoff", "28", "60"), metric("平均分", "Mean score", "28.6", "60")] },
   { year: "2024", sourceIds: ["cemc-csimc-2024-results"], metrics: [metric("Certificate of Distinction", "Certificate of Distinction cutoff", "36", "60"), metric("School Champion Medal", "School Champion Medal cutoff", "30", "60"), metric("平均分", "Mean score", "30.7", "60")] },
   { year: "2023", sourceIds: ["cemc-csimc-2023-results"], note: t("CEMC 结果册直接公布平均分；未直接写出 Distinction 或 School Champion Medal 原始分线。Top 25% 值按 14,325 名 official participants 的排名表重建，不能视为主办方直接公布的固定奖项线。", "The CEMC booklet directly gives the mean but does not state raw Certificate of Distinction or School Champion Medal cutoffs. The Top-25% value is reconstructed from the ranking of 14,325 official participants and is not an organiser-published fixed award cutoff."), metrics: [metric("平均分", "Mean score", "25.2", "60"), metric("Top 25% 重建值", "Reconstructed Top-25% boundary", "33", "60")] },
-]);
+  ]),
+  ...cemcHistoricalTopQuarter("csmc", "60", [
+    ["2022", "34"], ["2021", "32"], ["2020", "42"], ["2019", "37"], ["2018", "35"], ["2017", "39"], ["2016", "38"],
+  ]),
+];
+
+const cimcThresholds = [
+  ...expandThresholds("cimc", ["cemc-csimc"], [
+    { year: "2025", status: "confirmed", sourceIds: ["cemc-csimc-2025-results"], metrics: [metric("Certificate of Distinction", "Certificate of Distinction cutoff", "35", "60"), metric("School Champion Medal", "School Champion Medal cutoff", "29", "60")] },
+    { year: "2024", sourceIds: ["cemc-csimc-2024-results"], metrics: [metric("Certificate of Distinction", "Certificate of Distinction cutoff", "35", "60"), metric("School Champion Medal", "School Champion Medal cutoff", "27", "60")] },
+    { year: "2023", sourceIds: ["cemc-csimc-2023-results"], note: cemcReconstructedTopQuarterNote, metrics: [metric("Top 25% 重建值", "Reconstructed Top-25% boundary", "36", "60")] },
+  ]),
+  ...cemcHistoricalTopQuarter("cimc", "60", [
+    ["2022", "38"], ["2021", "37"], ["2020", "41"], ["2019", "36"], ["2018", "40"], ["2017", "43"], ["2016", "40"],
+  ]),
+];
 
 const fghThresholds = [
   ...expandThresholds("fryer", ["cemc-fgh-2026-results"], [
@@ -3622,11 +4220,17 @@ const fghThresholds = [
     { year: "2024", sourceIds: ["cemc-fgh-2024-results"], note: t("CEMC 结果册直接公布平均分；未直接写出 Distinction 或 School Champion Medal 原始分线。Top 25% 值按 5,016 名 eligible contestants 的排名表重建，不能视为主办方直接公布的固定奖项线。", "The CEMC booklet directly gives the mean but does not state raw Certificate of Distinction or School Champion Medal cutoffs. The Top-25% value is reconstructed from the ranking of 5,016 eligible contestants and is not an organiser-published fixed award cutoff."), metrics: [metric("平均分", "Mean score", "22.7", "40"), metric("Top 25% 重建值", "Reconstructed Top-25% boundary", "28", "40")] },
     { year: "2023", sourceIds: ["cemc-fgh-2023-results"], note: t("CEMC 结果册直接公布平均分；未直接写出 Distinction 原始分线。Top 25% 值按 5,519 名 official participants 的排名表重建，不能视为主办方直接公布的固定奖项线。", "The CEMC booklet directly gives the mean but does not state a raw Distinction cutoff. The Top-25% value is reconstructed from the ranking of 5,519 official participants and is not an organiser-published fixed award cutoff."), metrics: [metric("平均分", "Mean score", "20.6", "40"), metric("Top 25% 重建值", "Reconstructed Top-25% boundary", "26", "40")] },
   ]),
+  ...cemcHistoricalTopQuarter("fryer", "40", [
+    ["2022", "25"], ["2021", "32"], ["2019", "30"], ["2018", "29"], ["2017", "32"], ["2016", "30"],
+  ]),
   ...expandThresholds("galois", ["cemc-fgh-2026-results"], [
     { year: "2026", status: "confirmed", metrics: [metric("Certificate of Distinction", "Certificate of Distinction cutoff", "26", "40"), metric("School Champion Medal", "School Champion Medal cutoff", "21", "40"), metric("平均分", "Mean score", "21.0", "40")] },
     { year: "2025", sourceIds: ["cemc-fgh-2025-results"], metrics: [metric("Certificate of Distinction", "Certificate of Distinction cutoff", "27", "40"), metric("School Champion Medal", "School Champion Medal cutoff", "23", "40"), metric("平均分", "Mean score", "23.2", "40")] },
     { year: "2024", sourceIds: ["cemc-fgh-2024-results"], note: t("CEMC 结果册直接公布平均分；未直接写出 Distinction 或 School Champion Medal 原始分线。Top 25% 值按 6,725 名 eligible contestants 的排名表重建，不能视为主办方直接公布的固定奖项线。", "The CEMC booklet directly gives the mean but does not state raw Certificate of Distinction or School Champion Medal cutoffs. The Top-25% value is reconstructed from the ranking of 6,725 eligible contestants and is not an organiser-published fixed award cutoff."), metrics: [metric("平均分", "Mean score", "24.8", "40"), metric("Top 25% 重建值", "Reconstructed Top-25% boundary", "29", "40")] },
     { year: "2023", sourceIds: ["cemc-fgh-2023-results"], note: t("CEMC 结果册直接公布平均分；未直接写出 Distinction 原始分线。Top 25% 值按 7,268 名 official participants 的排名表重建，不能视为主办方直接公布的固定奖项线。", "The CEMC booklet directly gives the mean but does not state a raw Distinction cutoff. The Top-25% value is reconstructed from the ranking of 7,268 official participants and is not an organiser-published fixed award cutoff."), metrics: [metric("平均分", "Mean score", "22.8", "40"), metric("Top 25% 重建值", "Reconstructed Top-25% boundary", "29", "40")] },
+  ]),
+  ...cemcHistoricalTopQuarter("galois", "40", [
+    ["2022", "26"], ["2021", "29"], ["2019", "26"], ["2018", "25"], ["2017", "28"], ["2016", "29"],
   ]),
   ...expandThresholds("hypatia", ["cemc-fgh-2026-results"], [
     { year: "2026", status: "confirmed", metrics: [metric("Certificate of Distinction", "Certificate of Distinction cutoff", "28", "40"), metric("School Champion Medal", "School Champion Medal cutoff", "22", "40"), metric("平均分", "Mean score", "22.8", "40")] },
@@ -3634,9 +4238,13 @@ const fghThresholds = [
     { year: "2024", sourceIds: ["cemc-fgh-2024-results"], note: t("CEMC 结果册直接公布平均分；未直接写出 Distinction 或 School Champion Medal 原始分线。Top 25% 值按 6,399 名 eligible contestants 的排名表重建，不能视为主办方直接公布的固定奖项线。", "The CEMC booklet directly gives the mean but does not state raw Certificate of Distinction or School Champion Medal cutoffs. The Top-25% value is reconstructed from the ranking of 6,399 eligible contestants and is not an organiser-published fixed award cutoff."), metrics: [metric("平均分", "Mean score", "24.5", "40"), metric("Top 25% 重建值", "Reconstructed Top-25% boundary", "30", "40")] },
     { year: "2023", sourceIds: ["cemc-fgh-2023-results"], note: t("CEMC 结果册直接公布平均分；未直接写出 Distinction 原始分线。Top 25% 值按 6,362 名 official participants 的排名表重建，不能视为主办方直接公布的固定奖项线。", "The CEMC booklet directly gives the mean but does not state a raw Distinction cutoff. The Top-25% value is reconstructed from the ranking of 6,362 official participants and is not an organiser-published fixed award cutoff."), metrics: [metric("平均分", "Mean score", "23.3", "40"), metric("Top 25% 重建值", "Reconstructed Top-25% boundary", "28", "40")] },
   ]),
+  ...cemcHistoricalTopQuarter("hypatia", "40", [
+    ["2022", "30"], ["2021", "30"], ["2019", "32"], ["2018", "28"], ["2017", "26"], ["2016", "30"],
+  ]),
 ];
 
-const jmcThresholds = expandThresholds("jmc", ["ukmt-jmc-awards"], [
+const jmcThresholds = [
+  ...expandThresholds("jmc", ["ukmt-jmc-awards"], [
   ...[
     ["2026", "47", "59", "75", "80", "112"], ["2025", "54", "73", "91", "100", "125"], ["2024", "57", "70", "86", "92", "123"],
     ["2023", "52", "66", "82", "88", "113"], ["2022", "52", "66", "84", "92", "120"],
@@ -3665,9 +4273,63 @@ const jmcThresholds = expandThresholds("jmc", ["ukmt-jmc-awards"], [
       ...(olympiad ? [metric("Junior Mathematical Olympiad 资格线", "Junior Mathematical Olympiad qualification cutoff", olympiad, "135")] : []),
     ],
   })),
-]);
+  ]),
+  ...expandThresholds("jmc", ["ukmt-junior-kangaroo-awards"], [
+    {
+      year: "2025",
+      sitting: "Junior Kangaroo (UK)",
+      status: "historical",
+      note: t("2025 起该轮次按 Gold、Silver、Bronze 颁奖；仅面向英国学校。", "From 2025 this round used Gold, Silver, and Bronze awards; it is open only to UK schools."),
+      metrics: [
+        metric("Gold", "Gold cutoff", "113", "135"),
+        metric("Silver", "Silver cutoff", "101", "135"),
+        metric("Bronze", "Bronze cutoff", "85", "135"),
+      ],
+    },
+    {
+      year: "2026",
+      sitting: "Junior Kangaroo (UK)",
+      status: "confirmed",
+      note: t("这是仅对英国学校开放的后续轮次奖项分数线；不适用于中国 JMC 参赛路径。", "These are award thresholds for a follow-on round open only to UK schools; they do not apply to the China JMC route."),
+      metrics: [
+        metric("Gold", "Gold cutoff", "114", "135"),
+        metric("Silver", "Silver cutoff", "100", "135"),
+        metric("Bronze", "Bronze cutoff", "80", "135"),
+      ],
+    },
+  ]),
+  ...expandThresholds("jmc", ["ukmt-jmo-awards"], [
+    {
+      year: "2025",
+      sitting: "Junior Mathematical Olympiad (UK)",
+      status: "historical",
+      note: t("2025 年 JMO 改为 6 题、每题 10 分的 60 分卷；中国合作方说明当届奖项按英国分数线评定，但报名仍为独立安排。", "In 2025 JMO changed to six 10-mark questions, for a 60-mark paper. The China partner says that cycle's awards use UK cutoffs, but entry remains separately arranged."),
+      metrics: [
+        metric("Merit", "Merit cutoff", "22", "60"),
+        metric("Distinction", "Distinction cutoff", "33", "60"),
+        metric("Bronze", "Bronze cutoff", "36", "60"),
+        metric("Silver", "Silver cutoff", "39", "60"),
+        metric("Gold", "Gold cutoff", "42", "60"),
+      ],
+    },
+    {
+      year: "2026",
+      sitting: "Junior Mathematical Olympiad (UK)",
+      status: "confirmed",
+      note: t("中国合作方允许 JMO 直接报名，并说明奖项按英国分数线评定；但中国报名不是由 JMC 自动晋级，日期与报名规则仍以中国合作方当届通知为准。", "The China partner permits direct JMO entry and says awards use UK cutoffs; however, China entry is not an automatic progression from JMC, and dates and registration follow the partner's current notice."),
+      metrics: [
+        metric("Merit", "Merit cutoff", "19", "60"),
+        metric("Distinction", "Distinction cutoff", "31", "60"),
+        metric("Bronze", "Bronze cutoff", "35", "60"),
+        metric("Silver", "Silver cutoff", "42", "60"),
+        metric("Gold", "Gold cutoff", "51", "60"),
+      ],
+    },
+  ]),
+];
 
-const imcThresholds = expandThresholds("imc", ["ukmt-imc-awards"], [
+const imcThresholds = [
+  ...expandThresholds("imc", ["ukmt-imc-awards"], [
   ...[
     ["2026", "35", "46", "61", "61", "66", "86", "93", "98"],
     ["2025", "37", "52", "72", "72", "82", "105", "110", "116"],
@@ -3713,16 +4375,92 @@ const imcThresholds = expandThresholds("imc", ["ukmt-imc-awards"], [
       ...(maclaurin ? [metric("Maclaurin Olympiad 资格线", "Maclaurin Olympiad qualification cutoff", maclaurin, "135")] : []),
     ],
   })),
-]);
+  ]),
+  ...expandThresholds("imc", ["ukmt-grey-pink-kangaroo-awards"], [
+    {
+      year: "2025",
+      sitting: "Grey Kangaroo (UK)",
+      status: "historical",
+      note: t("2025 起按 Gold、Silver、Bronze 颁奖；仅面向英国学校。", "From 2025 the round used Gold, Silver, and Bronze awards; it is open only to UK schools."),
+      metrics: [metric("Gold", "Gold cutoff", "115", "135"), metric("Silver", "Silver cutoff", "102", "135"), metric("Bronze", "Bronze cutoff", "87", "135")],
+    },
+    {
+      year: "2025",
+      sitting: "Pink Kangaroo (UK)",
+      status: "historical",
+      note: t("2025 起按 Gold、Silver、Bronze 颁奖；仅面向英国学校。", "From 2025 the round used Gold, Silver, and Bronze awards; it is open only to UK schools."),
+      metrics: [metric("Gold", "Gold cutoff", "90", "135"), metric("Silver", "Silver cutoff", "78", "135"), metric("Bronze", "Bronze cutoff", "63", "135")],
+    },
+    {
+      year: "2026",
+      sitting: "Grey Kangaroo (UK)",
+      status: "confirmed",
+      note: t("Grey／Pink Kangaroo 仅面向英国学校；该表不是中国 IMC 后续轮次的奖项或资格线。", "Grey/Pink Kangaroo are open only to UK schools; this table is not an award or qualification threshold for China IMC follow-ons."),
+      metrics: [metric("Gold", "Gold cutoff", "101", "135"), metric("Silver", "Silver cutoff", "85", "135"), metric("Bronze", "Bronze cutoff", "67", "135")],
+    },
+    {
+      year: "2026",
+      sitting: "Pink Kangaroo (UK)",
+      status: "confirmed",
+      note: t("Grey／Pink Kangaroo 仅面向英国学校；该表不是中国 IMC 后续轮次的奖项或资格线。", "Grey/Pink Kangaroo are open only to UK schools; this table is not an award or qualification threshold for China IMC follow-ons."),
+      metrics: [metric("Gold", "Gold cutoff", "85", "135"), metric("Silver", "Silver cutoff", "73", "135"), metric("Bronze", "Bronze cutoff", "59", "135")],
+    },
+  ]),
+  ...expandThresholds("imc", ["ukmt-intermediate-olympiad-awards"], [
+    {
+      year: "2025",
+      sitting: "Cayley Olympiad (UK)",
+      status: "historical",
+      note: t("中国合作方说明 CMO／HMO／MMO 的奖项使用英国分数线，但中国报名为独立安排。", "The China partner says CMO/HMO/MMO awards use UK cutoffs, while China registration is separately arranged."),
+      metrics: [metric("Merit", "Merit cutoff", "17", "60"), metric("Distinction", "Distinction cutoff", "30", "60"), metric("Bronze", "Bronze cutoff", "34", "60"), metric("Silver", "Silver cutoff", "39", "60"), metric("Gold", "Gold cutoff", "45", "60")],
+    },
+    {
+      year: "2025",
+      sitting: "Hamilton Olympiad (UK)",
+      status: "historical",
+      note: t("中国合作方说明 CMO／HMO／MMO 的奖项使用英国分数线，但中国报名为独立安排。", "The China partner says CMO/HMO/MMO awards use UK cutoffs, while China registration is separately arranged."),
+      metrics: [metric("Merit", "Merit cutoff", "10", "60"), metric("Distinction", "Distinction cutoff", "23", "60"), metric("Bronze", "Bronze cutoff", "30", "60"), metric("Silver", "Silver cutoff", "34", "60"), metric("Gold", "Gold cutoff", "41", "60")],
+    },
+    {
+      year: "2025",
+      sitting: "Maclaurin Olympiad (UK)",
+      status: "historical",
+      note: t("中国合作方说明 CMO／HMO／MMO 的奖项使用英国分数线，但中国报名为独立安排。", "The China partner says CMO/HMO/MMO awards use UK cutoffs, while China registration is separately arranged."),
+      metrics: [metric("Merit", "Merit cutoff", "16", "60"), metric("Distinction", "Distinction cutoff", "27", "60"), metric("Bronze", "Bronze cutoff", "31", "60"), metric("Silver", "Silver cutoff", "37", "60"), metric("Gold", "Gold cutoff", "45", "60")],
+    },
+    {
+      year: "2026",
+      sitting: "Cayley Olympiad (UK)",
+      status: "confirmed",
+      note: t("中国合作方说明 CMO／HMO／MMO 的奖项使用英国分数线，但中国报名为独立安排；不能把 UKMT 的自动邀请机制套用为中国晋级规则。", "The China partner says CMO/HMO/MMO awards use UK cutoffs, but China registration is separately arranged; UKMT automatic invitations must not be treated as China progression rules."),
+      metrics: [metric("Merit", "Merit cutoff", "15", "60"), metric("Distinction", "Distinction cutoff", "29", "60"), metric("Bronze", "Bronze cutoff", "31", "60"), metric("Silver", "Silver cutoff", "39", "60"), metric("Gold", "Gold cutoff", "44", "60")],
+    },
+    {
+      year: "2026",
+      sitting: "Hamilton Olympiad (UK)",
+      status: "confirmed",
+      note: t("中国合作方说明 CMO／HMO／MMO 的奖项使用英国分数线，但中国报名为独立安排；不能把 UKMT 的自动邀请机制套用为中国晋级规则。", "The China partner says CMO/HMO/MMO awards use UK cutoffs, but China registration is separately arranged; UKMT automatic invitations must not be treated as China progression rules."),
+      metrics: [metric("Merit", "Merit cutoff", "6", "60"), metric("Distinction", "Distinction cutoff", "14", "60"), metric("Bronze", "Bronze cutoff", "17", "60"), metric("Silver", "Silver cutoff", "23", "60"), metric("Gold", "Gold cutoff", "33", "60")],
+    },
+    {
+      year: "2026",
+      sitting: "Maclaurin Olympiad (UK)",
+      status: "confirmed",
+      note: t("中国合作方说明 CMO／HMO／MMO 的奖项使用英国分数线，但中国报名为独立安排；不能把 UKMT 的自动邀请机制套用为中国晋级规则。", "The China partner says CMO/HMO/MMO awards use UK cutoffs, but China registration is separately arranged; UKMT automatic invitations must not be treated as China progression rules."),
+      metrics: [metric("Merit", "Merit cutoff", "15", "60"), metric("Distinction", "Distinction cutoff", "29", "60"), metric("Bronze", "Bronze cutoff", "31", "60"), metric("Silver", "Silver cutoff", "34", "60"), metric("Gold", "Gold cutoff", "40", "60")],
+    },
+  ]),
+];
 
 const mathKangarooThresholds = expandThresholds("math-kangaroo", ["aseeder-math-kangaroo"], [
   {
     year: "2026",
     sitting: "Mainland China",
     status: "confirmed",
-    note: t("按年级分别排名；这是中国赛区的百分位奖项口径，并非固定原始分数线。", "Ranked separately by grade; these are China-region percentile criteria, not fixed raw-score cutoffs."),
+    note: t("除满分奖外，按年级分别排名；其他奖项为百分位口径，并非固定原始分数线。", "Apart from the perfect-score award, results are ranked separately by grade; the other awards are percentile criteria rather than fixed raw-score cutoffs."),
     metrics: [
-      metric("Perfect Score", "Perfect Score", "满分 / Full score"),
+      metric("A／B Perfect Score", "Levels A/B Perfect Score", "120", "120"),
+      metric("C–F Perfect Score", "Levels C–F Perfect Score", "150", "150"),
       metric("Top Gold", "Top Gold", "Top 5%"),
       metric("Gold", "Gold", "Top 15%"),
       metric("Silver", "Silver", "Top 30%"),
@@ -3732,7 +4470,8 @@ const mathKangarooThresholds = expandThresholds("math-kangaroo", ["aseeder-math-
   },
 ]);
 
-const comcThresholds = expandThresholds("comc", ["cms-comc-results-2025"], [
+const comcThresholds = [
+  ...expandThresholds("comc", ["cms-comc-results-2025"], [
   {
     year: "2025",
     sitting: "International division",
@@ -3749,10 +4488,10 @@ const comcThresholds = expandThresholds("comc", ["cms-comc-results-2025"], [
     sitting: "Invitational eligibility",
     status: "historical",
     sourceIds: ["cms-comc-results-2025", "cms-comc-advancing"],
-    note: t("这是 2025 年旧制度的历史邀请线。CMOQR 自 2026 年起取消，不可作为当前晋级规则。", "These are historical thresholds under the 2025 system. CMOQR was discontinued from 2026 and must not be presented as a current progression route."),
+    note: t("这是 2025 年旧制度的历史邀请线，只对满足加拿大公民／永久居民等资格者适用。CMOQR 自 2026 年起取消，不可作为当前晋级规则。", "These are historical thresholds under the 2025 system and applied only to students meeting Canadian-citizen/permanent-resident and other eligibility rules. CMOQR was discontinued from 2026 and must not be presented as a current progression route."),
     metrics: [
       metric("CMO 参考邀请线", "CMO reference invitation threshold", "67", "80"),
-      metric("CMOQR 参考邀请线", "CMOQR reference invitation threshold", "62", "80"),
+      metric("CMOQR 历史邀请分数段", "CMOQR historical invitation band", "62–<67", "80"),
     ],
   },
   {
@@ -3770,10 +4509,10 @@ const comcThresholds = expandThresholds("comc", ["cms-comc-results-2025"], [
     year: "2024",
     sitting: "Invitational eligibility",
     sourceIds: ["cms-comc-results-2024"],
-    note: t("这是 2024 年旧制度的历史邀请线。CMOQR 自 2026 年起取消，不可作为当前晋级规则。", "These are historical thresholds under the 2024 system. CMOQR was discontinued from 2026 and must not be presented as a current progression route."),
+    note: t("这是 2024 年旧制度的历史邀请线，只对满足加拿大公民／永久居民等资格者适用。CMOQR 自 2026 年起取消，不可作为当前晋级规则。", "These are historical thresholds under the 2024 system and applied only to students meeting Canadian-citizen/permanent-resident and other eligibility rules. CMOQR was discontinued from 2026 and must not be presented as a current progression route."),
     metrics: [
       metric("CMO 邀请线", "CMO invitation threshold", "60.5", "80"),
-      metric("CMOQR 邀请线", "CMOQR invitation threshold", "55", "80"),
+      metric("CMOQR 历史邀请分数段", "CMOQR historical invitation band", "55–<60.5", "80"),
     ],
   },
   {
@@ -3792,13 +4531,45 @@ const comcThresholds = expandThresholds("comc", ["cms-comc-results-2025"], [
     year: "2023",
     sitting: "Invitational eligibility",
     sourceIds: ["cms-comc-results-2023"],
-    note: t("这是 2023 年旧制度的历史邀请线。CMOQR 自 2026 年起取消，不可作为当前晋级规则。", "These are historical thresholds under the 2023 system. CMOQR was discontinued from 2026 and must not be presented as a current progression route."),
+    note: t("这是 2023 年旧制度的历史邀请线，只对满足加拿大公民／永久居民等资格者适用。CMOQR 自 2026 年起取消，不可作为当前晋级规则。", "These are historical thresholds under the 2023 system and applied only to students meeting Canadian-citizen/permanent-resident and other eligibility rules. CMOQR was discontinued from 2026 and must not be presented as a current progression route."),
     metrics: [
       metric("CMO 邀请线", "CMO invitation threshold", "69", "80"),
-      metric("CMOQR 邀请线", "CMOQR invitation threshold", "64", "80"),
+      metric("CMOQR 历史邀请分数段", "CMOQR historical invitation band", "64–<69", "80"),
     ],
   },
-]);
+  ]),
+  ...[
+    ["2022", "69", "63.5–68.5"], ["2021", "68", "62–<68"], ["2020", "66", "60.5–<66"], ["2019", "66.5", "61–<66.5"],
+    ["2018", "61", "52–<61"], ["2017", "64", "57.5–<64"], ["2016", "69", "61–<69"], ["2015", "66", "55–<66"],
+    ["2014", "69", "62–<69"], ["2013", "60", "53–<60"], ["2012", "57", "53–<57"], ["2011", "70", "66–<70"],
+  ].flatMap(([year, cmo, cmoqr]) => expandThresholds("comc", ["cms-comc-advancing-archive"], [{
+    year,
+    sitting: "Historical invitational eligibility",
+    note: t("CMO／CMOQR 为加拿大代表队选拔链条的历史邀请线，仅对满足加拿大公民／永久居民等资格者适用；CMOQR 已自 2026 年起取消。", "These are historical Team Canada progression thresholds, restricted to students meeting Canadian-citizen/permanent-resident and other eligibility rules; CMOQR ended in 2026."),
+    metrics: [
+      metric("CMO 历史邀请线", "Historical CMO invitation threshold", cmo, "80"),
+      metric("CMOQR 历史邀请分数段", "Historical CMOQR invitation band", cmoqr, "80"),
+    ],
+  }])),
+  ...expandThresholds("comc", ["cms-cmo-report-2009"], [{
+    year: "2008",
+    sitting: "Historical invitational eligibility",
+    note: t("这是 CMOQR 历史邀请分数段，仅适用于满足加拿大代表队选拔资格的考生。", "This is a historical CMOQR invitation band, applicable only to students meeting Team Canada pathway eligibility."),
+    metrics: [
+      metric("CMO 直接邀请分数段", "CMO direct-invitation band", "73–80", "80"),
+      metric("CMOQR 历史邀请分数段", "Historical CMOQR invitation band", "67–72", "80"),
+    ],
+  }]),
+  ...expandThresholds("comc", ["cms-cmo-report-2008"], [{
+    year: "2007",
+    sitting: "Historical invitational eligibility",
+    note: t("当届使用 CMO Repêchage（不是后来使用的 CMOQR）；仅适用于满足加拿大代表队选拔资格的考生。", "This cycle used CMO Repêchage, not the later CMOQR; it applied only to students meeting Team Canada pathway eligibility."),
+    metrics: [
+      metric("CMO 直接邀请分数段", "CMO direct-invitation band", "72–80", "80"),
+      metric("CMO Repêchage 邀请分数段", "CMO Repêchage invitation band", "65–71", "80"),
+    ],
+  }]),
+];
 
 export const competitionThresholds: ThresholdRecord[] = [
   ...amc8Thresholds,
@@ -3806,6 +4577,7 @@ export const competitionThresholds: ThresholdRecord[] = [
   ...amc12AwardThresholds,
   ...aimeQualificationThresholds,
   ...aimeResultThresholds,
+  ...usamoUsajmoThresholds,
   ...waterlooThresholds,
   ...smcThresholds,
   ...seniorKangarooThresholds,
@@ -3813,8 +4585,10 @@ export const competitionThresholds: ThresholdRecord[] = [
   ...bmo2Thresholds,
   ...hmmtThresholds,
   ...awardAvailabilityThresholds,
+  ...australianAmcChinaThresholds,
   ...chinaLeagueThresholds,
   ...csmcThresholds,
+  ...cimcThresholds,
   ...fghThresholds,
   ...jmcThresholds,
   ...imcThresholds,

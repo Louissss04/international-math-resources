@@ -50,8 +50,8 @@ export const assessmentSources: SourceRecord[] = [
   source("ap-bc-exam", "AP Calculus BC 考试", "AP Calculus BC Exam", "College Board", "College Board", "https://apcentral.collegeboard.org/courses/ap-calculus-bc/exam", "official", "AP Calculus BC"),
   source("ap-registration", "AP 考试报名", "Register for AP Exams", "College Board", "College Board", "https://apstudents.collegeboard.org/register-for-ap-exams", "official", "AP registration"),
   source("ap-china", "在中国参加 AP 考试", "Taking AP in China", "College Board 国际部", "College Board International", "https://international.collegeboard.org/students/ap/taking-ap-china", "official", "AP testing routes in mainland China"),
-  { ...source("ap-china-registration-2027", "Prometric 中国 2027 AP 报名须知", "Prometric China 2027 AP Exam Registration", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/apregistration/", "official", "AP China 2027 registration, eligibility, fees, ID rules and exam schedule"), verifiedAt: "2026-09-10" },
-  { ...source("ap-china-timeline-2027", "Prometric 中国 2027 AP 报名流程", "Prometric China 2027 AP Registration Timeline", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/aptimeline/", "official", "AP China 2027 roster, registration, payment, confirmation and admission-ticket deadlines"), verifiedAt: "2026-09-10" },
+  { ...source("ap-china-registration-2027", "Prometric 中国 2027 AP 报名须知", "Prometric China 2027 AP Exam Registration", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/apregistration/", "official", "AP China 2027 registration, eligibility, fees, ID rules and exam schedule", "本校提供 AP 报名的学生须走学校 coordinator 路线；符合条件的社会考生可通过 MyAPChina 自行建账户。", "Students whose school provides AP registration must use the school-coordinator route; eligible unaffiliated candidates may create their own MyAPChina account."), verifiedAt: "2026-09-16" },
+  { ...source("ap-china-timeline-2027", "Prometric 中国 2027 AP 报名流程", "Prometric China 2027 AP Registration Timeline", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/aptimeline/", "official", "AP China 2027 roster, registration, payment, confirmation and admission-ticket deadlines", "学生信息、照片和科目确认已于 2026 年 9 月 16 日开放；全部科目确认与缴费截至 11 月 9 日中午 12:00。", "Student information, photo upload and subject confirmation opened on 16 September 2026; all subject confirmation and payment are due by 12:00 noon on 9 November."), verifiedAt: "2026-09-16" },
   source("ap-score-data", "AP 2026 成绩分布", "2026 AP Score Distributions", "College Board", "College Board", "https://apstudents.collegeboard.org/about-ap-scores/score-distributions", "official-data", "AP 2026 score distributions"),
   source("ap-ab-score-distributions", "AP Calculus AB 历年成绩分布", "Past AP Calculus AB Score Distributions", "College Board", "College Board", "https://apstudents.collegeboard.org/about-ap-scores/score-distributions/ap-calculus-ab", "official-data", "AP Calculus AB score distributions 2020-2026"),
   source("ap-bc-score-distributions", "AP Calculus BC 历年成绩分布", "Past AP Calculus BC Score Distributions", "College Board", "College Board", "https://apstudents.collegeboard.org/about-ap-scores/score-distributions/ap-calculus-bc", "official-data", "AP Calculus BC score distributions 2020-2026"),
@@ -328,7 +328,13 @@ const apProject: ProjectRecord = {
   costBand: "varies",
   status: "confirmed",
   cycle: "2026-27 course / May 2027 exam",
-  lastVerified: "2026-09-10",
+  lastVerified: "2026-09-16",
+  alerts: [{
+    title: t("中国大陆 2027 AP 学生报名已开放", "Mainland China 2027 AP student registration is open"),
+    body: t("自 9 月 16 日起，学生可在 MyAPChina 补充信息、上传照片并确认科目。学校在读生须先由 AP coordinator 提交名单；只有符合条件的社会考生自行创建 MyAPChina 账户。全部科目确认与缴费截至 11 月 9 日中午 12:00。", "From 16 September, students can complete information, upload a photo and verify subjects in MyAPChina. School students must first be rostered by their AP coordinator; only eligible unaffiliated candidates create their own MyAPChina account. All subject confirmation and payment are due by 12:00 noon on 9 November."),
+    sourceIds: ["ap-china-registration-2027", "ap-china-timeline-2027"],
+    tone: "warning",
+  }],
   facts: [
     { label: t("用途", "Purpose"), value: t("反映微积分课程学习；大学分别制定学分、分班和专业先修政策。", "Documents calculus coursework; universities set their own credit, placement and prerequisite policies."), sourceIds: ["ap-ab-exam", "ap-bc-exam"] },
     { label: t("AB / BC", "AB / BC"), value: t("AB 对应第一学期单变量微积分；BC 覆盖 AB 核心并增加后续单变量微积分、参数／极坐标与无穷级数。", "AB approximates first-semester single-variable calculus; BC includes the AB core plus subsequent calculus, parametric/polar topics and infinite series."), sourceIds: ["ap-ab-exam", "ap-bc-exam"] },
@@ -340,13 +346,13 @@ const apProject: ProjectRecord = {
     { label: t("2027 日期与中国费用", "2027 date and China fee"), value: t("AB 与 BC 均于 2027 年 5 月 10 日举行；Prometric 中国考点每科 1525 元，其中 133 元手续费及税费不退。", "AB and BC are both scheduled for 10 May 2027. At Prometric China centres, the fee is CNY 1,525 per exam, including a non-refundable CNY 133 processing fee and tax."), sourceIds: ["ap-2027-exam-dates", "ap-china-registration-2027"] },
   ],
   dates: [
-    dateRecord("ap-2027-coordinator-open", "Prometric 中国 AP 管理员系统开放", "Prometric China AP coordinator system opens", "2026-09-15", "confirmed", ["ap-china-timeline-2027"], {
+    dateRecord("ap-2027-coordinator-open", "Prometric 中国 AP 管理员系统开放", "Prometric China AP coordinator system opens", "2026-09-15", "historical", ["ap-china-timeline-2027"], {
       region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
       note: t("中午 12:00 开放，AP 管理员开始提交学生和考试科目花名册。", "Opens at 12:00 noon for AP coordinators to submit student and exam rosters."),
     }),
     dateRecord("ap-2027-registration-open", "Prometric 中国 AP 学生开始报名", "Prometric China AP student registration opens", "2026-09-16", "confirmed", ["ap-china-timeline-2027"], {
       region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
-      note: t("AP 授权学校须先由管理员提交考生和科目名单；符合条件的社会考生按 MyAPChina 页面操作。", "AP-authorized schools must first submit student and subject rosters; eligible unaffiliated candidates follow the MyAPChina instructions."),
+      note: t("学生信息、照片和科目确认现已开放；学校学生须先进入 coordinator 提交的名单。", "Student information, photo upload and subject confirmation are now open; school students must first appear on the coordinator-submitted roster."),
     }),
     dateRecord("ap-2027-roster-deadline", "Prometric 中国 AP 学校花名册截止", "Prometric China AP school roster deadline", "2026-10-16", "confirmed", ["ap-china-timeline-2027"], {
       region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
@@ -396,14 +402,14 @@ const apProject: ProjectRecord = {
           {
             cells: [
               t("中国大陆本地学校路径", "Mainland local-school route"),
-              t("AP coordinator 自 2026 年 9 月 15 日中午 12:00 起在 MyAPChina 提交本校考生与科目名单；学生自 9 月 16 日起补全资料、上传照片、确认科目并缴费。", "From 12:00 noon on 15 September 2026, the AP coordinator submits the school's student and subject roster in MyAPChina; from 16 September, students complete their details, upload a photograph, confirm subjects, and pay."),
+              t("AP coordinator 已于 9 月 15 日中午 12:00 开放提交本校考生与科目名单；自 9 月 16 日起，已在名单内的学生使用 College Board 账户邮箱登录 MyAPChina，补全资料、上传照片、确认科目并缴费。", "The AP coordinator roster system opened at 12:00 noon on 15 September; from 16 September, students on that roster log in to MyAPChina with the email linked to their College Board account to complete details, upload a photograph, confirm subjects and pay."),
             ],
             sourceIds: ["ap-china", "ap-china-registration-2027", "ap-china-timeline-2027"],
           },
           {
             cells: [
               t("非学校考生／自学考生", "Unaffiliated / self-study candidates"),
-              t("2027 年继续设置符合条件的社会考生通道；考生须自行通过 MyAPChina 提交报名信息，再按系统流程确认科目和缴费。", "An eligible unaffiliated-candidate route remains available for 2027. Candidates submit their information through MyAPChina, then confirm subjects and pay through the system workflow."),
+              t("MyAPChina 注册页仅供符合条件的社会考生自行创建账户；已经由本校提供 AP 报名的学生不得自建账户，必须由本校路线办理。", "The MyAPChina registration page is only for eligible unaffiliated candidates to create their own account. Students whose school provides AP registration must not create a separate account and must use the school route."),
             ],
             sourceIds: ["ap-china-registration-2027", "ap-china-timeline-2027"],
           },
