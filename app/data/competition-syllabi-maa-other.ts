@@ -1179,7 +1179,7 @@ export const maaOtherCompetitionSyllabi: AssessmentSyllabusRecord[] = [
     classification: "content-framework",
     title: t("诺特数学奖 2026 官方内容范围", "Noether Mathematics Award 2026 Official Content Framework"),
     officialName: t("丘成桐中学科学奖（诺特数学奖）", "S.-T. Yau High School Science Award: Noether Mathematics Award"),
-    applicableCycle: "2026",
+    applicableCycle: t("2026", "2026"),
     status: "confirmed",
     summary: t(
       "2026 年报名公告列出笔试和面试，以及中学数学基础之上的五个方向；没有公布题型数量、时长、各方向权重或样题。本页只翻译和组织该届公告明确给出的范围。",
