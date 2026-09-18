@@ -473,7 +473,7 @@ export const modelingCatalogProjects: ProjectRecord[] = [
     ],
     dates: [
       { id: "scudem-registration-open-2026", label: t("报名开放", "Registration opens"), date: "2026-07-01", region: t("全球线上", "Global online"), status: "historical", sourceIds: ["scudem-rules-2026", "scudem-student-info-2026"] },
-      { id: "scudem-info-session-2026", label: t("参赛说明会", "Participant information session"), date: "2026-09-16", time: "17:00", timezone: "America/New_York", region: t("线上", "Online"), status: "confirmed", sourceIds: ["scudem-home"] },
+      { id: "scudem-info-session-2026", label: t("参赛说明会", "Participant information session"), date: "2026-09-16", time: "17:00", timezone: "America/New_York", region: t("线上", "Online"), status: "historical", sourceIds: ["scudem-home"] },
       { id: "scudem-registration-close-2026", label: t("报名截止", "Registration closes"), date: "2026-10-16", time: "14:00", timezone: "US Eastern", region: t("全球线上", "Global online"), status: "confirmed", sourceIds: ["scudem-rules-2026"] },
       { id: "scudem-challenge-window-2026", label: t("挑战期", "Challenge period"), date: "2026-10-16", endDate: "2026-11-10", time: "15:00–15:00", timezone: "US Eastern", region: t("全球线上", "Global online"), status: "confirmed", sourceIds: ["scudem-rules-2026", "scudem-student-info-2026"] },
       { id: "scudem-results-2026", label: t("预计公布结果", "Expected results"), date: "2026-12-15", region: t("官网；官方仅写明 12 月中旬", "Official site; organizer states mid-December"), status: "pending", sourceIds: ["scudem-rules-2026", "scudem-student-info-2026"], note: t("日期用于日历定位，并非官方公布的具体日。", "The date is a calendar marker, not an organizer-published exact day.") },

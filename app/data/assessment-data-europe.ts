@@ -435,7 +435,7 @@ const cisiaProject: ProjectRecord = {
     { id: "cent-s-2026-04-23", label: t("CEnT-S 第三宏周期", "CEnT-S third macro-period"), date: "2026-04-23", time: "14:15", timezone: "Europe/Rome", status: "historical", sourceIds: ["eu-cisia-cent-rules"] },
     { id: "cent-s-2026-05-21", label: t("CEnT-S 第三宏周期", "CEnT-S third macro-period"), date: "2026-05-21", time: "14:15", timezone: "Europe/Rome", status: "historical", sourceIds: ["eu-cisia-cent-rules"] },
     { id: "cent-s-2026-06-09", label: t("CEnT-S 第三宏周期", "CEnT-S third macro-period"), date: "2026-06-09", time: "14:15", timezone: "Europe/Rome", status: "historical", sourceIds: ["eu-cisia-cent-rules"] },
-    { id: "cent-s-2026-09-17", label: t("CEnT-S 第四宏周期", "CEnT-S fourth macro-period"), date: "2026-09-17", time: "14:15", timezone: "Europe/Rome", status: "confirmed", sourceIds: ["eu-cisia-cent-rules"], note: t("正式标准化成绩最晚于 2026-10-30 发布。", "The final normalised score is released by 2026-10-30.") },
+    { id: "cent-s-2026-09-17", label: t("CEnT-S 第四宏周期", "CEnT-S fourth macro-period"), date: "2026-09-17", time: "14:15", timezone: "Europe/Rome", status: "historical", sourceIds: ["eu-cisia-cent-rules"], note: t("正式标准化成绩最晚于 2026-10-30 发布。", "The final normalised score is released by 2026-10-30.") },
     { id: "cent-s-2026-10-15", label: t("CEnT-S 第四宏周期末场", "CEnT-S final date of fourth macro-period"), date: "2026-10-15", time: "14:15", timezone: "Europe/Rome", status: "confirmed", sourceIds: ["eu-cisia-cent-rules"], note: t("正式标准化成绩最晚于 2026-10-30 发布；以大学申请截止日是否允许等待该成绩为准。", "The final normalised score is released by 2026-10-30; confirm that the programme deadline allows this result date.") },
   ],
   sections: [

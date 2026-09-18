@@ -209,7 +209,7 @@ function apChinaRegistrationDates(projectId: string): DateRecord[] {
   const region = t("中国大陆 Prometric 路径", "Prometric route in mainland China");
   return [
     { id: `${projectId}-china-coordinator-open`, label: t("AP 管理员系统开放", "AP coordinator system opens"), date: "2026-09-15", region, status: "historical", sourceIds, note: t("中午 12:00 开放，管理员开始提交学生和科目花名册。", "Opened at 12:00 noon for coordinators to submit student and subject rosters.") },
-    { id: `${projectId}-china-student-open`, label: t("AP 学生开始报名", "AP student registration opens"), date: "2026-09-16", region, status: "confirmed", sourceIds, note: t("学生信息、照片和科目确认现已开放；学校学生须先在 coordinator 名单内。", "Student information, photo upload and subject confirmation are now open; school students must first appear on the coordinator roster.") },
+    { id: `${projectId}-china-student-open`, label: t("AP 学生开始报名", "AP student registration opens"), date: "2026-09-16", region, status: "historical", sourceIds, note: t("学生信息、照片和科目确认现已开放；学校学生须先在 coordinator 名单内。", "Student information, photo upload and subject confirmation are now open; school students must first appear on the coordinator roster.") },
     { id: `${projectId}-china-roster-deadline`, label: t("AP 学校花名册截止", "AP school roster deadline"), date: "2026-10-16", region, status: "confirmed", sourceIds, note: t("中午 12:00 截止。", "Deadline is 12:00 noon.") },
     { id: `${projectId}-china-payment-deadline`, label: t("AP 报名缴费截止", "AP registration and payment deadline"), date: "2026-11-09", region, status: "confirmed", sourceIds, note: t("中午 12:00 截止。", "Deadline is 12:00 noon.") },
     { id: `${projectId}-china-myap-check`, label: t("核对 My AP 科目与资料", "Verify My AP subjects and details"), date: "2026-12-01", region, status: "confirmed", sourceIds },
