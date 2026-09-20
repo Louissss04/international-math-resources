@@ -192,7 +192,7 @@ const satSessions = [
 ] as const;
 
 const satDates: DateRecord[] = satSessions.flatMap(([exam, regular, late], index) => [
-  dateRecord(`sat-${index + 1}-registration`, "SAT 常规报名截止", "SAT regular registration deadline", regular, index <= 1 ? "historical" : "confirmed", ["sat-dates"], {
+  dateRecord(`sat-${index + 1}-registration`, "SAT 常规报名截止", "SAT regular registration deadline", regular, index <= 2 ? "historical" : "confirmed", ["sat-dates"], {
     time: "23:59",
     timezone: "America/New_York",
     region: t("全球周末场", "Worldwide weekend administration"),
@@ -1023,7 +1023,7 @@ const ssatChinaDates: DateRecord[] = [
       timezone: "Asia/Shanghai",
       note: t(`对应 ${session.exam} 场次；延迟报名费用增加。`, `For the ${session.exam} sitting; the fee increases during late registration.`),
     }),
-    dateRecord(`ssat-china-${index + 1}-rush`, "SSAT 中国抢注报名开始", "SSAT China rush registration begins", session.rush, "confirmed", ["ssat-china-cycle-2026-27"], {
+    dateRecord(`ssat-china-${index + 1}-rush`, "SSAT 中国抢注报名开始", "SSAT China rush registration begins", session.rush, index === 0 ? "historical" : "confirmed", ["ssat-china-cycle-2026-27"], {
       region: t("中国大陆", "Mainland China"),
       timezone: "Asia/Shanghai",
       note: t(`对应 ${session.exam} 场次；抢注报名费用再次增加。`, `For the ${session.exam} sitting; the fee increases again during rush registration.`),
