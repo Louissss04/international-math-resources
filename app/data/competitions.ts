@@ -1129,9 +1129,9 @@ export const competitionSources: SourceRecord[] = [
     owner: t("HMMT 组委会", "HMMT"),
     url: "https://www.hmmt.org/",
     kind: "official",
-    verifiedAt: "2026-09-21",
+    verifiedAt: "2026-09-23",
     appliesTo: "HMMT Season 30 dates, registration status and organizer-representation notice",
-    note: t("截至 2026 年 9 月 21 日，首页仍显示“报名开放、9 月 20 日截止”，但未说明具体截止时刻、延期或关闭状态。", "As of 21 September 2026, the home page still says registration is open and closes on 20 September, without giving an exact cutoff time, extension or closure status."),
+    note: t("截至 2026 年 9 月 23 日，首页明确说明报名已关闭、抽签结果已发布；但未说明 9 月 20 日的具体截止时刻、时区、延期或候补安排。", "As of 23 September 2026, the home page explicitly states that registration is closed and lottery results have been released. It does not state the precise 20 September cutoff time, time zone, an extension, or a waitlist arrangement."),
   },
   {
     id: "hmmt-registration-season30",
@@ -1809,9 +1809,9 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "Season 30 · 2026–27",
-    lastVerified: "2026-09-21",
+    lastVerified: "2026-09-23",
     facts: [
-      { label: t("Season 30 报名状态", "Season 30 application status"), value: t("官网首页列示报名于 2026 年 8 月 2 日开放、两场均于 9 月 20 日截止。截至 9 月 21 日，首页仍显示“报名开放”，但未公布具体截止时刻、延期或已关闭的说明。9 月 20 日已过，不应仅凭该页面文字认定仍可报名；须以官方报名系统或组委会书面回复确认。", "The home page lists an opening on 2 August 2026 and a 20 September deadline for both tournaments. As of 21 September it still says registration is open, but publishes no precise cutoff time, extension or closure notice. Since 20 September has passed, do not assume an application remains possible from that wording alone; confirm through the official registration system or directly with the organisers."), status: "conflict", sourceIds: ["hmmt-home-season30"] },
+      { label: t("Season 30 报名状态", "Season 30 application status"), value: t("截至 2026 年 9 月 23 日，官网首页明确说明 Season 30 两场报名均已关闭，抽签结果已发布。首页仍未公布 9 月 20 日的具体截止时刻、时区、延期或候补安排。", "As of 23 September 2026, the home page explicitly states that applications for both Season 30 tournaments are closed and lottery results have been released. It still does not publish the precise 20 September cutoff time, time zone, an extension, or a waitlist arrangement."), status: "confirmed", sourceIds: ["hmmt-home-season30"] },
       { label: t("基本资格", "Basic eligibility"), value: t("比赛当日未满 21 岁，并在 2026 年 8 月 2 日当日或之后仍全日制就读小学或中学阶段；在家教育学生另须符合官网的学历状态要求", "Under 21 on tournament day and enrolled in full-time primary or secondary education on or after 2 August 2026; home-schooled students must also meet the published credential-status rule"), sourceIds: ["hmmt-registration-season30"] },
       { label: t("国际学生", "International students"), value: t("可以申请，报名流程与美国学生相同；没有单独的中国赛区或中国配额", "May apply through the same process as domestic students; there is no separate China region or China quota"), sourceIds: ["hmmt-faq", "hmmt-registration-season30"] },
       { label: t("录取方式", "Selection"), value: t("因场地有限，团队与个人原则上参加统一随机抽签；上一届 February 总排名前 30 的队伍在重新申请当季 February 时可保证入选", "Teams and individuals generally enter a uniform random lottery because of space limits; a previous February top-30 team is guaranteed the current February place if it reapplies"), sourceIds: ["hmmt-registration-season30"] },
@@ -1824,7 +1824,7 @@ export const competitionProjects: ProjectRecord[] = [
       { label: t("与大学录取的关系", "Relationship to admissions"), value: t("HMMT 明确说明其不隶属于任何大学招生办公室，单独参加 HMMT 不会影响 Harvard 或 MIT 的录取决定", "HMMT states that it is not affiliated with any university admissions office and participation by itself has no effect on Harvard or MIT admissions"), sourceIds: ["hmmt-faq"] },
     ],
     dates: [
-      { id: "hmmt-season30-registration", label: t("Season 30 报名窗口", "Season 30 application window"), date: "2026-08-02", endDate: "2026-09-20", region: t("全球；November 与 February 共用", "Worldwide; common to November and February"), status: "historical", sourceIds: ["hmmt-home-season30", "hmmt-registration-season30", "hmmt-deadlines-season30"], note: t("官网未公布 9 月 20 日的具体截止时刻或时区；截至 9 月 21 日首页仍显示“报名开放”，未说明延期或关闭状态，须向官方确认。", "The official site does not publish a precise cutoff time or time zone for 20 September. As of 21 September, its home page still says registration is open without stating an extension or closure; confirm with the organiser.") },
+      { id: "hmmt-season30-registration", label: t("Season 30 报名窗口", "Season 30 application window"), date: "2026-08-02", endDate: "2026-09-20", region: t("全球；November 与 February 共用", "Worldwide; common to November and February"), status: "historical", sourceIds: ["hmmt-home-season30", "hmmt-registration-season30", "hmmt-deadlines-season30"], note: t("截至 2026 年 9 月 23 日，官网明确说明报名已关闭、抽签结果已发布；但未公布 9 月 20 日的具体截止时刻、时区、延期或候补安排。", "As of 23 September 2026, the official home page explicitly states that registration is closed and lottery results have been released. It does not publish the precise 20 September cutoff time, time zone, an extension, or a waitlist arrangement.") },
       { id: "hmmt-november-aid-confirmation", label: t("November 资助确认截止", "November financial-aid confirmation deadline"), date: "2026-10-03", status: "confirmed", sourceIds: ["hmmt-deadlines-season30"] },
       { id: "hmmt-november-confirmation", label: t("November 常规确认截止", "November general confirmation deadline"), date: "2026-10-10", status: "confirmed", sourceIds: ["hmmt-deadlines-season30"] },
       { id: "hmmt-november-waitlist", label: t("November 候补确认截止", "November waitlist confirmation deadline"), date: "2026-10-24", status: "confirmed", sourceIds: ["hmmt-deadlines-season30"] },
