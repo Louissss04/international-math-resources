@@ -25,7 +25,7 @@ export const modelingCatalogSources: SourceRecord[] = [
     owner: t("美国数学及其应用联合会（COMAP）", "Consortium for Mathematics and Its Applications (COMAP)"),
     url: "https://www.contest.comap.org/highschool/contests/himcm/instructions.html",
     kind: "official",
-    verifiedAt: VERIFIED_AT,
+    verifiedAt: "2026-09-24",
     appliesTo: "MidMCM 2026 eligibility, dates, fee, submission, and awards",
   },
   {
@@ -406,9 +406,9 @@ export const modelingCatalogProjects: ProjectRecord[] = [
     eligibilityTags: ["modeling-competition", "age-14.5-or-younger", "team-1-4", "same-school-or-recognized-program"],
     formatTags: ["team", "14-day-window", "english-paper", "online-submission"],
     costBand: "low",
-    status: "conflict",
+    status: "confirmed",
     cycle: "2026",
-    lastVerified: VERIFIED_AT,
+    lastVerified: "2026-09-24",
     facts: [
       { label: t("年龄资格", "Age eligibility"), value: t("2026 年须出生于 2012 年 5 月 1 日或之后；任一队员超过 14.5 岁，整队只能参加 HiMCM。", "For 2026, students must have been born on or after May 1, 2012. If any team member is older than 14.5, the team may enter HiMCM only."), sourceIds: ["midmcm-rules-2026"] },
       { label: t("团队组成", "Team composition"), value: t("每队最多 4 人，须来自同一学校、机构或同一个符合 COMAP 定义的认可项目，并由该单位教职员工担任指导教师。", "A team has up to four students from the same school, institution, or qualifying program, with a faculty or staff adviser from that affiliation."), sourceIds: ["midmcm-rules-2026"] },
@@ -418,9 +418,10 @@ export const modelingCatalogProjects: ProjectRecord[] = [
       { label: t("提交与奖项", "Submission and recognition"), value: t("提交匿名英文 PDF。奖项按整篇论文综合评审，设 Outstanding、Finalist、Meritorious、Honorable Mention 和 Successful Participant；不公布统一原始分数或分数线。", "Teams submit an anonymous English PDF. Holistic paper judging assigns Outstanding, Finalist, Meritorious, Honorable Mention, or Successful Participant; no universal raw score or cutoff is published."), sourceIds: ["midmcm-rules-2026"] },
     ],
     dates: [
-      { id: "midmcm-registration-deadline-2026", label: t("报名截止（官网日期冲突）", "Registration deadline (official date conflict)"), date: "2026-11-04", time: "14:00", timezone: "EST", region: t("全球", "Global"), status: "conflict", sourceIds: ["midmcm-rules-2026"], note: t("规则页页首表格写 11 月 4 日；正文按 11 月 5 日描述报名节点。COMAP 修正前应以报名后台显示的截止时间为准。", "The header table states November 4, while the body describes registration relative to November 5. Until COMAP corrects the page, use the deadline shown in the registration dashboard.") },
-      { id: "midmcm-contest-window-2026", label: t("竞赛窗口（官网日期冲突）", "Contest window (official date conflict)"), date: "2026-11-04", endDate: "2026-11-17", time: "15:00–20:00", timezone: "EST", region: t("全球", "Global"), status: "conflict", sourceIds: ["midmcm-home", "midmcm-rules-2026"], note: t("规则页页首和日期表写 11 月 4–17 日；正文规则写 11 月 5–18 日。页面暂按页首日期展示，参赛时必须核对 COMAP 后台和最新通知。", "The page header and date table state November 4–17, while the body rules state November 5–18. This page displays the header dates; entrants must check the COMAP dashboard and latest notice.") },
-      { id: "midmcm-solution-deadline-2026", label: t("论文提交截止（官网日期冲突）", "Solution report deadline (official date conflict)"), date: "2026-11-17", time: "21:00", timezone: "EST", region: t("全球", "Global"), status: "conflict", sourceIds: ["midmcm-rules-2026"], note: t("页首日期表写 11 月 17 日 21:00 EST，正文写 11 月 18 日 21:00 EST；提交前以后台倒计时为准。", "The header table states November 17 at 21:00 EST, while the body states November 18 at 21:00 EST; follow the dashboard countdown before submission.") },
+      { id: "midmcm-registration-deadline-2026", label: t("报名截止", "Registration deadline"), date: "2026-11-04", time: "14:00", timezone: "EST", region: t("全球", "Global"), status: "confirmed", sourceIds: ["midmcm-rules-2026"] },
+      { id: "midmcm-contest-window-2026", label: t("竞赛窗口", "Contest window"), date: "2026-11-04", endDate: "2026-11-17", time: "15:00–20:00", timezone: "EST", region: t("全球", "Global"), status: "confirmed", sourceIds: ["midmcm-rules-2026"], note: t("题目于 11 月 4 日 15:00 发布，11 月 17 日 20:00 停止工作。", "Problems are released at 15:00 on November 4, and work stops at 20:00 on November 17.") },
+      { id: "midmcm-solution-deadline-2026", label: t("论文提交截止", "Solution report deadline"), date: "2026-11-17", time: "21:00", timezone: "EST", region: t("全球", "Global"), status: "confirmed", sourceIds: ["midmcm-rules-2026"] },
+      { id: "midmcm-receipt-check-2026", label: t("指导教师收件核验提醒（非交稿截止）", "Adviser receipt-check reminder (not a submission deadline)"), date: "2026-11-18", time: "20:00", timezone: "EST", region: t("全球", "Global"), status: "confirmed", sourceIds: ["midmcm-rules-2026"], note: t("COMAP 建议指导教师在此时前登录系统确认论文已收到；这不是赛期或论文提交截止。", "COMAP asks advisers to log in and confirm receipt by this time; it is not a contest-window or paper-submission deadline.") },
       { id: "midmcm-results-2026", label: t("结果公布最迟日期", "Results published by"), date: "2027-01-31", region: t("官网", "Official website"), status: "confirmed", sourceIds: ["midmcm-rules-2026"] },
     ],
     sections: [
