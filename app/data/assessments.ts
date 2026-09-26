@@ -914,7 +914,7 @@ const actInternationalSessions = [
 ] as const;
 
 const actDates: DateRecord[] = actInternationalSessions.flatMap(([start, regular, late, end], index) => [
-  dateRecord(`act-intl-${index + 1}-regular`, "ACT 国际场常规报名截止", "ACT international regular-registration deadline", regular, index === 0 ? "historical" : "confirmed", ["act-intl-dates-2026-27"], {
+  dateRecord(`act-intl-${index + 1}-regular`, "ACT 国际场常规报名截止", "ACT international regular-registration deadline", regular, index <= 1 ? "historical" : "confirmed", ["act-intl-dates-2026-27"], {
     region: t("美国境外国际考点", "International test centers outside the United States"),
   }),
   dateRecord(`act-intl-${index + 1}-late`, "ACT 国际场晚报名截止", "ACT international late-registration deadline", late, index === 0 ? "historical" : "confirmed", ["act-intl-dates-2026-27"], {

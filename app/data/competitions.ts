@@ -446,7 +446,7 @@ export const competitionSources: SourceRecord[] = [
     owner: t("英国数学基金会", "UK Mathematics Trust"),
     url: "https://ukmt.org.uk/senior-challenges/senior-mathematical-challenge",
     kind: "official",
-    verifiedAt: "2026-09-08",
+    verifiedAt: "2026-09-26",
     appliesTo: "SMC current season",
   },
   {
@@ -455,7 +455,7 @@ export const competitionSources: SourceRecord[] = [
     owner: t("英国数学基金会", "UK Mathematics Trust"),
     url: "https://ukmt.org.uk/senior-challenges/senior-mathematical-challenge-awards",
     kind: "official-data",
-    verifiedAt: "2026-08-04",
+    verifiedAt: "2026-09-26",
     appliesTo: "SMC awards, Kangaroo and BMO1 qualification thresholds",
   },
   {
@@ -582,7 +582,7 @@ export const competitionSources: SourceRecord[] = [
     owner: t("阿思丹国际理科测评", "ASEEDER"),
     url: "https://www.seedasdan.asia/en/smc-en/",
     kind: "official",
-    verifiedAt: "2026-08-25",
+    verifiedAt: "2026-09-26",
     appliesTo: "SMC 2026 Mainland China date, registration deadline, grade eligibility, and delivery format",
   },
   {
@@ -2236,12 +2236,12 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "conflict",
     cycle: "2026–27",
-    lastVerified: "2026-09-08",
+    lastVerified: "2026-09-26",
     facts: [
       { label: t("年级上限", "Grade limit"), value: t("英格兰、威尔士及海外 Year 13；苏格兰 S6；北爱尔兰 Year 14", "Year 13 in England, Wales and overseas; S6 in Scotland; Year 14 in Northern Ireland"), sourceIds: ["ukmt-smc"] },
       { label: t("2026 题型", "2026 format"), value: t("22 道选择题加 3 道 000–999 数字答案题", "22 multiple-choice questions plus three 000–999 digit-answer questions"), status: "confirmed", sourceIds: ["ukmt-smc"] },
       { label: t("时长与满分", "Duration and maximum"), value: t("90 分钟；UKMT 2026 规则列满分 125 分", "90 minutes; the UKMT 2026 rules state a maximum score of 125"), sourceIds: ["ukmt-smc"] },
-      { label: t("新题计分", "New-question scoring"), value: t("三道数字答案题的完整计分规则尚未公布", "Full scoring rules for the three digit-answer questions have not yet been published"), status: "pending", sourceIds: ["ukmt-smc", "ukmt-smc-awards"] },
+      { label: t("2026 计分", "2026 scoring"), value: t("满分 125 分；每名考生起始 25 分，答对加 4 分，答错扣 1 分，留空 0 分。UKMT 已说明最后三题改为 000–999 数字答案题，未另列不同计分例外。", "Maximum 125. Every entrant starts on 25; a correct answer adds 4, an incorrect answer subtracts 1, and a blank scores 0. UKMT states that the final three questions use 000–999 digit answers and does not list a separate scoring exception."), status: "confirmed", sourceIds: ["ukmt-smc", "ukmt-smc-awards", "aseeder-smc-2026"] },
       { label: t("试题保密期限：官网待澄清", "Discussion embargo: official clarification needed"), value: t("官网写明 2026 年 10 月 10 日 08:00 GMT，但同时标为星期五；该日期实际是星期六。学校需向 UKMT 确认准确的解禁时间。", "The official page gives 10 October 2026 at 08:00 GMT but labels it Friday; that date is Saturday. Schools need to confirm the exact release time with UKMT."), status: "conflict", sourceIds: ["ukmt-smc"] },
       { label: t("器材", "Equipment"), value: t("禁止计算器、方格纸和测量工具；允许空白草稿纸", "Calculators, squared paper and measuring instruments are prohibited; blank rough paper is allowed"), sourceIds: ["ukmt-smc"] },
       { label: t("2026 英国学校价格", "2026 UK-school price"), value: t("每 10 份纸质试卷 16 英镑，或每 10 份下载版 15 英镑；中国合作学校价格由本地承办方另行公布", "£16 per 10 posted papers or £15 per 10 downloadable papers; China partner-school pricing is published separately by the local organiser"), sourceIds: ["ukmt-smc", "ukmt-china-partnership"] },
@@ -2271,6 +2271,7 @@ export const competitionProjects: ProjectRecord[] = [
         bullets: [
           t("ASEEDER 中国赛区由合作学校组织纸笔考试，也接受其线上服务申请；2026 年报名截止 9 月 28 日，考试为 10 月 8 日 17:00–18:30。", "ASEEDER's Mainland China route is a paper contest at partner schools and also accepts online service applications; registration closes September 28 and the contest runs 17:00–18:30 on October 8, 2026."),
           t("中国赛区页面注明，具有 British school enrollment status 的学生不得通过中国赛区参赛；此类学校应按 UKMT 当届海外学校账户规则办理。", "The China page states that students with British school enrolment status may not use the Mainland China route; such schools should follow UKMT's current overseas-school account rules."),
+          t("中国赛区页面标注中英文试卷。中国及国际学生按 UKMT 的 Gold／Silver／Bronze 分数线评奖；未获奖者获电子参与证书。2025 分数线仅作历史参考。", "The China page lists Chinese- and English-language papers. Students in China and other international entrants receive Gold, Silver or Bronze according to the UKMT thresholds; non-awardees receive an electronic participation certificate. The 2025 thresholds are historical only."),
           t("学生不能在 UKMT 以个人 coordinator 身份购卷；中国合作路径和 UKMT 直报路径均须由学校或项目方组织监考。", "Students cannot purchase papers from UKMT as individual coordinators; both the China partner route and direct UKMT route require school or organizer administration."),
         ],
       },
