@@ -2756,7 +2756,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "low",
     status: "confirmed",
     cycle: "2026",
-    lastVerified: "2026-09-29",
+    lastVerified: "2026-09-16",
     facts: [
       { label: t("参赛对象", "Audience"), value: t("九、十年级学生；有能力的低年级学生也可参加", "Students in Grades 9–10; motivated younger students may also participate"), sourceIds: ["cemc-csimc"] },
       { label: t("正式参赛资格", "Official-participant rule"), value: t("在加拿大境内或境外学校参赛，十年级及以下且完整填写 Student Information Form，即计入荣誉榜和团体分", "At a school inside or outside Canada, a Grade 10-or-below student who properly completes the Student Information Form is an official participant for honour rolls and team scores"), sourceIds: ["cemc-csimc"] },
