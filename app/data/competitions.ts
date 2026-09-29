@@ -2236,7 +2236,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "conflict",
     cycle: "2026–27",
-    lastVerified: "2026-09-26",
+    lastVerified: "2026-09-29",
     facts: [
       { label: t("年级上限", "Grade limit"), value: t("英格兰、威尔士及海外 Year 13；苏格兰 S6；北爱尔兰 Year 14", "Year 13 in England, Wales and overseas; S6 in Scotland; Year 14 in Northern Ireland"), sourceIds: ["ukmt-smc"] },
       { label: t("2026 题型", "2026 format"), value: t("22 道选择题加 3 道 000–999 数字答案题", "22 multiple-choice questions plus three 000–999 digit-answer questions"), status: "confirmed", sourceIds: ["ukmt-smc"] },
@@ -2252,7 +2252,7 @@ export const competitionProjects: ProjectRecord[] = [
       { id: "smc-2026-paper-order", label: t("英国纸质试卷购买截止", "UK physical-paper order deadline"), date: "2026-09-16", region: t("英国", "United Kingdom"), status: "historical", sourceIds: ["ukmt-smc"] },
       { id: "smc-2026-uk", label: t("英国主竞赛日", "UK competition date"), date: "2026-10-07", region: t("英国", "United Kingdom"), status: "confirmed", sourceIds: ["ukmt-smc", "ukmt-calendar-2026-27"] },
       { id: "smc-2026-upload", label: t("英国纸质答题表上传截止", "UK paper answer-sheet upload deadline"), date: "2026-10-08", time: "23:59", timezone: "Europe/London", region: t("英国", "United Kingdom"), status: "confirmed", sourceIds: ["ukmt-smc"] },
-      { id: "smc-2026-cn-registration", label: t("中国赛区报名截止", "Mainland China registration deadline"), date: "2026-09-28", region: t("中国大陆", "Mainland China"), status: "confirmed", sourceIds: ["aseeder-smc-2026"] },
+      { id: "smc-2026-cn-registration", label: t("中国赛区报名截止", "Mainland China registration deadline"), date: "2026-09-28", region: t("中国大陆", "Mainland China"), status: "historical", sourceIds: ["aseeder-smc-2026"], note: t("截至 9 月 29 日，官网未公布延期；页面未单独说明报名系统状态。", "As of 29 September, the organiser has not announced an extension; the page does not separately state the portal status.") },
       { id: "smc-2026-cn-competition", label: t("中国赛区竞赛", "Mainland China competition"), date: "2026-10-08", time: "17:00", timezone: "Asia/Shanghai", region: t("中国大陆", "Mainland China"), status: "confirmed", sourceIds: ["aseeder-smc-2026"], note: t("考试时长 90 分钟，18:30 结束。", "The 90-minute paper ends at 18:30.") },
     ],
     sections: [
@@ -2756,7 +2756,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "low",
     status: "confirmed",
     cycle: "2026",
-    lastVerified: "2026-09-16",
+    lastVerified: "2026-09-29",
     facts: [
       { label: t("参赛对象", "Audience"), value: t("九、十年级学生；有能力的低年级学生也可参加", "Students in Grades 9–10; motivated younger students may also participate"), sourceIds: ["cemc-csimc"] },
       { label: t("正式参赛资格", "Official-participant rule"), value: t("在加拿大境内或境外学校参赛，十年级及以下且完整填写 Student Information Form，即计入荣誉榜和团体分", "At a school inside or outside Canada, a Grade 10-or-below student who properly completes the Student Information Form is an official participant for honour rolls and team scores"), sourceIds: ["cemc-csimc"] },
@@ -3060,7 +3060,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026",
-    lastVerified: "2026-09-16",
+    lastVerified: "2026-09-29",
     facts: [
       { label: t("赛事识别", "Identity"), value: t("由 Australian Maths Trust 主办，始于 1978 年；与美国 MAA 的 AMC 8／10／12 没有晋级关系", "Run by the Australian Maths Trust since 1978; it has no progression link to the MAA AMC 8/10/12"), sourceIds: ["amt-australian-amc"] },
       { label: t("AMT 全球分组", "AMT global divisions"), value: t("Middle Primary（澳洲 3–4 年级）、Upper Primary（5–6）、Junior（7–8）、Intermediate（9–10）、Senior（11–12）", "Middle Primary (Australian Years 3–4), Upper Primary (5–6), Junior (7–8), Intermediate (9–10) and Senior (11–12)"), sourceIds: ["amt-australian-amc"] },
@@ -3073,7 +3073,7 @@ export const competitionProjects: ProjectRecord[] = [
       { id: "australian-amc-2026-intl-paper", label: t("AMT 国际学校纸质卷报名截止", "AMT international printed-entry deadline"), date: "2026-06-26", region: t("一般国际学校路径", "General international-school route"), status: "historical", sourceIds: ["amt-australian-amc"] },
       { id: "australian-amc-2026-online", label: t("AMT 在线报名截止", "AMT online-entry deadline"), date: "2026-07-31", status: "historical", sourceIds: ["amt-australian-amc"] },
       { id: "australian-amc-2026-global", label: t("AMT 全球竞赛窗口", "AMT global competition window"), date: "2026-08-04", endDate: "2026-08-06", status: "historical", sourceIds: ["amt-australian-amc", "amt-competition-registration"] },
-      { id: "australian-amc-2026-cn-register", label: t("中国合作赛区报名截止", "China partner-route registration deadline"), date: "2026-09-28", region: t("中国大陆", "Mainland China"), status: "confirmed", sourceIds: ["aseeder-australian-amc"] },
+      { id: "australian-amc-2026-cn-register", label: t("中国合作赛区报名截止", "China partner-route registration deadline"), date: "2026-09-28", region: t("中国大陆", "Mainland China"), status: "historical", sourceIds: ["aseeder-australian-amc"], note: t("截至 9 月 29 日，官方中国合作方页面未公布延期；页面未单独说明报名系统状态。", "As of 29 September, the official China-partner page has not announced an extension; the page does not separately state the portal status.") },
       { id: "australian-amc-2026-cn-test", label: t("中国合作赛区竞赛", "China partner-route competition"), date: "2026-10-11", region: t("中国大陆", "Mainland China"), status: "confirmed", sourceIds: ["aseeder-australian-amc"], note: t("Pre-A 10:00–10:50；A／B 10:00–11:00；C／D／E 14:00–15:15，均为北京时间。", "Pre-A 10:00–10:50; A/B 10:00–11:00; C/D/E 14:00–15:15, all China Standard Time.") },
     ],
     sections: [
