@@ -29,6 +29,11 @@ export function CalendarClient({ projects, sources, fixedTrack }: { projects: Pr
   const [status, setStatus] = useState("all");
   const [period, setPeriod] = useState<CalendarPeriod>("current");
   const today = localDateString();
+  const displayRows = useMemo<CalendarRow[]>(() => rows.map((item) => (
+    calendarDateIsHistorical(item, today) && item.status === "confirmed"
+      ? { ...item, status: "historical" }
+      : item
+  )), [rows, today]);
 
   useEffect(() => {
     const requested = new URLSearchParams(window.location.search).get("period");
@@ -36,12 +41,12 @@ export function CalendarClient({ projects, sources, fixedTrack }: { projects: Pr
     const timer = window.setTimeout(() => setPeriod(requested), 0);
     return () => window.clearTimeout(timer);
   }, []);
-  const matched = useMemo(() => rows.filter((item) => {
+  const matched = useMemo(() => displayRows.filter((item) => {
     const text = `${item.project.title.zh} ${item.project.title.en} ${item.project.shortTitle} ${item.label.zh} ${item.label.en} ${item.region?.zh ?? ""}`.toLowerCase();
     return (!query.trim() || text.includes(query.trim().toLowerCase()))
       && (track === "all" || item.project.track === track)
       && (status === "all" || item.status === status);
-  }), [rows, query, track, status]);
+  }), [displayRows, query, track, status]);
   const currentRows = useMemo(() => matched
     .filter((item) => !calendarDateIsHistorical(item, today))
     .sort((a, b) => a.date.localeCompare(b.date) || a.project.shortTitle.localeCompare(b.project.shortTitle, undefined, { numeric: true })), [matched, today]);
