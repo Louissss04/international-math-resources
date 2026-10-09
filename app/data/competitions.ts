@@ -2248,7 +2248,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "conflict",
     cycle: "2026–27",
-    lastVerified: "2026-09-29",
+    lastVerified: "2026-10-09",
     facts: [
       { label: t("年级上限", "Grade limit"), value: t("英格兰、威尔士及海外 Year 13；苏格兰 S6；北爱尔兰 Year 14", "Year 13 in England, Wales and overseas; S6 in Scotland; Year 14 in Northern Ireland"), sourceIds: ["ukmt-smc"] },
       { label: t("2026 题型", "2026 format"), value: t("22 道选择题加 3 道 000–999 数字答案题", "22 multiple-choice questions plus three 000–999 digit-answer questions"), status: "confirmed", sourceIds: ["ukmt-smc"] },
@@ -2262,10 +2262,10 @@ export const competitionProjects: ProjectRecord[] = [
     dates: [
       { id: "smc-2026-access", label: t("英国无障碍试卷申请截止", "UK accessible-paper request deadline"), date: "2026-09-09", region: t("英国", "United Kingdom"), status: "historical", sourceIds: ["ukmt-smc"] },
       { id: "smc-2026-paper-order", label: t("英国纸质试卷购买截止", "UK physical-paper order deadline"), date: "2026-09-16", region: t("英国", "United Kingdom"), status: "historical", sourceIds: ["ukmt-smc"] },
-      { id: "smc-2026-uk", label: t("英国主竞赛日", "UK competition date"), date: "2026-10-07", region: t("英国", "United Kingdom"), status: "confirmed", sourceIds: ["ukmt-smc", "ukmt-calendar-2026-27"] },
-      { id: "smc-2026-upload", label: t("英国纸质答题表上传截止", "UK paper answer-sheet upload deadline"), date: "2026-10-08", time: "23:59", timezone: "Europe/London", region: t("英国", "United Kingdom"), status: "confirmed", sourceIds: ["ukmt-smc"] },
+      { id: "smc-2026-uk", label: t("英国主竞赛日", "UK competition date"), date: "2026-10-07", region: t("英国", "United Kingdom"), status: "historical", sourceIds: ["ukmt-smc", "ukmt-calendar-2026-27"] },
+      { id: "smc-2026-upload", label: t("英国纸质答题表上传截止", "UK paper answer-sheet upload deadline"), date: "2026-10-08", time: "23:59", timezone: "Europe/London", region: t("英国", "United Kingdom"), status: "historical", sourceIds: ["ukmt-smc"] },
       { id: "smc-2026-cn-registration", label: t("中国赛区报名截止", "Mainland China registration deadline"), date: "2026-09-28", region: t("中国大陆", "Mainland China"), status: "historical", sourceIds: ["aseeder-smc-2026"], note: t("截至 9 月 29 日，官网未公布延期；页面未单独说明报名系统状态。", "As of 29 September, the organiser has not announced an extension; the page does not separately state the portal status.") },
-      { id: "smc-2026-cn-competition", label: t("中国赛区竞赛", "Mainland China competition"), date: "2026-10-08", time: "17:00", timezone: "Asia/Shanghai", region: t("中国大陆", "Mainland China"), status: "confirmed", sourceIds: ["aseeder-smc-2026"], note: t("考试时长 90 分钟，18:30 结束。", "The 90-minute paper ends at 18:30.") },
+      { id: "smc-2026-cn-competition", label: t("中国赛区竞赛", "Mainland China competition"), date: "2026-10-08", time: "17:00", timezone: "Asia/Shanghai", region: t("中国大陆", "Mainland China"), status: "historical", sourceIds: ["aseeder-smc-2026"], note: t("考试时长 90 分钟，18:30 结束。", "The 90-minute paper ends at 18:30.") },
     ],
     sections: [
       {
@@ -2281,7 +2281,7 @@ export const competitionProjects: ProjectRecord[] = [
         id: "china-registration",
         title: t("中国学生如何报名", "Registration for students in China"),
         bullets: [
-          t("ASEEDER 中国赛区由合作学校组织纸笔考试，也接受其线上服务申请；2026 年报名截止 9 月 28 日，考试为 10 月 8 日 17:00–18:30。", "ASEEDER's Mainland China route is a paper contest at partner schools and also accepts online service applications; registration closes September 28 and the contest runs 17:00–18:30 on October 8, 2026."),
+          t("ASEEDER 中国赛区 2026 年由合作学校组织纸笔考试，也接受线上服务申请；报名已于 9 月 28 日截止，考试安排为 10 月 8 日 17:00–18:30。下一周期报名安排待公布。", "For 2026, ASEEDER's Mainland China route was a paper contest at partner schools and accepted online service applications; registration closed on September 28 and the contest was scheduled for 17:00–18:30 on October 8. The next-cycle registration arrangement is pending."),
           t("中国赛区页面注明，具有 British school enrollment status 的学生不得通过中国赛区参赛；此类学校应按 UKMT 当届海外学校账户规则办理。", "The China page states that students with British school enrolment status may not use the Mainland China route; such schools should follow UKMT's current overseas-school account rules."),
           t("中国赛区页面标注中英文试卷。中国及国际学生按 UKMT 的 Gold／Silver／Bronze 分数线评奖；未获奖者获电子参与证书。2025 分数线仅作历史参考。", "The China page lists Chinese- and English-language papers. Students in China and other international entrants receive Gold, Silver or Bronze according to the UKMT thresholds; non-awardees receive an electronic participation certificate. The 2025 thresholds are historical only."),
           t("学生不能在 UKMT 以个人 coordinator 身份购卷；中国合作路径和 UKMT 直报路径均须由学校或项目方组织监考。", "Students cannot purchase papers from UKMT as individual coordinators; both the China partner route and direct UKMT route require school or organizer administration."),
