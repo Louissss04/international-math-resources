@@ -643,9 +643,9 @@ export const competitionSources: SourceRecord[] = [
     id: "cms-league-notices",
     label: t("全国高中数学联赛公告档案", "National League notice archive"),
     owner: t("中国数学会", "Chinese Mathematical Society"),
-    url: "https://www.cms.org.cn/Home/comp/comp/cid/12.html",
+    url: "https://www.cms.org.cn/competition/NationalHighSchoolMathematicsLeague.html",
     kind: "official-archive",
-    verifiedAt: "2026-08-04",
+    verifiedAt: "2026-10-14",
     appliesTo: "League notices and first-prize review",
   },
   {
@@ -2544,7 +2544,7 @@ export const competitionProjects: ProjectRecord[] = [
       { label: t("报名", "Registration"), value: t("由学校或省级赛区统一报送；不设全国统一的学生个人报名入口", "Entries are submitted through schools or provincial committees; there is no national individual-registration portal"), sourceIds: ["cms-league-notices"] },
     ],
     dates: [
-      { id: "china-league-2026-date", label: t("2026 全国高中数学联赛日期", "2026 National League date"), date: "TBD", region: t("中国大陆各赛区", "Mainland China regions"), status: "pending", sourceIds: ["cms-league-notices"], note: t("截至 2026 年 8 月 4 日，中国数学会联赛公告栏目最新记录仍为 2025 年一等奖公示，尚未发布 2026 全国统一赛程；各省报名和竞赛安排须查本赛区正式通知。", "As of 4 August 2026, the latest entry in the Chinese Mathematical Society's League archive remained the 2025 First Prize roster and no 2026 national schedule had been published; regional registration and competition arrangements require the current provincial notice.") },
+      { id: "china-league-2026-date", label: t("2026 全国高中数学联赛日期", "2026 National League date"), date: "TBD", region: t("中国大陆各赛区", "Mainland China regions"), status: "pending", sourceIds: ["cms-league-notices"], note: t("中国数学会联赛公告栏目最新记录仍为 2025 年一等奖公示，尚未发布 2026 全国统一赛程；各省报名和竞赛安排须查本赛区正式通知。", "The latest entry in the Chinese Mathematical Society's League archive remains the 2025 First Prize roster, with no 2026 national schedule published there; check the current provincial notice for registration and contest arrangements.") },
     ],
     sections: [
       {
