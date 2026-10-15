@@ -52,9 +52,9 @@ export const researchProgramSources: SourceRecord[] = [
     owner: t("麻省理工学院数学系", "MIT Department of Mathematics"),
     url: "https://math.mit.edu/research/highschool/primes/program/apply.html",
     kind: "official",
-    verifiedAt: "2026-09-15",
+    verifiedAt: "2026-10-15",
     appliesTo: "MIT PRIMES 2027 application",
-    note: t("2027 申请已开放：申请截止为 2026 年 11 月 2 日 23:59 EST，推荐信截止为 11 月 6 日 23:59 EST。", "The 2027 application is open: applications are due November 2, 2026 at 11:59 pm EST, and recommendations are due November 6 at 11:59 pm EST."),
+    note: t("Deadlines 段明确写明申请于 2026 年 11 月 2 日 23:59 EST 截止、推荐信于 11 月 6 日 23:59 EST 截止；同页申请步骤另写推荐信可在申请截止后 5 天内收到，两处表述不一致。", "The Deadlines section explicitly gives November 2, 2026 at 11:59 pm EST for applications and November 6 at 11:59 pm EST for recommendations. The application steps on the same page instead allow letters up to five days after the general deadline; the wording is inconsistent."),
   },
   {
     id: "research-mit-primes-faq",
@@ -611,7 +611,13 @@ export const researchProgramProjects: ProjectRecord[] = [
     costBand: "free",
     status: "confirmed",
     cycle: "2027 application open",
-    lastVerified: "2026-09-15",
+    lastVerified: "2026-10-15",
+    alerts: [{
+      title: t("推荐信截止说明存在歧义", "Inconsistent recommendation-deadline wording"),
+      body: t("官网 Deadlines 段列明 2026 年 11 月 6 日 23:59 EST，但申请步骤另写可在 11 月 2 日申请截止后 5 天内收到推荐信。建议按明确列出的 11 月 6 日提交；如需延后，先向 PRIMES 确认，不要自行推算为 11 月 7 日。", "The official Deadlines section specifies November 6, 2026 at 11:59 pm EST, but the application steps allow letters up to five days after the November 2 application deadline. Plan to meet the explicit November 6 date; ask PRIMES before relying on a later date rather than calculating a November 7 deadline."),
+      sourceIds: ["research-mit-primes-apply"],
+      tone: "warning",
+    }],
     facts: [
       { label: t("主办性质", "Organizer type"), value: t("MIT 数学系直接举办的免费研究项目；PRIMES-USA 是其美国全国远程部分。", "A free research program run by the MIT Department of Mathematics; PRIMES-USA is its nationwide distance section."), sourceIds: ["research-mit-primes-home"] },
       { label: t("2027 申请", "2027 application"), value: t("申请入口已开放。申请截止为 2026 年 11 月 2 日 23:59 EST；推荐信截止为 11 月 6 日 23:59 EST；录取结果预计于 2027 年 1 月上旬统一通知。", "The application is open. Applications are due November 2, 2026 at 11:59 pm EST; recommendations are due November 6 at 11:59 pm EST; decisions are expected in early January 2027."), sourceIds: ["research-mit-primes-apply"] },
@@ -622,7 +628,7 @@ export const researchProgramProjects: ProjectRecord[] = [
     ],
     dates: [
       { id: "mit-primes-2027-application-deadline", label: t("2027 申请截止", "2027 Application Deadline"), date: "2026-11-02", time: "23:59", timezone: "EST", status: "confirmed", region: t("美国居住申请者", "U.S.-resident applicants"), sourceIds: ["research-mit-primes-apply"] },
-      { id: "mit-primes-2027-recommendation-deadline", label: t("2027 推荐信截止", "2027 Recommendation Deadline"), date: "2026-11-06", time: "23:59", timezone: "EST", status: "confirmed", region: t("美国居住申请者", "U.S.-resident applicants"), sourceIds: ["research-mit-primes-apply"] },
+      { id: "mit-primes-2027-recommendation-deadline", label: t("2027 推荐信截止", "2027 Recommendation Deadline"), date: "2026-11-06", time: "23:59", timezone: "EST", status: "conflict", region: t("美国居住申请者", "U.S.-resident applicants"), sourceIds: ["research-mit-primes-apply"], note: t("Deadlines 段列明此日期；同页另写申请截止后 5 天内，表述不一致。建议按 11 月 6 日提交，如需延后先向项目确认。", "This is the date stated in the Deadlines section; the same page also says five days after the application deadline. Meet November 6 and ask the program before relying on a later date.") },
     ],
     sections: [
       {
@@ -630,7 +636,7 @@ export const researchProgramProjects: ProjectRecord[] = [
         title: t("资格边界", "Eligibility Boundary"),
         bullets: [
           t("申请年通常为高中 10 或 11 年级；MIT PRIMES 面向大波士顿通勤范围，PRIMES-USA 面向美国其他地区。", "Applicants are typically in grades 10 or 11. MIT PRIMES serves the Greater Boston commuting area; PRIMES-USA serves the rest of the United States."),
-          t("2027 申请已开放。申请截止为 2026 年 11 月 2 日 23:59 EST；推荐信可在申请截止后 5 天内提交，截止为 11 月 6 日 23:59 EST。", "The 2027 application is open. Applications are due November 2, 2026 at 11:59 pm EST; recommendations may arrive up to five days later, by November 6 at 11:59 pm EST."),
+          t("2027 申请已开放，申请截止为 2026 年 11 月 2 日 23:59 EST。", "The 2027 application is open; applications are due November 2, 2026 at 11:59 pm EST."),
         ],
       },
       {
@@ -638,6 +644,7 @@ export const researchProgramProjects: ProjectRecord[] = [
         title: t("选拔与准备", "Selection and Preparation"),
         bullets: [
           t("官网将 USAMO／USAJMO、大学层级证明课程、重点数学夏校或大学数学教授推荐信列为推荐背景，而不是硬性必要条件。", "MIT lists USAMO/USAJMO qualification, a college proof course, major mathematics summer programs, or a university mathematics recommendation as preferred rather than mandatory backgrounds."),
+          t("申请时需说明倾向参加研究项目还是阅读组；阅读组由导师指导阅读进阶数学文献。", "Applicants indicate a preference for research or reading; reading groups provide guided study of advanced mathematical literature."),
           t("2027 入口题已公布，官方强烈建议用 LaTeX 写解答。可查阅资料和使用工具，但不得接受他人帮助；如借助 AI 得到正确解答，须披露模型和提示词，并用自己的方式完整重写。", "The 2027 entrance problem set is published, and MIT strongly recommends LaTeX for solutions. Resources and tools may be used, but help from other people is prohibited; a correct solution reached with AI assistance requires disclosure of the model and prompts and a complete rewrite in the applicant's own style."),
         ],
       },

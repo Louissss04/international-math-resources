@@ -30,6 +30,28 @@ const resource = (
 });
 
 export const assessmentLearningResources: LearningResourceRecord[] = [
+  {
+    id: "lr-ap-china-student-handbook-2027",
+    projectIds: ["ap-calculus", "ap-precalculus", "ap-calculus-ab", "ap-calculus-bc", "ap-statistics"],
+    title: t("Prometric 中国 2026–27 AP 学生报名手册", "Prometric China 2026–27 AP Student Registration Handbook"),
+    provider: t("Prometric 中国 AP 考试", "Prometric AP China"),
+    url: "https://www.prometric.com.cn/wp-content/uploads/ap/2026-27-AP学生指导手册-AP-Students-Instruction.pdf",
+    kind: "official-guide",
+    description: t("2026 年 9 月版，38 页，中英双语。说明中国考生资格、账户资料、照片、科目确认、缴费及 My AP 考试订购核对。", "September 2026 edition, 38 pages, in Chinese and English. Covers China eligibility, account details, photographs, subject confirmation, payment and verification of exam orders in My AP."),
+    access: "free",
+    verifiedAt: "2026-10-15",
+  },
+  {
+    id: "lr-ap-china-coordinator-handbook-2027",
+    projectIds: ["ap-calculus", "ap-precalculus", "ap-calculus-ab", "ap-calculus-bc", "ap-statistics"],
+    title: t("Prometric 中国 2026–27 AP 学校管理员手册", "Prometric China 2026–27 AP School Coordinator Handbook"),
+    provider: t("Prometric 中国 AP 考试", "Prometric AP China"),
+    url: "https://www.prometric.com.cn/wp-content/uploads/ap/2026-27-AP管理员指导手册-AP-School-Coordinators-Instruction.pdf",
+    kind: "official-guide",
+    description: t("2026 年 9 月版，32 页，中英双语。学校名册、APRO 建课及科目更改说明；第 14 页列出 2027 年中国考点考试时间。", "September 2026 edition, 32 pages, in Chinese and English. Covers school rosters, APRO class sections and subject changes; page 14 lists 2027 exam times at China centres."),
+    access: "free",
+    verifiedAt: "2026-10-15",
+  },
   resource(
     "lr-sat-practice-hub",
     ["sat"],

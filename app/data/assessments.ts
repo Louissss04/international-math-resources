@@ -52,6 +52,8 @@ export const assessmentSources: SourceRecord[] = [
   source("ap-china", "在中国参加 AP 考试", "Taking AP in China", "College Board 国际部", "College Board International", "https://international.collegeboard.org/students/ap/taking-ap-china", "official", "AP testing routes in mainland China"),
   { ...source("ap-china-registration-2027", "Prometric 中国 2027 AP 报名须知", "Prometric China 2027 AP Exam Registration", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/apregistration/", "official", "AP China 2027 registration, eligibility, fees, ID rules and exam schedule", "本校提供 AP 报名的学生须走学校 coordinator 路线；符合条件的社会考生可通过 MyAPChina 自行建账户。", "Students whose school provides AP registration must use the school-coordinator route; eligible unaffiliated candidates may create their own MyAPChina account."), verifiedAt: "2026-09-16" },
   { ...source("ap-china-timeline-2027", "Prometric 中国 2027 AP 报名流程", "Prometric China 2027 AP Registration Timeline", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/aptimeline/", "official", "AP China 2027 roster, registration, payment, confirmation and admission-ticket deadlines", "学生信息、照片和科目确认已于 2026 年 9 月 16 日开放；全部科目确认与缴费截至 11 月 9 日中午 12:00。", "Student information, photo upload and subject confirmation opened on 16 September 2026; all subject confirmation and payment are due by 12:00 noon on 9 November."), verifiedAt: "2026-09-16" },
+  { ...source("ap-china-coordinator-handbook-2027", "Prometric 中国 2026–27 AP 管理员手册", "Prometric China 2026–27 AP Coordinator Handbook", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/wp-content/uploads/ap/2026-27-AP管理员指导手册-AP-School-Coordinators-Instruction.pdf", "official", "September 2026 edition; school rosters, APRO class sections and May 2027 local exam times"), verifiedAt: "2026-10-15" },
+  { ...source("ap-china-student-handbook-2027", "Prometric 中国 2026–27 AP 学生手册", "Prometric China 2026–27 AP Student Handbook", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/wp-content/uploads/ap/2026-27-AP学生指导手册-AP-Students-Instruction.pdf", "official", "September 2026 edition; China eligibility, MyAPChina, payment and exam-order confirmation"), verifiedAt: "2026-10-15" },
   source("ap-score-data", "AP 2026 成绩分布", "2026 AP Score Distributions", "College Board", "College Board", "https://apstudents.collegeboard.org/about-ap-scores/score-distributions", "official-data", "AP 2026 score distributions"),
   source("ap-ab-score-distributions", "AP Calculus AB 历年成绩分布", "Past AP Calculus AB Score Distributions", "College Board", "College Board", "https://apstudents.collegeboard.org/about-ap-scores/score-distributions/ap-calculus-ab", "official-data", "AP Calculus AB score distributions 2020-2026"),
   source("ap-bc-score-distributions", "AP Calculus BC 历年成绩分布", "Past AP Calculus BC Score Distributions", "College Board", "College Board", "https://apstudents.collegeboard.org/about-ap-scores/score-distributions/ap-calculus-bc", "official-data", "AP Calculus BC score distributions 2020-2026"),
@@ -328,7 +330,7 @@ const apProject: ProjectRecord = {
   costBand: "varies",
   status: "confirmed",
   cycle: "2026-27 course / May 2027 exam",
-  lastVerified: "2026-09-16",
+  lastVerified: "2026-10-15",
   alerts: [{
     title: t("中国大陆 2027 AP 学生报名已开放", "Mainland China 2027 AP student registration is open"),
     body: t("自 9 月 16 日起，学生可在 MyAPChina 补充信息、上传照片并确认科目。学校在读生须先由 AP coordinator 提交名单；只有符合条件的社会考生自行创建 MyAPChina 账户。全部科目确认与缴费截至 11 月 9 日中午 12:00。", "From 16 September, students can complete information, upload a photo and verify subjects in MyAPChina. School students must first be rostered by their AP coordinator; only eligible unaffiliated candidates create their own MyAPChina account. All subject confirmation and payment are due by 12:00 noon on 9 November."),
@@ -394,10 +396,10 @@ const apProject: ProjectRecord = {
         rows: [
           {
             cells: [
-              t("AP 授权学校在读生", "Students enrolled at an AP-authorized school"),
-              t("学生使用学校提供的 join code 加入 class 或 exam-only section；AP coordinator 负责提交名单、订卷并告知本校缴费安排。授权学校自行决定是否接收外校考生，并自行决定开考科目。", "The student uses the school's join code to enter a class or exam-only section; the AP coordinator submits the roster, orders exams and communicates the school's payment arrangements. Each authorized school decides whether to accept external candidates and which subjects to offer."),
+              t("Prometric 中国学校名册", "Prometric China school rosters"),
+              t("学校只可提交本校学生，不能把外校学生加入名册。学校应在 APRO 创建正式 class section，不得创建 exam-only section；学生使用本校 join code 加入课程。成功订购后 My AP 显示的 Exam Only 属于考点订购结果，是另一阶段。", "Schools may roster only their own students, not external candidates. Schools must create regular class sections in APRO rather than exam-only sections; students join using their school's code. An Exam Only order later displayed in My AP is a separate, post-ordering stage."),
             ],
-            sourceIds: ["ap-registration", "ap-china"],
+            sourceIds: ["ap-china-coordinator-handbook-2027", "ap-china-student-handbook-2027"],
           },
           {
             cells: [
@@ -409,9 +411,13 @@ const apProject: ProjectRecord = {
           {
             cells: [
               t("非学校考生／自学考生", "Unaffiliated / self-study candidates"),
-              t("MyAPChina 注册页仅供符合条件的社会考生自行创建账户；已经由本校提供 AP 报名的学生不得自建账户，必须由本校路线办理。", "The MyAPChina registration page is only for eligible unaffiliated candidates to create their own account. Students whose school provides AP registration must not create a separate account and must use the school route."),
+              t("符合手册资格的社会考生自行创建 MyAPChina 账户；本校提供 AP 报名的学生须走本校路线。手册另列因大学录取需要指定 AP 成绩的应届高中毕业生例外，但一般已毕业者、大学生、教师及培训从业者、不以 AP 申请大学者不得报名；应届毕业生应先向 Prometric 确认条件。", "Eligible unaffiliated candidates create their own MyAPChina account; students whose school offers AP registration must use that school. The handbook lists a specific exception for recent graduates needing a specified AP exam for university admission, while generally excluding former high-school students, college students, teachers, test-prep staff and those not using AP for admission. Recent graduates should confirm eligibility with Prometric."),
             ],
-            sourceIds: ["ap-china-registration-2027", "ap-china-timeline-2027"],
+            sourceIds: ["ap-china-registration-2027", "ap-china-student-handbook-2027"],
+          },
+          {
+            cells: [t("缴费与考试订购", "Payment and exam orders"), t("从 MyAPChina 进入 ProScheduler 逐科缴费，核对确认号及已付款状态；12 月至次年 1 月再到 My AP 核对考试订购。只有完成信息确认而未成功付款，不会订购考试。", "Pay for each subject through the ProScheduler link in MyAPChina and check the confirmation number and paid status. Verify exam orders again in My AP in December–January; information confirmation without successful payment does not order an exam.")],
+            sourceIds: ["ap-china-student-handbook-2027"],
           },
           {
             cells: [
@@ -477,7 +483,7 @@ const apProject: ProjectRecord = {
       }],
     },
   ],
-  sourceIds: ["ap-clarifications-2027", "ap-ab-exam", "ap-bc-exam", "ap-registration", "ap-china", "ap-china-registration-2027", "ap-china-timeline-2027", "ap-score-data", "ap-ab-score-distributions", "ap-bc-score-distributions", "ap-ab-past-questions", "ap-bc-past-questions"],
+  sourceIds: ["ap-clarifications-2027", "ap-ab-exam", "ap-bc-exam", "ap-registration", "ap-china", "ap-china-registration-2027", "ap-china-timeline-2027", "ap-china-coordinator-handbook-2027", "ap-china-student-handbook-2027", "ap-score-data", "ap-ab-score-distributions", "ap-bc-score-distributions", "ap-ab-past-questions", "ap-bc-past-questions"],
   relatedIds: ["sat"],
   searchTerms: ["AP Calculus", "AP 微积分", "AB", "BC", "hybrid digital", "Bluebook", "FRQ", "大学学分"],
 };

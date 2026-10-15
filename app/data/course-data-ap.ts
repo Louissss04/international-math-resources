@@ -223,13 +223,26 @@ function chinaRegistrationSection(): ContentSection {
     id: "ap-china-registration",
     title: t("中国学生报名", "Registration for students in China"),
     bullets: [
-      t("AP 授权学校学生通过本校 AP coordinator 和 My AP class／exam-only section 报名；学校决定开考科目及是否接收外校考生。", "Students at AP-authorized schools register through their AP coordinator and a My AP class or exam-only section; each school decides which subjects it offers and whether it accepts external candidates."),
-      t("中国大陆指定考务路线、公开考点、资格和证件要求按 Prometric 中国 2027 通知执行；AP 授权学校学生由本校 AP coordinator 先提交名单。", "Mainland-China administration routes, public centres, eligibility and ID requirements follow the 2027 Prometric China notice; students at AP-authorized schools must first be placed on the roster by their AP coordinator."),
+      t("Prometric 中国路径下，学校只可提交本校学生，不能把外校学生加入名册；学校在 APRO 创建正式 class section，不得创建 exam-only section。学生使用本校提供的 join code 加入课程。", "For the Prometric China route, schools may roster only their own students, not external candidates. Schools create regular class sections in APRO rather than exam-only sections; students join using their school's code."),
+      t("成功订购后，My AP 显示的 Exam Only 属于考点订购结果，不等同于学校在 APRO 建立 exam-only 课堂。学校学生先由本校 AP coordinator 提交名单，再登录 MyAPChina。", "An Exam Only order displayed in My AP after successful ordering is distinct from an exam-only class section created by the school in APRO. School students must first be rostered by their AP coordinator before using MyAPChina."),
       t("学生信息、照片和科目确认现已开放，全部科目确认与缴费在 11 月 9 日中午 12:00 截止；每科 1525 元，其中 133 元手续费及税费不退。学校学生须先由 coordinator 提交名单。", "Student information, photo upload and subject confirmation are now open, with all subject confirmation and payment due by 12:00 noon on 9 November. The fee is CNY 1,525 per exam, including a non-refundable CNY 133 processing fee and tax. School students must first be rostered by their coordinator."),
       t("社会考生须符合 Prometric 列明的高中在读、自主学习／网校或因大学录取需要指定 AP 成绩等条件，并在 MyAPChina 自行创建账户；已由本校提供 AP 报名的学生必须通过本校报考，不得自建账户。", "Unaffiliated candidates must meet Prometric's listed conditions, such as current high-school, home/independent/online study, or needing a specified AP score for university admission, and create their own MyAPChina account. Students whose school offers AP registration must register through that school and must not create a separate account."),
+      t("学生手册另列因大学录取需要指定 AP 成绩的应届毕业生例外，但一般已毕业者、大学生、教师及培训从业者、不以 AP 申请大学者不得报名。应届毕业生先向 Prometric 确认适用条件；不符合资格的报名可能被取消且不退款。", "The student handbook lists a specific exception for recent graduates needing a specified AP exam for university admission, while generally excluding former high-school students, college students, teachers, test-prep staff and those not using AP for admission. Recent graduates should confirm eligibility with Prometric; ineligible registrations may be cancelled without a refund."),
+      t("从 MyAPChina 进入 ProScheduler 逐科缴费，核对确认号及已付款状态；12 月至次年 1 月再到 My AP 核对考试订购。只确认科目但未成功付款，不会订购考试。", "Pay for each subject through the ProScheduler link in MyAPChina and check the confirmation number and paid status. Verify exam orders again in My AP in December–January; subject confirmation without successful payment does not order an exam."),
       t("同一科目不得在不同学校或考点重复报名。缴费完成后不得取消或退款，缺考没有补考或退款；只有主办方无法正常组织考试等规定情形可扣除手续费后退款。", "The same subject must not be registered at multiple schools or centres. After payment, cancellation and refunds are unavailable, and there is no make-up or refund for absence; only specified organizer-side disruptions may qualify for a refund less the processing charge."),
       t("Prometric 中国考点不支持 Chromebook；iPad 或 Windows 平板须配实体键盘，设备至少可续航 4 小时。", "Prometric China centres do not support Chromebooks. An iPad or Windows tablet requires a physical keyboard, and the device must have at least four hours of battery life."),
     ],
+    tables: [{
+      title: t("Prometric 中国：2027 年常规数学考试时间", "Prometric China: regular 2027 mathematics exam times"),
+      columns: [t("科目", "Subject"), t("日期", "Date"), t("北京时间", "Beijing time")],
+      rows: [
+        { cells: [t("Calculus AB", "Calculus AB"), t("2027-05-10", "2027-05-10"), t("08:50", "08:50")], sourceIds: ["ap-china-coordinator-handbook-2027"] },
+        { cells: [t("Calculus BC", "Calculus BC"), t("2027-05-10", "2027-05-10"), t("08:50", "08:50")], sourceIds: ["ap-china-coordinator-handbook-2027"] },
+        { cells: [t("Precalculus", "Precalculus"), t("2027-05-11", "2027-05-11"), t("08:50", "08:50")], sourceIds: ["ap-china-coordinator-handbook-2027"] },
+        { cells: [t("Statistics", "Statistics"), t("2027-05-11", "2027-05-11"), t("13:40", "13:40")], sourceIds: ["ap-china-coordinator-handbook-2027"] },
+      ],
+      note: t("管理员手册第 14 页；具体报到与考试安排以准考信为准。AB 与 BC 同时举行，同年只能报一门。", "Coordinator handbook, page 14; follow the admission letter for check-in and final arrangements. AB and BC run simultaneously and only one may be taken in the same year."),
+    }],
   };
 }
 
@@ -276,12 +289,12 @@ export const apCourseProjects: ProjectRecord[] = apSpecs.map((spec) => ({
   summary: spec.summary,
   regions: ["global", "china", "us"],
   gradeBands: ["high-school"],
-  eligibilityTags: ["school-or-authorized-center-registration", "exam-only-section-possible", "china-route-varies-by-cycle"],
+  eligibilityTags: ["school-or-authorized-center-registration", "prometric-china-class-section-required", "china-route-varies-by-cycle"],
   formatTags: ["course-and-exam", "multiple-choice", "free-response", spec.delivery.en.toLowerCase().includes("fully") ? "fully-digital" : "hybrid-digital"],
   costBand: "varies",
   status: "confirmed",
   cycle: spec.cycle,
-  lastVerified: "2026-09-16",
+  lastVerified: "2026-10-15",
   alerts: [{
     title: t("中国大陆 2027 AP 学生报名已开放", "Mainland China 2027 AP student registration is open"),
     body: t("自 9 月 16 日起，学生可在 MyAPChina 补充信息、上传照片并确认科目。学校在读生须先由 AP coordinator 提交名单；只有符合条件的社会考生自行创建 MyAPChina 账户。全部科目确认与缴费截至 11 月 9 日中午 12:00。", "From 16 September, students can complete information, upload a photo and verify subjects in MyAPChina. School students must first be rostered by their AP coordinator; only eligible unaffiliated candidates create their own MyAPChina account. All subject confirmation and payment are due by 12:00 noon on 9 November."),
@@ -308,7 +321,7 @@ export const apCourseProjects: ProjectRecord[] = apSpecs.map((spec) => ({
     note: spec.examSession,
   } satisfies DateRecord],
   sections: projectSections(spec),
-  sourceIds: spec.sourceIds,
+  sourceIds: [...spec.sourceIds, "ap-china-coordinator-handbook-2027", "ap-china-student-handbook-2027"],
   relatedIds: apSpecs.filter((item) => item.id !== spec.id).map((item) => item.id),
   searchTerms: [spec.shortTitle, spec.title.zh, spec.title.en, "AP math", "AP 数学", "College Board", "Bluebook", "中国 AP 报名"],
 }));
