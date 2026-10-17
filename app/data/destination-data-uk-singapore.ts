@@ -353,11 +353,11 @@ export const ukSingaporeDestinationSources: SourceRecord[] = [
       "NTU undergraduate admission guide (AY2027/28)",
       "南洋理工大学招生办公室",
       "NTU Office of Admissions",
-      "https://www.ntu.edu.sg/admissions/undergraduate/admission-guide",
+      "https://www.ntu.edu.sg/admissions/undergraduate/admissions",
       "official",
       "AY2027/2028 application groups and broad application windows",
     ),
-    verifiedAt: "2026-08-25",
+    verifiedAt: "2026-10-17",
   },
   {
     ...source(

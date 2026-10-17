@@ -516,9 +516,9 @@ export const competitionSources: SourceRecord[] = [
     id: "ukmt-calendar-2026-27",
     label: t("UKMT 2026–27 竞赛日历", "UKMT 2026–27 competition calendar"),
     owner: t("英国数学基金会", "UK Mathematics Trust"),
-    url: "https://ukmt.org.uk/competition-calendar-2026-27",
+    url: "https://ukmt.org.uk/competition-calendar",
     kind: "official",
-    verifiedAt: "2026-08-04",
+    verifiedAt: "2026-10-17",
     appliesTo: "SMC, Senior Kangaroo, BMO1 and BMO2 dates",
   },
   {
@@ -563,7 +563,7 @@ export const competitionSources: SourceRecord[] = [
     owner: t("英国数学基金会", "UK Mathematics Trust"),
     url: "https://ukmt.org.uk/competition-papers",
     kind: "official-archive",
-    verifiedAt: "2026-08-04",
+    verifiedAt: "2026-10-17",
     appliesTo: "SMC, Senior Kangaroo, BMO1 and BMO2 past papers",
   },
   {
