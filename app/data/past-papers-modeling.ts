@@ -15,7 +15,7 @@ export const modelingPastPaperArchives: PastPaperArchiveRecord[] = [
       {
         title: t("HiMCM 历届题目与结果", "HiMCM previous problems and results"),
         provider: t("美国数学及其应用联合会（COMAP）", "Consortium for Mathematics and Its Applications (COMAP)"),
-        url: "https://www.contest.comap.com/highschool/contests/himcm/previous%20problems.html",
+        url: "https://www.contest.comap.org/highschool/contests/himcm/previous%20problems.html",
         authority: "official",
         kind: "archive",
         access: "free",

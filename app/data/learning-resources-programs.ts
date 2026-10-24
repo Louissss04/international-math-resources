@@ -8,7 +8,7 @@ export const programLearningResources: LearningResourceRecord[] = [
     projectIds: ["himcm"],
     title: t("HiMCM 历届题目与结果", "HiMCM Previous Problems and Results"),
     provider: t("美国数学及其应用联合会（COMAP）", "Consortium for Mathematics and Its Applications (COMAP)"),
-    url: "https://www.contest.comap.com/highschool/contests/himcm/previous%20problems.html",
+    url: "https://www.contest.comap.org/highschool/contests/himcm/previous%20problems.html",
     kind: "past-papers",
     description: t("按年份进入 HiMCM／MidMCM 题目与官方结果，现有档案可追溯至 1999 年。", "Browse HiMCM/MidMCM problem statements and official results by year; the archive currently reaches back to 1999."),
     access: "free",

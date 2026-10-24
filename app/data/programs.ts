@@ -13,9 +13,9 @@ export const programSources: SourceRecord[] = [
     id: "himcm-home",
     label: t("HiMCM / MidMCM 官方主页", "HiMCM / MidMCM Official Home"),
     owner: t("美国数学及其应用联合会", "COMAP"),
-    url: "https://www.contest.comap.com/highschool/contests/himcm/about.html",
+    url: "https://www.contest.comap.org/highschool/contests/himcm/about.html",
     kind: "official",
-    verifiedAt: "2026-08-05",
+    verifiedAt: "2026-10-24",
     appliesTo: "HiMCM and MidMCM current overview",
   },
   {
@@ -24,7 +24,7 @@ export const programSources: SourceRecord[] = [
     owner: t("美国数学及其应用联合会", "COMAP"),
     url: "https://www.contest.comap.org/highschool/contests/himcm/instructions.html",
     kind: "official",
-    verifiedAt: "2026-09-24",
+    verifiedAt: "2026-10-24",
     appliesTo: "HiMCM 2026",
     note: t("资格、报名、费用、赛期、论文、AI 披露、提交与评奖；当前页面统一列 11 月 4–17 日为赛期。", "Eligibility, registration, fee, contest window, paper, AI disclosure, submission, and judging; the current page consistently lists November 4–17 as the contest window."),
   },
@@ -59,9 +59,9 @@ export const programSources: SourceRecord[] = [
     id: "himcm-archive",
     label: t("HiMCM 历届题目与结果", "HiMCM Previous Problems and Results"),
     owner: t("美国数学及其应用联合会", "COMAP"),
-    url: "https://www.contest.comap.com/highschool/contests/himcm/previous%20problems.html",
+    url: "https://www.contest.comap.org/highschool/contests/himcm/previous%20problems.html",
     kind: "official-archive",
-    verifiedAt: VERIFIED_AT,
+    verifiedAt: "2026-10-24",
     appliesTo: "HiMCM 1999–2025",
   },
   {
@@ -853,7 +853,7 @@ export const programProjects: ProjectRecord[] = [
     costBand: "low",
     status: "confirmed",
     cycle: "2026",
-    lastVerified: "2026-09-24",
+    lastVerified: "2026-10-24",
     facts: [
       { label: t("参赛资格", "Eligibility"), value: t("参赛时为高中阶段或以下在读学生。同队成员须来自同一学校，或共同参加同一个获认可的项目。", "Entrants must be current secondary-school students or younger. Team members must attend the same school or belong to the same recognized program."), sourceIds: ["himcm-instructions-2026"] },
       { label: t("团队组成", "Team composition"), value: t("每队 1–4 名学生，并由所属学校或机构的一名教职员工担任指导教师。", "Each team has one to four students and a faculty or staff adviser from its school or institution."), sourceIds: ["himcm-instructions-2026"] },
@@ -973,7 +973,7 @@ export const programProjects: ProjectRecord[] = [
       {
         id: "awards-results",
         title: t("奖项类别与历年分布", "Award Categories and Historical Distribution"),
-        intro: t("正式奖项类别包括 Outstanding、Finalist、Meritorious、Honorable Mention 和 Successful Participant。Unsuccessful、Disqualified 与 Not Judged 属于结果状态，不是奖项。", "The formal award categories are Outstanding, Finalist, Meritorious, Honorable Mention, and Successful Participant. Unsuccessful, Disqualified, and Not Judged are result statuses rather than awards."),
+        intro: t("正式奖项类别包括 Outstanding、Finalist、Meritorious、Honorable Mention 和 Successful Participant。Unsuccessful、Disqualified 与 Not Judged 属于结果状态，不是奖项。2026 年规则另设 NCTM Award：授予两支 HiMCM Outstanding 队伍和一支 MidMCM Outstanding 队伍。", "The formal award categories are Outstanding, Finalist, Meritorious, Honorable Mention, and Successful Participant. Unsuccessful, Disqualified, and Not Judged are result statuses rather than awards. The 2026 rules also add an NCTM Award for two HiMCM Outstanding teams and one MidMCM Outstanding team."),
         tables: [{
           columns: [t("Designation", "Designation"), t("2025：1,091 队", "2025: 1,091 teams"), t("2024：1,055 队", "2024: 1,055 teams")],
           rows: [
