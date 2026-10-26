@@ -3,6 +3,18 @@ import test from "node:test";
 
 const staleDemoCopy = /codex-preview|Your site is taking shape|这是一个演示型规则引擎|正式版本可接入/i;
 
+test("COMC 2026 closes registration and preserves conflicting overseas release instructions", async () => {
+  const html = await renderHtml("/competitions/comc");
+  const text = visibleText(html);
+  assert.match(text, /2026 registration closed/);
+  assert.match(text, /October 30 at 04:00 China Standard Time/);
+  assert.match(text, /12:00 EDT/);
+  assert.match(text, /16:00 EDT/);
+  assert.match(text, /download time is not a student's start time/);
+  assert.match(html, /cms\.math\.ca\/competitions\/comc\/comc2026\/faq\/teachers\//);
+  assert.doesNotMatch(text, /School registration is open|Independent-student entry is now open|Schools in China can now register/);
+});
+
 async function render(path = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${path}`);

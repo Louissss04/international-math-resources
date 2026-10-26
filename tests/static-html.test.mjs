@@ -7,6 +7,38 @@ import { fileURLToPath } from "node:url";
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const outputDirectory = path.resolve(testDirectory, "../outputs/mathpath-static");
 
+test("2026 SMC raw boundaries preserve years, progression eligibility and official paper links", async () => {
+  const data = await loadStaticData();
+  const rows = data.thresholds.filter((row) => row.projectId === "smc" && row.year === "2026");
+  assert.equal(rows.length, 5);
+  for (const [metric, value] of [["Bronze cutoff", "41"], ["Silver cutoff", "54"], ["Gold cutoff", "71"], ["Senior Kangaroo qualification cutoff", "71"], ["BMO1 qualification cutoff", "101"]]) {
+    const row = rows.find((item) => item.metric.en === metric);
+    assert.equal(row?.value, value, metric);
+    assert.equal(row?.maxScore, "125", metric);
+  }
+  assert.equal(data.thresholds.find((row) => row.projectId === "smc" && row.year === "2025" && row.metric.en === "Gold cutoff")?.value, "72");
+  for (const [project, value] of [["senior-kangaroo", "71"], ["bmo1", "101"]]) {
+    const row = data.thresholds.find((item) => item.projectId === project && item.year === "2026" && item.sitting === "SMC qualification");
+    assert.equal(row?.value, value);
+    assert.equal(row?.maxScore, "125");
+  }
+  const html = await readFile(path.join(outputDirectory, "competition-smc.html"), "utf8");
+  assert.match(visibleText(html), /UK schools only/);
+  assert.match(html, /SMC_2026_Paper-2\.pdf/);
+  assert.match(html, /SMC_2026_Solutions\.pdf/);
+});
+
+test("static COMC page distinguishes closed registration, historical capacity and release-time conflict", async () => {
+  const html = await readFile(path.join(outputDirectory, "competition-comc.html"), "utf8");
+  const text = visibleText(html);
+  assert.match(text, /2026 registration closed/);
+  assert.match(text, /Historical OWC snapshot/);
+  assert.match(text, /Confirm the overseas question-release time/);
+  assert.match(text, /October 30 at 04:00 China Standard Time/);
+  assert.match(text, /Canada's prepaid waybill/);
+  assert.doesNotMatch(text, /School registration is open|Independent-student entry is now open|Schools in China can now register/);
+});
+
 const requiredAssets = [
   "assets/site.css",
   "assets/data.js",

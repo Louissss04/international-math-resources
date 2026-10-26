@@ -455,7 +455,7 @@ export const competitionSources: SourceRecord[] = [
     owner: t("英国数学基金会", "UK Mathematics Trust"),
     url: "https://ukmt.org.uk/senior-challenges/senior-mathematical-challenge-awards",
     kind: "official-data",
-    verifiedAt: "2026-09-26",
+    verifiedAt: "2026-10-26",
     appliesTo: "SMC awards, Kangaroo and BMO1 qualification thresholds",
   },
   {
@@ -563,7 +563,7 @@ export const competitionSources: SourceRecord[] = [
     owner: t("英国数学基金会", "UK Mathematics Trust"),
     url: "https://ukmt.org.uk/competition-papers",
     kind: "official-archive",
-    verifiedAt: "2026-10-17",
+    verifiedAt: "2026-10-26",
     appliesTo: "SMC, Senior Kangaroo, BMO1 and BMO2 past papers",
   },
   {
@@ -989,9 +989,19 @@ export const competitionSources: SourceRecord[] = [
     owner: t("加拿大数学学会", "Canadian Mathematical Society"),
     url: "https://cms.math.ca/competitions/comc/comc2026/",
     kind: "official",
-    verifiedAt: "2026-10-18",
+    verifiedAt: "2026-10-26",
     appliesTo: "COMC 2026 dates, school and independent registration, delivery methods, fees, and CMOQR discontinuation",
-    note: t("邮寄订购已于 10 月 14 日截止，当前费率表标为 n/a；新学校订单仅提供 PDF，订购截止 10 月 21 日，付款截止 10 月 22 日。页面把 2026 年 10 月 21 日误标为 Thursday。", "Courier orders closed October 14 and now appear as n/a in the rates table. New school orders use PDF delivery, with ordering due October 21 and payment due October 22. The page incorrectly labels 21 October 2026 as Thursday."),
+    note: t("官网已明确报名关闭，并公布材料配送及比赛日试题释放安排。付款段列 10 月 22 日、邮寄订单 10 月 14 日；海外试题释放时刻与教师 FAQ 的概括表述不同。", "The page now explicitly closes registration and gives materials-delivery and competition-day question-release arrangements. It lists October 22 for payments and October 14 for shipped orders; the overseas question-release time differs from the teacher FAQ's general wording."),
+  },
+  {
+    id: "cms-comc-teacher-faq-2026",
+    label: t("COMC 2026 教师与组织者 FAQ", "COMC 2026 Teacher and Organizer FAQ"),
+    owner: t("加拿大数学学会", "Canadian Mathematical Society"),
+    url: "https://cms.math.ca/competitions/comc/comc2026/faq/teachers/",
+    kind: "official",
+    verifiedAt: "2026-10-26",
+    appliesTo: "COMC 2026 materials, proctoring, payment and return arrangements",
+    note: t("材料段统一写比赛日 12:00 EDT 放题，主页则区分美洲 12:00、海外 16:00；付款段亦写与适用报名截止相同，和主页的具体付款日期不同。", "The materials section gives 12:00 EDT on competition day generally, whereas the home page distinguishes 12:00 for the Americas and 16:00 overseas. Its payment section says the applicable registration deadline, unlike the specific payment dates on the home page."),
   },
   {
     id: "cms-competitions-2026",
@@ -2258,12 +2268,14 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "conflict",
     cycle: "2026–27",
-    lastVerified: "2026-10-09",
+    lastVerified: "2026-10-26",
     facts: [
       { label: t("年级上限", "Grade limit"), value: t("英格兰、威尔士及海外 Year 13；苏格兰 S6；北爱尔兰 Year 14", "Year 13 in England, Wales and overseas; S6 in Scotland; Year 14 in Northern Ireland"), sourceIds: ["ukmt-smc"] },
       { label: t("2026 题型", "2026 format"), value: t("22 道选择题加 3 道 000–999 数字答案题", "22 multiple-choice questions plus three 000–999 digit-answer questions"), status: "confirmed", sourceIds: ["ukmt-smc"] },
       { label: t("时长与满分", "Duration and maximum"), value: t("90 分钟；UKMT 2026 规则列满分 125 分", "90 minutes; the UKMT 2026 rules state a maximum score of 125"), sourceIds: ["ukmt-smc"] },
       { label: t("2026 计分", "2026 scoring"), value: t("满分 125 分；每名考生起始 25 分，答对加 4 分，答错扣 1 分，留空 0 分。UKMT 已说明最后三题改为 000–999 数字答案题，未另列不同计分例外。", "Maximum 125. Every entrant starts on 25; a correct answer adds 4, an incorrect answer subtracts 1, and a blank scores 0. UKMT states that the final three questions use 000–999 digit answers and does not list a separate scoring exception."), status: "confirmed", sourceIds: ["ukmt-smc", "ukmt-smc-awards", "aseeder-smc-2026"] },
+      { label: t("2026 证书分数线", "2026 certificate cutoffs"), value: t("Gold 71 分、Silver 54 分、Bronze 41 分，均为最低获奖分；满分 125 分。", "Gold 71, Silver 54 and Bronze 41 are the minimum award scores, out of 125."), status: "confirmed", sourceIds: ["ukmt-smc-awards"] },
+      { label: t("2026 后续轮次分数线", "2026 follow-on cutoffs"), value: t("Senior Kangaroo 71 分（仅英国学校）；BMO1 101 分，仍须符合相应参赛资格。达到分数线不等于中国赛区学生自动获邀。", "Senior Kangaroo 71 (UK schools only); BMO1 101, subject to the relevant eligibility rules. Reaching a cutoff does not automatically invite a student from the China administration."), status: "confirmed", sourceIds: ["ukmt-smc-awards"] },
       { label: t("试题保密期限：官网待澄清", "Discussion embargo: official clarification needed"), value: t("官网写明 2026 年 10 月 10 日 08:00 GMT，但同时标为星期五；该日期实际是星期六。学校需向 UKMT 确认准确的解禁时间。", "The official page gives 10 October 2026 at 08:00 GMT but labels it Friday; that date is Saturday. Schools need to confirm the exact release time with UKMT."), status: "conflict", sourceIds: ["ukmt-smc"] },
       { label: t("器材", "Equipment"), value: t("禁止计算器、方格纸和测量工具；允许空白草稿纸", "Calculators, squared paper and measuring instruments are prohibited; blank rough paper is allowed"), sourceIds: ["ukmt-smc"] },
       { label: t("2026 英国学校价格", "2026 UK-school price"), value: t("每 10 份纸质试卷 16 英镑，或每 10 份下载版 15 英镑；中国合作学校价格由本地承办方另行公布", "£16 per 10 posted papers or £15 per 10 downloadable papers; China partner-school pricing is published separately by the local organiser"), sourceIds: ["ukmt-smc", "ukmt-china-partnership"] },
@@ -2293,7 +2305,7 @@ export const competitionProjects: ProjectRecord[] = [
         bullets: [
           t("ASEEDER 中国赛区 2026 年由合作学校组织纸笔考试，也接受线上服务申请；报名已于 9 月 28 日截止，考试安排为 10 月 8 日 17:00–18:30。下一周期报名安排待公布。", "For 2026, ASEEDER's Mainland China route was a paper contest at partner schools and accepted online service applications; registration closed on September 28 and the contest was scheduled for 17:00–18:30 on October 8. The next-cycle registration arrangement is pending."),
           t("中国赛区页面注明，具有 British school enrollment status 的学生不得通过中国赛区参赛；此类学校应按 UKMT 当届海外学校账户规则办理。", "The China page states that students with British school enrolment status may not use the Mainland China route; such schools should follow UKMT's current overseas-school account rules."),
-          t("中国赛区页面标注中英文试卷。中国及国际学生按 UKMT 的 Gold／Silver／Bronze 分数线评奖；未获奖者获电子参与证书。2025 分数线仅作历史参考。", "The China page lists Chinese- and English-language papers. Students in China and other international entrants receive Gold, Silver or Bronze according to the UKMT thresholds; non-awardees receive an electronic participation certificate. The 2025 thresholds are historical only."),
+          t("中国赛区页面标注中英文试卷。中国及国际学生按 UKMT 的 Gold／Silver／Bronze 分数线评奖；2026 年最低分依次为 71、54、41 分。未获奖者获电子参与证书。", "The China page lists Chinese- and English-language papers. Students in China and other international entrants receive Gold, Silver or Bronze according to the UKMT thresholds: the 2026 minimum scores are 71, 54 and 41 respectively. Non-awardees receive an electronic participation certificate."),
           t("学生不能在 UKMT 以个人 coordinator 身份购卷；中国合作路径和 UKMT 直报路径均须由学校或项目方组织监考。", "Students cannot purchase papers from UKMT as individual coordinators; both the China partner route and direct UKMT route require school or organizer administration."),
         ],
       },
@@ -2304,8 +2316,8 @@ export const competitionProjects: ProjectRecord[] = [
           columns: [t("项目", "Item"), t("定义", "Definition")],
           rows: [
             { cells: [t("Gold／Silver／Bronze", "Gold / Silver / Bronze"), t("成绩较高的约 66% 获奖，金、银、铜人数比例约为 1:2:3；每年公布整数分数线", "Approximately the highest-scoring 66% receive awards, divided into gold, silver and bronze in a ratio of about 1:2:3; integer thresholds are published annually")], sourceIds: ["ukmt-smc-awards"] },
-            { cells: [t("Senior Kangaroo", "Senior Kangaroo"), t("按 SMC 当届分数线选择；当前标准资格限 UK Schools", "Selected by the current SMC threshold; standard qualification is currently restricted to UK schools")], sourceIds: ["ukmt-smc-awards", "ukmt-kangaroo"] },
-            { cells: [t("BMO1 自动资格", "BMO1 automatic qualification"), t("同时达到当届 SMC 分数线并具备英国 IMO 代表资格；其他学生可由学校按规则付费报名", "Requires both the current SMC cutoff and UK IMO eligibility; other students may enter through the school's discretionary paid route")], sourceIds: ["ukmt-smc-awards", "bmos-eligibility", "ukmt-bmo1"] },
+            { cells: [t("Senior Kangaroo", "Senior Kangaroo"), t("2026 年 SMC 资格线为 71 分；当前标准资格限 UK Schools", "The 2026 SMC qualification cutoff is 71; standard qualification is currently restricted to UK schools")], sourceIds: ["ukmt-smc-awards", "ukmt-kangaroo"] },
+            { cells: [t("BMO1 自动资格", "BMO1 automatic qualification"), t("2026 年须达到 SMC 101 分并具备英国 IMO 代表资格；其他学生可由学校按规则付费报名", "Requires an SMC score of 101 in 2026 and UK IMO eligibility; other students may enter through the school's discretionary paid route")], sourceIds: ["ukmt-smc-awards", "bmos-eligibility", "ukmt-bmo1"] },
           ],
         }],
       },
@@ -2313,7 +2325,7 @@ export const competitionProjects: ProjectRecord[] = [
         id: "official-resources",
         title: t("官方历年材料", "Official archive"),
         bullets: [
-          t("UKMT 官方试题库提供历年 SMC 试卷与解答；当届格式和计分仍以 2026 SMC 页面及竞赛材料为准。", "UKMT's official paper archive provides past SMC papers and solutions; the 2026 SMC page and current contest materials govern the current format and scoring."),
+          t("UKMT 官方试题库已列出 2026 SMC 试卷、答案、题目与解答合订版、Solutions and Investigations，以及视频解答入口。资料链接见下方官方材料及真题区。", "UKMT's official archive now lists the 2026 SMC paper, solutions, combined questions and solutions, Solutions and Investigations, and a video-solutions entry. Links appear below under official materials and past papers."),
         ],
       },
     ],
@@ -2336,8 +2348,9 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "low",
     status: "confirmed",
     cycle: "2026–27",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-10-26",
     facts: [
+      { label: t("2026 SMC 晋级分数", "2026 SMC qualification score"), value: t("SMC 至少 71／125 分，标准晋级仅适用于英国学校；这不是 Senior Kangaroo 本身的获奖线。", "At least 71/125 in the SMC, with standard qualification restricted to UK schools. This is not an award cutoff on the Senior Kangaroo paper."), sourceIds: ["ukmt-smc-awards"] },
       { label: t("参赛资格", "Entry"), value: t("达到当届 SMC 资格线可自动晋级；符合条件的学校也可购买额外参赛名额", "Students who meet the annual SMC cutoff qualify automatically; eligible schools may also purchase discretionary entries"), sourceIds: ["ukmt-kangaroo", "ukmt-smc-awards"] },
       { label: t("题量与时长", "Questions and duration"), value: t("20 题，60 分钟；满分 100", "20 questions, 60 minutes; maximum 100"), sourceIds: ["ukmt-kangaroo"] },
       { label: t("答案与计分", "Answers and scoring"), value: t("每题提交 000–999 整数；答对 5 分，答错或留空 0 分", "Each response is an integer from 000 to 999; 5 points correct and 0 wrong or blank"), sourceIds: ["ukmt-kangaroo"] },
@@ -2400,8 +2413,9 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026–27",
-    lastVerified: "2026-09-16",
+    lastVerified: "2026-10-26",
     facts: [
+      { label: t("2026 SMC 晋级分数", "2026 SMC qualification score"), value: t("SMC 至少 101／125 分，并须符合自动晋级资格；这不是 BMO1 试卷成绩，也不等同于中国学生自动获邀。", "At least 101/125 in the SMC, subject to automatic-entry eligibility. This is not a BMO1 paper score or an automatic invitation for students in China."), sourceIds: ["ukmt-smc-awards"] },
       { label: t("题量与时长", "Questions and duration"), value: t("6 道证明题，3.5 小时；满分 60", "6 proof problems, 3.5 hours; maximum 60"), sourceIds: ["ukmt-bmo1"] },
       { label: t("评分", "Marking"), value: t("每题 10 分，按数学进展与证明完整度评分", "10 points per problem, awarded for mathematical progress and completeness of proof"), sourceIds: ["ukmt-bmo1-awards"] },
       { label: t("自动晋级", "Automatic entry"), value: t("须同时达到当届 SMC 的 BMO1 分数线，并具备英国 IMO 代表资格", "Requires both the current SMC-to-BMO1 cutoff and UK IMO eligibility"), sourceIds: ["ukmt-smc-awards", "bmos-eligibility"] },
@@ -3219,23 +3233,37 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026",
-    lastVerified: "2026-10-18",
+    lastVerified: "2026-10-26",
+    alerts: [
+      {
+        title: t("2026 报名已关闭", "2026 registration closed"),
+        body: t("CMS 主页已明确关闭本届报名。中国及其他美洲以外地区于 10 月 30 日比赛；已报名队伍应由学校或监考人查看 Portal 和官方邮件，不再按旧名额快照办理新报名。", "CMS now explicitly closes registration. China and other locations outside the Americas write on October 30. Registered students should follow their school or proctor's Portal and official email instructions; old capacity snapshots are not an entry route."),
+        sourceIds: ["cms-comc-current"],
+        tone: "warning",
+      },
+      {
+        title: t("海外试题下载时刻待确认", "Confirm the overseas question-release time"),
+        body: t("主页写海外试题于 10 月 29 日 16:00 EDT 提供，教师 FAQ 则概括为比赛日 12:00 EDT。两处并不一致；中国学校应向 CMS 确认，并以收到的专属监考通知核对下载和开考安排。", "The home page gives October 29 at 16:00 EDT for overseas question release, while the teacher FAQ generally says 12:00 EDT on competition day. The wording differs; schools in China should confirm with CMS and check their specific proctor instructions for downloading and administration."),
+        sourceIds: ["cms-comc-current", "cms-comc-teacher-faq-2026"],
+        tone: "warning",
+      },
+    ],
     facts: [
-      { label: t("2026 日期与报名", "2026 dates and registration"), value: t("学校新订单仅提供 PDF，订购截止 10 月 21 日，付款截止 10 月 22 日；邮寄订购已于 10 月 14 日截止。独立考生须在 CMS Portal 创建 Student 账户，选择仍有名额的 Open Writing Centre（OWC）并付款；未付款不保留名额。美洲于 10 月 29 日比赛，其他地区于 10 月 30 日比赛。", "New school orders use PDF delivery, with ordering due October 21 and payment due October 22; courier orders closed October 14. Independent students create a Student account in the CMS Portal, choose an Open Writing Centre (OWC) with space and pay; unpaid orders do not reserve places. The contest is held October 29 in the Americas and October 30 elsewhere."), status: "confirmed", sourceIds: ["cms-comc-current", "cms-comc-student-faq", "cms-comc-independent-portal", "cms-competitions-2026"] },
-      { label: t("付款与日期说明", "Payment and date clarification"), value: t("10 月 14 日和 10 月 21 日分别是邮寄、PDF 两种交付方式的订购截止，不是两套付款截止；官方明确所有付款截至 10 月 22 日。页面把 2026 年 10 月 21 日误标为 Thursday，但日期本身明确。", "October 14 and October 21 are order deadlines for shipped and PDF delivery, not competing payment deadlines; the organiser states that all payments are due October 22. The page mislabels 21 October 2026 as Thursday, but the date itself is clear."), status: "confirmed", sourceIds: ["cms-comc-current"] },
+      { label: t("2026 日期与报名", "2026 dates and registration"), value: t("本届报名已关闭。美洲于 10 月 29 日比赛，中国及其他美洲以外地区于 10 月 30 日比赛；已报名的独立考生由 OWC 发送最终安排。", "Registration is closed. The Americas write on October 29; China and other locations outside the Americas write on October 30. Registered independent students receive final arrangements from their OWC."), status: "confirmed", sourceIds: ["cms-comc-current"] },
+      { label: t("付款记录与差异", "Payment record and differing wording"), value: t("当前主页列付款截止 10 月 22 日（邮寄订单 10 月 14 日）；教师 FAQ 写付款与适用报名截止日相同。相关日期均已过去；欠款订单可能取消，已付款订单不可更改或退款，有疑问应向 CMS 核实订单状态。", "The current home page lists October 22 for payment, with October 14 for shipped orders; the teacher FAQ says payment is due on the applicable registration deadline. These dates have passed. Unpaid orders may be cancelled, and paid orders cannot be modified or refunded; ask CMS about an unresolved order."), status: "conflict", sourceIds: ["cms-comc-current", "cms-comc-teacher-faq-2026"] },
       { label: t("正式参赛资格", "Official-participant eligibility"), value: t("各地点、各年级均可参加；要获得正式奖项，学生须在 2026 年 6 月 30 日未满 19 岁，并自 9 月 15 日起全日制就读于学校、线上学校、Cégep 或合规居家教育。", "Students at all locations and grade levels may enter. For official awards, a student must be under 19 on June 30, 2026 and enrolled full-time in a school, virtual school, Cégep, or qualifying homeschool from September 15."), status: "confirmed", sourceIds: ["cms-comc-eligibility"] },
       { label: t("试卷结构", "Exam structure"), value: t("150 分钟、12 题、满分 80：4 道入门题各 4 分，4 道中等题各 6 分，4 道长解答题各 10 分；最后四题必须写出完整过程。", "150 minutes, 12 questions, maximum 80: four introductory questions worth 4 each, four intermediate questions worth 6 each, and four advanced questions worth 10 each; the final four require full solutions."), status: "confirmed", sourceIds: ["cms-comc-student-faq"] },
       { label: t("器材与监考", "Equipment and proctoring"), value: t("纸笔考试；禁止手机、计算器及其他电子设备。正式成绩须在 CMS 认可场地由 Qualified Proctor 全程监考。", "A paper examination; phones, calculators, and other electronic devices are prohibited. Official results require full supervision by a CMS-approved Qualified Proctor."), status: "confirmed", sourceIds: ["cms-comc-eligibility", "cms-comc-student-faq"] },
       { label: t("2026 组别", "2026 divisions"), value: t("Competitive Division 要求学生为正式参赛者，且为加拿大公民／永久居民或在加拿大学校考试，并于 13:00–15:30 EDT 开始、在 2.5 小时内结束；其他正式参赛者进入 Global Division。只有 Competitive Division 可获现金奖。", "The Competitive Division requires official-participant status, Canadian citizenship/permanent residence or writing at a Canadian school, and a start between 1:00 and 3:30 p.m. EDT with completion within 2.5 hours. All other official participants enter the Global Division. Cash prizes are limited to the Competitive Division."), status: "confirmed", sourceIds: ["cms-comc-changes-2026", "cms-comc-prizes-2026"] },
-      { label: t("2026 当前学校费率", "Current 2026 school rates"), value: t("新订单仅提供 PDF：加拿大 CAD 30／人、至少 3 人；美国及其他地区 USD 35／人、至少 5 人。邮寄订购已截止，官网现标 n/a。此费率不代表独立考生 OWC 的收费。", "New orders use PDF delivery only: Canada CAD 30 per student, minimum 3; USA and elsewhere USD 35 per student, minimum 5. Courier orders have closed and now appear as n/a. These rates do not establish independent-student OWC fees."), status: "confirmed", sourceIds: ["cms-comc-current"] },
+      { label: t("2026 PDF 学校费率（已截止）", "2026 PDF school rates — closed"), value: t("截至 10 月 21 日订购截止：加拿大 CAD 30／人、至少 3 人；美国及其他地区 USD 35／人、至少 5 人。当前主页已撤下订购费率表；此处为历史记录，不是补报名报价，也不代表独立考生 OWC 收费。", "Before the October 21 order deadline: Canada CAD 30 per student, minimum 3; USA and elsewhere USD 35 per student, minimum 5. The home page has removed the order-rate table. These are historical rates, not late-entry prices or independent-student OWC fees."), status: "historical", sourceIds: ["cms-comc-current"] },
       { label: t("2026 邮寄费率（已截止）", "2026 courier rates — closed"), value: t("10 月 14 日订购截止前：加拿大 CAD 35／人、至少 5 人；美国 USD 40／人、至少 5 人。保留作当届历史记录，不是当前可选交付方式。", "Before the October 14 order deadline: Canada CAD 35 per student, minimum 5; USA USD 40 per student, minimum 5. Retained as the season's historical rates, not a currently available delivery method."), status: "historical", sourceIds: ["cms-comc-current"] },
-      { label: t("OWC 名额快照（10 月 18 日）", "OWC availability snapshot (18 October)"), value: t("10 个场次中，7 个加拿大线下场次仍有名额；Windsor 已满（10／10），2 个 Remote/Zoom 场次仍满额（16／16、19／19）。未列中国考点；canadaOnly: false 不能证明中国学生可报。名额随时可能变化，应查看官方实时列表。", "Of ten sessions, seven Canadian in-person sessions still have spaces. Windsor is full (10/10), as are both Remote/Zoom sessions (16/16 and 19/19). No China centre is listed; canadaOnly: false does not establish China eligibility. Availability can change; use the official live list."), status: "confirmed", sourceIds: ["cms-comc-owc-live-2026"] },
+      { label: t("OWC 名额快照（10 月 18 日，历史）", "Historical OWC snapshot (18 October)"), value: t("当时 10 个场次中，7 个加拿大线下场次仍有名额；Windsor 满额（10／10），2 个 Remote/Zoom 场次满额（16／16、19／19）。未列中国考点；canadaOnly: false 不证明中国学生可报。本届报名现已关闭。", "At that time, seven of ten sessions had spaces at Canadian in-person centres. Windsor was full (10/10), as were both Remote/Zoom sessions (16/16 and 19/19). No China centre was listed, and canadaOnly: false did not establish China eligibility. Registration is now closed."), status: "historical", sourceIds: ["cms-comc-owc-live-2026", "cms-comc-current"] },
     ],
     dates: [
       { id: "comc-2026-registration-open", label: t("学校报名开放", "School registration opens"), date: "2026-09-01", status: "historical", sourceIds: ["cms-comc-current"] },
       { id: "comc-2026-shipped-deadline", label: t("邮寄试卷订购／报名截止", "Shipped-exam order/registration deadline"), date: "2026-10-14", status: "historical", sourceIds: ["cms-comc-current"] },
-      { id: "comc-2026-pdf-deadline", label: t("PDF 配送订购／报名截止", "PDF-delivery order/registration deadline"), date: "2026-10-21", status: "confirmed", sourceIds: ["cms-comc-current", "cms-competitions-2026"] },
-      { id: "comc-2026-payment-deadline", label: t("所有订单付款截止", "All-order payment deadline"), date: "2026-10-22", status: "confirmed", sourceIds: ["cms-comc-current"], note: t("10 月 14 日和 10 月 21 日是不同交付方式的订购截止；官网把 10 月 21 日误标为 Thursday。", "October 14 and October 21 are order deadlines for different delivery methods; the page labels October 21 with the wrong weekday.") },
+      { id: "comc-2026-pdf-deadline", label: t("PDF 配送订购／报名截止", "PDF-delivery order/registration deadline"), date: "2026-10-21", status: "historical", sourceIds: ["cms-comc-current", "cms-competitions-2026"] },
+      { id: "comc-2026-payment-deadline", label: t("主页所列付款截止（邮寄订单除外）", "Home-page payment deadline (except shipped orders)"), date: "2026-10-22", status: "historical", sourceIds: ["cms-comc-current", "cms-comc-teacher-faq-2026"], note: t("当前主页为 10 月 22 日，邮寄订单为 10 月 14 日；教师 FAQ 另写与适用报名截止日相同。保留双方说明。", "The current home page says October 22, with October 14 for shipped orders; the teacher FAQ instead says the applicable registration deadline. Both statements are retained.") },
       { id: "comc-2026-americas", label: t("加拿大与美洲竞赛日", "Canada and Americas competition date"), date: "2026-10-29", region: t("北美、南美、中美及覆盖这些地区的时区", "North, South, and Central America and their time zones"), status: "confirmed", sourceIds: ["cms-comc-current", "cms-comc-eligibility"] },
       { id: "comc-2026-world", label: t("中国及其他美洲以外地区竞赛日", "China and other locations outside the Americas"), date: "2026-10-30", region: t("中国及其他美洲以外地区", "China and elsewhere outside the Americas"), status: "confirmed", sourceIds: ["cms-comc-current", "cms-comc-changes-2026"], note: t("CMS 已确认全球日期；ASEEDER 的 2026 合作学校报名截止、费用和具体场次仍待其更新。", "The CMS worldwide date is confirmed; ASEEDER's 2026 partner-school deadline, fee, and local arrangements remain pending.") },
     ],
@@ -3257,28 +3285,41 @@ export const competitionProjects: ProjectRecord[] = [
         id: "registration",
         title: t("报名与正式参赛", "Registration and official participation"),
         bullets: [
-          t("学校报名已开放，由教师或学校通过 CMS Competitions Portal 注册。正式成绩与奖项要求全程由 CMS 认可条件下的 Qualified Proctor 监考。", "School registration is open. A teacher or school registers through the CMS Competitions Portal. Official scores and awards require full supervision by a Qualified Proctor under CMS-approved conditions."),
-          t("独立考生入口现已开放：学校不能组织时，先在 COMC 主页查看实时 OWC 名额，再创建 CMS Student 账户，选定仍有名额的 OWC 后以 PayPal 或信用卡付款。未付款不会保留名额；OWC 的地点、名额和是否提供远程场次以实时列表为准。", "Independent-student entry is now open. If a school cannot organise the contest, first check the live OWC list on the COMC home page, create a CMS Student account, choose an OWC with space, and pay by PayPal or credit card. An unpaid order does not reserve a place; location, capacity and any remote option are determined by the live list."),
+          t("2026 报名已关闭。学校通过教师账户管理既有报名；正式成绩与奖项仍须符合 CMS 的监考要求。", "Registration for 2026 is closed. Schools manage existing entries through their teacher accounts; official scores and awards remain subject to CMS proctoring requirements."),
+          t("已报名 OWC 的独立考生应查看电子邮件中的最终安排。下表仅保留报名期的名额记录，不能用于判断当前可报名。", "Registered OWC students should check their emailed final instructions. The table below preserves registration-period capacity snapshots and does not establish current bookability."),
         ],
         tables: [{
           title: t("2026 OWC 名额记录", "2026 OWC availability history"),
           columns: [t("记录日期", "Snapshot date"), t("仍有名额的线下场次", "In-person sessions with space"), t("Remote/Zoom 场次", "Remote/Zoom sessions")],
           rows: [
             { cells: [t("2026-10-11", "11 October 2026"), t("8 场", "8 sessions"), t("2 场均满：16／16、19／19", "Both full: 16/16 and 19/19")], status: "historical", sourceIds: ["cms-comc-owc-live-2026"] },
-            { cells: [t("2026-10-18", "18 October 2026"), t("7 场；Windsor 已满（10／10）", "7 sessions; Windsor full (10/10)"), t("2 场仍满：16／16、19／19", "Both still full: 16/16 and 19/19")], sourceIds: ["cms-comc-owc-live-2026"] },
+            { cells: [t("2026-10-18", "18 October 2026"), t("7 场；Windsor 已满（10／10）", "7 sessions; Windsor full (10/10)"), t("2 场仍满：16／16、19／19", "Both still full: 16/16 and 19/19")], status: "historical", sourceIds: ["cms-comc-owc-live-2026"] },
           ],
-          note: t("两次快照均未列中国考点；线下场次均标为 canadaOnly，远程场次的 canadaOnly: false 不是中国学生资格说明。报名时以实时名额及 CMS 的资格确认结果为准。", "Neither snapshot lists a China centre. All in-person entries are marked canadaOnly; the remote entries' canadaOnly: false is not a China-eligibility statement. Registration depends on live availability and CMS confirmation of eligibility."),
+          note: t("两次快照均未列中国考点；线下场次均标为 canadaOnly，远程场次的 canadaOnly: false 不是中国学生资格说明。上述记录不代表仍有报名名额。", "Neither snapshot lists a China centre. All in-person entries are marked canadaOnly; the remote entries' canadaOnly: false is not a China-eligibility statement. These snapshots do not mean registration remains available."),
         }],
       },
       {
         id: "china-registration",
         title: t("中国学生如何报名", "Registration for students in China"),
         bullets: [
-          t("中国学校现可在 CMS Portal 注册。中国属于美洲以外地区，2026 年比赛日为 10 月 30 日；学校订单仅提供 PDF，35 美元／人、至少 5 人，订购／报名截止 10 月 21 日。", "Schools in China can now register through the CMS Portal. China writes on October 30 in 2026; school orders use PDF delivery only at USD 35 per student with a minimum of five, with an October 21 order/registration deadline."),
-          t("10 月 18 日的公开 OWC 列表没有中国考点，2 个 Remote/Zoom 场次均已满额。canadaOnly: false 不等同于“中国学生可报”；学校不能组织时，须先向 CMS 确认中国个人考生资格及可用场次。", "The October 18 public OWC list has no China centre, and both Remote/Zoom sessions are full. canadaOnly: false does not establish eligibility for students in China; if the school cannot host, confirm China individual-student eligibility and an available session with CMS first."),
+          t("中国学校的 2026 报名已结束，比赛日仍为 10 月 30 日。学校通过 CMS Portal 或指定监考人领取材料，学生不应自行寻找当届未公开试题。", "The 2026 registration period for schools in China has ended; the contest remains October 30. Schools receive materials through the CMS Portal or an appointed proctor. Students should not seek unreleased current papers."),
+          t("10 月 18 日的 OWC 历史快照没有中国考点，2 个 Remote/Zoom 场次均满额。旧列表和 canadaOnly: false 均不能证明可补报名或中国个人参赛资格。", "The October 18 OWC snapshot lists no China centre and both Remote/Zoom sessions as full. Neither the old list nor canadaOnly: false establishes late entry or China individual eligibility."),
           t("正式成绩要求学校获得 Official participation status，或安排经 CMS 审核的 Qualified Proctor；不符合监考条件者只能取得非正式成绩，不能获得奖项。", "Official results require Official participation status or a CMS-approved Qualified Proctor. Otherwise, students receive unofficial scores and are ineligible for awards."),
-          t("ASEEDER 页面仍是 2025 赛季；合作学校路径的 2026 报名截止和费用继续标待公布，不影响学校直接向 CMS 注册。", "The ASEEDER page remains on the 2025 cycle. Its 2026 partner-school deadline and fee remain pending, but this does not prevent qualifying schools from registering directly with CMS."),
+          t("此前收录的 ASEEDER 页面为 2025 赛季；合作学校的 2026 费用及具体安排仍未确认。CMS 当前关闭报名的说明不能被旧合作页替代。", "The previously recorded ASEEDER page covers 2025; its 2026 partner-school fees and arrangements remain unconfirmed. An old partner page does not override CMS's current registration closure."),
         ],
+      },
+      {
+        id: "materials-2026",
+        title: t("2026 考前材料与下载", "2026 Materials and Downloads"),
+        tables: [{
+          columns: [t("材料／地区", "Material / region"), t("官方安排", "Official arrangement")],
+          rows: [
+            { cells: [t("答题册与监考材料", "Answer booklets and proctor materials"), t("主页称正式参赛单位在赛前周一前通过 Portal 领取；特殊安排的监考人通过邮件领取。这不表示试题已开放。", "The home page says official participating organisations receive these through the Portal by Monday before the contest; specially arranged proctors receive them by email. This does not mean the questions are available.")], sourceIds: ["cms-comc-current"] },
+            { cells: [t("美洲试题", "Questions for the Americas"), t("主页为 10 月 29 日 12:00 EDT（UTC−4）；教师负责下载和打印，无论原订单采用邮寄还是 PDF。", "The home page gives October 29 at 12:00 EDT (UTC−4). Teachers download and print the questions, regardless of whether the original order used courier or PDF delivery.")], sourceIds: ["cms-comc-current", "cms-comc-teacher-faq-2026"] },
+            { cells: [t("中国及其他海外地区试题", "Questions for China and other overseas locations"), t("主页为 10 月 29 日 16:00 EDT，即北京时间 10 月 30 日 04:00；教师 FAQ 统一写比赛日 12:00 EDT。存在表述差异，学校须向 CMS 核对；下载时刻不是学生开考时刻。", "The home page gives October 29 at 16:00 EDT, or October 30 at 04:00 China Standard Time; the teacher FAQ generally says 12:00 EDT on competition day. Schools must clarify the difference with CMS. The download time is not a student's start time.")], status: "conflict", sourceIds: ["cms-comc-current", "cms-comc-teacher-faq-2026"] },
+            { cells: [t("中国学校交回材料", "Returning materials from China"), t("加拿大境外单位须按监考说明中的地址自行付费寄回答卷；不要套用加拿大的预付运单和周五上门取件安排。", "Organisations outside Canada pay for return shipping to the address in their proctor instructions; Canada's prepaid waybill and Friday pickup do not apply automatically.")], sourceIds: ["cms-comc-teacher-faq-2026"] },
+          ],
+        }],
       },
       {
         id: "awards-progression",
@@ -3299,7 +3340,7 @@ export const competitionProjects: ProjectRecord[] = [
         bullets: [t("CMS 免费公开 COMC 历年题目、解答和 Problem of the Week；先按 2.5 小时完成整卷，再对照官方解答检查证明表达。", "CMS freely publishes past COMC papers, solutions and Problem of the Week; students can write a full paper in 2.5 hours and then review proof presentation against official solutions.")],
       },
     ],
-    sourceIds: ["cms-comc-current", "cms-competitions-2026", "cms-comc-eligibility", "cms-comc-student-faq", "cms-comc-independent-portal", "cms-comc-owc-live-2026", "cms-comc-advancing", "cms-comc-advancing-archive", "cms-cmo-report-2008", "cms-cmo-report-2009", "cms-comc-changes-2026", "cms-comc-prizes-2026", "cms-comc-results-2025", "aseeder-comc"],
+    sourceIds: ["cms-comc-current", "cms-comc-teacher-faq-2026", "cms-competitions-2026", "cms-comc-eligibility", "cms-comc-student-faq", "cms-comc-independent-portal", "cms-comc-owc-live-2026", "cms-comc-advancing", "cms-comc-advancing-archive", "cms-cmo-report-2008", "cms-cmo-report-2009", "cms-comc-changes-2026", "cms-comc-prizes-2026", "cms-comc-results-2025", "aseeder-comc"],
     relatedIds: ["csmc", "euclid", "china-league"],
     searchTerms: ["COMC", "Canadian Open Mathematics Challenge", "加拿大数学公开挑战", "Canadian Mathematical Society", "CMS", "CMOQR"],
   },
@@ -3771,6 +3812,17 @@ const waterlooThresholds = [
 ];
 
 const smcThresholds = expandThresholds("smc", ["ukmt-smc-awards"], [
+  {
+    year: "2026",
+    status: "confirmed",
+    metrics: [
+      metric("Bronze", "Bronze cutoff", "41", "125"),
+      metric("Silver", "Silver cutoff", "54", "125"),
+      metric("Gold", "Gold cutoff", "71", "125"),
+      metric("Senior Kangaroo 资格线", "Senior Kangaroo qualification cutoff", "71", "125", t("仅用于英国学校标准晋级路径，不是中国赛区自动邀请线。", "For the standard UK-school qualification route only; not an automatic invitation cutoff for the China administration.")),
+      metric("BMO1 资格线", "BMO1 qualification cutoff", "101", "125", t("达到分数线还须符合英国 IMO 代表等资格要求；中国承办路径另按当届规则。", "The cutoff is subject to eligibility rules, including UK IMO eligibility; the China organiser's route follows its own current rules.")),
+    ],
+  },
   ...[
     ["2025", "46", "57", "72", "72", "104"], ["2024", "49", "66", "83", "83", "110"],
     ["2023", "49", "64", "80", "80", "106"], ["2022", "48", "62", "76", "76", "100"],
@@ -3799,6 +3851,7 @@ const smcThresholds = expandThresholds("smc", ["ukmt-smc-awards"], [
 ]);
 
 const seniorKangarooThresholds = expandThresholds("senior-kangaroo", ["ukmt-kangaroo-awards"], [
+  { year: "2026", sitting: "SMC qualification", status: "confirmed", sourceIds: ["ukmt-smc-awards"], metrics: [metric("SMC→Senior Kangaroo 资格线", "SMC-to-Senior-Kangaroo qualification cutoff", "71", "125", t("SMC 成绩，非 Senior Kangaroo 获奖线；标准晋级仅限英国学校。", "An SMC score, not a Senior Kangaroo award cutoff; standard qualification is for UK schools only."))] },
   { year: "2025", status: "confirmed", metrics: [metric("Gold", "Gold cutoff", "70", "100"), metric("Silver", "Silver cutoff", "55", "100"), metric("Bronze", "Bronze cutoff", "40", "100")] },
   { year: "2024", metrics: [metric("旧制 Merit", "Former Merit cutoff", "50", "100")] },
   { year: "2023", metrics: [metric("旧制 Merit", "Former Merit cutoff", "50", "100")] },
@@ -3818,6 +3871,7 @@ const seniorKangarooThresholds = expandThresholds("senior-kangaroo", ["ukmt-kang
 ]);
 
 const bmo1Thresholds = expandThresholds("bmo1", ["ukmt-bmo1-awards", "bmos-bmo-archive"], [
+  { year: "2026", sitting: "SMC qualification", status: "confirmed", sourceIds: ["ukmt-smc-awards"], metrics: [metric("SMC→BMO1 资格线", "SMC-to-BMO1 qualification cutoff", "101", "125", t("SMC 成绩，非 BMO1 试卷分数；仍须符合自动晋级资格，中国路径单独核对。", "An SMC score, not a BMO1 paper score; automatic-entry eligibility still applies and the China route is checked separately."))] },
   {
     year: "2026",
     sitting: "Mainland China",

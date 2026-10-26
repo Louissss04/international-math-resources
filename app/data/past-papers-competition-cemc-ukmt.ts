@@ -83,6 +83,51 @@ function ukmtChallengeArchive(
   };
 }
 
+const smcArchive: PastPaperArchiveRecord = {
+  ...ukmtChallengeArchive("smc", "Senior Mathematical Challenge"),
+  summary: t(
+    "UKMT 官方索引已列出 2026 SMC 试卷、解答、题目与解答合订版及拓展探究材料；近年资料免费，更早年份合订资料由官方商店出售。",
+    "UKMT's official index lists the 2026 SMC paper, solutions, combined questions and solutions, and investigation materials. Recent resources are free; older collections are sold by the official shop.",
+  ),
+  links: [
+    {
+      title: t("2026 SMC 官方试卷", "Official 2026 SMC paper"),
+      provider: UKMT,
+      url: "https://ukmt.org.uk/wp-content/uploads/2026/07/SMC_2026_Paper-2.pdf",
+      authority: "official",
+      kind: "download-page",
+      access: "free",
+      note: t("由 UKMT 官方资料索引列出；版权归 UKMT，本站不托管副本。", "Listed in UKMT's official resource index. Copyright belongs to UKMT; no copy is hosted here."),
+    },
+    {
+      title: t("2026 SMC 官方解答", "Official 2026 SMC solutions"),
+      provider: UKMT,
+      url: "https://ukmt.org.uk/wp-content/uploads/2026/07/SMC_2026_Solutions.pdf",
+      authority: "official",
+      kind: "solutions",
+      access: "free",
+    },
+    {
+      title: t("2026 SMC 题目与解答合订版", "2026 SMC questions and solutions"),
+      provider: UKMT,
+      url: "https://ukmt.org.uk/wp-content/uploads/2026/07/SMC_2026_questions_and_solutions.pdf",
+      authority: "official",
+      kind: "solutions",
+      access: "free",
+    },
+    {
+      title: t("2026 SMC 解答与拓展探究", "2026 SMC Solutions and Investigations"),
+      provider: UKMT,
+      url: "https://ukmt.org.uk/wp-content/uploads/2026/07/SMC__2026_Solutions_and_Investigations_web_version__final_.pdf",
+      authority: "official",
+      kind: "solutions",
+      access: "free",
+    },
+    ...ukmtChallengeArchive("smc", "Senior Mathematical Challenge").links,
+  ],
+  lastVerified: "2026-10-26",
+};
+
 const bmo1Archive: PastPaperArchiveRecord = {
   id: "past-papers-bmos-bmo1",
   projectId: "bmo1",
@@ -170,7 +215,7 @@ export const cemcUkmtPastPaperArchives: PastPaperArchiveRecord[] = [
   cemcArchive("hypatia", "Hypatia"),
   ukmtChallengeArchive("jmc", "Junior Mathematical Challenge"),
   ukmtChallengeArchive("imc", "Intermediate Mathematical Challenge"),
-  ukmtChallengeArchive("smc", "Senior Mathematical Challenge"),
+  smcArchive,
   ukmtChallengeArchive("senior-kangaroo", "Andrew Jobbings Senior Kangaroo"),
   bmo1Archive,
   bmo2Archive,

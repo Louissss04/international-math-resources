@@ -127,6 +127,18 @@ export const competitionLearningResources: LearningResourceRecord[] = [
     verifiedAt: "2026-09-08",
   },
   {
+    id: "ukmt-smc-2026-papers-solutions-index",
+    projectIds: ["smc"],
+    title: t("SMC 2026 官方试卷与解答", "Official SMC 2026 paper and solutions"),
+    provider: t("英国数学信托（UKMT）", "United Kingdom Mathematics Trust (UKMT)"),
+    url: "https://ukmt.org.uk/competition-papers",
+    kind: "past-papers",
+    description: t("在 Senior Mathematical Challenge – 2026 下选择 Questions、Solutions、Questions and Solutions、Solutions and Investigations 或 Video Solutions。", "Under Senior Mathematical Challenge – 2026, choose Questions, Solutions, Questions and Solutions, Solutions and Investigations, or Video Solutions."),
+    access: "free",
+    note: t("链接指向 UKMT 官方资料索引；版权归 UKMT 所有，本站不托管文件副本。", "Links to UKMT's official resource index. Copyright belongs to UKMT; no file copies are hosted here."),
+    verifiedAt: "2026-10-26",
+  },
+  {
     id: "ukmt-video-solutions",
     projectIds: ["jmc", "imc", "smc", "bmo1", "bmo2"],
     title: t("UKMT 官方视频解答", "UKMT official video solutions"),
