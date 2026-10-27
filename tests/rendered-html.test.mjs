@@ -3,6 +3,16 @@ import test from "node:test";
 
 const staleDemoCopy = /codex-preview|Your site is taking shape|这是一个演示型规则引擎|正式版本可接入/i;
 
+test("Noether 2026 results distinguish published award counts from unpublished scores", async () => {
+  const html = await renderHtml("/competitions/yau-noether-mathematics-award");
+  const text = visibleText(html);
+  assert.match(text, /2026 winners announced/);
+  assert.match(text, /1 Gold, 4 Silver, 5 Bronze and 5 Merit/);
+  assert.match(text, /Raw scores and score cutoffs are not published/);
+  assert.match(html, /yau-girls-contest\.tsinghua\.edu\.cn\/info\/1012\/1062\.htm/);
+  assert.doesNotMatch(text, /eligibility review is under way|finalists will be notified/);
+});
+
 test("COMC 2026 closes registration and preserves conflicting overseas release instructions", async () => {
   const html = await renderHtml("/competitions/comc");
   const text = visibleText(html);

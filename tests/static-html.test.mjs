@@ -7,6 +7,17 @@ import { fileURLToPath } from "node:url";
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const outputDirectory = path.resolve(testDirectory, "../outputs/mathpath-static");
 
+test("static Noether 2026 page links the results and keeps award counts separate from cutoffs", async () => {
+  const html = await readFile(path.join(outputDirectory, "competition-yau-noether-mathematics-award.html"), "utf8");
+  const text = visibleText(html);
+  assert.match(text, /2026 winners announced/);
+  assert.match(text, /1 Gold, 4 Silver, 5 Bronze and 5 Merit/);
+  assert.match(text, /Counts are taken from the list published on 26 October/);
+  assert.match(text, /Raw scores and score cutoffs are not published/);
+  assert.match(html, /yau-girls-contest\.tsinghua\.edu\.cn\/info\/1012\/1062\.htm/);
+  assert.doesNotMatch(text, /eligibility review is under way|finalists will be notified/);
+});
+
 test("2026 SMC raw boundaries preserve years, progression eligibility and official paper links", async () => {
   const data = await loadStaticData();
   const rows = data.thresholds.filter((row) => row.projectId === "smc" && row.year === "2026");

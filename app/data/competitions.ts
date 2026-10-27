@@ -1444,6 +1444,16 @@ export const competitionSources: SourceRecord[] = [
     verifiedAt: "2026-09-16",
     appliesTo: "2026 Noether Mathematics Award parent-site announcement",
   },
+  {
+    id: "yau-noether-2026-results",
+    label: t("2026 诺特数学奖获奖名单", "2026 Noether Mathematics Award winners"),
+    owner: t("清华大学丘成桐数学科学中心", "Yau Mathematical Sciences Center, Tsinghua University"),
+    url: "https://yau-girls-contest.tsinghua.edu.cn/info/1012/1062.htm",
+    kind: "official-data",
+    verifiedAt: "2026-10-27",
+    appliesTo: "2026 Noether Mathematics Award winners and observed award counts",
+    note: t("2026 年 10 月 26 日发布；人数按公布名单统计，不是预设名额或分数线。", "Published 26 October 2026. Counts are taken from the winners list, not preset quotas or score cutoffs."),
+  },
 ];
 
 const LAST_VERIFIED = "2026-08-04";
@@ -3351,7 +3361,7 @@ export const competitionProjects: ProjectRecord[] = [
     title: t("丘成桐中学科学奖（诺特数学奖）", "S.-T. Yau High School Science Award: Noether Mathematics Award"),
     shortTitle: "Noether Mathematics Award",
     organizer: t("清华大学丘成桐数学科学中心", "Yau Mathematical Sciences Center, Tsinghua University"),
-    summary: t("面向全球高中女生的个人数学竞赛，以笔试和面试选拔；2026 年报名期已于 10 月 7 日结束，现处资格审核阶段。", "An individual mathematics competition for female high-school students worldwide, selected through a written test and interview; the 2026 registration period ended on 7 October and eligibility review is under way."),
+    summary: t("面向全球高中女生的个人数学竞赛，以笔试和面试选拔。2026 年获奖名单已于 10 月 26 日公布，共 15 人获奖。", "An individual mathematics competition for female high-school students worldwide, selected through a written test and interview. The 2026 winners list was published on 26 October, naming 15 award recipients."),
     regions: ["Global", "Mainland China"],
     gradeBands: ["Female high-school students"],
     eligibilityTags: ["female-high-school-students", "global-entry", "individual-registration"],
@@ -3359,12 +3369,11 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "free",
     status: "confirmed",
     cycle: "2026",
-    lastVerified: "2026-10-08",
+    lastVerified: "2026-10-27",
     alerts: [{
-      title: t("2026 报名已结束", "2026 registration closed"),
-      body: t("网上报名期为 2026 年 9 月 15 日至 10 月 7 日，公告明确逾期不予受理。10 月 8 日至 13 日为资格审核期；入围总决赛名单将于 10 月 14 日通过报名系统及电子邮件通知。", "Online registration ran from 15 September through 7 October 2026, and the notice states that late submissions are not accepted. Eligibility review runs from 8 to 13 October; finalists will be notified through the registration system and email on 14 October."),
-      sourceIds: ["yau-noether-2026-announcement", "yau-noether-portal", "yau-noether-2026-registration"],
-      tone: "warning",
+      title: t("2026 获奖名单已公布", "2026 winners announced"),
+      body: t("10 月 26 日公布的名单列出金奖 1 人、银奖 4 人、铜奖 5 人、优胜奖 5 人。名单没有公布成绩或获奖分数线；下一届报名安排待公布。", "The list published on 26 October names 1 Gold, 4 Silver, 5 Bronze and 5 Merit award recipients. It does not publish scores or award cutoffs; registration for the next cycle has not been announced."),
+      sourceIds: ["yau-noether-2026-results"],
     }],
     facts: [
       { label: t("参赛资格", "Eligibility"), value: t("全球在读女中学生，限高中女生参赛；本届公告未列国籍或居住地限制。", "Globally enrolled female secondary-school students, limited to high-school girls; the current notice states no nationality or residence restriction."), sourceIds: ["yau-noether-2026-announcement"] },
@@ -3372,13 +3381,14 @@ export const competitionProjects: ProjectRecord[] = [
       { label: t("竞赛形式", "Format"), value: t("笔试与面试；通过资格审核后通知入围总决赛名单。", "Written test and interview; finalists are notified after eligibility review."), sourceIds: ["yau-noether-2026-announcement"] },
       { label: t("考查范围", "Scope"), value: t("中学数学全部内容，并覆盖分析、线性代数、几何与拓扑、概率统计与组合、数值／应用数学。", "All secondary-school mathematics plus analysis, linear algebra, geometry and topology, probability/statistics and combinatorics, and numerical/applied mathematics."), sourceIds: ["yau-noether-2026-announcement"] },
       { label: t("费用", "Fee"), value: t("全程不收费；因家庭经济原因参赛困难者可按官网邮箱申请资助。", "No fee; students with financial difficulty may request assistance through the official email."), sourceIds: ["yau-noether-2026-announcement"] },
-      { label: t("奖项", "Awards"), value: t("按成绩颁发金、银、铜奖及优胜奖若干名；2026 公告未公布固定获奖人数或分数线。", "Gold, Silver, Bronze and Merit awards are granted according to results; the 2026 notice does not publish fixed award counts or score cutoffs."), sourceIds: ["yau-noether-2026-announcement"] },
+      { label: t("2026 获奖人数", "2026 award recipients"), value: t("金奖 1 人、银奖 4 人、铜奖 5 人、优胜奖 5 人，共 15 人；原始成绩与分数线未公布。", "1 Gold, 4 Silver, 5 Bronze and 5 Merit recipients: 15 in total. Raw scores and score cutoffs are not published."), sourceIds: ["yau-noether-2026-results"] },
     ],
     dates: [
       { id: "yau-noether-2026-registration", label: t("网上报名", "Online registration"), date: "2026-09-15", endDate: "2026-10-07", region: t("全球高中女生", "Female high-school students worldwide"), status: "historical", sourceIds: ["yau-noether-2026-announcement", "yau-noether-portal", "yau-noether-2026-registration"], note: t("官网未公布截止具体时刻或时区。", "The official notice does not state a cutoff time or time zone.") },
       { id: "yau-noether-2026-review", label: t("资格审核", "Eligibility review"), date: "2026-10-08", endDate: "2026-10-13", status: "confirmed", sourceIds: ["yau-noether-2026-announcement"] },
       { id: "yau-noether-2026-finalist-notice", label: t("入围总决赛通知", "Finalist notification"), date: "2026-10-14", status: "confirmed", sourceIds: ["yau-noether-2026-announcement"], note: t("通过报名系统及电子邮件通知。", "Notification is sent through the registration system and email.") },
       { id: "yau-noether-2026-final", label: t("总决赛", "Final"), date: "2026-10-24", endDate: "2026-10-25", region: t("北京市第一〇一中学", "Beijing No. 101 Middle School"), status: "confirmed", sourceIds: ["yau-noether-2026-announcement"] },
+      { id: "yau-noether-2026-results", label: t("获奖名单公布", "Winners list published"), date: "2026-10-26", status: "historical", sourceIds: ["yau-noether-2026-results"] },
       { id: "yau-noether-2026-ceremony", label: t("颁奖典礼", "Award ceremony"), date: "2026-12-06", region: t("清华大学", "Tsinghua University"), status: "confirmed", sourceIds: ["yau-noether-2026-announcement"] },
     ],
     sections: [
@@ -3410,14 +3420,25 @@ export const competitionProjects: ProjectRecord[] = [
       {
         id: "results-and-integrity",
         title: t("奖项与诚信", "Awards and integrity"),
+        tables: [{
+          title: t("2026 获奖人数", "2026 award recipients"),
+          columns: [t("奖项", "Award"), t("人数", "Recipients"), t("原始分数线", "Raw-score cutoff")],
+          rows: [
+            { cells: [t("金奖", "Gold"), t("1 人", "1"), t("未公布", "Not published")], sourceIds: ["yau-noether-2026-results"] },
+            { cells: [t("银奖", "Silver"), t("4 人", "4"), t("未公布", "Not published")], sourceIds: ["yau-noether-2026-results"] },
+            { cells: [t("铜奖", "Bronze"), t("5 人", "5"), t("未公布", "Not published")], sourceIds: ["yau-noether-2026-results"] },
+            { cells: [t("优胜奖", "Merit"), t("5 人", "5"), t("未公布", "Not published")], sourceIds: ["yau-noether-2026-results"] },
+          ],
+          note: t("人数按 10 月 26 日公布的名单统计，不代表下一届名额；完整姓名与学校见官方获奖名单。", "Counts are taken from the list published on 26 October and are not quotas for the next cycle. Names and schools are available in the official winners list."),
+        }],
         bullets: [
-          t("本届公告仅说明金、银、铜奖及优胜奖按成绩颁发若干名，没有公布固定奖项数量、百分位或原始分数线。", "The current notice says that Gold, Silver, Bronze and Merit awards are granted in unspecified numbers according to results; it does not publish fixed counts, percentiles or raw-score cutoffs."),
+          t("获奖名单不含原始成绩、分数线或百分位，不能根据获奖人数反推获奖概率或分数门槛。", "The winners list contains no raw scores, score cutoffs or percentiles. Award counts do not establish an award probability or score threshold."),
           t("考试作弊、违反考试纪律或提交虚假材料将被取消成绩。", "Cheating, examination-discipline violations or false materials result in cancellation of the result."),
           t("2026 诺特数学奖公告未说明 AI 使用规则。不要把常规丘成桐中学科学奖研究报告的 AI 规则套用于本项目；以本届报名系统和后续通知为准。", "The 2026 Noether notice does not state an AI-use rule. Do not apply the regular Yau Award research-report AI rules to this contest; follow the current registration system and later official notices."),
         ],
       },
     ],
-    sourceIds: ["yau-noether-portal", "yau-noether-2026-registration", "yau-noether-2026-announcement", "yau-noether-2026-parent-notice"],
+    sourceIds: ["yau-noether-portal", "yau-noether-2026-registration", "yau-noether-2026-announcement", "yau-noether-2026-parent-notice", "yau-noether-2026-results"],
     relatedIds: ["yau-high-school-math-award", "china-league", "cmo"],
     searchTerms: ["诺特数学奖", "Noether Mathematics Award", "丘成桐女子数学竞赛", "丘成桐中学科学奖", "女生数学竞赛", "Yau girls contest"],
   },
