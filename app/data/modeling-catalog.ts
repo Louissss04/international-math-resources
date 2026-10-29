@@ -408,7 +408,7 @@ export const modelingCatalogProjects: ProjectRecord[] = [
     costBand: "low",
     status: "confirmed",
     cycle: "2026",
-    lastVerified: "2026-09-24",
+    lastVerified: "2026-10-29",
     facts: [
       { label: t("年龄资格", "Age eligibility"), value: t("2026 年须出生于 2012 年 5 月 1 日或之后；任一队员超过 14.5 岁，整队只能参加 HiMCM。", "For 2026, students must have been born on or after May 1, 2012. If any team member is older than 14.5, the team may enter HiMCM only."), sourceIds: ["midmcm-rules-2026"] },
       { label: t("团队组成", "Team composition"), value: t("每队最多 4 人，须来自同一学校、机构或同一个符合 COMAP 定义的认可项目，并由该单位教职员工担任指导教师。", "A team has up to four students from the same school, institution, or qualifying program, with a faculty or staff adviser from that affiliation."), sourceIds: ["midmcm-rules-2026"] },

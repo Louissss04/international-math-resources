@@ -7,6 +7,16 @@ import { fileURLToPath } from "node:url";
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const outputDirectory = path.resolve(testDirectory, "../outputs/mathpath-static");
 
+test("static HiMCM and MidMCM pages expose the official Summary Sheet template", async () => {
+  for (const slug of ["himcm", "midmcm"]) {
+    const html = await readFile(path.join(outputDirectory, `modeling-${slug}.html`), "utf8");
+    const text = visibleText(html);
+    assert.match(html, /contest\.comap\.org\/highschool\/contests\/himcm\/flyers\/HiMCM_Summary\.docx/);
+    assert.match(text, /Official HiMCM \/ MidMCM Summary Sheet Word template/);
+    assert.match(text, /Word file is not a substitute for the required PDF/);
+  }
+});
+
 test("static Noether 2026 page links the results and keeps award counts separate from cutoffs", async () => {
   const html = await readFile(path.join(outputDirectory, "competition-yau-noether-mathematics-award.html"), "utf8");
   const text = visibleText(html);
@@ -39,15 +49,18 @@ test("2026 SMC raw boundaries preserve years, progression eligibility and offici
   assert.match(html, /SMC_2026_Solutions\.pdf/);
 });
 
-test("static COMC page distinguishes closed registration, historical capacity and release-time conflict", async () => {
+test("static COMC page distinguishes current materials, historical capacity and withdrawn release times", async () => {
   const html = await readFile(path.join(outputDirectory, "competition-comc.html"), "utf8");
   const text = visibleText(html);
   assert.match(text, /2026 registration closed/);
   assert.match(text, /Historical OWC snapshot/);
-  assert.match(text, /Confirm the overseas question-release time/);
+  assert.match(text, /Registered schools: check your materials/);
+  assert.match(text, /ordered materials should be in organisers' Portal accounts/);
+  assert.match(text, /competitions@cms.math.ca/);
+  assert.match(text, /retained only as a historical record/);
   assert.match(text, /October 30 at 04:00 China Standard Time/);
   assert.match(text, /Canada's prepaid waybill/);
-  assert.doesNotMatch(text, /School registration is open|Independent-student entry is now open|Schools in China can now register/);
+  assert.doesNotMatch(text, /School registration is open|Independent-student entry is now open|Schools in China can now register|The home page gives October 29 at 16:00 EDT/);
 });
 
 const requiredAssets = [

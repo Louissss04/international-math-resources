@@ -38,6 +38,16 @@ export const programSources: SourceRecord[] = [
     appliesTo: "COMAP modeling contests",
   },
   {
+    id: "comap-himcm-summary-sheet",
+    label: t("HiMCM／MidMCM 官方摘要页 Word 模板", "Official HiMCM / MidMCM Summary Sheet Word template"),
+    owner: t("美国数学及其应用联合会", "COMAP"),
+    url: "https://www.contest.comap.org/highschool/contests/himcm/flyers/HiMCM_Summary.docx",
+    kind: "official",
+    verifiedAt: "2026-10-29",
+    appliesTo: "Official Summary Sheet download linked from the joint HiMCM / MidMCM instructions",
+    note: t("联合参赛说明中的通用摘要页模板；不替代当届论文格式和提交规则。", "The generic summary-sheet template linked from the joint contest instructions; it does not replace current paper-format and submission rules."),
+  },
+  {
     id: "himcm-results-2025",
     label: t("HiMCM 2025 官方结果", "HiMCM 2025 Official Results"),
     owner: t("美国数学及其应用联合会", "COMAP"),
@@ -853,7 +863,7 @@ export const programProjects: ProjectRecord[] = [
     costBand: "low",
     status: "confirmed",
     cycle: "2026",
-    lastVerified: "2026-10-24",
+    lastVerified: "2026-10-29",
     facts: [
       { label: t("参赛资格", "Eligibility"), value: t("参赛时为高中阶段或以下在读学生。同队成员须来自同一学校，或共同参加同一个获认可的项目。", "Entrants must be current secondary-school students or younger. Team members must attend the same school or belong to the same recognized program."), sourceIds: ["himcm-instructions-2026"] },
       { label: t("团队组成", "Team composition"), value: t("每队 1–4 名学生，并由所属学校或机构的一名教职员工担任指导教师。", "Each team has one to four students and a faculty or staff adviser from its school or institution."), sourceIds: ["himcm-instructions-2026"] },

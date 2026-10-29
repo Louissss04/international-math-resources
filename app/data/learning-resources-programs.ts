@@ -27,6 +27,18 @@ export const programLearningResources: LearningResourceRecord[] = [
     verifiedAt: "2026-08-06",
   },
   {
+    id: "himcm-midmcm-summary-template",
+    projectIds: ["himcm", "midmcm"],
+    title: t("HiMCM／MidMCM 官方摘要页 Word 模板", "Official HiMCM / MidMCM Summary Sheet Word template"),
+    provider: t("美国数学及其应用联合会（COMAP）", "Consortium for Mathematics and Its Applications (COMAP)"),
+    url: "https://www.contest.comap.org/highschool/contests/himcm/flyers/HiMCM_Summary.docx",
+    kind: "official-guide",
+    description: t("官方联合参赛说明直接链接的 Word 模板，用于建模论文首页的 Summary Sheet（摘要页）。", "The Word template linked directly from the joint contest instructions for the Summary Sheet on the first page of a modeling paper."),
+    access: "free",
+    note: t("摘要页计入 25 页总页数。完成后须与论文其余部分合并为一份匿名 PDF 提交，不能以 Word 文件代替正式交稿。", "The Summary Sheet counts toward the 25-page limit. Combine it with the rest of the paper into one anonymous PDF for submission; the Word file is not a substitute for the required PDF."),
+    verifiedAt: "2026-10-29",
+  },
+  {
     id: "himcm-2025-problems",
     projectIds: ["himcm"],
     title: t("HiMCM 2025 官方题目", "Official 2025 HiMCM Problems"),

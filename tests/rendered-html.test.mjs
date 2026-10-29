@@ -3,6 +3,16 @@ import test from "node:test";
 
 const staleDemoCopy = /codex-preview|Your site is taking shape|这是一个演示型规则引擎|正式版本可接入/i;
 
+test("HiMCM and MidMCM link the official Summary Sheet without offering Word submission", async () => {
+  for (const slug of ["himcm", "midmcm"]) {
+    const html = await renderHtml(`/modeling/${slug}`);
+    const text = visibleText(html);
+    assert.match(html, /contest\.comap\.org\/highschool\/contests\/himcm\/flyers\/HiMCM_Summary\.docx/);
+    assert.match(text, /Official HiMCM \/ MidMCM Summary Sheet Word template/);
+    assert.match(text, /Word file is not a substitute for the required PDF/);
+  }
+});
+
 test("Noether 2026 results distinguish published award counts from unpublished scores", async () => {
   const html = await renderHtml("/competitions/yau-noether-mathematics-award");
   const text = visibleText(html);
@@ -13,16 +23,21 @@ test("Noether 2026 results distinguish published award counts from unpublished s
   assert.doesNotMatch(text, /eligibility review is under way|finalists will be notified/);
 });
 
-test("COMC 2026 closes registration and preserves conflicting overseas release instructions", async () => {
+test("COMC 2026 shows current materials guidance and archives withdrawn release instructions", async () => {
   const html = await renderHtml("/competitions/comc");
   const text = visibleText(html);
   assert.match(text, /2026 registration closed/);
+  assert.match(text, /Registered schools: check your materials/);
+  assert.match(text, /ordered materials should be in organisers' Portal accounts/);
+  assert.match(text, /competitions@cms.math.ca/);
   assert.match(text, /October 30 at 04:00 China Standard Time/);
   assert.match(text, /12:00 EDT/);
   assert.match(text, /16:00 EDT/);
   assert.match(text, /download time is not a student's start time/);
+  assert.match(text, /retained only as a historical record/);
+  assert.match(text, /Overview-calendar general registration deadline/);
   assert.match(html, /cms\.math\.ca\/competitions\/comc\/comc2026\/faq\/teachers\//);
-  assert.doesNotMatch(text, /School registration is open|Independent-student entry is now open|Schools in China can now register/);
+  assert.doesNotMatch(text, /School registration is open|Independent-student entry is now open|Schools in China can now register|The home page gives October 29 at 16:00 EDT/);
 });
 
 async function render(path = "/") {

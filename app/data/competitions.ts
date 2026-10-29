@@ -989,9 +989,9 @@ export const competitionSources: SourceRecord[] = [
     owner: t("加拿大数学学会", "Canadian Mathematical Society"),
     url: "https://cms.math.ca/competitions/comc/comc2026/",
     kind: "official",
-    verifiedAt: "2026-10-26",
+    verifiedAt: "2026-10-29",
     appliesTo: "COMC 2026 dates, school and independent registration, delivery methods, fees, and CMOQR discontinuation",
-    note: t("官网已明确报名关闭，并公布材料配送及比赛日试题释放安排。付款段列 10 月 22 日、邮寄订单 10 月 14 日；海外试题释放时刻与教师 FAQ 的概括表述不同。", "The page now explicitly closes registration and gives materials-delivery and competition-day question-release arrangements. It lists October 22 for payments and October 14 for shipped orders; the overseas question-release time differs from the teacher FAQ's general wording."),
+    note: t("主页已换为比赛日材料提醒：组织者应在 Portal 看到已订材料，独立考生应已收到说明；缺失时联系 CMS。此前按地区列出的放题时刻已撤下，不能继续当作当前下载通知。付款段仍列 10 月 22 日、邮寄订单 10 月 14 日。", "The page now gives competition-day materials guidance: organisers should find ordered materials in their Portal and independent students should have their instructions; contact CMS if anything is missing. Earlier region-specific question-release times have been removed and are not a current download notice. Payment dates remain October 22 and October 14 for shipped orders."),
   },
   {
     id: "cms-comc-teacher-faq-2026",
@@ -999,9 +999,9 @@ export const competitionSources: SourceRecord[] = [
     owner: t("加拿大数学学会", "Canadian Mathematical Society"),
     url: "https://cms.math.ca/competitions/comc/comc2026/faq/teachers/",
     kind: "official",
-    verifiedAt: "2026-10-26",
+    verifiedAt: "2026-10-29",
     appliesTo: "COMC 2026 materials, proctoring, payment and return arrangements",
-    note: t("材料段统一写比赛日 12:00 EDT 放题，主页则区分美洲 12:00、海外 16:00；付款段亦写与适用报名截止相同，和主页的具体付款日期不同。", "The materials section gives 12:00 EDT on competition day generally, whereas the home page distinguishes 12:00 for the Americas and 16:00 overseas. Its payment section says the applicable registration deadline, unlike the specific payment dates on the home page."),
+    note: t("材料段仍概括为比赛日 12:00 EDT 放题；主页已撤下此前的地区放题时刻，不能据此认定中国具体下载安排已澄清。付款段仍写与适用报名截止相同，和主页的具体付款日期不同。", "The materials section still gives 12:00 EDT on competition day generally. The home page has removed its earlier region-specific times, which does not establish a clarified China download arrangement. Payment wording still refers to the applicable registration deadline, unlike the specific dates on the home page."),
   },
   {
     id: "cms-competitions-2026",
@@ -1009,8 +1009,9 @@ export const competitionSources: SourceRecord[] = [
     owner: t("加拿大数学学会", "Canadian Mathematical Society"),
     url: "https://cms.math.ca/competitions/",
     kind: "official",
-    verifiedAt: "2026-09-27",
+    verifiedAt: "2026-10-29",
     appliesTo: "2026 COMC date and registration deadline",
+    note: t("当前总日历列 COMC 比赛日 10 月 29 日、一般报名截止 10 月 22 日；此前年度主页的 PDF 订购截止为 10 月 21 日，现均保留为历史记录，不据此推断延期或补报名。", "The current overview calendar lists October 29 for COMC and October 22 as its general registration deadline. The earlier annual home page gave October 21 for PDF orders. Both are retained as historical records, not evidence of an extension or late entry."),
   },
   {
     id: "cms-comc-eligibility",
@@ -3243,17 +3244,17 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026",
-    lastVerified: "2026-10-26",
+    lastVerified: "2026-10-29",
     alerts: [
       {
         title: t("2026 报名已关闭", "2026 registration closed"),
-        body: t("CMS 主页已明确关闭本届报名。中国及其他美洲以外地区于 10 月 30 日比赛；已报名队伍应由学校或监考人查看 Portal 和官方邮件，不再按旧名额快照办理新报名。", "CMS now explicitly closes registration. China and other locations outside the Americas write on October 30. Registered students should follow their school or proctor's Portal and official email instructions; old capacity snapshots are not an entry route."),
+        body: t("此前 CMS 已关闭本届报名，当前主页已换为比赛日提醒，未公布补报名。中国及其他美洲以外地区于 10 月 30 日比赛；旧名额快照不能用于办理新报名。", "CMS previously closed registration and the home page now shows competition-day guidance, with no late-entry announcement. China and other locations outside the Americas write on October 30; old capacity snapshots are not an entry route."),
         sourceIds: ["cms-comc-current"],
         tone: "warning",
       },
       {
-        title: t("海外试题下载时刻待确认", "Confirm the overseas question-release time"),
-        body: t("主页写海外试题于 10 月 29 日 16:00 EDT 提供，教师 FAQ 则概括为比赛日 12:00 EDT。两处并不一致；中国学校应向 CMS 确认，并以收到的专属监考通知核对下载和开考安排。", "The home page gives October 29 at 16:00 EDT for overseas question release, while the teacher FAQ generally says 12:00 EDT on competition day. The wording differs; schools in China should confirm with CMS and check their specific proctor instructions for downloading and administration."),
+        title: t("已报名学校请检查考务材料", "Registered schools: check your materials"),
+        body: t("CMS 主页现称已订材料应在组织者的 Portal 中，独立考生应已收到参赛说明。若缺失，请由学校、监考人或已报名考生联系 competitions@cms.math.ca。中国学校仍须按专属监考通知确认下载和开考时刻。", "The CMS home page now says ordered materials should be in organisers' Portal accounts and independent students should have their instructions. If anything is missing, the school, proctor or registered student should contact competitions@cms.math.ca. Schools in China should still confirm download and start times against their specific proctor instructions."),
         sourceIds: ["cms-comc-current", "cms-comc-teacher-faq-2026"],
         tone: "warning",
       },
@@ -3272,7 +3273,8 @@ export const competitionProjects: ProjectRecord[] = [
     dates: [
       { id: "comc-2026-registration-open", label: t("学校报名开放", "School registration opens"), date: "2026-09-01", status: "historical", sourceIds: ["cms-comc-current"] },
       { id: "comc-2026-shipped-deadline", label: t("邮寄试卷订购／报名截止", "Shipped-exam order/registration deadline"), date: "2026-10-14", status: "historical", sourceIds: ["cms-comc-current"] },
-      { id: "comc-2026-pdf-deadline", label: t("PDF 配送订购／报名截止", "PDF-delivery order/registration deadline"), date: "2026-10-21", status: "historical", sourceIds: ["cms-comc-current", "cms-competitions-2026"] },
+      { id: "comc-2026-pdf-deadline", label: t("此前主页所列 PDF 订购截止", "Earlier home-page PDF-order deadline"), date: "2026-10-21", status: "historical", sourceIds: ["cms-comc-current"], note: t("此前年度主页的 PDF 订购记录；当前总日历另列一般报名截止 10 月 22 日。均非当前开放报名。", "The earlier annual home-page record for PDF orders; the current overview calendar separately lists October 22 as a general registration deadline. Neither is a currently open registration window.") },
+      { id: "comc-2026-calendar-deadline", label: t("总日历所列一般报名截止（历史）", "Overview-calendar general registration deadline — historical"), date: "2026-10-22", status: "historical", sourceIds: ["cms-competitions-2026"], note: t("总日历目前列 10 月 22 日，和此前 PDF 订购的 10 月 21 日表述不同；不据此推断曾延期或可补报名。", "The overview calendar currently lists October 22, unlike the earlier October 21 PDF-order wording. This does not establish an extension or late-entry route.") },
       { id: "comc-2026-payment-deadline", label: t("主页所列付款截止（邮寄订单除外）", "Home-page payment deadline (except shipped orders)"), date: "2026-10-22", status: "historical", sourceIds: ["cms-comc-current", "cms-comc-teacher-faq-2026"], note: t("当前主页为 10 月 22 日，邮寄订单为 10 月 14 日；教师 FAQ 另写与适用报名截止日相同。保留双方说明。", "The current home page says October 22, with October 14 for shipped orders; the teacher FAQ instead says the applicable registration deadline. Both statements are retained.") },
       { id: "comc-2026-americas", label: t("加拿大与美洲竞赛日", "Canada and Americas competition date"), date: "2026-10-29", region: t("北美、南美、中美及覆盖这些地区的时区", "North, South, and Central America and their time zones"), status: "confirmed", sourceIds: ["cms-comc-current", "cms-comc-eligibility"] },
       { id: "comc-2026-world", label: t("中国及其他美洲以外地区竞赛日", "China and other locations outside the Americas"), date: "2026-10-30", region: t("中国及其他美洲以外地区", "China and elsewhere outside the Americas"), status: "confirmed", sourceIds: ["cms-comc-current", "cms-comc-changes-2026"], note: t("CMS 已确认全球日期；ASEEDER 的 2026 合作学校报名截止、费用和具体场次仍待其更新。", "The CMS worldwide date is confirmed; ASEEDER's 2026 partner-school deadline, fee, and local arrangements remain pending.") },
@@ -3315,7 +3317,7 @@ export const competitionProjects: ProjectRecord[] = [
           t("中国学校的 2026 报名已结束，比赛日仍为 10 月 30 日。学校通过 CMS Portal 或指定监考人领取材料，学生不应自行寻找当届未公开试题。", "The 2026 registration period for schools in China has ended; the contest remains October 30. Schools receive materials through the CMS Portal or an appointed proctor. Students should not seek unreleased current papers."),
           t("10 月 18 日的 OWC 历史快照没有中国考点，2 个 Remote/Zoom 场次均满额。旧列表和 canadaOnly: false 均不能证明可补报名或中国个人参赛资格。", "The October 18 OWC snapshot lists no China centre and both Remote/Zoom sessions as full. Neither the old list nor canadaOnly: false establishes late entry or China individual eligibility."),
           t("正式成绩要求学校获得 Official participation status，或安排经 CMS 审核的 Qualified Proctor；不符合监考条件者只能取得非正式成绩，不能获得奖项。", "Official results require Official participation status or a CMS-approved Qualified Proctor. Otherwise, students receive unofficial scores and are ineligible for awards."),
-          t("此前收录的 ASEEDER 页面为 2025 赛季；合作学校的 2026 费用及具体安排仍未确认。CMS 当前关闭报名的说明不能被旧合作页替代。", "The previously recorded ASEEDER page covers 2025; its 2026 partner-school fees and arrangements remain unconfirmed. An old partner page does not override CMS's current registration closure."),
+          t("此前收录的 ASEEDER 页面为 2025 赛季；合作学校的 2026 费用及具体安排仍未确认。旧合作页不能作为本届补报名依据。", "The previously recorded ASEEDER page covers 2025; its 2026 partner-school fees and arrangements remain unconfirmed. An old partner page is not evidence of late entry for this cycle."),
         ],
       },
       {
@@ -3324,9 +3326,9 @@ export const competitionProjects: ProjectRecord[] = [
         tables: [{
           columns: [t("材料／地区", "Material / region"), t("官方安排", "Official arrangement")],
           rows: [
-            { cells: [t("答题册与监考材料", "Answer booklets and proctor materials"), t("主页称正式参赛单位在赛前周一前通过 Portal 领取；特殊安排的监考人通过邮件领取。这不表示试题已开放。", "The home page says official participating organisations receive these through the Portal by Monday before the contest; specially arranged proctors receive them by email. This does not mean the questions are available.")], sourceIds: ["cms-comc-current"] },
-            { cells: [t("美洲试题", "Questions for the Americas"), t("主页为 10 月 29 日 12:00 EDT（UTC−4）；教师负责下载和打印，无论原订单采用邮寄还是 PDF。", "The home page gives October 29 at 12:00 EDT (UTC−4). Teachers download and print the questions, regardless of whether the original order used courier or PDF delivery.")], sourceIds: ["cms-comc-current", "cms-comc-teacher-faq-2026"] },
-            { cells: [t("中国及其他海外地区试题", "Questions for China and other overseas locations"), t("主页为 10 月 29 日 16:00 EDT，即北京时间 10 月 30 日 04:00；教师 FAQ 统一写比赛日 12:00 EDT。存在表述差异，学校须向 CMS 核对；下载时刻不是学生开考时刻。", "The home page gives October 29 at 16:00 EDT, or October 30 at 04:00 China Standard Time; the teacher FAQ generally says 12:00 EDT on competition day. Schools must clarify the difference with CMS. The download time is not a student's start time.")], status: "conflict", sourceIds: ["cms-comc-current", "cms-comc-teacher-faq-2026"] },
+            { cells: [t("当前材料通知", "Current materials notice"), t("主页称已订材料应在组织者 Portal 中；快递材料最迟应在美洲比赛日到达。独立考生应已收到参赛说明，缺失时联系 competitions@cms.math.ca。此处不提供当届未公开试题入口。", "The home page says ordered materials should be in organisers' Portal accounts; courier materials should arrive by the Americas competition day. Independent students should have their instructions and should contact competitions@cms.math.ca if anything is missing. No unreleased current-paper link is provided here.")], sourceIds: ["cms-comc-current"] },
+            { cells: [t("FAQ 的一般下载说明", "General FAQ download guidance"), t("教师 FAQ 仍写比赛日 12:00 EDT（UTC−4）通过 Portal 提供试题，由教师下载和打印；特殊安排的监考人通过邮件领取材料。中国学校须以专属监考通知确认具体安排，下载时刻不是学生开考时刻。", "The teacher FAQ still says questions are released through the Portal at 12:00 EDT (UTC−4) on competition day for teachers to download and print; specially appointed proctors receive materials by email. Schools in China should confirm their specific arrangements in the proctor instructions. The download time is not a student's start time.")], sourceIds: ["cms-comc-teacher-faq-2026"] },
+            { cells: [t("此前放题通知（历史）", "Earlier question-release notice — historical"), t("10 月 26 日所见主页曾列美洲 10 月 29 日 12:00 EDT、海外 16:00 EDT（北京时间 10 月 30 日 04:00）。当前主页已撤下这段文字，保留作历史记录；撤下不等于中国下载时刻已获澄清。", "The home page read on October 26 listed October 29 at 12:00 EDT for the Americas and 16:00 EDT overseas (October 30 at 04:00 China Standard Time). This wording has since been removed from the current home page and is retained only as a historical record; its removal does not establish a clarified China download time.")], status: "historical", sourceIds: ["cms-comc-current"] },
             { cells: [t("中国学校交回材料", "Returning materials from China"), t("加拿大境外单位须按监考说明中的地址自行付费寄回答卷；不要套用加拿大的预付运单和周五上门取件安排。", "Organisations outside Canada pay for return shipping to the address in their proctor instructions; Canada's prepaid waybill and Friday pickup do not apply automatically.")], sourceIds: ["cms-comc-teacher-faq-2026"] },
           ],
         }],
