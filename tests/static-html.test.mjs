@@ -7,6 +7,23 @@ import { fileURLToPath } from "node:url";
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const outputDirectory = path.resolve(testDirectory, "../outputs/mathpath-static");
 
+test("static AMC pages link MAA's current potential-host list without implying open seats", async () => {
+  for (const slug of ["amc-8", "amc-10", "amc-12"]) {
+    const html = await readFile(path.join(outputDirectory, `competition-${slug}.html`), "utf8");
+    const text = visibleText(html);
+    assert.match(html, /docs\.google\.com\/spreadsheets\/d\/16mX4qHvr4EEQviRwxSq7JzE3baYCZcFgHYZvTQyPHDo/);
+    assert.match(text, /MAA 2026–27 AMC public competition-site listing/);
+    assert.match(text, /居住地 IGL/);
+    if (slug === "amc-8") {
+      assert.match(text, /Listing does not guarantee a place or provide individual registration/);
+    } else {
+      assert.match(text, /It is not individual registration or a deadline extension/);
+      assert.match(text, /Additional-bundle deadlines are for registered sites/);
+    }
+  }
+  assert.match(visibleText(await readFile(path.join(outputDirectory, "sources.html"), "utf8")), /Listing does not guarantee a place, extend a deadline or authorise cross-region entry/);
+});
+
 test("static HiMCM and MidMCM pages expose the official Summary Sheet template", async () => {
   for (const slug of ["himcm", "midmcm"]) {
     const html = await readFile(path.join(outputDirectory, `modeling-${slug}.html`), "utf8");
@@ -15,6 +32,30 @@ test("static HiMCM and MidMCM pages expose the official Summary Sheet template",
     assert.match(text, /Official HiMCM \/ MidMCM Summary Sheet Word template/);
     assert.match(text, /Word file is not a substitute for the required PDF/);
   }
+});
+
+test("static HMMT November timetable preserves venues, EST and the February pending boundary", async () => {
+  const data = await loadStaticData();
+  const hmmt = data.projects.find((project) => project.id === "hmmt");
+  assert.equal(hmmt.lastVerified, "2026-11-02");
+  assert.equal(hmmt.facts.find((fact) => fact.label.en === "November detailed timetable")?.status, "confirmed");
+  assert.equal(hmmt.facts.find((fact) => fact.label.en === "February detailed timetable")?.status, "pending");
+  const html = await readFile(path.join(outputDirectory, "competition-hmmt.html"), "utf8");
+  const text = visibleText(html);
+  for (const pattern of [
+    /November 2026 detailed schedule published/,
+    /November 6 · MIT Lobby 13/,
+    /07:45–08:30/,
+    /14:50–16:35/,
+    /18:00–18:55/,
+    /EST \(UTC−05:00\)/,
+    /Beijing is 13 hours ahead/,
+    /Round slots include administration, not just working time/,
+    /February 2027's detailed timetable remains pending/,
+    /Self-proctoring and alternative testing times are not allowed/,
+  ]) assert.match(text, pattern);
+  assert.match(html, /https:\/\/www\.hmmt\.org\/www\/tournaments\/schedule/);
+  assert.doesNotMatch(text, /current page shows an older example timetable only/);
 });
 
 test("static Noether 2026 page links the results and keeps award counts separate from cutoffs", async () => {

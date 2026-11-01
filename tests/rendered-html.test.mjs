@@ -3,6 +3,23 @@ import test from "node:test";
 
 const staleDemoCopy = /codex-preview|Your site is taking shape|这是一个演示型规则引擎|正式版本可接入/i;
 
+test("AMC public-site listing is a potential-host route, not personal or China registration", async () => {
+  for (const slug of ["amc-8", "amc-10", "amc-12"]) {
+    const html = await renderHtml(`/competitions/${slug}`);
+    const text = visibleText(html);
+    assert.match(html, /docs\.google\.com\/spreadsheets\/d\/16mX4qHvr4EEQviRwxSq7JzE3baYCZcFgHYZvTQyPHDo/);
+    assert.match(text, /MAA 2026–27 AMC public competition-site listing/);
+    assert.match(text, /居住地 IGL/);
+    if (slug === "amc-8") {
+      assert.match(text, /Listing does not guarantee a place or provide individual registration/);
+    } else {
+      assert.match(text, /It is not individual registration or a deadline extension/);
+      assert.match(text, /Additional-bundle deadlines are for registered sites/);
+    }
+  }
+  assert.match(visibleText(await renderHtml("/sources")), /Listing does not guarantee a place, extend a deadline or authorise cross-region entry/);
+});
+
 test("HiMCM and MidMCM link the official Summary Sheet without offering Word submission", async () => {
   for (const slug of ["himcm", "midmcm"]) {
     const html = await renderHtml(`/modeling/${slug}`);
@@ -743,6 +760,30 @@ test("renders the HMMT Season 30 guide with registration, results and China-spec
   }
   assert.match(html, /href="\/syllabi\/hmmt-published-format"/);
   assert.match(html, /hmmt-archive\.s3\.amazonaws\.com/);
+});
+
+test("renders HMMT November 2026 times without confirming February or extending exam durations", async () => {
+  const html = await renderHtml("/competitions/hmmt");
+  for (const pattern of [
+    /November 2026 detailed schedule published/,
+    /id="november-2026-timetable"/,
+    /November 6 · MIT Lobby 13/,
+    /17:45–19:00/,
+    /07:45–08:30/,
+    /09:00–10:15/,
+    /10:30–11:45/,
+    /12:15–13:30/,
+    /14:50–16:35/,
+    /18:00–18:55/,
+    /November 8 · Harvard Emerson 210/,
+    /11:00–11:50/,
+    /EST \(UTC−05:00\)/,
+    /Beijing is 13 hours ahead/,
+    /Round slots include administration, not just working time/,
+    /February 2027&#x27;s detailed timetable remains pending/,
+    /10 questions \/ 50 minutes each/,
+  ]) assert.match(html, pattern);
+  assert.doesNotMatch(html, /current page shows an older example timetable only/);
 });
 
 test("limits mixed assessments and translated syllabi to mathematics", async () => {
