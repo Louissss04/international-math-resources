@@ -58,6 +58,36 @@ test("static HMMT November timetable preserves venues, EST and the February pend
   assert.doesNotMatch(text, /current page shows an older example timetable only/);
 });
 
+test("static Yau mathematics dates distinguish semifinal and global-finalist public review", async () => {
+  const data = await loadStaticData();
+  const yau = data.projects.find((project) => project.id === "yau-high-school-math-award");
+  assert.ok(yau.lastVerified >= "2026-11-02", "Yau verification predates the revised 2026 schedule");
+  const dateById = new Map(yau.dates.map((item) => [item.id, item]));
+  for (const [id, start, end] of [
+    ["yau-math-2026-registration", "2026-07-01", "2026-09-15"],
+    ["yau-math-2026-regional", "2026-10-01", "2026-11-08"],
+    ["yau-math-2026-semifinal-public-review", "2026-10-28", "2026-11-03"],
+    ["yau-math-2026-semifinal", "2026-11-07", "2026-11-08"],
+    ["yau-math-2026-public-review", "2026-11-09", "2026-11-15"],
+    ["yau-math-2026-final", "2026-12-05", "2026-12-06"],
+  ]) assert.deepEqual([dateById.get(id)?.date, dateById.get(id)?.endDate], [start, end], id);
+  assert.equal(dateById.get("yau-math-2026-registration").status, "historical");
+  assert.equal(yau.dates.some((item) => item.date === "2026-11-03" && item.endDate === "2026-11-10"), false);
+  const html = await readFile(path.join(outputDirectory, "research-yau-high-school-mathematics-award.html"), "utf8");
+  const text = visibleText(html);
+  for (const pattern of [
+    /These are not global-finalist lists/,
+    /Each team has 35 minutes: a 15-minute presentation and 20-minute Q&A/,
+    /Students must attend in person or lose award eligibility/,
+    /Near Zhejiang University's Zijingang Campus; not confirmed as on-campus/,
+    /assigned days, times and precise venues await final regional notices/,
+    /15 September, 24:00/,
+    /no extension, late-entry, or reopening notice was found/,
+  ]) assert.match(text, pattern);
+  assert.match(html, /https:\/\/www\.yau-awards\.com\/show-86-63\.html/);
+  assert.doesNotMatch(html, /href=["']https?:\/\/(?:www\.)?yau-awards\.science/);
+});
+
 test("static Noether 2026 page links the results and keeps award counts separate from cutoffs", async () => {
   const html = await readFile(path.join(outputDirectory, "competition-yau-noether-mathematics-award.html"), "utf8");
   const text = visibleText(html);
