@@ -3,6 +3,22 @@ import test from "node:test";
 
 const staleDemoCopy = /codex-preview|Your site is taking shape|这是一个演示型规则引擎|正式版本可接入/i;
 
+test("League 2026 results are historical without inventing a contest date or score cutoff", async () => {
+  const html = await renderHtml("/competitions/china-league");
+  const text = visibleText(html);
+  assert.match(html, /cms\.org\.cn\/article\/1525\.html/);
+  for (const pattern of [
+    /2026 First Prize public-review window has ended/,
+    /October 14–21/,
+    /official WeChat account/,
+    /no numerical cutoffs, recipient count or CMO selection roster/,
+    /TBD denotes missing official date evidence on this site/,
+    /not a new registration or appeal opportunity/,
+  ]) assert.match(text, pattern);
+  assert.doesNotMatch(text, /latest entry.*remains the 2025 First Prize roster/);
+  assert.match(visibleText(await renderHtml("/sources")), /not a new November announcement/);
+});
+
 test("AMC public-site listing is a potential-host route, not personal or China registration", async () => {
   for (const slug of ["amc-8", "amc-10", "amc-12"]) {
     const html = await renderHtml(`/competitions/${slug}`);
@@ -789,11 +805,11 @@ test("renders the HMMT Season 30 guide with registration, results and China-spec
 
 test("renders HMMT November 2026 times without confirming February or extending exam durations", async () => {
   const html = await renderHtml("/competitions/hmmt");
+  const text = visibleText(html);
   for (const pattern of [
-    /November 2026 detailed schedule published/,
-    /id="november-2026-timetable"/,
-    /November 6 · MIT Lobby 13/,
-    /17:45–19:00/,
+    /November 2026 on-site schedule revised/,
+    /November 6 · Assigned locations/,
+    /17:00–22:00/,
     /07:45–08:30/,
     /09:00–10:15/,
     /10:30–11:45/,
@@ -805,10 +821,33 @@ test("renders HMMT November 2026 times without confirming February or extending 
     /EST \(UTC−05:00\)/,
     /Beijing is 13 hours ahead/,
     /Round slots include administration, not just working time/,
-    /February 2027&#x27;s detailed timetable remains pending/,
+    /February 2027's detailed timetable remains pending/,
     /10 questions \/ 50 minutes each/,
-  ]) assert.match(html, pattern);
-  assert.doesNotMatch(html, /current page shows an older example timetable only/);
+  ]) assert.match(text, pattern);
+  assert.match(html, /id="november-2026-timetable"/);
+  assert.doesNotMatch(text, /current page shows an older example timetable only/);
+});
+
+test("HMMT keeps withdrawn arrival details in history, not the current timetable or calendar", async () => {
+  const html = await renderHtml("/competitions/hmmt");
+  const timetable = html.match(/<section\b[^>]*id="november-2026-timetable"[^>]*>[\s\S]*?<\/section>/)?.[0];
+  assert.ok(timetable, "missing current HMMT timetable");
+  assert.match(visibleText(timetable), /November 7 · Assigned locations/);
+  assert.doesNotMatch(visibleText(timetable), /MIT Lobby 13|17:45–19:00|SC B\/C/);
+  const history = html.match(/<section\b[^>]*id="november-2026-schedule-history"[^>]*>[\s\S]*?<\/section>/)?.[0];
+  assert.ok(history, "missing HMMT revision history");
+  for (const pattern of [/17:45–19:00, MIT Lobby 13/, /Harvard SC B\/C/, /not current arrival instructions/, /not an organizer announcement that an event is cancelled/]) {
+    assert.match(visibleText(history), pattern);
+  }
+  assert.match(visibleText(html), /do not arrive using the old MIT early-registration time\/location or the former SC B\/C awards location/);
+  const calendar = await renderHtml("/calendar");
+  const friday = calendar.match(/<article\b[^>]*data-event-id="hmmt-november-friday-events"[^>]*>[\s\S]*?<\/article>/)?.[0];
+  assert.ok(friday, "missing current HMMT Friday calendar event");
+  assert.match(visibleText(friday), /17:00–22:00/);
+  assert.match(visibleText(friday), /Assigned locations; EST/);
+  assert.doesNotMatch(visibleText(friday), /Lobby 13|17:45–19:00|SC B\/C/);
+  assert.doesNotMatch(calendar, /data-event-id="hmmt-november-early-registration"/);
+  assert.match(visibleText(await renderHtml("/sources")), /This does not establish cancellation/);
 });
 
 test("limits mixed assessments and translated syllabi to mathematics", async () => {

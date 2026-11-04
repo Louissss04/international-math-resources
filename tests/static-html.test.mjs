@@ -7,6 +7,27 @@ import { fileURLToPath } from "node:url";
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const outputDirectory = path.resolve(testDirectory, "../outputs/mathpath-static");
 
+test("static League 2026 notice preserves historical review dates and unpublished scores", async () => {
+  const data = await loadStaticData();
+  const league = data.projects.find((project) => project.id === "china-league");
+  assert.equal(league.lastVerified, "2026-11-04");
+  const contest = league.dates.find((date) => date.id === "china-league-2026-date");
+  assert.equal(contest.date, "TBD");
+  assert.equal(contest.status, "pending");
+  const review = league.dates.find((date) => date.id === "china-league-2026-first-prize-review");
+  assert.equal(review.date, "2026-10-14");
+  assert.equal(review.endDate, "2026-10-21");
+  assert.equal(review.status, "historical");
+  const text = visibleText(await readFile(path.join(outputDirectory, "competition-china-league.html"), "utf8"));
+  assert.match(text, /2026 First Prize public-review window has ended/);
+  assert.match(text, /no numerical cutoffs, recipient count or CMO selection roster/);
+  assert.match(text, /not an unheld contest or open registration/);
+  assert.doesNotMatch(text, /latest entry.*remains the 2025 First Prize roster/);
+  const source = data.sources.find((record) => record.id === "cms-league-2026-first-prize-notice");
+  assert.equal(source.url, "https://www.cms.org.cn/article/1525.html");
+  assert.match(source.note.en, /not a new November announcement/);
+});
+
 test("static AMC pages link MAA's current potential-host list without implying open seats", async () => {
   for (const slug of ["amc-8", "amc-10", "amc-12"]) {
     const html = await readFile(path.join(outputDirectory, `competition-${slug}.html`), "utf8");
@@ -37,14 +58,15 @@ test("static HiMCM and MidMCM pages expose the official Summary Sheet template",
 test("static HMMT November timetable preserves venues, EST and the February pending boundary", async () => {
   const data = await loadStaticData();
   const hmmt = data.projects.find((project) => project.id === "hmmt");
-  assert.equal(hmmt.lastVerified, "2026-11-02");
+  assert.equal(hmmt.lastVerified, "2026-11-04");
   assert.equal(hmmt.facts.find((fact) => fact.label.en === "November detailed timetable")?.status, "confirmed");
   assert.equal(hmmt.facts.find((fact) => fact.label.en === "February detailed timetable")?.status, "pending");
   const html = await readFile(path.join(outputDirectory, "competition-hmmt.html"), "utf8");
   const text = visibleText(html);
   for (const pattern of [
-    /November 2026 detailed schedule published/,
-    /November 6 · MIT Lobby 13/,
+    /November 2026 on-site schedule revised/,
+    /November 6 · Assigned locations/,
+    /17:00–22:00/,
     /07:45–08:30/,
     /14:50–16:35/,
     /18:00–18:55/,
@@ -56,6 +78,36 @@ test("static HMMT November timetable preserves venues, EST and the February pend
   ]) assert.match(text, pattern);
   assert.match(html, /https:\/\/www\.hmmt\.org\/www\/tournaments\/schedule/);
   assert.doesNotMatch(text, /current page shows an older example timetable only/);
+});
+
+test("static HMMT current arrivals exclude withdrawn details while retaining their history", async () => {
+  const data = await loadStaticData();
+  const hmmt = data.projects.find((project) => project.id === "hmmt");
+  const current = hmmt.sections.find((section) => section.id === "november-2026-timetable");
+  const currentRows = current.tables[0].rows.map((row) => row.cells.map((cell) => cell.en).join(" | "));
+  assert.match(currentRows.find((row) => row.includes("Friday events")), /November 6 · Assigned locations \| Friday events \| 17:00–22:00/);
+  assert.match(currentRows.find((row) => row.includes("Awards")), /November 7 · Assigned locations \| Awards \| 18:00–18:55/);
+  assert.doesNotMatch(currentRows.join(" "), /MIT Lobby 13|17:45–19:00|SC B\/C/);
+  const friday = hmmt.dates.find((date) => date.id === "hmmt-november-friday-events");
+  assert.ok(friday);
+  assert.equal(friday.date, "2026-11-06");
+  assert.equal(friday.region.en, "Assigned locations; EST");
+  assert.match(friday.note.en, /17:00–22:00/);
+  assert.equal(hmmt.dates.some((date) => date.id === "hmmt-november-early-registration"), false);
+  const history = hmmt.sections.find((section) => section.id === "november-2026-schedule-history");
+  assert.match(JSON.stringify(history), /17:45–19:00, MIT Lobby 13/);
+  assert.match(JSON.stringify(history), /Harvard SC B\/C/);
+  assert.match(history.intro.en, /not current arrival instructions/);
+  const source = data.sources.find((record) => record.id === "hmmt-schedule-season30");
+  assert.equal(source.verifiedAt, "2026-11-04");
+  assert.match(source.note.en, /This does not establish cancellation/);
+  const html = await readFile(path.join(outputDirectory, "competition-hmmt.html"), "utf8");
+  assert.match(visibleText(html), /do not arrive using the old MIT early-registration time\/location or the former SC B\/C awards location/);
+  const calendar = await readFile(path.join(outputDirectory, "calendar.html"), "utf8");
+  assert.match(calendar, /data-event-id="hmmt-november-friday-events"/);
+  assert.doesNotMatch(calendar, /data-event-id="hmmt-november-early-registration"/);
+  const sources = await readFile(path.join(outputDirectory, "sources.html"), "utf8");
+  assert.match(visibleText(sources), /This does not establish cancellation/);
 });
 
 test("static Yau mathematics dates distinguish semifinal and global-finalist public review", async () => {

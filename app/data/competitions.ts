@@ -655,8 +655,18 @@ export const competitionSources: SourceRecord[] = [
     owner: t("中国数学会", "Chinese Mathematical Society"),
     url: "https://www.cms.org.cn/competition/NationalHighSchoolMathematicsLeague.html",
     kind: "official-archive",
-    verifiedAt: "2026-10-14",
+    verifiedAt: "2026-11-04",
     appliesTo: "League notices and first-prize review",
+  },
+  {
+    id: "cms-league-2026-first-prize-notice",
+    label: t("2026 全国高中数学联赛一等奖名单公示", "2026 National League First Prize roster notice"),
+    owner: t("中国数学会中学数学竞赛委员会", "Chinese Mathematical Society Secondary-School Mathematics Competition Committee"),
+    url: "https://www.cms.org.cn/article/1525.html",
+    kind: "official-data",
+    verifiedAt: "2026-11-04",
+    appliesTo: "2026 regional First Prize review and the October 14–21 public-review window",
+    note: t("本次补充的是 2026 年 10 月 14 日已发布的公告，并非 11 月新发布。具体名单由公告指向中国数学会微信公众号；原公示期已结束，正文未提供数值分数线、比赛日期或名单下载链接。", "Added here from a notice published on 14 October 2026, not a new November announcement. The notice directs readers to the Society's official WeChat account for the roster. Its public-review window has ended; the body supplies no numerical cutoffs, contest date or roster-download link."),
   },
   {
     id: "imms-league-archive",
@@ -1233,9 +1243,9 @@ export const competitionSources: SourceRecord[] = [
     owner: t("HMMT 组委会", "HMMT"),
     url: "https://www.hmmt.org/www/tournaments/schedule",
     kind: "official",
-    verifiedAt: "2026-11-02",
+    verifiedAt: "2026-11-04",
     appliesTo: "November 6–8, 2026 detailed schedule; February 2027 detailed timetable still pending",
-    note: t("已改为 2026 年 11 月 6–8 日当届日程，全部时间为 EST（UTC−05:00）；不用于证明 February 2027 的逐小时安排。", "Now lists the November 6–8, 2026 schedule, entirely in EST (UTC−05:00); it does not confirm February 2027's detailed timetable."),
+    note: t("11 月 4 日所见日程列周五活动 17:00–22:00、地点由主办方分配；不再列此前 MIT Lobby 13 的提前报到条目，颁奖地点也改为主办方分配。这不证明活动取消。全部为 EST（UTC−05:00）；February 2027 详细日程仍未公布。", "The schedule read on November 4 lists Friday events at 17:00–22:00 with assigned locations; the former MIT Lobby 13 early-registration entry is absent, and awards now also use assigned locations. This does not establish cancellation. All times are EST (UTC−05:00); February 2027's detailed timetable remains unpublished."),
   },
   {
     id: "hmmt-problems-results-archive",
@@ -1865,10 +1875,10 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "Season 30 · 2026–27",
-    lastVerified: "2026-11-02",
+    lastVerified: "2026-11-04",
     alerts: [{
-      title: t("November 2026 详细日程已公布", "November 2026 detailed schedule published"),
-      body: t("11 月 6 日提前报到在 MIT；11 月 7 日正赛在 Harvard，07:45–08:30 报到，18:00–18:55 颁奖。全部为 EST。February 2027 的详细日程仍待公布。", "November 6 early registration is at MIT; November 7 competition is at Harvard, with 07:45–08:30 registration and 18:00–18:55 awards. All times are EST. February 2027's detailed timetable remains pending."),
+      title: t("November 2026 现场日程已修订", "November 2026 on-site schedule revised"),
+      body: t("11 月 6 日现列 17:00–22:00 周五活动，地点由主办方分配；旧 MIT 提前报到条目已不在当前日程中，不能据此推断活动取消。11 月 7 日 07:45–08:30 在 SC Arcades 报到；颁奖仍为 18:00–18:55，但地点也须按分配通知确认。全部为 EST。", "November 6 now lists Friday events at 17:00–22:00 with assigned locations. The old MIT early-registration entry is no longer in the current timetable; cancellation cannot be inferred. November 7 check-in is 07:45–08:30 at SC Arcades; awards remain 18:00–18:55, but their location must also follow the assignment notice. All times are EST."),
       sourceIds: ["hmmt-schedule-season30"],
     }],
     facts: [
@@ -1890,7 +1900,7 @@ export const competitionProjects: ProjectRecord[] = [
       { id: "hmmt-november-aid-confirmation", label: t("November 资助确认截止", "November financial-aid confirmation deadline"), date: "2026-10-03", status: "confirmed", sourceIds: ["hmmt-deadlines-season30"] },
       { id: "hmmt-november-confirmation", label: t("November 常规确认截止", "November general confirmation deadline"), date: "2026-10-10", status: "confirmed", sourceIds: ["hmmt-deadlines-season30"] },
       { id: "hmmt-november-waitlist", label: t("November 候补确认截止", "November waitlist confirmation deadline"), date: "2026-10-24", status: "confirmed", sourceIds: ["hmmt-deadlines-season30"] },
-      { id: "hmmt-november-early-registration", label: t("November 提前报到与周五活动", "November early registration and Friday events"), date: "2026-11-06", region: t("MIT；EST", "MIT; EST"), status: "confirmed", sourceIds: ["hmmt-schedule-season30"], note: t("提前报到 17:45–19:00，地点 Lobby 13；与周六 Harvard 正赛地点不同。", "Early registration is 17:45–19:00 in Lobby 13; Saturday's competition is at Harvard instead.") },
+      { id: "hmmt-november-friday-events", label: t("November 周五活动", "November Friday events"), date: "2026-11-06", region: t("主办方分配地点；EST", "Assigned locations; EST"), status: "confirmed", sourceIds: ["hmmt-schedule-season30"], note: t("17:00–22:00。当前日程不再列旧 MIT 提前报到条目；具体地点以当届分配通知为准，不据此推断活动取消。", "17:00–22:00. The current timetable no longer lists the old MIT early-registration entry; use the current assignment notice for locations, without inferring cancellation.") },
       { id: "hmmt-november-2026", label: t("HMMT November", "HMMT November"), date: "2026-11-07", region: t("Harvard University，Cambridge, Massachusetts", "Harvard University, Cambridge, Massachusetts"), status: "confirmed", sourceIds: ["hmmt-home-season30", "hmmt-registration-season30"] },
       { id: "hmmt-november-education-day", label: t("November 周日教育活动", "November Sunday education events"), date: "2026-11-08", region: t("Harvard University；EST", "Harvard University; EST"), status: "confirmed", sourceIds: ["hmmt-schedule-season30"], note: t("讲座 09:00 开始，最后一场 13:00–13:50；Eli Luberoff 主旨演讲为 11:00–11:50。", "Talks begin at 09:00; the last session is 13:00–13:50. Eli Luberoff's keynote is 11:00–11:50.") },
       { id: "hmmt-february-aid-confirmation", label: t("February 资助确认截止", "February financial-aid confirmation deadline"), date: "2026-11-14", status: "confirmed", sourceIds: ["hmmt-deadlines-season30"] },
@@ -1906,22 +1916,34 @@ export const competitionProjects: ProjectRecord[] = [
         tables: [{
           columns: [t("日期／地点", "Date / venue"), t("环节", "Event"), t("EST 时段", "EST slot")],
           rows: [
-            { cells: [t("11 月 6 日 · MIT Lobby 13", "November 6 · MIT Lobby 13"), t("提前报到", "Early registration"), t("17:45–19:00", "17:45–19:00")], sourceIds: ["hmmt-schedule-season30"] },
+            { cells: [t("11 月 6 日 · 主办方分配地点", "November 6 · Assigned locations"), t("周五活动", "Friday events"), t("17:00–22:00", "17:00–22:00")], sourceIds: ["hmmt-schedule-season30"] },
             { cells: [t("11 月 7 日 · Harvard SC Arcades", "November 7 · Harvard SC Arcades"), t("学生报到", "Student registration"), t("07:45–08:30", "07:45–08:30")], sourceIds: ["hmmt-schedule-season30"] },
             { cells: [t("11 月 7 日 · Harvard", "November 7 · Harvard"), t("General Round", "General Round"), t("09:00–10:15", "09:00–10:15")], sourceIds: ["hmmt-schedule-season30"] },
             { cells: [t("11 月 7 日 · Harvard", "November 7 · Harvard"), t("Theme Round", "Theme Round"), t("10:30–11:45", "10:30–11:45")], sourceIds: ["hmmt-schedule-season30"] },
             { cells: [t("11 月 7 日 · Harvard", "November 7 · Harvard"), t("Team Round", "Team Round"), t("12:15–13:30", "12:15–13:30")], sourceIds: ["hmmt-schedule-season30"] },
             { cells: [t("11 月 7 日 · Harvard", "November 7 · Harvard"), t("Guts Round", "Guts Round"), t("14:50–16:35", "14:50–16:35")], sourceIds: ["hmmt-schedule-season30"] },
-            { cells: [t("11 月 7 日 · Harvard SC B/C", "November 7 · Harvard SC B/C"), t("颁奖", "Awards"), t("18:00–18:55", "18:00–18:55")], sourceIds: ["hmmt-schedule-season30"] },
+            { cells: [t("11 月 7 日 · 主办方分配地点", "November 7 · Assigned locations"), t("颁奖", "Awards"), t("18:00–18:55", "18:00–18:55")], sourceIds: ["hmmt-schedule-season30"] },
             { cells: [t("11 月 8 日 · Harvard", "November 8 · Harvard"), t("教育讲座", "Educational talks"), t("09:00 起；最后一场 13:00–13:50", "From 09:00; last session 13:00–13:50")], sourceIds: ["hmmt-schedule-season30"] },
             { cells: [t("11 月 8 日 · Harvard Emerson 210", "November 8 · Harvard Emerson 210"), t("Eli Luberoff 主旨演讲", "Eli Luberoff keynote"), t("11:00–11:50", "11:00–11:50")], sourceIds: ["hmmt-schedule-season30"] },
           ],
           note: t("以官网最新日程与现场分配教室为准；February 2027 详细安排仍待公布。", "Follow the latest official schedule and assigned rooms; February 2027's detailed timetable remains pending."),
         }],
         bullets: [
-          t("北京时间比 EST 快 13 小时，例如 11 月 7 日 07:45 EST 对应北京时间同日 20:45；这是美国现场活动，不是中国线上场。周五 MIT 与周六 Harvard 不要走错。", "Beijing is 13 hours ahead of EST: November 7 at 07:45 EST is 20:45 in Beijing. These are US on-site events, not a China online sitting. Friday is at MIT; Saturday is at Harvard."),
+          t("北京时间比 EST 快 13 小时，例如 11 月 7 日 07:45 EST 对应北京时间同日 20:45；这是美国现场活动，不是中国线上场。周五活动与颁奖的具体地点须按主办方当届通知确认。", "Beijing is 13 hours ahead of EST: November 7 at 07:45 EST is 20:45 in Beijing. These are US on-site events, not a China online sitting. Confirm Friday-event and awards locations from the organizer's current notices."),
           t("考前须已在分配教室准备就绪，迟到可能被取消资格；不得自行监考或另选时间考试。", "Be ready in the assigned room before testing; lateness may cause disqualification. Self-proctoring and alternative testing times are not allowed."),
         ],
+      },
+      {
+        id: "november-2026-schedule-history",
+        title: t("November 2026 日程修订记录", "November 2026 Schedule Revision History"),
+        intro: t("以下为旧日程与 11 月 4 日所见版本的差异，不是当前到场指引。条目从日程移除不等于主办方宣布取消活动。", "These differences compare the earlier timetable with the version read on November 4; they are not current arrival instructions. Removal of an entry is not an organizer announcement that an event is cancelled."),
+        tables: [{
+          columns: [t("项目", "Item"), t("此前记录", "Earlier record"), t("11 月 4 日所见", "Read on November 4")],
+          rows: [
+            { cells: [t("11 月 6 日提前报到", "November 6 early registration"), t("17:45–19:00，MIT Lobby 13", "17:45–19:00, MIT Lobby 13"), t("该条目已不在当前日程中；现列周五活动 17:00–22:00、主办方分配地点", "That entry is absent from the current timetable; Friday events are listed at 17:00–22:00 with assigned locations")], sourceIds: ["hmmt-schedule-season30"] },
+            { cells: [t("11 月 7 日颁奖地点", "November 7 awards location"), t("Harvard SC B/C", "Harvard SC B/C"), t("主办方分配地点；18:00–18:55 时段不变", "Assigned locations; the 18:00–18:55 slot is unchanged")], sourceIds: ["hmmt-schedule-season30"] },
+          ],
+        }],
       },
       {
         id: "november-february",
@@ -1961,6 +1983,7 @@ export const competitionProjects: ProjectRecord[] = [
           t("HMMT 明确表示不与任何和参赛队伍相关的机构合作，也不允许任何非 HMMT 团体声称代表某一国家或出售参赛名额。中国申请者应只使用 hmmt.org 官方账户与报名系统。", "HMMT states that it does not partner with organizations connected to competing teams and that no non-HMMT group may claim to represent a country or sell tournament places. Applicants from China should use only hmmt.org accounts and registration."),
           t("如果学生所在学校当季提交申请，学生必须通过学校参赛，不能绕开学校另报个人。非学校队通常还须满足同校、150 英里居住范围或事先确认的连续地理区域规则。", "If a student's school applies that season, the student must compete through the school rather than apply separately. Non-school teams normally must satisfy the same-school, 150-mile residence or pre-approved contiguous-region rule."),
           t("两场均为美国 Massachusetts 州 Cambridge 的现场竞赛。参赛者须自行处理护照、签证、国际交通和未获资助的住宿；官网未公布中国专项签证或机票支持。", "Both tournaments are in-person in Cambridge, Massachusetts. Entrants arrange passports, visas, international travel and lodging not covered by aid; no China-specific visa or airfare support is published."),
+          t("赴赛前重新确认主办方当届日程及分配通知：不要按旧 MIT 提前报到时间／地点或旧 SC B/C 颁奖地点直接到场。当前周五活动和颁奖均为主办方分配地点；旧条目移除不代表活动取消，也不能据此另推校园。", "Before travelling, recheck the organizer's current timetable and assignment notices: do not arrive using the old MIT early-registration time/location or the former SC B/C awards location. Friday events and awards now have assigned locations; removal of an old entry proves neither cancellation nor a different campus."),
         ],
       },
       {
@@ -2605,7 +2628,12 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "pending",
     cycle: "2026",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-11-04",
+    alerts: [{
+      title: t("2026 一等奖公示期已结束", "2026 First Prize public-review window has ended"),
+      body: t("中国数学会 10 月 14 日公告确认当届复评完成；公示／申诉期为 10 月 14–21 日，现已结束。本次补充这份既有公告，不是新一轮报名或申诉开放通知。", "The Society's October 14 notice confirms completion of the 2026 review. The October 14–21 public-review and appeal window has ended. This is an addition of an existing notice, not a new registration or appeal opportunity."),
+      sourceIds: ["cms-league-2026-first-prize-notice"],
+    }],
     facts: [
       { label: t("正式名称", "Official name"), value: t("全国中学生数学奥林匹克竞赛（预赛）；通称全国高中数学联赛", "The preliminary round of the National Secondary-School Mathematical Olympiad, commonly known as the National High School Mathematics League"), sourceIds: ["cms-league"] },
       { label: t("创办", "Established"), value: t("1981 年", "1981"), sourceIds: ["cms-league"] },
@@ -2614,13 +2642,24 @@ export const competitionProjects: ProjectRecord[] = [
       { label: t("报名", "Registration"), value: t("由学校或省级赛区统一报送；不设全国统一的学生个人报名入口", "Entries are submitted through schools or provincial committees; there is no national individual-registration portal"), sourceIds: ["cms-league-notices"] },
     ],
     dates: [
-      { id: "china-league-2026-date", label: t("2026 全国高中数学联赛日期", "2026 National League date"), date: "TBD", region: t("中国大陆各赛区", "Mainland China regions"), status: "pending", sourceIds: ["cms-league-notices"], note: t("中国数学会联赛公告栏目最新记录仍为 2025 年一等奖公示，尚未发布 2026 全国统一赛程；各省报名和竞赛安排须查本赛区正式通知。", "The latest entry in the Chinese Mathematical Society's League archive remains the 2025 First Prize roster, with no 2026 national schedule published there; check the current provincial notice for registration and contest arrangements.") },
+      { id: "china-league-2026-date", label: t("2026 联赛比赛日期（待补官方日期依据）", "2026 League contest date — official date evidence pending"), date: "TBD", region: t("中国大陆各赛区", "Mainland China regions"), status: "pending", sourceIds: ["cms-league-notices", "cms-league-2026-first-prize-notice"], note: t("联赛栏目已发布 2026 一等奖公示，但该结果公告未提供比赛日期，不能由公示日反推。TBD 仅表示本站待补官方日期依据，不表示比赛尚未举行或报名仍开放；各省安排须查本赛区正式通知。", "The archive now includes the 2026 First Prize notice, but that results notice gives no contest date, which cannot be inferred from its publication date. TBD denotes missing official date evidence on this site, not an unheld contest or open registration; consult the relevant provincial notice.") },
+      { id: "china-league-2026-first-prize-review", label: t("2026 一等奖公示／申诉期（已结束）", "2026 First Prize public-review / appeal window — ended"), date: "2026-10-14", endDate: "2026-10-21", region: t("中国大陆各赛区", "Mainland China regions"), status: "historical", sourceIds: ["cms-league-2026-first-prize-notice"], note: t("保留为当届历史记录；不是新的申诉窗口或比赛日期。", "Retained as a historical record of this cycle, not a new appeal window or the contest date.") },
     ],
     sections: [
+      {
+        id: "results-2026",
+        title: t("2026 结果公告与历史记录", "2026 results notice and historical record"),
+        bullets: [
+          t("10 月 14 日公告确认 2026 联赛复评已结束，并公示各赛区一等奖名单。具体名单须查中国数学会微信公众号；公告正文没有名单下载链接，本站不复制学生名单。", "The October 14 notice confirms that the 2026 review is complete and announces regional First Prize rosters. Consult the Society's official WeChat account for the names; the notice body has no roster-download link, and this site does not reproduce student lists."),
+          t("原公示／申诉期为 10 月 14–21 日，已结束；公告说明，未被赛区报送全国复核的本人试卷不在该成绩申诉范围内。不能把这份历史通知视为当前仍可申诉。", "The original October 14–21 review and appeal period has ended. The notice excluded score appeals for scripts not submitted by the regional committee for national review. This historical notice is not evidence that appeals remain open."),
+          t("该公告没有数值分数线、获奖人数或 CMO 入选名单，不能据此填入全国统一获奖线或认定一等奖自动获得省队／CMO 资格。", "The notice gives no numerical cutoffs, recipient count or CMO selection roster. It cannot establish a national award threshold or automatic provincial-team/CMO qualification for First Prize recipients."),
+        ],
+      },
       {
         id: "china-registration",
         title: t("中国学生如何报名", "Registration for students in China"),
         bullets: [
+          t("2026 复评已完成，10 月 14–21 日一等奖公示期已结束；以下是报名组织方式说明，不代表 2026 仍开放报名或补报名。", "The 2026 review is complete and the October 14–21 First Prize public-review period has ended. The entry procedure below does not imply that 2026 registration or late entry remains open."),
           t("全国不设统一学生个人报名入口。学生先向本校竞赛教师／教研部门询问，本校或地市竞赛组织机构再按省级赛区要求统一报送。", "There is no national student-direct registration portal. Students first ask their school's competition teacher/teaching-research office, after which the school or municipal competition body submits entries under the provincial committee's procedure."),
           t("报名轮次和名额因赛区而异：部分省份先举行省内初赛或夏令营筛选。山东 2025 正式通知即由各市竞赛领导小组按分配名额向省竞赛委员会报送登记表，不能外推为全国统一流程。", "Rounds and quotas differ by region: some provinces first hold a local preliminary or summer-camp selection. Shandong's 2025 official notice, for example, required municipal competition committees to submit registration forms under allocated quotas; that process is not a national template."),
           t("学籍、照片、身份证件或报名表字段以本省当届通知为准，现有全国公告页未公布统一证件清单。查询顺序为省数学会／省级竞赛委员会当届通知，再核对中国数学会联赛公告档案。", "School-enrolment, photo, identity-document and form fields follow the current provincial notice; the national notice archive does not publish a uniform document list. Check the provincial mathematical society/competition committee first, then the Chinese Mathematical Society League archive."),
@@ -2648,7 +2687,7 @@ export const competitionProjects: ProjectRecord[] = [
         ],
       },
     ],
-    sourceIds: ["cms-league", "cms-league-notices", "shandong-league-2025-registration", "imms-league-archive"],
+    sourceIds: ["cms-league", "cms-league-notices", "cms-league-2026-first-prize-notice", "shandong-league-2025-registration", "imms-league-archive"],
     relatedIds: ["cmo"],
     searchTerms: ["全国高中数学联赛", "全国中学生数学奥林匹克竞赛预赛", "省一", "省队", "联赛分数线"],
   },
