@@ -828,18 +828,19 @@ test("renders HMMT November 2026 times without confirming February or extending 
   assert.doesNotMatch(text, /current page shows an older example timetable only/);
 });
 
-test("HMMT keeps withdrawn arrival details in history, not the current timetable or calendar", async () => {
+test("HMMT keeps old HTML-only arrival details in history, not the current timetable or calendar", async () => {
   const html = await renderHtml("/competitions/hmmt");
   const timetable = html.match(/<section\b[^>]*id="november-2026-timetable"[^>]*>[\s\S]*?<\/section>/)?.[0];
   assert.ok(timetable, "missing current HMMT timetable");
   assert.match(visibleText(timetable), /November 7 · Assigned locations/);
-  assert.doesNotMatch(visibleText(timetable), /MIT Lobby 13|17:45–19:00|SC B\/C/);
+  const timetableRows = [...timetable.matchAll(/<tr\b[^>]*>[\s\S]*?<\/tr>/g)].map((match) => visibleText(match[0]));
+  assert.doesNotMatch(timetableRows.join(" "), /MIT Lobby 13|17:45–19:00|SC B\/C/);
   const history = html.match(/<section\b[^>]*id="november-2026-schedule-history"[^>]*>[\s\S]*?<\/section>/)?.[0];
   assert.ok(history, "missing HMMT revision history");
   for (const pattern of [/17:45–19:00, MIT Lobby 13/, /Harvard SC B\/C/, /not current arrival instructions/, /not an organizer announcement that an event is cancelled/]) {
     assert.match(visibleText(history), pattern);
   }
-  assert.match(visibleText(html), /do not arrive using the old MIT early-registration time\/location or the former SC B\/C awards location/);
+  assert.match(visibleText(html), /Do not choose either PDF's early-registration time\/location without organizer confirmation/);
   const calendar = await renderHtml("/calendar");
   const friday = calendar.match(/<article\b[^>]*data-event-id="hmmt-november-friday-events"[^>]*>[\s\S]*?<\/article>/)?.[0];
   assert.ok(friday, "missing current HMMT Friday calendar event");
@@ -848,6 +849,29 @@ test("HMMT keeps withdrawn arrival details in history, not the current timetable
   assert.doesNotMatch(visibleText(friday), /Lobby 13|17:45–19:00|SC B\/C/);
   assert.doesNotMatch(calendar, /data-event-id="hmmt-november-early-registration"/);
   assert.match(visibleText(await renderHtml("/sources")), /This does not establish cancellation/);
+});
+
+test("HMMT exposes official brochure conflicts without changing the confirmed 2026 tournament date", async () => {
+  const html = await renderHtml("/competitions/hmmt");
+  const text = visibleText(html);
+  for (const pattern of [
+    /official brochures conflict on early registration/,
+    /17:45–19:00, Lobby 13/,
+    /18:00–19:00, Lobby 10/,
+    /Friday November 7 and Saturday November 8/,
+    /Weekday\/date labels do not match 2026/,
+    /not new tournament dates or confirmed check-in instructions/,
+    /remains in the Friday brochure, not removed from every official source/,
+    /an overall window or an HTML omission does not establish cancellation/,
+    /not inherently conflicting/,
+    /The parent page's inconsistent weekday\/date labels do not change the confirmed November 7 tournament date/,
+  ]) assert.match(text, pattern);
+  for (const filename of ["HMMT_November_2026_FNE_Brochure.pdf", "HMMT_November_2026_Brochure.pdf"]) {
+    assert.ok(html.includes(`https://hmmt-archive.s3.amazonaws.com/brochures/${filename}`), filename);
+  }
+  const dates = html.match(/<section\b[^>]*id="dates"[^>]*>[\s\S]*?<\/section>/)?.[0];
+  assert.ok(dates);
+  assert.doesNotMatch(visibleText(dates), /17:45–19:00|18:00–19:00|Lobby 13|Lobby 10/);
 });
 
 test("limits mixed assessments and translated syllabi to mathematics", async () => {

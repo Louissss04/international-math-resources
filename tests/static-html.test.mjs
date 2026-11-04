@@ -80,7 +80,7 @@ test("static HMMT November timetable preserves venues, EST and the February pend
   assert.doesNotMatch(text, /current page shows an older example timetable only/);
 });
 
-test("static HMMT current arrivals exclude withdrawn details while retaining their history", async () => {
+test("static HMMT current arrivals exclude old HTML-only details while retaining their history", async () => {
   const data = await loadStaticData();
   const hmmt = data.projects.find((project) => project.id === "hmmt");
   const current = hmmt.sections.find((section) => section.id === "november-2026-timetable");
@@ -102,12 +102,46 @@ test("static HMMT current arrivals exclude withdrawn details while retaining the
   assert.equal(source.verifiedAt, "2026-11-04");
   assert.match(source.note.en, /This does not establish cancellation/);
   const html = await readFile(path.join(outputDirectory, "competition-hmmt.html"), "utf8");
-  assert.match(visibleText(html), /do not arrive using the old MIT early-registration time\/location or the former SC B\/C awards location/);
+  assert.match(visibleText(html), /Do not choose either PDF's early-registration time\/location without organizer confirmation/);
   const calendar = await readFile(path.join(outputDirectory, "calendar.html"), "utf8");
   assert.match(calendar, /data-event-id="hmmt-november-friday-events"/);
   assert.doesNotMatch(calendar, /data-event-id="hmmt-november-early-registration"/);
   const sources = await readFile(path.join(outputDirectory, "sources.html"), "utf8");
   assert.match(visibleText(sources), /This does not establish cancellation/);
+});
+
+test("static HMMT records brochure conflicts without selecting a definitive early-registration slot", async () => {
+  const data = await loadStaticData();
+  const hmmt = data.projects.find((project) => project.id === "hmmt");
+  const conflict = hmmt.facts.find((fact) => fact.label.en === "November early registration / brochure conflict");
+  assert.equal(conflict?.status, "conflict");
+  assert.deepEqual(new Set(conflict.sourceIds), new Set(["hmmt-november-2026-friday-brochure", "hmmt-november-2026-tournament-brochure"]));
+  for (const pattern of [/17:45–19:00 in Lobby 13/, /18:00–19:00 in Lobby 10/, /do not match the 2026 calendar/, /Organizer clarification is pending/]) {
+    assert.match(conflict.value.en, pattern);
+  }
+  assert.equal(hmmt.dates.find((date) => date.id === "hmmt-november-2026")?.date, "2026-11-07");
+  assert.equal(hmmt.dates.some((date) => /early registration/i.test(date.label.en)), false);
+  assert.doesNotMatch(JSON.stringify(hmmt.dates), /17:45–19:00|18:00–19:00|Lobby 13|Lobby 10/);
+  for (const [id, filename] of [
+    ["hmmt-november-2026-friday-brochure", "HMMT_November_2026_FNE_Brochure.pdf"],
+    ["hmmt-november-2026-tournament-brochure", "HMMT_November_2026_Brochure.pdf"],
+  ]) {
+    const source = data.sources.find((record) => record.id === id);
+    assert.equal(source?.url, `https://hmmt-archive.s3.amazonaws.com/brochures/${filename}`);
+    assert.equal(source.verifiedAt, "2026-11-04");
+    assert.ok(hmmt.sourceIds.includes(id));
+  }
+  const html = await readFile(path.join(outputDirectory, "competition-hmmt.html"), "utf8");
+  const text = visibleText(html);
+  for (const pattern of [
+    /official brochures conflict on early registration/,
+    /Friday November 7 and Saturday November 8/,
+    /not new tournament dates or confirmed check-in instructions/,
+    /not inherently conflicting/,
+    /remains in the Friday brochure, not removed from every official source/,
+  ]) assert.match(text, pattern);
+  assert.match(html, /HMMT_November_2026_FNE_Brochure\.pdf/);
+  assert.match(html, /HMMT_November_2026_Brochure\.pdf/);
 });
 
 test("static Yau mathematics dates distinguish semifinal and global-finalist public review", async () => {

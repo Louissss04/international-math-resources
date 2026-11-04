@@ -1245,7 +1245,27 @@ export const competitionSources: SourceRecord[] = [
     kind: "official",
     verifiedAt: "2026-11-04",
     appliesTo: "November 6–8, 2026 detailed schedule; February 2027 detailed timetable still pending",
-    note: t("11 月 4 日所见日程列周五活动 17:00–22:00、地点由主办方分配；不再列此前 MIT Lobby 13 的提前报到条目，颁奖地点也改为主办方分配。这不证明活动取消。全部为 EST（UTC−05:00）；February 2027 详细日程仍未公布。", "The schedule read on November 4 lists Friday events at 17:00–22:00 with assigned locations; the former MIT Lobby 13 early-registration entry is absent, and awards now also use assigned locations. This does not establish cancellation. All times are EST (UTC−05:00); February 2027's detailed timetable remains unpublished."),
+    note: t("11 月 4 日所见 HTML 列周五活动 17:00–22:00、颁奖地点由主办方分配，但未列提前报到子环节。这不证明活动取消。页面所链接的两份官方 PDF 已核验，其中提前报到时间／地点及家长页日期互相不一致，须请主办方澄清；HTML 总时窗与 PDF 子环节不能直接判为冲突。全部时间为 EST（UTC−05:00）；February 2027 详细日程仍未公布。", "The HTML read on November 4 lists Friday events at 17:00–22:00 and assigned awards locations, but omits an early-registration sub-event. This does not establish cancellation. Both linked official PDFs have been checked; their early-registration times/locations and parent-page dates are inconsistent and need organizer clarification. An HTML overall window and a PDF sub-event are not inherently contradictory. All times are EST (UTC−05:00); February 2027's detailed timetable remains unpublished."),
+  },
+  {
+    id: "hmmt-november-2026-friday-brochure",
+    label: t("HMMT November 2026 周五活动官方手册 PDF（报到信息存在冲突）", "HMMT November 2026 official Friday-events brochure PDF — check-in conflict"),
+    owner: t("HMMT 组委会", "HMMT"),
+    url: "https://hmmt-archive.s3.amazonaws.com/brochures/HMMT_November_2026_FNE_Brochure.pdf",
+    kind: "official",
+    verifiedAt: "2026-11-04",
+    appliesTo: "November 2026 Friday events; page 4 early registration, not a resolved arrival instruction",
+    note: t("由当届日程页的 Friday Night Events brochure 链接到此文件。第 4 页列 11 月 6 日提前报到 17:45–19:00、Lobby 13；另一份当届手册的家长页却列 18:00–19:00、Lobby 10，并混用不符合 2026 日历的星期／日期。保留冲突，不擅选一项作为确定到场安排。", "Linked by the current schedule's Friday Night Events brochure. Page 4 gives November 6 early registration at 17:45–19:00 in Lobby 13; the other current brochure's parent page instead gives 18:00–19:00 in Lobby 10 and mixes weekday/date labels that do not match the 2026 calendar. The conflict is retained rather than choosing a definitive arrival instruction."),
+  },
+  {
+    id: "hmmt-november-2026-tournament-brochure",
+    label: t("HMMT November 2026 正赛官方手册 PDF（家长页日期／报到信息冲突）", "HMMT November 2026 official tournament brochure PDF — parent-page date/check-in conflict"),
+    owner: t("HMMT 组委会", "HMMT"),
+    url: "https://hmmt-archive.s3.amazonaws.com/brochures/HMMT_November_2026_Brochure.pdf",
+    kind: "official",
+    verifiedAt: "2026-11-04",
+    appliesTo: "November 2026 tournament; page 6 student timetable and page 7 parent/coach inconsistencies",
+    note: t("由当届日程页的 Saturday Tournament Events brochure 链接到此文件。第 6 页列 11 月 7 日周六 Harvard、颁奖 18:00–18:55、按分配前往 SC B/C；第 7 页家长／教练页却写 Friday November 7、Saturday November 8，并列提前报到 18:00–19:00、Lobby 10。其日期与 2026 日历不符，报到信息也与周五手册不一致；须主办方澄清。", "Linked by the current schedule's Saturday Tournament Events brochure. Page 6 identifies Saturday November 7 at Harvard and awards at 18:00–18:55 in assigned SC B/C; page 7 for parents/coaches instead labels November 7 as Friday and November 8 as Saturday, with early registration at 18:00–19:00 in Lobby 10. Those weekday/date labels do not match 2026, and check-in differs from the Friday brochure; organizer clarification is required."),
   },
   {
     id: "hmmt-problems-results-archive",
@@ -1877,9 +1897,14 @@ export const competitionProjects: ProjectRecord[] = [
     cycle: "Season 30 · 2026–27",
     lastVerified: "2026-11-04",
     alerts: [{
+      title: t("November 2026 官方手册的提前报到信息冲突", "November 2026 official brochures conflict on early registration"),
+      body: t("周五手册列 11 月 6 日 17:45–19:00、Lobby 13；正赛手册的家长页却列 18:00–19:00、Lobby 10，并混用不符合 2026 日历的星期／日期。请在赴赛前向主办方确认，不把其中一处当作确定安排；HTML 没列子环节也不等于取消。", "The Friday brochure gives November 6 at 17:45–19:00 in Lobby 13; the tournament brochure's parent page instead gives 18:00–19:00 in Lobby 10 and weekday/date labels that do not fit 2026. Obtain organizer confirmation before travelling rather than choosing one as definitive; omission of a sub-event from the HTML does not mean cancellation."),
+      tone: "warning",
+      sourceIds: ["hmmt-november-2026-friday-brochure", "hmmt-november-2026-tournament-brochure", "hmmt-schedule-season30"],
+    }, {
       title: t("November 2026 现场日程已修订", "November 2026 on-site schedule revised"),
-      body: t("11 月 6 日现列 17:00–22:00 周五活动，地点由主办方分配；旧 MIT 提前报到条目已不在当前日程中，不能据此推断活动取消。11 月 7 日 07:45–08:30 在 SC Arcades 报到；颁奖仍为 18:00–18:55，但地点也须按分配通知确认。全部为 EST。", "November 6 now lists Friday events at 17:00–22:00 with assigned locations. The old MIT early-registration entry is no longer in the current timetable; cancellation cannot be inferred. November 7 check-in is 07:45–08:30 at SC Arcades; awards remain 18:00–18:55, but their location must also follow the assignment notice. All times are EST."),
-      sourceIds: ["hmmt-schedule-season30"],
+      body: t("HTML 日程列 11 月 6 日 17:00–22:00 周五活动，地点由主办方分配；这是总时窗，不否定 PDF 中的子环节。11 月 7 日 07:45–08:30 在 SC Arcades 报到；颁奖仍为 18:00–18:55，HTML 写主办方分配地点，正赛手册第 6 页细列按分配前往 SC B/C。最终以当届分配通知确认，不能只按 PDF 地点自行到场。全部为 EST。", "The HTML lists November 6 Friday events at 17:00–22:00 with assigned locations; this overall window does not negate PDF sub-events. November 7 check-in is 07:45–08:30 at SC Arcades. Awards remain 18:00–18:55: the HTML says assigned locations and tournament-brochure page 6 specifies assigned SC B/C. Confirm the final assignment rather than arriving solely from a PDF location. All times are EST."),
+      sourceIds: ["hmmt-schedule-season30", "hmmt-november-2026-tournament-brochure"],
     }],
     facts: [
       { label: t("Season 30 报名状态", "Season 30 application status"), value: t("截至 2026 年 9 月 23 日，官网首页明确说明 Season 30 两场报名均已关闭，抽签结果已发布。首页仍未公布 9 月 20 日的具体截止时刻、时区、延期或候补安排。", "As of 23 September 2026, the home page explicitly states that applications for both Season 30 tournaments are closed and lottery results have been released. It still does not publish the precise 20 September cutoff time, time zone, an extension, or a waitlist arrangement."), status: "confirmed", sourceIds: ["hmmt-home-season30"] },
@@ -1892,6 +1917,7 @@ export const competitionProjects: ProjectRecord[] = [
       { label: t("官方教材", "Official textbook"), value: t("官网未列统一官方教材；备赛材料以官方历年题、解答和赛制说明为主", "No single official textbook is listed; preparation is based primarily on the official paper archive, solutions and format guidance"), sourceIds: ["hmmt-problems-results-archive", "hmmt-november-february"] },
       { label: t("固定分数线", "Fixed cutoffs"), value: t("没有预先公布的晋级线或获奖线；现场参赛资格主要由报名抽签决定，奖项按当届名次产生", "No advance qualification or award cutoff is published; in-person places are mainly allocated by application lottery and awards follow current-tournament ranks"), sourceIds: ["hmmt-registration-season30", "hmmt-testing"] },
       { label: t("November 逐小时日程", "November detailed timetable"), value: t("2026 年 11 月 6–8 日当届日程已公布；全部时间为美国东部标准时间 EST（UTC−05:00）", "The November 6–8, 2026 timetable is published; all times are Eastern Standard Time, EST (UTC−05:00)"), status: "confirmed", sourceIds: ["hmmt-schedule-season30"] },
+      { label: t("November 提前报到／手册冲突", "November early registration / brochure conflict"), value: t("官方周五手册第 4 页为 11 月 6 日 17:45–19:00、Lobby 13；正赛手册第 7 页家长／教练页为 18:00–19:00、Lobby 10，并将 November 7 写作 Friday、November 8 写作 Saturday，与 2026 日历不符。待主办方澄清；不在日历中确认任一提前报到安排。", "Friday-brochure page 4 gives November 6 at 17:45–19:00 in Lobby 13; tournament-brochure page 7 for parents/coaches gives 18:00–19:00 in Lobby 10 and labels November 7 as Friday and November 8 as Saturday, which do not match the 2026 calendar. Organizer clarification is pending; neither early-registration arrangement is confirmed in the calendar."), status: "conflict", sourceIds: ["hmmt-november-2026-friday-brochure", "hmmt-november-2026-tournament-brochure"] },
       { label: t("February 逐小时日程", "February detailed timetable"), value: t("2027 年 2 月逐小时安排待公布，不能套用 November 2026 日程", "February 2027's detailed timetable remains pending; do not reuse November 2026's schedule"), status: "pending", sourceIds: ["hmmt-schedule-season30"] },
       { label: t("与大学录取的关系", "Relationship to admissions"), value: t("HMMT 明确说明其不隶属于任何大学招生办公室，单独参加 HMMT 不会影响 Harvard 或 MIT 的录取决定", "HMMT states that it is not affiliated with any university admissions office and participation by itself has no effect on Harvard or MIT admissions"), sourceIds: ["hmmt-faq"] },
     ],
@@ -1900,7 +1926,7 @@ export const competitionProjects: ProjectRecord[] = [
       { id: "hmmt-november-aid-confirmation", label: t("November 资助确认截止", "November financial-aid confirmation deadline"), date: "2026-10-03", status: "confirmed", sourceIds: ["hmmt-deadlines-season30"] },
       { id: "hmmt-november-confirmation", label: t("November 常规确认截止", "November general confirmation deadline"), date: "2026-10-10", status: "confirmed", sourceIds: ["hmmt-deadlines-season30"] },
       { id: "hmmt-november-waitlist", label: t("November 候补确认截止", "November waitlist confirmation deadline"), date: "2026-10-24", status: "confirmed", sourceIds: ["hmmt-deadlines-season30"] },
-      { id: "hmmt-november-friday-events", label: t("November 周五活动", "November Friday events"), date: "2026-11-06", region: t("主办方分配地点；EST", "Assigned locations; EST"), status: "confirmed", sourceIds: ["hmmt-schedule-season30"], note: t("17:00–22:00。当前日程不再列旧 MIT 提前报到条目；具体地点以当届分配通知为准，不据此推断活动取消。", "17:00–22:00. The current timetable no longer lists the old MIT early-registration entry; use the current assignment notice for locations, without inferring cancellation.") },
+      { id: "hmmt-november-friday-events", label: t("November 周五活动", "November Friday events"), date: "2026-11-06", region: t("主办方分配地点；EST", "Assigned locations; EST"), status: "confirmed", sourceIds: ["hmmt-schedule-season30", "hmmt-november-2026-friday-brochure", "hmmt-november-2026-tournament-brochure"], note: t("17:00–22:00 为 HTML 总时窗，不是提前报到时段。两份官方 PDF 的提前报到与日期信息存在冲突，具体安排须主办方确认；HTML 未列子环节不代表取消。", "17:00–22:00 is the HTML overall window, not an early-registration slot. The two official PDFs conflict on early registration and dates; obtain organizer confirmation. Omission of a sub-event from HTML does not mean cancellation.") },
       { id: "hmmt-november-2026", label: t("HMMT November", "HMMT November"), date: "2026-11-07", region: t("Harvard University，Cambridge, Massachusetts", "Harvard University, Cambridge, Massachusetts"), status: "confirmed", sourceIds: ["hmmt-home-season30", "hmmt-registration-season30"] },
       { id: "hmmt-november-education-day", label: t("November 周日教育活动", "November Sunday education events"), date: "2026-11-08", region: t("Harvard University；EST", "Harvard University; EST"), status: "confirmed", sourceIds: ["hmmt-schedule-season30"], note: t("讲座 09:00 开始，最后一场 13:00–13:50；Eli Luberoff 主旨演讲为 11:00–11:50。", "Talks begin at 09:00; the last session is 13:00–13:50. Eli Luberoff's keynote is 11:00–11:50.") },
       { id: "hmmt-february-aid-confirmation", label: t("February 资助确认截止", "February financial-aid confirmation deadline"), date: "2026-11-14", status: "confirmed", sourceIds: ["hmmt-deadlines-season30"] },
@@ -1912,7 +1938,7 @@ export const competitionProjects: ProjectRecord[] = [
       {
         id: "november-2026-timetable",
         title: t("November 2026 现场日程", "November 2026 On-site Timetable"),
-        intro: t("以下为官网当届日程，全部使用 EST（UTC−05:00）。表中的轮次时段包含现场组织时间，不等于试卷净作答时长。", "The current official timetable uses EST (UTC−05:00). Round slots include administration, not just working time."),
+        intro: t("以下摘录当届 HTML 总日程，全部使用 EST（UTC−05:00）。表中的轮次时段包含现场组织时间，不等于试卷净作答时长。PDF 的提前报到信息另有冲突，见官方手册对照；不把总时窗或 HTML 省略直接解释为子环节取消。", "The following summarizes the current HTML timetable in EST (UTC−05:00). Round slots include administration, not just working time. Early-registration details conflict between the PDFs, as compared below; an overall window or an HTML omission does not establish cancellation of a sub-event."),
         tables: [{
           columns: [t("日期／地点", "Date / venue"), t("环节", "Event"), t("EST 时段", "EST slot")],
           rows: [
@@ -1922,11 +1948,11 @@ export const competitionProjects: ProjectRecord[] = [
             { cells: [t("11 月 7 日 · Harvard", "November 7 · Harvard"), t("Theme Round", "Theme Round"), t("10:30–11:45", "10:30–11:45")], sourceIds: ["hmmt-schedule-season30"] },
             { cells: [t("11 月 7 日 · Harvard", "November 7 · Harvard"), t("Team Round", "Team Round"), t("12:15–13:30", "12:15–13:30")], sourceIds: ["hmmt-schedule-season30"] },
             { cells: [t("11 月 7 日 · Harvard", "November 7 · Harvard"), t("Guts Round", "Guts Round"), t("14:50–16:35", "14:50–16:35")], sourceIds: ["hmmt-schedule-season30"] },
-            { cells: [t("11 月 7 日 · 主办方分配地点", "November 7 · Assigned locations"), t("颁奖", "Awards"), t("18:00–18:55", "18:00–18:55")], sourceIds: ["hmmt-schedule-season30"] },
+            { cells: [t("11 月 7 日 · 主办方分配地点", "November 7 · Assigned locations"), t("颁奖", "Awards"), t("18:00–18:55", "18:00–18:55")], sourceIds: ["hmmt-schedule-season30", "hmmt-november-2026-tournament-brochure"] },
             { cells: [t("11 月 8 日 · Harvard", "November 8 · Harvard"), t("教育讲座", "Educational talks"), t("09:00 起；最后一场 13:00–13:50", "From 09:00; last session 13:00–13:50")], sourceIds: ["hmmt-schedule-season30"] },
             { cells: [t("11 月 8 日 · Harvard Emerson 210", "November 8 · Harvard Emerson 210"), t("Eli Luberoff 主旨演讲", "Eli Luberoff keynote"), t("11:00–11:50", "11:00–11:50")], sourceIds: ["hmmt-schedule-season30"] },
           ],
-          note: t("以官网最新日程与现场分配教室为准；February 2027 详细安排仍待公布。", "Follow the latest official schedule and assigned rooms; February 2027's detailed timetable remains pending."),
+          note: t("上表保留 HTML 的主办方分配地点表述。正赛手册第 6 页进一步写按分配前往 SC B/C，但须核对最终通知，并非与 HTML 直接矛盾；提前报到的 PDF 冲突须另行澄清。February 2027 详细安排仍待公布。", "The table retains the HTML's assigned-location wording. Tournament-brochure page 6 further specifies assigned SC B/C, subject to the final notice; this is not a direct contradiction with the HTML. The PDFs' early-registration conflict needs separate clarification. February 2027's detailed timetable remains pending."),
         }],
         bullets: [
           t("北京时间比 EST 快 13 小时，例如 11 月 7 日 07:45 EST 对应北京时间同日 20:45；这是美国现场活动，不是中国线上场。周五活动与颁奖的具体地点须按主办方当届通知确认。", "Beijing is 13 hours ahead of EST: November 7 at 07:45 EST is 20:45 in Beijing. These are US on-site events, not a China online sitting. Confirm Friday-event and awards locations from the organizer's current notices."),
@@ -1936,13 +1962,27 @@ export const competitionProjects: ProjectRecord[] = [
       {
         id: "november-2026-schedule-history",
         title: t("November 2026 日程修订记录", "November 2026 Schedule Revision History"),
-        intro: t("以下为旧日程与 11 月 4 日所见版本的差异，不是当前到场指引。条目从日程移除不等于主办方宣布取消活动。", "These differences compare the earlier timetable with the version read on November 4; they are not current arrival instructions. Removal of an entry is not an organizer announcement that an event is cancelled."),
+        intro: t("以下比较此前 HTML 与 11 月 4 日所见 HTML、官方 PDF，不是当前到场指引。旧提前报到条目当前 HTML 未列，但周五手册仍列，并非所有官方入口都已撤下；HTML 省略不等于主办方宣布取消活动。", "These differences compare the earlier HTML with the HTML and official PDFs read on November 4; they are not current arrival instructions. The old early-registration entry is absent from current HTML but remains in the Friday brochure, not removed from every official source. HTML omission is not an organizer announcement that an event is cancelled."),
         tables: [{
-          columns: [t("项目", "Item"), t("此前记录", "Earlier record"), t("11 月 4 日所见", "Read on November 4")],
+          columns: [t("项目", "Item"), t("此前 HTML 记录", "Earlier HTML record"), t("11 月 4 日所见官方来源", "Official sources read on November 4")],
           rows: [
-            { cells: [t("11 月 6 日提前报到", "November 6 early registration"), t("17:45–19:00，MIT Lobby 13", "17:45–19:00, MIT Lobby 13"), t("该条目已不在当前日程中；现列周五活动 17:00–22:00、主办方分配地点", "That entry is absent from the current timetable; Friday events are listed at 17:00–22:00 with assigned locations")], sourceIds: ["hmmt-schedule-season30"] },
-            { cells: [t("11 月 7 日颁奖地点", "November 7 awards location"), t("Harvard SC B/C", "Harvard SC B/C"), t("主办方分配地点；18:00–18:55 时段不变", "Assigned locations; the 18:00–18:55 slot is unchanged")], sourceIds: ["hmmt-schedule-season30"] },
+            { cells: [t("11 月 6 日提前报到", "November 6 early registration"), t("17:45–19:00，MIT Lobby 13", "17:45–19:00, MIT Lobby 13"), t("当前 HTML 未单列，但周五 PDF 第 4 页仍列此项；正赛 PDF 家长页另列 18:00–19:00、Lobby 10，冲突待澄清", "Not separately listed in current HTML, but retained on Friday-PDF page 4; the tournament PDF's parent page instead gives 18:00–19:00 in Lobby 10, an unresolved conflict")], status: "conflict", sourceIds: ["hmmt-schedule-season30", "hmmt-november-2026-friday-brochure", "hmmt-november-2026-tournament-brochure"] },
+            { cells: [t("11 月 7 日颁奖地点", "November 7 awards location"), t("Harvard SC B/C", "Harvard SC B/C"), t("HTML 写主办方分配地点，正赛 PDF 第 6 页细列按分配前往 SC B/C；两者不直接矛盾，18:00–18:55 不变，仍须最终分配通知", "HTML says assigned locations; tournament-PDF page 6 specifies assigned SC B/C. These are not directly contradictory; 18:00–18:55 is unchanged, subject to the final assignment notice")], sourceIds: ["hmmt-schedule-season30", "hmmt-november-2026-tournament-brochure"] },
           ],
+        }],
+      },
+      {
+        id: "november-2026-official-brochures",
+        title: t("November 2026 官方现场手册：待澄清差异", "November 2026 Official On-site Brochures: Unresolved Differences"),
+        intro: t("以下两份 PDF 均由当前官方日程页直接链接，已核验正文；可点击对应来源阅读原件。保留原文冲突，不因为文件名含 2026 就将其中不一致的日期改写为当届安排，也不擅选一份覆盖另一份。", "Both PDFs are linked directly from the current official schedule and their contents have been checked; use the cited sources to read the originals. Conflicting text is retained: a 2026 filename does not justify converting inconsistent dates into current instructions or choosing one brochure over the other."),
+        tables: [{
+          columns: [t("官方材料／页码", "Official material / PDF page"), t("核验内容", "Checked content"), t("使用限制", "Limit")],
+          rows: [
+            { cells: [t("周五活动手册，第 4 页", "Friday-events brochure, page 4"), t("11 月 6 日提前报到 17:45–19:00、Lobby 13", "November 6 early registration at 17:45–19:00, Lobby 13"), t("与正赛手册家长页的时间／地点不一致；待主办方澄清，非确定到场安排", "Time/location differ from the tournament brochure's parent page; awaiting organizer clarification, not a definitive arrival instruction")], status: "conflict", sourceIds: ["hmmt-november-2026-friday-brochure", "hmmt-november-2026-tournament-brochure"] },
+            { cells: [t("正赛手册，第 6 页", "Tournament brochure, page 6"), t("Saturday November 7，Harvard；颁奖 18:00–18:55，按分配前往 SC B/C", "Saturday November 7 at Harvard; awards 18:00–18:55, assigned SC B/C"), t("与 HTML 的主办方分配地点表述并非直接矛盾；最终地点仍按当届分配通知", "Not directly contradictory to the HTML's assigned locations; the final location still follows the current assignment notice")], sourceIds: ["hmmt-november-2026-tournament-brochure", "hmmt-schedule-season30"] },
+            { cells: [t("正赛手册，第 7 页家长／教练说明", "Tournament brochure, page 7 for parents/coaches"), t("Friday November 7、Saturday November 8；提前报到 18:00–19:00、Lobby 10", "Friday November 7 and Saturday November 8; early registration 18:00–19:00, Lobby 10"), t("星期／日期与 2026 日历不符，且与本文件第 6 页及周五手册不一致；不能作为新的比赛日期或确定报到安排", "Weekday/date labels do not match 2026 and differ from page 6 and the Friday brochure; not new tournament dates or confirmed check-in instructions")], status: "conflict", sourceIds: ["hmmt-november-2026-tournament-brochure", "hmmt-november-2026-friday-brochure"] },
+          ],
+          note: t("HTML 的周五 17:00–22:00 是总时窗，PDF 的提前报到是子环节，二者本身不构成直接冲突；当前真正未解决的是两份 PDF 的报到时间／地点与正赛 PDF 内部星期／日期。", "The HTML's Friday 17:00–22:00 is an overall window and PDF early registration is a sub-event, so these are not inherently conflicting. The unresolved issues are the two PDFs' check-in times/locations and inconsistent weekday/date labels within the tournament PDF."),
         }],
       },
       {
@@ -1983,7 +2023,7 @@ export const competitionProjects: ProjectRecord[] = [
           t("HMMT 明确表示不与任何和参赛队伍相关的机构合作，也不允许任何非 HMMT 团体声称代表某一国家或出售参赛名额。中国申请者应只使用 hmmt.org 官方账户与报名系统。", "HMMT states that it does not partner with organizations connected to competing teams and that no non-HMMT group may claim to represent a country or sell tournament places. Applicants from China should use only hmmt.org accounts and registration."),
           t("如果学生所在学校当季提交申请，学生必须通过学校参赛，不能绕开学校另报个人。非学校队通常还须满足同校、150 英里居住范围或事先确认的连续地理区域规则。", "If a student's school applies that season, the student must compete through the school rather than apply separately. Non-school teams normally must satisfy the same-school, 150-mile residence or pre-approved contiguous-region rule."),
           t("两场均为美国 Massachusetts 州 Cambridge 的现场竞赛。参赛者须自行处理护照、签证、国际交通和未获资助的住宿；官网未公布中国专项签证或机票支持。", "Both tournaments are in-person in Cambridge, Massachusetts. Entrants arrange passports, visas, international travel and lodging not covered by aid; no China-specific visa or airfare support is published."),
-          t("赴赛前重新确认主办方当届日程及分配通知：不要按旧 MIT 提前报到时间／地点或旧 SC B/C 颁奖地点直接到场。当前周五活动和颁奖均为主办方分配地点；旧条目移除不代表活动取消，也不能据此另推校园。", "Before travelling, recheck the organizer's current timetable and assignment notices: do not arrive using the old MIT early-registration time/location or the former SC B/C awards location. Friday events and awards now have assigned locations; removal of an old entry proves neither cancellation nor a different campus."),
+          t("中国赴赛学生须在出发前向主办方确认提前报到时间／地点：不要自行在两份 PDF 的 Lobby 13 与 Lobby 10 安排中择一，也不能因 HTML 未列子环节就认定取消。颁奖地点须核对当届最终分配，不能只按手册的 SC B/C 到场；含错误星期／日期的家长页不能改变已确认的 11 月 7 日正赛日期。", "Students travelling from China should obtain organizer confirmation of early-registration time/location before departure. Do not choose either PDF's early-registration time/location without organizer confirmation, or infer cancellation from an HTML omission. Check the final awards assignment rather than arriving solely from the brochure's SC B/C wording. The parent page's inconsistent weekday/date labels do not change the confirmed November 7 tournament date."),
         ],
       },
       {
@@ -2037,7 +2077,7 @@ export const competitionProjects: ProjectRecord[] = [
         ],
       },
     ],
-    sourceIds: ["hmmt-home-season30", "hmmt-registration-season30", "hmmt-deadlines-season30", "hmmt-faq", "hmmt-november-february", "hmmt-testing", "hmmt-financial-aid-season30", "hmmt-travel", "hmmt-schedule-season30", "hmmt-problems-results-archive", "hmmt-online", "hmmt-scoring-algorithm", "hmmt-november-2025-results", "hmmt-february-2026-results", "hmmt-february-2026-extended-results"],
+    sourceIds: ["hmmt-home-season30", "hmmt-registration-season30", "hmmt-deadlines-season30", "hmmt-faq", "hmmt-november-february", "hmmt-testing", "hmmt-financial-aid-season30", "hmmt-travel", "hmmt-schedule-season30", "hmmt-november-2026-friday-brochure", "hmmt-november-2026-tournament-brochure", "hmmt-problems-results-archive", "hmmt-online", "hmmt-scoring-algorithm", "hmmt-november-2025-results", "hmmt-february-2026-results", "hmmt-february-2026-extended-results"],
     relatedIds: ["amc10", "amc12", "aime"],
     searchTerms: ["HMMT", "Harvard MIT Mathematics Tournament", "哈佛MIT数学竞赛", "Guts Round", "HMMT November", "HMMT February"],
   },
