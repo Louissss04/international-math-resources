@@ -14,6 +14,7 @@ test("MTFC distinguishes the precise closing time, account-only scenarios, and c
     /no account or current challenge content was accessed in this check/,
     /account-only tasks are not presented as a public paper archive/,
     /Access to materials does not relax the existing restriction/,
+    /neither U\.S\. citizens nor U\.S\. permanent residents/,
     /not a replacement for 2026–27 eligibility, report page limits, or AI rules/,
     /metadata still names 2024/,
   ]) assert.match(text, pattern);

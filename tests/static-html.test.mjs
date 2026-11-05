@@ -31,7 +31,8 @@ test("static MTFC preserves PST cutoff precision without widening eligibility or
   assert.match(sourceById.get("mtfc-registration-current").note.en, /No account or current challenge content was accessed/);
   assert.match(sourceById.get("mtfc-ics-entry-2026-27").note.en, /does not establish eligibility for students in every region/);
   const china = mtfc.facts.find((fact) => fact.label.en === "Access for students in China");
-  assert.match(china.value.en, /attending ordinary schools in China have no formal entry route/);
+  assert.match(china.value.en, /attending ordinary schools in China who are neither U\.S\. citizens nor U\.S\. permanent residents have no formal entry route/);
+  assert.match(china.value.en, /U\.S\. citizens or permanent residents studying in China may enter/);
   const ai = mtfc.sections.find((section) => section.id === "integrity-ai");
   const aiText = ai.bullets.map((bullet) => bullet.en).join(" ");
   for (const pattern of [
