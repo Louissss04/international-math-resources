@@ -7,6 +7,52 @@ import { fileURLToPath } from "node:url";
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const outputDirectory = path.resolve(testDirectory, "../outputs/mathpath-static");
 
+test("static MTFC preserves PST cutoff precision without widening eligibility or AI permission", async () => {
+  const data = await loadStaticData();
+  const mtfc = data.projects.find((project) => project.id === "modeling-the-future-challenge");
+  assert.equal(mtfc.lastVerified, "2026-11-05");
+  const deadline = mtfc.dates.find((date) => date.id === "mtfc-registration-close-2026");
+  assert.equal(deadline.date, "2026-11-08");
+  assert.equal(deadline.time, "23:59");
+  assert.equal(deadline.timezone, "America/Los_Angeles");
+  assert.ok(deadline.sourceIds.includes("mtfc-registration-current"));
+  assert.ok(deadline.sourceIds.includes("mtfc-ics-entry-2026-27"));
+  assert.match(deadline.note.en, /November 9 at 15:59 in Beijing/);
+  assert.match(deadline.note.en, /not an extension/);
+  const sourceById = new Map(data.sources.map((source) => [source.id, source]));
+  const current = sourceById.get("mtfc-process-guide-2026");
+  const historical = sourceById.get("mtfc-process-guide");
+  assert.equal(current.url, "https://www.mtfchallenge.org/wp-content/uploads/2026/09/Actuarial-Process-Guide-2026.pdf");
+  assert.match(current.note.en, /does not establish a new policy or a 2026 edition/);
+  assert.match(current.note.en, /does not replace current eligibility, page-limit, or AI rules/);
+  assert.match(historical.url, /2024\/07\/MTFC-Actuarial-Process-Guide-2024-FINAL-min\.pdf/);
+  assert.equal(historical.kind, "official-archive");
+  assert.match(historical.label.en, /historical 2024 link/);
+  assert.match(sourceById.get("mtfc-registration-current").note.en, /No account or current challenge content was accessed/);
+  assert.match(sourceById.get("mtfc-ics-entry-2026-27").note.en, /does not establish eligibility for students in every region/);
+  const china = mtfc.facts.find((fact) => fact.label.en === "Access for students in China");
+  assert.match(china.value.en, /attending ordinary schools in China have no formal entry route/);
+  const ai = mtfc.sections.find((section) => section.id === "integrity-ai");
+  const aiText = ai.bullets.map((bullet) => bullet.en).join(" ");
+  for (const pattern of [
+    /AI may assist preliminary Risk Infographic design and presentation layout based on the team's own report content/,
+    /Unedited AI-generated slides may not be submitted directly/,
+    /AI may not write presentation scripts or Q&A answers/,
+    /AI may not generate, draft, edit, rewrite, or paraphrase the Scenario Response, Project Proposal, or Project Report/,
+    /This does not relax the prohibitions/,
+  ]) assert.match(aiText, pattern);
+  const html = await readRoute("/modeling/modeling-the-future-challenge", data);
+  const text = visibleText(html);
+  assert.match(html, /data-resource-id="mtfc-actuarial-process-guide-current-resource"/);
+  assert.match(html, /data-resource-id="mtfc-actuarial-process-guide-resource"/);
+  assert.match(text, /account-only tasks are not presented as a public paper archive/);
+  assert.match(text, /no account or current challenge content was accessed in this check/);
+  assert.match(text, /metadata still names 2024/);
+  const gaimme = await readRoute("/modeling/gaimme-school-modeling-project", data);
+  assert.match(gaimme, /data-resource-id="mtfc-actuarial-process-guide-resource"/);
+  assert.doesNotMatch(gaimme, /data-resource-id="mtfc-actuarial-process-guide-current-resource"/);
+});
+
 test("static League 2026 notice preserves historical review dates and unpublished scores", async () => {
   const data = await loadStaticData();
   const league = data.projects.find((project) => project.id === "china-league");

@@ -3,6 +3,47 @@ import test from "node:test";
 
 const staleDemoCopy = /codex-preview|Your site is taking shape|这是一个演示型规则引擎|正式版本可接入/i;
 
+test("MTFC distinguishes the precise closing time, account-only scenarios, and current versus historical guides", async () => {
+  const html = await renderHtml("/modeling/modeling-the-future-challenge");
+  const text = visibleText(html);
+  for (const pattern of [
+    /November 8 at 23:59 PST \(UTC−08:00\)/,
+    /November 9 at 15:59 in Beijing/,
+    /not an extension/,
+    /Challenge Scenarios through the ICS account after registration/,
+    /no account or current challenge content was accessed in this check/,
+    /account-only tasks are not presented as a public paper archive/,
+    /Access to materials does not relax the existing restriction/,
+    /not a replacement for 2026–27 eligibility, report page limits, or AI rules/,
+    /metadata still names 2024/,
+  ]) assert.match(text, pattern);
+  assert.match(html, /competitionsciences\.org\/competitions\/2026-27-mtfc\//);
+  const current = html.match(/<article\b[^>]*data-resource-id="mtfc-actuarial-process-guide-current-resource"[^>]*>[\s\S]*?<\/article>/)?.[0];
+  const historical = html.match(/<article\b[^>]*data-resource-id="mtfc-actuarial-process-guide-resource"[^>]*>[\s\S]*?<\/article>/)?.[0];
+  assert.ok(current, "missing current official guide resource");
+  assert.ok(historical, "missing retained historical guide resource");
+  assert.match(current, /2026\/09\/Actuarial-Process-Guide-2026\.pdf/);
+  assert.match(historical, /2024\/07\/MTFC-Actuarial-Process-Guide-2024-FINAL-min\.pdf/);
+  assert.match(visibleText(historical), /historical 2024 link/);
+  const ai = html.match(/<section\b[^>]*id="integrity-ai"[^>]*>[\s\S]*?<\/section>/)?.[0];
+  assert.ok(ai, "missing MTFC AI rules");
+  for (const pattern of [
+    /AI may assist preliminary Risk Infographic design and presentation layout based on the team's own report content/,
+    /Unedited AI-generated slides may not be submitted directly/,
+    /AI may not write presentation scripts or Q&A answers/,
+    /AI may not generate, draft, edit, rewrite, or paraphrase the Scenario Response, Project Proposal, or Project Report/,
+    /This does not relax the prohibitions/,
+  ]) assert.match(visibleText(ai), pattern);
+  const calendar = await renderHtml("/calendar");
+  const deadline = calendar.match(/<article\b[^>]*data-event-id="mtfc-registration-close-2026"[^>]*>[\s\S]*?<\/article>/)?.[0];
+  assert.ok(deadline, "missing MTFC registration deadline calendar event");
+  assert.match(visibleText(deadline), /23:59/);
+  assert.match(visibleText(deadline), /November 9 at 15:59 in Beijing/);
+  const gaimme = await renderHtml("/modeling/gaimme-school-modeling-project");
+  assert.match(gaimme, /data-resource-id="mtfc-actuarial-process-guide-resource"/);
+  assert.doesNotMatch(gaimme, /data-resource-id="mtfc-actuarial-process-guide-current-resource"/);
+});
+
 test("League 2026 results are historical without inventing a contest date or score cutoff", async () => {
   const html = await renderHtml("/competitions/china-league");
   const text = visibleText(html);
