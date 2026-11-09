@@ -50,8 +50,8 @@ export const assessmentSources: SourceRecord[] = [
   source("ap-bc-exam", "AP Calculus BC 考试", "AP Calculus BC Exam", "College Board", "College Board", "https://apcentral.collegeboard.org/courses/ap-calculus-bc/exam", "official", "AP Calculus BC"),
   source("ap-registration", "AP 考试报名", "Register for AP Exams", "College Board", "College Board", "https://apstudents.collegeboard.org/register-for-ap-exams", "official", "AP registration"),
   source("ap-china", "在中国参加 AP 考试", "Taking AP in China", "College Board 国际部", "College Board International", "https://international.collegeboard.org/students/ap/taking-ap-china", "official", "AP testing routes in mainland China"),
-  { ...source("ap-china-registration-2027", "Prometric 中国 2027 AP 报名须知", "Prometric China 2027 AP Exam Registration", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/apregistration/", "official", "AP China 2027 registration, eligibility, fees, ID rules and exam schedule", "本校提供 AP 报名的学生须走学校 coordinator 路线；符合条件的社会考生可通过 MyAPChina 自行建账户。", "Students whose school provides AP registration must use the school-coordinator route; eligible unaffiliated candidates may create their own MyAPChina account."), verifiedAt: "2026-09-16" },
-  { ...source("ap-china-timeline-2027", "Prometric 中国 2027 AP 报名流程", "Prometric China 2027 AP Registration Timeline", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/aptimeline/", "official", "AP China 2027 roster, registration, payment, confirmation and admission-ticket deadlines", "学生信息、照片和科目确认已于 2026 年 9 月 16 日开放；全部科目确认与缴费截至 11 月 9 日中午 12:00。", "Student information, photo upload and subject confirmation opened on 16 September 2026; all subject confirmation and payment are due by 12:00 noon on 9 November."), verifiedAt: "2026-09-16" },
+  { ...source("ap-china-registration-2027", "Prometric 中国 2027 AP 报名须知", "Prometric China 2027 AP Exam Registration", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/apregistration/", "official", "AP China 2027 registration, eligibility, fees, ID rules and exam schedule", "截止后不再接受新增报名。本周期本校提供 AP 报名的学生须走本校 coordinator 路线，只有符合条件的社会考生可自行建 MyAPChina 账户；费用与资格规则保留供已报名者核对。", "New registrations are not accepted after the deadline. For this cycle, students whose school offered AP registration had to use their school coordinator; only eligible unaffiliated candidates could create their own MyAPChina account. Fee and eligibility rules remain available for registered candidates to check."), verifiedAt: "2026-11-09" },
+  { ...source("ap-china-timeline-2027", "Prometric 中国 2027 AP 报名流程", "Prometric China 2027 AP Registration Timeline", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/aptimeline/", "official", "AP China 2027 roster, registration, payment, confirmation and admission-ticket deadlines", "学生信息、照片和科目确认于 2026 年 9 月 16 日开放，全部科目确认与缴费已于 11 月 9 日北京时间中午 12:00 截止；12 月 1 日核对 My AP 科目与个人资料。", "Student information, photo upload and subject confirmation opened on 16 September 2026; all subject confirmation and payment closed at 12:00 noon Beijing time on 9 November. Verify My AP subjects and personal details on 1 December."), verifiedAt: "2026-11-09" },
   { ...source("ap-china-coordinator-handbook-2027", "Prometric 中国 2026–27 AP 管理员手册", "Prometric China 2026–27 AP Coordinator Handbook", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/wp-content/uploads/ap/2026-27-AP管理员指导手册-AP-School-Coordinators-Instruction.pdf", "official", "September 2026 edition; school rosters, APRO class sections and May 2027 local exam times"), verifiedAt: "2026-10-15" },
   { ...source("ap-china-student-handbook-2027", "Prometric 中国 2026–27 AP 学生手册", "Prometric China 2026–27 AP Student Handbook", "Prometric 中国 AP 考试", "Prometric AP China", "https://www.prometric.com.cn/wp-content/uploads/ap/2026-27-AP学生指导手册-AP-Students-Instruction.pdf", "official", "September 2026 edition; China eligibility, MyAPChina, payment and exam-order confirmation"), verifiedAt: "2026-10-15" },
   source("ap-score-data", "AP 2026 成绩分布", "2026 AP Score Distributions", "College Board", "College Board", "https://apstudents.collegeboard.org/about-ap-scores/score-distributions", "official-data", "AP 2026 score distributions"),
@@ -330,10 +330,10 @@ const apProject: ProjectRecord = {
   costBand: "varies",
   status: "confirmed",
   cycle: "2026-27 course / May 2027 exam",
-  lastVerified: "2026-10-15",
+  lastVerified: "2026-11-09",
   alerts: [{
-    title: t("中国大陆 2027 AP 学生报名已开放", "Mainland China 2027 AP student registration is open"),
-    body: t("自 9 月 16 日起，学生可在 MyAPChina 补充信息、上传照片并确认科目。学校在读生须先由 AP coordinator 提交名单；只有符合条件的社会考生自行创建 MyAPChina 账户。全部科目确认与缴费截至 11 月 9 日中午 12:00。", "From 16 September, students can complete information, upload a photo and verify subjects in MyAPChina. School students must first be rostered by their AP coordinator; only eligible unaffiliated candidates create their own MyAPChina account. All subject confirmation and payment are due by 12:00 noon on 9 November."),
+    title: t("中国大陆 2027 AP 报名缴费已截止", "Mainland China 2027 AP registration and payment have closed"),
+    body: t("原定全部科目确认与缴费已于 2026 年 11 月 9 日北京时间中午 12:00 截止；官方须知不接受截止后新增报名。已完成报名缴费者应于 12 月 1 日登录 My AP 核对科目与个人资料，考试订购确认截止为 2027 年 1 月 31 日。", "The original deadline for all subject confirmation and payment passed at 12:00 noon Beijing time on 9 November 2026; the official instructions do not accept new registrations after the deadline. Paid registrants should log in to My AP on 1 December to verify subjects and personal details; exam-order confirmation is due by 31 January 2027."),
     sourceIds: ["ap-china-registration-2027", "ap-china-timeline-2027"],
     tone: "warning",
   }],
@@ -352,17 +352,17 @@ const apProject: ProjectRecord = {
       region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
       note: t("中午 12:00 开放，AP 管理员开始提交学生和考试科目花名册。", "Opens at 12:00 noon for AP coordinators to submit student and exam rosters."),
     }),
-    dateRecord("ap-2027-registration-open", "Prometric 中国 AP 学生开始报名", "Prometric China AP student registration opens", "2026-09-16", "confirmed", ["ap-china-timeline-2027"], {
+    dateRecord("ap-2027-registration-open", "Prometric 中国 AP 学生开始报名", "Prometric China AP student registration opens", "2026-09-16", "historical", ["ap-china-timeline-2027"], {
       region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
-      note: t("学生信息、照片和科目确认现已开放；学校学生须先进入 coordinator 提交的名单。", "Student information, photo upload and subject confirmation are now open; school students must first appear on the coordinator-submitted roster."),
+      note: t("学生信息、照片和科目确认于当日开放；学校学生须先进入 coordinator 提交的名单。", "Student information, photo upload and subject confirmation opened on this date; school students first had to appear on the coordinator-submitted roster."),
     }),
-    dateRecord("ap-2027-roster-deadline", "Prometric 中国 AP 学校花名册截止", "Prometric China AP school roster deadline", "2026-10-16", "confirmed", ["ap-china-timeline-2027"], {
+    dateRecord("ap-2027-roster-deadline", "Prometric 中国 AP 学校花名册截止", "Prometric China AP school roster deadline", "2026-10-16", "historical", ["ap-china-timeline-2027"], {
       region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
-      note: t("中午 12:00 截止，AP 管理员完成本校考试花名册。", "Deadline is 12:00 noon for AP coordinators to complete school exam rosters."),
+      note: t("北京时间中午 12:00 截止，AP 管理员完成本校考试花名册。", "Closed at 12:00 noon Beijing time for AP coordinators to complete school exam rosters."),
     }),
-    dateRecord("ap-2027-registration-deadline", "Prometric 中国 AP 报名缴费截止", "Prometric China AP registration and payment deadline", "2026-11-09", "confirmed", ["ap-china-timeline-2027"], {
+    dateRecord("ap-2027-registration-deadline", "Prometric 中国 AP 报名缴费截止", "Prometric China AP registration and payment deadline", "2026-11-09", "historical", ["ap-china-timeline-2027"], {
       region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
-      note: t("中午 12:00 截止；学生须完成全部科目确认和缴费。", "Deadline is 12:00 noon; students must finalize all subjects and payment."),
+      note: t("北京时间中午 12:00 已截止；原要求学生完成全部科目确认和缴费。", "Closed at 12:00 noon Beijing time; students were required to finalize all subjects and payment."),
     }),
     dateRecord("ap-2027-myap-check", "AP 学生核对 My AP 科目与资料", "AP students verify My AP subjects and details", "2026-12-01", "confirmed", ["ap-china-timeline-2027"], {
       region: t("中国大陆 Prometric 路径", "Prometric route in mainland China"),
@@ -404,7 +404,7 @@ const apProject: ProjectRecord = {
           {
             cells: [
               t("中国大陆本地学校路径", "Mainland local-school route"),
-              t("AP coordinator 已于 9 月 15 日中午 12:00 开放提交本校考生与科目名单；自 9 月 16 日起，已在名单内的学生使用 College Board 账户邮箱登录 MyAPChina，补全资料、上传照片、确认科目并缴费。", "The AP coordinator roster system opened at 12:00 noon on 15 September; from 16 September, students on that roster log in to MyAPChina with the email linked to their College Board account to complete details, upload a photograph, confirm subjects and pay."),
+              t("本周期 AP coordinator 系统于 2026 年 9 月 15 日中午 12:00 开放提交本校名单；学生信息与科目确认于 9 月 16 日开放，须在 11 月 9 日北京时间中午 12:00 前完成。原流程为名单内学生使用 College Board 账户邮箱登录 MyAPChina，补全资料、上传照片、确认科目并缴费。", "For this cycle, coordinator rosters opened at 12:00 noon on 15 September 2026 and student information and subject confirmation opened on 16 September, with completion required by 12:00 noon Beijing time on 9 November. Under the original process, rostered students used their College Board account email to log in to MyAPChina, complete details, upload a photograph, confirm subjects and pay."),
             ],
             sourceIds: ["ap-china", "ap-china-registration-2027", "ap-china-timeline-2027"],
           },
@@ -416,8 +416,8 @@ const apProject: ProjectRecord = {
             sourceIds: ["ap-china-registration-2027", "ap-china-student-handbook-2027"],
           },
           {
-            cells: [t("缴费与考试订购", "Payment and exam orders"), t("从 MyAPChina 进入 ProScheduler 逐科缴费，核对确认号及已付款状态；12 月至次年 1 月再到 My AP 核对考试订购。只有完成信息确认而未成功付款，不会订购考试。", "Pay for each subject through the ProScheduler link in MyAPChina and check the confirmation number and paid status. Verify exam orders again in My AP in December–January; information confirmation without successful payment does not order an exam.")],
-            sourceIds: ["ap-china-student-handbook-2027"],
+            cells: [t("缴费与考试订购", "Payment and exam orders"), t("本周期原通过 MyAPChina 的 ProScheduler 链接逐科缴费。已缴费者应核对各科确认号及已付款状态，并于 12 月 1 日登录 My AP 核对科目与个人资料；考试订购确认截止为 2027 年 1 月 31 日。只有完成信息确认而未成功付款，不会订购考试。", "Payment for this cycle was made per subject through the ProScheduler link in MyAPChina. Paid candidates should check each confirmation number and paid status, then log in to My AP on 1 December to verify subjects and personal details; exam-order confirmation is due by 31 January 2027. Information confirmation without successful payment does not order an exam.")],
+            sourceIds: ["ap-china-student-handbook-2027", "ap-china-timeline-2027"],
           },
           {
             cells: [

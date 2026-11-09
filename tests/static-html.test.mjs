@@ -7,6 +7,22 @@ import { fileURLToPath } from "node:url";
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const outputDirectory = path.resolve(testDirectory, "../outputs/mathpath-static");
 
+test("static AP China warnings distinguish the elapsed original deadline from a new policy", async () => {
+  const data = await loadStaticData();
+  for (const id of ["ap-precalculus", "ap-calculus-ab", "ap-calculus-bc", "ap-statistics"]) {
+    const project = data.projects.find((record) => record.id === id);
+    assert.equal(project.lastVerified, "2026-11-09");
+    const text = visibleText(await readRoute(`/courses/${id}`, data));
+    assert.match(text, /报名缴费已截止|registration and payment have closed/i);
+    assert.match(text, /12:00 noon Beijing time on 9 November 2026/);
+    assert.match(text, /1 December|December 1/);
+    assert.doesNotMatch(text, /student registration is open|subject confirmation are now open/);
+  }
+  const sourceById = new Map(data.sources.map((record) => [record.id, record]));
+  assert.equal(sourceById.get("ap-china-registration-2027").verifiedAt, "2026-11-09");
+  assert.notEqual(sourceById.get("ap-china-student-handbook-2027").verifiedAt, "2026-11-09");
+});
+
 test("static MTFC preserves PST cutoff precision without widening eligibility or AI permission", async () => {
   const data = await loadStaticData();
   const mtfc = data.projects.find((project) => project.id === "modeling-the-future-challenge");
@@ -194,7 +210,7 @@ test("static HMMT records brochure conflicts without selecting a definitive earl
 test("static Yau mathematics dates distinguish semifinal and global-finalist public review", async () => {
   const data = await loadStaticData();
   const yau = data.projects.find((project) => project.id === "yau-high-school-math-award");
-  assert.ok(yau.lastVerified >= "2026-11-02", "Yau verification predates the revised 2026 schedule");
+  assert.equal(yau.lastVerified, "2026-11-09");
   const dateById = new Map(yau.dates.map((item) => [item.id, item]));
   for (const [id, start, end] of [
     ["yau-math-2026-registration", "2026-07-01", "2026-09-15"],
@@ -209,6 +225,9 @@ test("static Yau mathematics dates distinguish semifinal and global-finalist pub
   const html = await readFile(path.join(outputDirectory, "research-yau-high-school-mathematics-award.html"), "utf8");
   const text = visibleText(html);
   for (const pattern of [
+    /November 5 semifinal list is not a global-finalist announcement/,
+    /consolidated mainland-China semifinal list on November 5/,
+    /calendar window alone does not establish finalist status/,
     /These are not global-finalist lists/,
     /Each team has 35 minutes: a 15-minute presentation and 20-minute Q&A/,
     /Students must attend in person or lose award eligibility/,
@@ -218,6 +237,11 @@ test("static Yau mathematics dates distinguish semifinal and global-finalist pub
     /no extension, late-entry, or reopening notice was found/,
   ]) assert.match(text, pattern);
   assert.match(html, /https:\/\/www\.yau-awards\.com\/show-86-63\.html/);
+  assert.match(html, /https:\/\/www\.yau-awards\.com\/show-86-64\.html/);
+  const listSource = data.sources.find((record) => record.id === "research-yau-semifinal-list-2026");
+  assert.equal(listSource.url, "https://www.yau-awards.com/show-86-64.html");
+  assert.match(listSource.note.en, /Published November 5, 2026/);
+  assert.equal(data.sources.find((record) => record.id === "research-yau-semifinals-2026").verifiedAt, "2026-11-02");
   assert.doesNotMatch(html, /href=["']https?:\/\/(?:www\.)?yau-awards\.science/);
 });
 

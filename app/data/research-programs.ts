@@ -257,6 +257,16 @@ export const researchProgramSources: SourceRecord[] = [
     note: t("2026 年 10 月 28 日发布；名单属于半决赛，公示无异议后生效，不是全球总决赛名单。各区具体安排仍以最终通知为准。", "Published October 28, 2026. These are semifinal lists, effective after uncontested public review, not global-finalist lists. Detailed regional arrangements remain subject to final notice."),
   },
   {
+    id: "research-yau-semifinal-list-2026",
+    label: t("2026 丘成桐中学科学奖中国内地赛区半决赛汇总名单", "2026 S.-T. Yau Award Consolidated Mainland-China Semifinal List"),
+    owner: t("丘成桐中学科学奖组委会", "S.-T. Yau High School Science Award Committee"),
+    url: "https://www.yau-awards.com/show-86-64.html",
+    kind: "official",
+    verifiedAt: "2026-11-09",
+    appliesTo: "2026 mainland-China semifinals, including mathematics northern, eastern and southern regions",
+    note: t("2026 年 11 月 5 日发布；这是半决赛汇总名单，不是全球总决赛名单，也未新增答辩时间、地点或分数线。保留 10 月 28 日公告作为历史安排依据。", "Published November 5, 2026. This consolidated semifinal list is not a global-finalist announcement and adds no defense time, venue or score cutoff. The October 28 notice is retained for historical arrangements."),
+  },
+  {
     id: "research-yau-apply-portal",
     label: t("丘成桐中学科学奖报名门户", "S.-T. Yau High School Science Award application portal"),
     owner: t("清华大学丘成桐数学科学中心", "Yau Mathematical Sciences Center, Tsinghua University"),
@@ -967,11 +977,11 @@ export const researchProgramProjects: ProjectRecord[] = [
     costBand: "free",
     status: "confirmed",
     cycle: "2026",
-    lastVerified: "2026-11-02",
+    lastVerified: "2026-11-09",
     alerts: [{
-      title: t("2026 半决赛名单已公示，后续日程调整", "2026 semifinal lists published; later dates revised"),
-      body: t("半决赛名单及论文公示为 10 月 28 日至 11 月 3 日，不是全球总决赛名单。半决赛于 11 月 7 或 8 日现场答辩；全球总决赛入围论文公示现为 11 月 9–15 日。入围学生须留意各区最终到场通知。", "Semifinal lists and reports are under public review October 28–November 3, not global-finalist lists. In-person semifinal defenses are November 7 or 8; global-finalist report review is now November 9–15. Shortlisted students must follow their region's final attendance notice."),
-      sourceIds: ["research-yau-semifinals-2026", "research-yau-schedule-2026"],
+      title: t("11 月 5 日半决赛汇总名单不是总决赛名单", "November 5 semifinal list is not a global-finalist announcement"),
+      body: t("官网 11 月 5 日发布中国内地赛区半决赛汇总名单，含数学北部、东部和南部赛区。这不是全球总决赛名单。总日程列明总决赛入围论文公示为 11 月 9–15 日；截至本次核验，已读官网公告尚未见 2026 总决赛名单，不能仅凭日程窗口认定入围。此前 10 月 28 日至 11 月 3 日的公示和 11 月 7／8 日的答辩安排保留为历史记录。", "The organizer published a consolidated mainland-China semifinal list on November 5, including mathematics in the northern, eastern and southern regions. This is not a global-finalist announcement. The calendar schedules global-finalist report review for November 9–15; no 2026 global-finalist notice was found in the official announcements read in this check, so the calendar window alone does not establish finalist status. The October 28–November 3 review and November 7/8 defense arrangements are retained as history."),
+      sourceIds: ["research-yau-semifinal-list-2026", "research-yau-semifinals-2026", "research-yau-schedule-2026"],
       tone: "warning",
     }, {
       title: t("报名入口与截止日期", "Application portal and deadline"),
@@ -997,8 +1007,8 @@ export const researchProgramProjects: ProjectRecord[] = [
     sections: [
       {
         id: "semifinals-2026",
-        title: t("2026 数学半决赛与日程调整", "2026 Mathematics Semifinals and Revised Dates"),
-        intro: t("10 月 28 日公告（二）列出数学北部、东部、南部入围及候补名单；名单和论文公示至 11 月 3 日，期满且无异议后正式生效。它不是全球总决赛名单。", "The October 28 notice II lists mathematics semifinalists and reserves for the northern, eastern and southern regions. Review ends November 3; effectiveness requires no outstanding objection. These are not global-finalist lists."),
+        title: t("2026 数学半决赛名单与历史安排", "2026 Mathematics Semifinal Lists and Historical Arrangements"),
+        intro: t("11 月 5 日新增半决赛汇总名单，含数学北部、东部、南部赛区；不代表全球总决赛入围。此前 10 月 28 日公告（二）列出半决赛入围及候补名单，公示期为 10 月 28 日至 11 月 3 日，期满且无异议后生效。以下保留当时答辩与日程安排，不是新的报名或申诉窗口。", "The November 5 consolidated semifinal list includes mathematics in the northern, eastern and southern regions. These are not global-finalist lists. Earlier, the October 28 notice II listed semifinalists and reserves for public review October 28–November 3, effective after uncontested review. The arrangements below are historical, not a new registration or appeal window."),
         tables: [{
           columns: [t("数学赛区", "Mathematics region"), t("公告列明地点", "Announced venue")],
           rows: [
@@ -1043,7 +1053,7 @@ export const researchProgramProjects: ProjectRecord[] = [
         ],
       },
     ],
-    sourceIds: ["research-yau-home", "research-yau-rules", "research-yau-schedule-2026", "research-yau-semifinals-2026", "research-yau-apply-portal", "research-yau-ai-rules-2026", "research-yau-faq", "research-yau-criteria"],
+    sourceIds: ["research-yau-home", "research-yau-rules", "research-yau-schedule-2026", "research-yau-semifinals-2026", "research-yau-semifinal-list-2026", "research-yau-apply-portal", "research-yau-ai-rules-2026", "research-yau-faq", "research-yau-criteria"],
     relatedIds: ["research-start", "research-integrity", "research-records"],
     searchTerms: ["丘成桐中学科学奖", "丘成桐数学奖", "中学生数学论文", "Yau High School Science Award"],
   },

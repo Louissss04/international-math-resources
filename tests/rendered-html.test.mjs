@@ -3,6 +3,16 @@ import test from "node:test";
 
 const staleDemoCopy = /codex-preview|Your site is taking shape|这是一个演示型规则引擎|正式版本可接入/i;
 
+test("AP China pages retire the open-registration warning after the original November cutoff", async () => {
+  for (const slug of ["ap-precalculus", "ap-calculus-ab", "ap-calculus-bc", "ap-statistics"]) {
+    const text = visibleText(await renderHtml(`/courses/${slug}`));
+    assert.match(text, /报名缴费已截止|registration and payment have closed/i);
+    assert.match(text, /12:00 noon Beijing time on 9 November 2026/);
+    assert.match(text, /1 December|December 1/);
+    assert.doesNotMatch(text, /student registration is open|subject confirmation are now open/);
+  }
+});
+
 test("MTFC distinguishes the precise closing time, account-only scenarios, and current versus historical guides", async () => {
   const html = await renderHtml("/modeling/modeling-the-future-challenge");
   const text = visibleText(html);
@@ -658,7 +668,9 @@ test("renders revised Yau dates and in-person mathematics semifinals without pro
   const html = await renderHtml("/research/yau-high-school-mathematics-award");
   const text = visibleText(html);
   for (const pattern of [
-    /2026 semifinal lists published; later dates revised/,
+    /November 5 semifinal list is not a global-finalist announcement/,
+    /consolidated mainland-China semifinal list on November 5/,
+    /calendar window alone does not establish finalist status/,
     /These are not global-finalist lists/,
     /Each team has 35 minutes: a 15-minute presentation and 20-minute Q&A/,
     /Students must attend in person or lose award eligibility/,
@@ -676,6 +688,7 @@ test("renders revised Yau dates and in-person mathematics semifinals without pro
   assert.match(visibleText(finalistReviewRow), /2026-11-09 — 2026-11-15/);
   assert.doesNotMatch(finalistReviewRow, /2026-11-03|2026-11-10/);
   assert.match(html, /https:\/\/www\.yau-awards\.com\/show-86-63\.html/);
+  assert.match(html, /https:\/\/www\.yau-awards\.com\/show-86-64\.html/);
   assert.doesNotMatch(html, /href=["']https?:\/\/(?:www\.)?yau-awards\.science/);
 });
 
