@@ -3,6 +3,27 @@ import test from "node:test";
 
 const staleDemoCopy = /codex-preview|Your site is taking shape|这是一个演示型规则引擎|正式版本可接入/i;
 
+test("NTU current Gaokao route separates case-by-case graduation assessment from pending results", async () => {
+  const html = await renderHtml("/destinations/singapore-undergraduate-mathematics-admissions");
+  const section = html.match(/<section\b[^>]*id="sg-ntu-current-gaokao-route"[^>]*>[\s\S]*?<\/section>/)?.[0];
+  assert.ok(section, "missing current NTU qualification branches");
+  const text = visibleText(section);
+  for (const pattern of [
+    /unable to sit Gaokao who have good High School Graduation results/,
+    /case-by-case assessment/,
+    /not a general opt-out waiver/,
+    /within three days of release/,
+    /at least five AP Tests, each scored 4 or 5/,
+    /AP results alone will not be considered/,
+    /AST results are optional supplements/,
+    /including English, Mathematics and one additional subject/,
+    /non-Engineering and non-Science programmes/,
+    /cannot stand alone/,
+    /not a claim of a newly changed policy or guaranteed admission/,
+  ]) assert.match(text, pattern);
+  assert.match(html, /admissions\/undergraduate\/admissions\/undergraduate\/admission-guide\/international-qualifications\/prc-gaokao/);
+});
+
 test("AP China pages retire the open-registration warning after the original November cutoff", async () => {
   for (const slug of ["ap-precalculus", "ap-calculus-ab", "ap-calculus-bc", "ap-statistics"]) {
     const text = visibleText(await renderHtml(`/courses/${slug}`));

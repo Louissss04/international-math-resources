@@ -381,13 +381,13 @@ export const ukSingaporeDestinationSources: SourceRecord[] = [
       "NTU PRC Gaokao application requirements",
       "南洋理工大学招生办公室",
       "NTU Office of Admissions",
-      "https://www.ntu.edu.sg/admissions/undergraduate/admissions/general-admission-requirements",
+      "https://www.ntu.edu.sg/admissions/undergraduate/admissions/undergraduate/admission-guide/international-qualifications/prc-gaokao",
       "official",
       "AY2027/2028 PRC NCEE / Gao Kao curriculum route",
-      "原 PRC Gaokao 专页已返回 404；当前规则由 General Admission Requirements 总览承载。该页将 PRC NCEE／高考课程申请标为 Open，申请窗口为 2026-10-15 至 2027-03-19；高考实分须在成绩发布后 3 天内补交，并须提交认可的英语成绩。",
-      "The former PRC Gaokao page returns 404; current rules are carried by the General Admission Requirements overview. It marks the PRC NCEE / Gao Kao curriculum route as Open for 15 October 2026–19 March 2027; actual Gaokao results are due within three days of release, and an accepted English test is mandatory.",
+      "本次从 NTU 当前总览找到可访问的高考专页；过去旧路径返回 404 的记录不代表现行细则缺失。专页区分已有高考成绩、应届高三等待成绩、以及无法参加高考但高中毕业成绩良好的个案路径；认可的英语成绩仍须满足。总览列明申请窗口为 2026-10-15 至 2027-03-19。本次补充不宣称政策刚修改。",
+      "This check located a working Gaokao criteria page through NTU's current overview; the previously recorded 404 at the old path does not mean current criteria are unavailable. The page distinguishes applicants with Gaokao results, current Gao 3 students awaiting results, and case-by-case consideration for those unable to sit Gaokao who have good High School Graduation results. The English requirement still applies. The overview lists 15 October 2026–19 March 2027. This addition does not establish when the policy changed.",
     ),
-    verifiedAt: "2026-10-24",
+    verifiedAt: "2026-11-10",
   },
   source(
     "sg-ntu-mathematical-sciences",
@@ -873,8 +873,8 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
     fact(
       "中国高考路径",
       "China Gaokao route",
-      "NUS 采用“高考良好成绩”表述但未公布统一百分比；NTU 的最低申请条件为高考总分平均达到满分的 80%。",
-      "NUS states a 'good pass' in Gaokao without publishing a uniform percentage; NTU sets a minimum application threshold of 80% of the total Gaokao score.",
+      "NUS 采用“高考良好成绩”表述但未公布统一百分比；NTU 对已有高考实分的申请者要求至少满分的 80%，另列无法参加高考且高中毕业成绩良好者的个案审理路径。最低条件不保证录取。",
+      "NUS states a 'good pass' in Gaokao without publishing a uniform percentage. NTU requires at least 80% of the maximum Gaokao score for applicants with results, and separately lists case-by-case consideration for applicants unable to sit Gaokao who have good High School Graduation results. Minimum eligibility does not guarantee admission.",
       ["sg-nus-gaokao-2026", "sg-ntu-gaokao-2027"],
     ),
     fact(
@@ -887,6 +887,24 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
     ),
   ],
   sections: [
+    {
+      id: "sg-ntu-current-gaokao-route",
+      title: t("NTU 高考课程路径：先区分申请情形", "NTU Gaokao-Curriculum Route: Distinguish Applicant Circumstances"),
+      intro: t("NTU 当前高考专页区分已有高考成绩、应届等待成绩、以及无法参加高考的情形。高考课程学生自行参加 AP／SAT，不会自动转入另一高中资格类别；学术条件与英语要求须同时满足。以下是当前专页的补充说明，不代表规则刚修改，也不保证录取。", "NTU's current Gaokao page distinguishes applicants with results, current students awaiting results, and those unable to sit Gaokao. Independently taken AP/SAT tests do not automatically move a Gaokao-curriculum student into another school-qualification category. Academic and English requirements both apply. These are details from the current page, not a claim of a newly changed policy or guaranteed admission."),
+      tables: [{
+        columns: [t("情形", "Circumstance"), t("当前专页条件", "Current criteria")],
+        rows: [
+          row([["已有高考实分", "With Gaokao results"], ["至少达到高考满分的 80%，并提交有效的学信网 CSSD 验证报告。达到最低条件不保证录取。", "At least 80% of the maximum Gaokao score, with a valid CSSD verification report issued by CHSI. Meeting the minimum does not guarantee admission."]], ["sg-ntu-gaokao-2027"]),
+          row([["应届高三等待成绩", "Current Gao 3 students awaiting results"], ["高一、高二成绩良好者可先提交这两年的成绩单；须在高考出分后 3 日内补交正式实分，否则不再处理申请。符合条件者获邀于 7 月面试，最终决定依据面试表现。", "Students with good Gao 1 and Gao 2 results may apply using those transcripts, but must submit official Gaokao results within three days of release or the application will not be processed further. Eligible applicants are invited for an interview in July; final decisions are based on interview performance."]], ["sg-ntu-gaokao-2027"]),
+          row([["无法参加高考", "Unable to sit Gaokao"], ["无法参加高考且高中毕业成绩良好者，可用高中毕业成绩申请，按个案审理。这不是所有学生可主动放弃高考的通用豁免，也不取消应届等待成绩者的补分要求。", "Applicants unable to sit Gaokao who have good High School Graduation results may apply using those results for case-by-case assessment. This is not a general opt-out waiver for every student and does not remove the result-submission rule for current students awaiting Gaokao."]], ["sg-ntu-gaokao-2027"]),
+        ],
+      }],
+      bullets: [
+        t("AP 为可选补充，不是高考课程申请的统一必交项：至少 5 门 AP，每门 4 或 5 分，须与高考成绩或高一、高二成绩单一起提交；仅有 AP 成绩不予考虑。", "AP results are optional supplements, not a universal requirement for this route: at least five AP Tests, each scored 4 or 5, must accompany either Gaokao results or Gao 1 and Gao 2 transcripts. AP results alone will not be considered."),
+        t("AST 为可选补充：至少三科，包括英语、数学和另一科；第三科选经济者仅考虑非工程、非科学专业。AST 同样须配高考成绩或高一、高二成绩单，不能单独提交。", "AST results are optional supplements: at least three subjects, including English, Mathematics and one additional subject. Economics as the third subject limits consideration to non-Engineering and non-Science programmes. AST results must also accompany Gaokao results or Gao 1 and Gao 2 transcripts and cannot stand alone."),
+        t("AP／AST 的上述配套成绩单规则不应改写成“无法参加高考”个案路径的统一必交条件。仍须满足所选专业的最低科目要求；本轮没有从资格页推断数学专业降低先修要求。", "The accompanying-transcript rules for AP/AST should not be recast as universal requirements for the separate unable-to-sit-Gaokao case-by-case branch. Applicants must still meet the intended programme's minimum subject requirements; the qualification page does not establish any lowering of mathematics prerequisites."),
+      ],
+    },
     {
       id: "sg-application-system",
       title: t("申请体系与信息层级", "Application System and Levels of Authority"),
@@ -984,7 +1002,7 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
               [
                 ["中国高考", "China Gaokao"],
                 ["已参加者提交高考良好成绩；应届生可先用高二下学期成绩申请，再按截止时间补交高考实分。当前页面未给统一百分比线。", "Applicants with results submit a good Gaokao pass; current students may apply using Senior Middle 2 Semester 2 results and later submit actual Gaokao results by the stated deadline. The current page gives no uniform percentage cutoff."],
-                ["最低为高考总分平均达到满分 80%，并提交学信网 CSSD 验证报告；达到最低条件不保证录取。", "The minimum is 80% of the total Gaokao score, with a CSSD verification report; meeting the minimum does not guarantee admission."],
+                ["已有高考实分的路径最低为满分 80%，并提交学信网 CSSD 验证报告；无法参加高考且高中毕业成绩良好者另按个案审理。达到最低条件不保证录取。", "The with-results route requires at least 80% of the maximum Gaokao score and a CSSD verification report. Applicants unable to sit Gaokao who have good High School Graduation results are separately assessed case by case. Meeting minimum eligibility does not guarantee admission."],
                 ["数学专业仍需显示高中阶段数学达到相当于 H2／IB HL 的良好水平。", "Mathematics programmes still require strong senior-high mathematics comparable to H2 / IB HL."],
               ],
               ["sg-nus-gaokao-2026", "sg-ntu-gaokao-2027", "sg-ntu-mathematical-sciences"],
@@ -1093,7 +1111,7 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
               [
                 ["高考最低口径", "Gaokao minimum"],
                 ["“良好成绩”，未公布统一百分比。", "A 'good pass'; no uniform percentage is published."],
-                ["高考总分平均达到满分 80%。", "At least 80% of the total Gaokao score."],
+                ["已有高考实分者至少达到满分的 80%；无高考个案路径另列，不等于统一录取线。", "Applicants with Gaokao results need at least 80% of the maximum score; the separate no-Gaokao case-by-case branch does not create a universal admission cutoff."],
               ],
               ["sg-nus-gaokao-2026", "sg-ntu-gaokao-2027"],
             ),
@@ -1101,7 +1119,7 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
               [
                 ["中国普高但不参加高考", "Chinese senior high school without Gaokao"],
                 ["按 Other High School Qualifications 申请，提交最新高中成绩和规定的 AP／ACT／SAT 标准化考试成绩；不能继续使用高考类别。", "Apply under Other High School Qualifications with the latest school results and the prescribed AP/ACT/SAT standardised-test results; do not remain in the Gaokao category."],
-                ["仍按 PRC Gaokao 类别申请；自行参加 AP／SAT 不会改变申请类别。AY2027 起，应届申请人仍须在高考出分后 3 日内提交实分。", "Continue to apply under the PRC Gaokao category; independently taken AP/SAT does not change the application category. From AY2027, current-year applicants must still submit actual Gaokao results within three days of release."],
+                ["仍按 PRC Gaokao 类别申请；自行参加 AP／SAT 不改变类别。无法参加高考且高中毕业成绩良好者，可用毕业成绩按个案审理；应届高三等待高考实分者另须在出分后 3 日内补交。不能把个案路径当作通用高考豁免。", "Continue under the PRC Gaokao category; independently taken AP/SAT does not change it. Applicants unable to sit Gaokao who have good High School Graduation results may use those results for case-by-case assessment. Current Gao 3 students awaiting Gaokao results separately remain subject to the three-day result deadline. The case-by-case branch is not a general Gaokao waiver."],
               ],
               ["sg-nus-gaokao-2026", "sg-nus-standardised-tests-2026", "sg-ntu-gaokao-2027"],
             ),
@@ -1109,7 +1127,7 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
               [
                 ["实分与核验", "Actual results and verification"],
                 ["AY2026/2027 应届生须在 2026-06-29 12:00（新加坡时间）前通过 Applicant Portal 更新高考实分；互联网成绩单可暂收，须显示全名。", "For AY2026/2027, current-year applicants had to update actual Gaokao results through the Applicant Portal by 29 June 2026, 12:00 Singapore time; an internet result printout was provisionally accepted if it showed the full name."],
-                ["须提交学信网 CSSD 验证报告；AY2027 起，应届生须在高考出分后 3 日内提交实分，入围者于 7 月面试。", "A CSSD verification report is compulsory; from AY2027, current-year applicants must submit actual Gaokao results within three days of release, with shortlisted interviews in July."],
+                ["已有高考实分者提交有效的 CSSD 验证报告；应届高三等待成绩者出分后 3 日内补交实分，符合条件者于 7 月面试；若录取，再于可取得时提交有效 CSSD 报告。无高考个案路径不能与等待出分混为一谈。", "Applicants with Gaokao results submit a valid CSSD verification report. Current Gao 3 students awaiting results must submit actual scores within three days of release; eligible applicants interview in July and, if admitted, provide a valid CSSD report when available. The no-Gaokao case-by-case branch is distinct from awaiting results."],
               ],
               ["sg-nus-gaokao-2026", "sg-ntu-gaokao-2027"],
             ),
@@ -1117,7 +1135,7 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
               [
                 ["英语成绩", "English-language test"],
                 ["按 NUS 当年国际资格页提交所要求的英语证明；不同资格的认可考试和分数线分别核对。", "Submit the English evidence required by NUS's current international-qualification route; recognised tests and scores vary by qualification."],
-                ["PRC Gao Kao 申请人必须提交认可的英语成绩；总览示例包括 IELTS Academic 总分 6.5（写作、口语均 6.5）或 TOEFL iBT 总分 90（写作 25）等，须按当前表格核对。", "PRC Gao Kao applicants must submit an accepted English test. The overview examples include IELTS Academic 6.5 overall with 6.5 in writing and speaking, or TOEFL iBT 90 overall with 25 in writing; verify the current table."],
+                ["PRC Gao Kao 申请人必须提交认可的英语成绩；当前表格示例包括 IELTS Academic 总分 6.5（写作、口语均 6.5）或 TOEFL iBT 总分 90（写作、口语均 25）等，须按完整现行表格核对。", "PRC Gao Kao applicants must submit an accepted English test. Current table examples include IELTS Academic 6.5 overall with 6.5 in writing and speaking, or TOEFL iBT 90 overall with 25 in both writing and speaking; verify the full current table."],
               ],
               ["sg-nus-international-qualifications-2026", "sg-ntu-gaokao-2027"],
             ),
@@ -1182,7 +1200,7 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
                 ["NTU 2027 高考申请人", "NTU applicants sitting Gaokao in 2027"],
                 ["AY2027 起规则已预告", "Rule announced from AY2027"],
                 ["高考出分后 3 日内提交；入围者于 7 月面试。当前总览给出 2026-10-15 至 2027-03-19 的国际资格总窗口，具体专业截止日按申请表格核对。", "Submit results within three days of release; shortlisted applicants interview in July. The current overview gives a 15 October 2026–19 March 2027 broad international-qualifications window; verify the programme-specific deadline in the application table."],
-                ["总览已将 PRC NCEE／高考课程标为 Open；原高考专页已迁移并返回 404，不能从旧链接推断更细的专业截止日。", "The overview marks PRC NCEE / Gao Kao curriculum as Open; the former Gaokao page has been removed/relocated and returns 404, so its old URL cannot establish a programme-specific deadline."],
+                ["总览仍将 PRC NCEE／高考课程标为 Open；本次已从总览找到可访问的当前高考专页。旧路径的 404 记录仅作历史，不代表细则缺失；具体专业要求另查对应页面。", "The overview still marks PRC NCEE / Gao Kao curriculum as Open. This check located a working current Gaokao page from that overview. The old-path 404 record is historical, not evidence that criteria are unavailable; programme requirements must still be checked separately."],
               ],
               ["sg-ntu-gaokao-2027", "sg-ntu-admission-guide-current", "sg-ntu-international-qualifications-2026"],
               "confirmed",
@@ -1251,7 +1269,7 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
     "ib-dp-math-ai-hl",
     "ap-calculus-bc",
   ],
-  lastVerified: "2026-08-25",
+  lastVerified: "2026-11-10",
 };
 
 export const ukSingaporeDestinationGuides: DestinationGuideRecord[] = [

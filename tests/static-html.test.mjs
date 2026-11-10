@@ -7,6 +7,30 @@ import { fileURLToPath } from "node:url";
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const outputDirectory = path.resolve(testDirectory, "../outputs/mathpath-static");
 
+test("static NTU qualification branches retain optional-test and no-guarantee boundaries", async () => {
+  const data = await loadStaticData();
+  const guide = data.destinationGuides.find((record) => record.id === "destination-singapore-undergraduate-mathematics");
+  assert.equal(guide.lastVerified, "2026-11-10");
+  const section = guide.sections.find((record) => record.id === "sg-ntu-current-gaokao-route");
+  assert.equal(section.tables[0].rows.length, 3);
+  const rows = section.tables[0].rows;
+  assert.match(rows[0].cells[1].en, /80%.*CSSD/);
+  assert.match(rows[1].cells[1].en, /within three days of release/);
+  assert.match(rows[2].cells[1].en, /unable to sit Gaokao who have good High School Graduation results/);
+  assert.match(rows[2].cells[1].en, /not a general opt-out waiver/);
+  const bullets = section.bullets.map((record) => record.en).join(" ");
+  assert.match(bullets, /at least five AP Tests, each scored 4 or 5/);
+  assert.match(bullets, /either Gaokao results or Gao 1 and Gao 2 transcripts/);
+  assert.match(bullets, /non-Engineering and non-Science programmes/);
+  assert.match(bullets, /cannot stand alone/);
+  const sourceById = new Map(data.sources.map((record) => [record.id, record]));
+  assert.equal(sourceById.get("sg-ntu-gaokao-2027").url, "https://www.ntu.edu.sg/admissions/undergraduate/admissions/undergraduate/admission-guide/international-qualifications/prc-gaokao");
+  assert.equal(sourceById.get("sg-ntu-gaokao-2027").verifiedAt, "2026-11-10");
+  assert.notEqual(sourceById.get("sg-nus-gaokao-2026").verifiedAt, "2026-11-10");
+  const html = await readRoute("/destinations/singapore-undergraduate-mathematics-admissions", data);
+  assert.match(visibleText(html), /not evidence that criteria are unavailable/);
+});
+
 test("static AP China warnings distinguish the elapsed original deadline from a new policy", async () => {
   const data = await loadStaticData();
   for (const id of ["ap-precalculus", "ap-calculus-ab", "ap-calculus-bc", "ap-statistics"]) {
