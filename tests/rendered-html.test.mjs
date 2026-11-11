@@ -141,6 +141,10 @@ test("COMC 2026 shows current materials guidance and archives withdrawn release 
   assert.match(text, /16:00 EDT/);
   assert.match(text, /download time is not a student's start time/);
   assert.match(text, /retained only as a historical record/);
+  assert.match(text, /Contest complete; preliminary scores expected in December/);
+  assert.match(text, /marking is underway at (?:several )?Canadian universities/i);
+  assert.match(text, /Official Solutions are not yet available/);
+  assert.match(text, /final results, raw-score boundaries and later invitations remain unpublished/);
   assert.match(text, /Overview-calendar general registration deadline/);
   assert.match(html, /cms\.math\.ca\/competitions\/comc\/comc2026\/faq\/teachers\//);
   assert.doesNotMatch(text, /School registration is open|Independent-student entry is now open|Schools in China can now register|The home page gives October 29 at 16:00 EDT/);

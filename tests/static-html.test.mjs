@@ -310,6 +310,10 @@ test("static COMC page distinguishes current materials, historical capacity and 
   assert.match(text, /ordered materials should be in organisers' Portal accounts/);
   assert.match(text, /competitions@cms.math.ca/);
   assert.match(text, /retained only as a historical record/);
+  assert.match(text, /Contest complete; preliminary scores expected in December/);
+  assert.match(text, /marking is underway at (?:several )?Canadian universities/i);
+  assert.match(text, /Official Solutions are not yet available/);
+  assert.match(text, /final results, raw-score boundaries and later invitations remain unpublished/);
   assert.match(text, /October 30 at 04:00 China Standard Time/);
   assert.match(text, /Canada's prepaid waybill/);
   assert.doesNotMatch(text, /School registration is open|Independent-student entry is now open|Schools in China can now register|The home page gives October 29 at 16:00 EDT/);

@@ -1009,9 +1009,9 @@ export const competitionSources: SourceRecord[] = [
     owner: t("加拿大数学学会", "Canadian Mathematical Society"),
     url: "https://cms.math.ca/competitions/comc/comc2026/",
     kind: "official",
-    verifiedAt: "2026-10-29",
+    verifiedAt: "2026-11-11",
     appliesTo: "COMC 2026 dates, school and independent registration, delivery methods, fees, and CMOQR discontinuation",
-    note: t("主页已换为比赛日材料提醒：组织者应在 Portal 看到已订材料，独立考生应已收到说明；缺失时联系 CMS。此前按地区列出的放题时刻已撤下，不能继续当作当前下载通知。付款段仍列 10 月 22 日、邮寄订单 10 月 14 日。", "The page now gives competition-day materials guidance: organisers should find ordered materials in their Portal and independent students should have their instructions; contact CMS if anything is missing. Earlier region-specific question-release times have been removed and are not a current download notice. Payment dates remain October 22 and October 14 for shipped orders."),
+    note: t("比赛日主页现说明：本届比赛已完成，CMS 正在加拿大大学评分；官方解答暂未公布，预计 12 月发布初步成绩。组织者应在 Portal 看到已订材料，独立考生应已收到说明；缺失时联系 CMS。此前按地区列出的放题时刻已撤下，不能继续当作当前下载通知。付款段仍列 10 月 22 日、邮寄订单 10 月 14 日。", "The competition-day home page now says the contest is complete and marking is underway at Canadian universities; official solutions are not yet available and preliminary scores are expected in December. Organisers should find ordered materials in their Portal and independent students should have their instructions; contact CMS if anything is missing. Earlier region-specific question-release times have been removed and are not a current download notice. Payment dates remain October 22 and October 14 for shipped orders."),
   },
   {
     id: "cms-comc-teacher-faq-2026",
@@ -3368,7 +3368,7 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "confirmed",
     cycle: "2026",
-    lastVerified: "2026-10-29",
+    lastVerified: "2026-11-11",
     alerts: [
       {
         title: t("2026 报名已关闭", "2026 registration closed"),
@@ -3382,9 +3382,16 @@ export const competitionProjects: ProjectRecord[] = [
         sourceIds: ["cms-comc-current", "cms-comc-teacher-faq-2026"],
         tone: "warning",
       },
+      {
+        title: t("比赛已完成，初步成绩预计 12 月", "Contest complete; preliminary scores expected in December"),
+        body: t("CMS 当前页面确认 10 月 29 日美洲、10 月 30 日其他地区的比赛已经完成，加拿大大学正在评分。官方解答暂未公布，初步成绩预计 12 月发布；具体日期、最终成绩、分数线和后续邀请仍待 CMS 公布。", "The current CMS page confirms that the October 29 Americas and October 30 elsewhere administrations are complete, with marking underway at Canadian universities. Official solutions are not yet available and preliminary scores are expected in December; the exact date, final results, score boundaries and later invitations remain pending."),
+        sourceIds: ["cms-comc-current"],
+        tone: "warning",
+      },
     ],
     facts: [
       { label: t("2026 日期与报名", "2026 dates and registration"), value: t("本届报名已关闭。美洲于 10 月 29 日比赛，中国及其他美洲以外地区于 10 月 30 日比赛；已报名的独立考生由 OWC 发送最终安排。", "Registration is closed. The Americas write on October 29; China and other locations outside the Americas write on October 30. Registered independent students receive final arrangements from their OWC."), status: "confirmed", sourceIds: ["cms-comc-current"] },
+      { label: t("比赛后状态与初步成绩", "Post-contest status and preliminary scores"), value: t("比赛已于 10 月 29 日（美洲）和 10 月 30 日（其他地区）完成；加拿大大学正在评分，官方解答尚未公布，初步成绩预计 12 月发布。具体日期、最终成绩、原始分数线和后续邀请仍未公布，不从“评分进行中”推导结果。", "The contest was completed on October 29 in the Americas and October 30 elsewhere. Marking is underway at Canadian universities, official solutions are not yet available, and preliminary scores are expected in December. The exact date, final results, raw-score boundaries and later invitations remain unpublished; no result is inferred from marking status."), status: "pending", sourceIds: ["cms-comc-current"] },
       { label: t("付款记录与差异", "Payment record and differing wording"), value: t("当前主页列付款截止 10 月 22 日（邮寄订单 10 月 14 日）；教师 FAQ 写付款与适用报名截止日相同。相关日期均已过去；欠款订单可能取消，已付款订单不可更改或退款，有疑问应向 CMS 核实订单状态。", "The current home page lists October 22 for payment, with October 14 for shipped orders; the teacher FAQ says payment is due on the applicable registration deadline. These dates have passed. Unpaid orders may be cancelled, and paid orders cannot be modified or refunded; ask CMS about an unresolved order."), status: "conflict", sourceIds: ["cms-comc-current", "cms-comc-teacher-faq-2026"] },
       { label: t("正式参赛资格", "Official-participant eligibility"), value: t("各地点、各年级均可参加；要获得正式奖项，学生须在 2026 年 6 月 30 日未满 19 岁，并自 9 月 15 日起全日制就读于学校、线上学校、Cégep 或合规居家教育。", "Students at all locations and grade levels may enter. For official awards, a student must be under 19 on June 30, 2026 and enrolled full-time in a school, virtual school, Cégep, or qualifying homeschool from September 15."), status: "confirmed", sourceIds: ["cms-comc-eligibility"] },
       { label: t("试卷结构", "Exam structure"), value: t("150 分钟、12 题、满分 80：4 道入门题各 4 分，4 道中等题各 6 分，4 道长解答题各 10 分；最后四题必须写出完整过程。", "150 minutes, 12 questions, maximum 80: four introductory questions worth 4 each, four intermediate questions worth 6 each, and four advanced questions worth 10 each; the final four require full solutions."), status: "confirmed", sourceIds: ["cms-comc-student-faq"] },
@@ -3404,6 +3411,16 @@ export const competitionProjects: ProjectRecord[] = [
       { id: "comc-2026-world", label: t("中国及其他美洲以外地区竞赛日", "China and other locations outside the Americas"), date: "2026-10-30", region: t("中国及其他美洲以外地区", "China and elsewhere outside the Americas"), status: "confirmed", sourceIds: ["cms-comc-current", "cms-comc-changes-2026"], note: t("CMS 已确认全球日期；ASEEDER 的 2026 合作学校报名截止、费用和具体场次仍待其更新。", "The CMS worldwide date is confirmed; ASEEDER's 2026 partner-school deadline, fee, and local arrangements remain pending.") },
     ],
     sections: [
+      {
+        id: "results-status-2026",
+        title: t("2026 比赛后结果状态", "2026 Post-contest Results Status"),
+        intro: t("CMS 当前年度页面已从报名与材料说明切换到赛后状态。以下只记录已公布的评分进度，不把“预计 12 月”写成具体发布日期，也不提前填写分数线或获奖名单。", "The current annual CMS page has moved from registration and materials guidance to post-contest status. The notes below record only the published marking progress; “expected in December” is not converted into an exact date, score boundary or award list."),
+        bullets: [
+          t("本届比赛已完成：美洲为 10 月 29 日，中国及其他美洲以外地区为 10 月 30 日。加拿大多所大学正在评分。", "The contest is complete: October 29 in the Americas and October 30 in China and elsewhere outside the Americas. Marking is underway at several Canadian universities."),
+          t("官方 Problem Set 已公开；Official Solutions 尚未公布，预计初步成绩在 12 月发布。具体日期和最终结果待 CMS 后续公告。", "The official problem set is available. Official Solutions are not yet available, and preliminary scores are expected in December. The exact date and final results await a later CMS announcement."),
+          t("在官方结果发布前，不填写 2026 原始分数线、百分位、奖项名单或 CMO／CJMO 邀请名单；中国学生也不能把历史 OWC 名额快照当作结果或补报名入口。", "Before official results are released, do not fill in 2026 raw-score boundaries, percentiles, award lists or CMO/CJMO invitations. Students in China should not treat historical OWC snapshots as results or a late-entry route."),
+        ],
+      },
       {
         id: "comparison",
         title: t("COMC 与 CSMC 的区别", "COMC versus CSMC"),
