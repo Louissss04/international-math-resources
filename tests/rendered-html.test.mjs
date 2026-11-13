@@ -693,10 +693,12 @@ test("renders revised Yau dates and in-person mathematics semifinals without pro
   const html = await renderHtml("/research/yau-high-school-mathematics-award");
   const text = visibleText(html);
   for (const pattern of [
+    /On November 13 the organizer announced 72 mainland-China finalist teams/,
+    /finalist teams must submit final reports and defense slides in English/,
     /November 5 semifinal list is not a global-finalist announcement/,
     /consolidated mainland-China semifinal list on November 5/,
     /calendar window alone does not establish finalist status/,
-    /These are not global-finalist lists/,
+    /This is not a global-finalist announcement/,
     /Each team has 35 minutes: a 15-minute presentation and 20-minute Q&A/,
     /Students must attend in person or lose award eligibility/,
     /Reports, slides and defense may use Chinese or English/,
@@ -708,10 +710,10 @@ test("renders revised Yau dates and in-person mathematics semifinals without pro
     /December 5–6 final and awards at Tsinghua remain unchanged/,
   ]) assert.match(text, pattern);
   const finalistReviewRow = [...html.matchAll(/<tr\b[^>]*>[\s\S]*?<\/tr>/g)]
-    .map((match) => match[0]).find((row) => row.includes("2026 Public Review of Global-Finalist Reports"));
+    .map((match) => match[0]).find((row) => row.includes("2026 Public Review of Global-Finalist Lists and Reports"));
   assert.ok(finalistReviewRow, "missing global-finalist report review milestone");
-  assert.match(visibleText(finalistReviewRow), /2026-11-09 — 2026-11-15/);
-  assert.doesNotMatch(finalistReviewRow, /2026-11-03|2026-11-10/);
+  assert.match(visibleText(finalistReviewRow), /2026-11-13 — 2026-11-19/);
+  assert.doesNotMatch(finalistReviewRow, /2026-11-03|2026-11-09|2026-11-15/);
   assert.match(html, /https:\/\/www\.yau-awards\.com\/show-86-63\.html/);
   assert.match(html, /https:\/\/www\.yau-awards\.com\/show-86-64\.html/);
   assert.doesNotMatch(html, /href=["']https?:\/\/(?:www\.)?yau-awards\.science/);

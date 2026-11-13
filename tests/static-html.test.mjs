@@ -234,14 +234,14 @@ test("static HMMT records brochure conflicts without selecting a definitive earl
 test("static Yau mathematics dates distinguish semifinal and global-finalist public review", async () => {
   const data = await loadStaticData();
   const yau = data.projects.find((project) => project.id === "yau-high-school-math-award");
-  assert.equal(yau.lastVerified, "2026-11-09");
+  assert.equal(yau.lastVerified, "2026-11-13");
   const dateById = new Map(yau.dates.map((item) => [item.id, item]));
   for (const [id, start, end] of [
     ["yau-math-2026-registration", "2026-07-01", "2026-09-15"],
     ["yau-math-2026-regional", "2026-10-01", "2026-11-08"],
     ["yau-math-2026-semifinal-public-review", "2026-10-28", "2026-11-03"],
     ["yau-math-2026-semifinal", "2026-11-07", "2026-11-08"],
-    ["yau-math-2026-public-review", "2026-11-09", "2026-11-15"],
+    ["yau-math-2026-public-review", "2026-11-13", "2026-11-19"],
     ["yau-math-2026-final", "2026-12-05", "2026-12-06"],
   ]) assert.deepEqual([dateById.get(id)?.date, dateById.get(id)?.endDate], [start, end], id);
   assert.equal(dateById.get("yau-math-2026-registration").status, "historical");
@@ -249,10 +249,12 @@ test("static Yau mathematics dates distinguish semifinal and global-finalist pub
   const html = await readFile(path.join(outputDirectory, "research-yau-high-school-mathematics-award.html"), "utf8");
   const text = visibleText(html);
   for (const pattern of [
+    /On November 13 the organizer announced 72 mainland-China finalist teams/,
+    /finalist teams must submit final reports and defense slides in English/,
     /November 5 semifinal list is not a global-finalist announcement/,
     /consolidated mainland-China semifinal list on November 5/,
     /calendar window alone does not establish finalist status/,
-    /These are not global-finalist lists/,
+    /This is not a global-finalist announcement/,
     /Each team has 35 minutes: a 15-minute presentation and 20-minute Q&A/,
     /Students must attend in person or lose award eligibility/,
     /Near Zhejiang University's Zijingang Campus; not confirmed as on-campus/,
