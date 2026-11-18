@@ -397,10 +397,28 @@ export const maaOtherPastPaperArchives: PastPaperArchiveRecord[] = [
     projectId: "comc",
     availability: "official",
     summary: t(
-      "加拿大数学学会的 Competition Archive 免费提供从 1996 年起的 COMC 试题及含解答版本，按年份直接进入 PDF；使用和转载须遵守 CMS 的个人学习与授权条款。",
-      "The Canadian Mathematical Society's Competition Archive provides free COMC problem sets and solution editions from 1996 onward, linked to PDFs by year. Use and redistribution remain subject to the CMS terms for personal study and licensing.",
+      "加拿大数学学会的 Competition Archive 免费提供从 1996 年起的 COMC 试题及含解答版本；本次另补充年度主页已公开的 2026 英文、中文题卷。2026 官方解答仍未公布，使用和转载须遵守 CMS 的个人学习与授权条款。",
+      "The CMS Competition Archive provides free COMC problem sets and solution editions from 1996 onward. This update also adds the existing public 2026 English and Chinese papers from the annual home page. Official 2026 solutions remain unpublished; use and redistribution are subject to CMS personal-study and licensing terms.",
     ),
     links: [
+      {
+        title: t("2026 COMC 官方英文题卷", "Official 2026 COMC English paper"),
+        provider: CMS,
+        url: "https://cms.math.ca/wp-content/uploads/2026/11/COMC-2026-Problems-en.pdf",
+        authority: "official",
+        kind: "download-page",
+        access: "free",
+        note: t("CMS 年度主页直接列出的英文题卷；本次补充入口，不声称刚发布。官方解答尚未公布。仅链接，不复制题目或重新托管文件。", "The English paper linked directly by the CMS annual page. This update adds the entry point without claiming a new publication. Official solutions remain unpublished. External link only; no copied questions or rehosted file."),
+      },
+      {
+        title: t("2026 COMC 官方中文题卷", "Official 2026 COMC Chinese paper"),
+        provider: CMS,
+        url: "https://cms.math.ca/wp-content/uploads/2026/11/COMC-2026-Problems-zh.pdf",
+        authority: "official",
+        kind: "download-page",
+        access: "free",
+        note: t("CMS 年度主页标注为 Chinese version，供中文对照复盘；这是题卷，不是解答或单独的中国赛区规则。仅链接，不重新托管。", "Labelled Chinese version on the CMS annual page, for Chinese-language review. This is a paper, not solutions or separate China-region rules. External link only, with no rehosting."),
+      },
       {
         title: t("COMC 官方历年试题与解答档案", "Official COMC past-paper and solution archive"),
         provider: CMS,
@@ -414,6 +432,6 @@ export const maaOtherPastPaperArchives: PastPaperArchiveRecord[] = [
         ),
       },
     ],
-    lastVerified: VERIFIED_AT,
+    lastVerified: "2026-11-18",
   },
 ];

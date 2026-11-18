@@ -133,9 +133,12 @@ test("COMC 2026 shows current materials guidance and archives withdrawn release 
   const html = await renderHtml("/competitions/comc");
   const text = visibleText(html);
   assert.match(text, /2026 registration closed/);
-  assert.match(text, /Registered schools: check your materials/);
-  assert.match(text, /ordered materials should be in organisers' Portal accounts/);
-  assert.match(text, /competitions@cms.math.ca/);
+  assert.match(text, /Official 2026 English and Chinese papers added/);
+  assert.match(text, /Earlier materials notice — historical/);
+  assert.match(html, /https:\/\/cms\.math\.ca\/wp-content\/uploads\/2026\/11\/COMC-2026-Problems-en\.pdf/);
+  assert.match(html, /https:\/\/cms\.math\.ca\/wp-content\/uploads\/2026\/11\/COMC-2026-Problems-zh\.pdf/);
+  assert.match(text, /First capture is not a claimed publication date/);
+  assert.doesNotMatch(text, /Registered schools: check your materials/);
   assert.match(text, /October 30 at 04:00 China Standard Time/);
   assert.match(text, /12:00 EDT/);
   assert.match(text, /16:00 EDT/);
@@ -143,7 +146,7 @@ test("COMC 2026 shows current materials guidance and archives withdrawn release 
   assert.match(text, /retained only as a historical record/);
   assert.match(text, /Contest complete; preliminary scores expected in December/);
   assert.match(text, /marking is underway at (?:several )?Canadian universities/i);
-  assert.match(text, /Official Solutions are not yet available/);
+  assert.match(text, /Official solutions are not yet available/i);
   assert.match(text, /final results, raw-score boundaries and later invitations remain unpublished/);
   assert.match(text, /Overview-calendar general registration deadline/);
   assert.match(html, /cms\.math\.ca\/competitions\/comc\/comc2026\/faq\/teachers\//);
@@ -717,6 +720,28 @@ test("renders revised Yau dates and in-person mathematics semifinals without pro
   assert.match(html, /https:\/\/www\.yau-awards\.com\/show-86-63\.html/);
   assert.match(html, /https:\/\/www\.yau-awards\.com\/show-86-64\.html/);
   assert.doesNotMatch(html, /href=["']https?:\/\/(?:www\.)?yau-awards\.science/);
+});
+
+test("keeps Yau 2026 Asian and mainland finalist review windows separate", async () => {
+  const html = await renderHtml("/research/yau-high-school-mathematics-award");
+  const text = visibleText(html);
+  for (const pattern of [
+    /11 teams across all subjects, including 2 mathematics teams/,
+    /November 17–23 until 24:00 Beijing time/,
+    /North American finalists remain pending/,
+    /does not extend the mainland-China November 13–19 review window or reopen registration/,
+    /not a mainland-China extension, late-entry or region-transfer route/,
+  ]) assert.match(text, pattern);
+  const rows = [...html.matchAll(/<tr\b[^>]*>[\s\S]*?<\/tr>/g)].map((match) => match[0]);
+  const asiaMilestone = rows.find((row) => row.includes("2026 Asian-Region Global-Finalist Public Review"));
+  assert.ok(asiaMilestone, "missing Asian-region public-review milestone");
+  assert.match(visibleText(asiaMilestone), /2026-11-17 — 2026-11-23/);
+  assert.match(visibleText(asiaMilestone), /Asian region; Beijing time/);
+  const mainlandMilestone = rows.find((row) => row.includes("2026 Public Review of Global-Finalist Lists and Reports"));
+  assert.match(visibleText(mainlandMilestone), /2026-11-13 — 2026-11-19/);
+  assert.doesNotMatch(mainlandMilestone, /2026-11-23/);
+  assert.match(html, /https:\/\/www\.yau-awards\.com\/show-86-66\.html/);
+  assert.doesNotMatch(text, /no 2026 global-finalist notice was found/);
 });
 
 test("renders a separate mathematics journal directory with detailed submission records", async () => {

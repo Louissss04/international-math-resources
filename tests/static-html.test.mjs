@@ -234,7 +234,7 @@ test("static HMMT records brochure conflicts without selecting a definitive earl
 test("static Yau mathematics dates distinguish semifinal and global-finalist public review", async () => {
   const data = await loadStaticData();
   const yau = data.projects.find((project) => project.id === "yau-high-school-math-award");
-  assert.equal(yau.lastVerified, "2026-11-13");
+  assert.equal(yau.lastVerified, "2026-11-18");
   const dateById = new Map(yau.dates.map((item) => [item.id, item]));
   for (const [id, start, end] of [
     ["yau-math-2026-registration", "2026-07-01", "2026-09-15"],
@@ -242,6 +242,7 @@ test("static Yau mathematics dates distinguish semifinal and global-finalist pub
     ["yau-math-2026-semifinal-public-review", "2026-10-28", "2026-11-03"],
     ["yau-math-2026-semifinal", "2026-11-07", "2026-11-08"],
     ["yau-math-2026-public-review", "2026-11-13", "2026-11-19"],
+    ["yau-math-2026-asia-public-review", "2026-11-17", "2026-11-23"],
     ["yau-math-2026-final", "2026-12-05", "2026-12-06"],
   ]) assert.deepEqual([dateById.get(id)?.date, dateById.get(id)?.endDate], [start, end], id);
   assert.equal(dateById.get("yau-math-2026-registration").status, "historical");
@@ -267,6 +268,18 @@ test("static Yau mathematics dates distinguish semifinal and global-finalist pub
   const listSource = data.sources.find((record) => record.id === "research-yau-semifinal-list-2026");
   assert.equal(listSource.url, "https://www.yau-awards.com/show-86-64.html");
   assert.match(listSource.note.en, /Published November 5, 2026/);
+  const overseasSource = data.sources.find((record) => record.id === "research-yau-overseas-finalists-2026");
+  assert.equal(overseasSource.url, "https://www.yau-awards.com/show-86-66.html");
+  assert.equal(overseasSource.verifiedAt, "2026-11-18");
+  assert.match(overseasSource.note.en, /Published November 17, 2026/);
+  assert.match(text, /11 teams across all subjects, including 2 mathematics teams/);
+  assert.match(text, /November 17–23 until 24:00 Beijing time/);
+  assert.match(text, /North American finalists remain pending/);
+  assert.match(text, /does not extend the mainland-China November 13–19 review window or reopen registration/);
+  assert.doesNotMatch(text, /no 2026 global-finalist notice was found/);
+  const northAmerica = yau.sections.find((section) => section.id === "global-finalists-2026").tables[0].rows.find((row) => row.cells[0].en.startsWith("North America"));
+  assert.equal(northAmerica.status, "pending");
+  assert.match(html, /https:\/\/www\.yau-awards\.com\/show-86-66\.html/);
   assert.equal(data.sources.find((record) => record.id === "research-yau-semifinals-2026").verifiedAt, "2026-11-02");
   assert.doesNotMatch(html, /href=["']https?:\/\/(?:www\.)?yau-awards\.science/);
 });
@@ -308,13 +321,16 @@ test("static COMC page distinguishes current materials, historical capacity and 
   const text = visibleText(html);
   assert.match(text, /2026 registration closed/);
   assert.match(text, /Historical OWC snapshot/);
-  assert.match(text, /Registered schools: check your materials/);
-  assert.match(text, /ordered materials should be in organisers' Portal accounts/);
-  assert.match(text, /competitions@cms.math.ca/);
+  assert.match(text, /Official 2026 English and Chinese papers added/);
+  assert.match(text, /Earlier materials notice — historical/);
+  assert.match(html, /https:\/\/cms\.math\.ca\/wp-content\/uploads\/2026\/11\/COMC-2026-Problems-en\.pdf/);
+  assert.match(html, /https:\/\/cms\.math\.ca\/wp-content\/uploads\/2026\/11\/COMC-2026-Problems-zh\.pdf/);
+  assert.match(text, /First capture is not a claimed publication date/);
+  assert.doesNotMatch(text, /Registered schools: check your materials/);
   assert.match(text, /retained only as a historical record/);
   assert.match(text, /Contest complete; preliminary scores expected in December/);
   assert.match(text, /marking is underway at (?:several )?Canadian universities/i);
-  assert.match(text, /Official Solutions are not yet available/);
+  assert.match(text, /Official solutions are not yet available/i);
   assert.match(text, /final results, raw-score boundaries and later invitations remain unpublished/);
   assert.match(text, /October 30 at 04:00 China Standard Time/);
   assert.match(text, /Canada's prepaid waybill/);
