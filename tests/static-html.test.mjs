@@ -234,7 +234,7 @@ test("static HMMT records brochure conflicts without selecting a definitive earl
 test("static Yau mathematics dates distinguish semifinal and global-finalist public review", async () => {
   const data = await loadStaticData();
   const yau = data.projects.find((project) => project.id === "yau-high-school-math-award");
-  assert.equal(yau.lastVerified, "2026-11-18");
+  assert.equal(yau.lastVerified, "2026-11-19");
   const dateById = new Map(yau.dates.map((item) => [item.id, item]));
   for (const [id, start, end] of [
     ["yau-math-2026-registration", "2026-07-01", "2026-09-15"],
@@ -243,6 +243,7 @@ test("static Yau mathematics dates distinguish semifinal and global-finalist pub
     ["yau-math-2026-semifinal", "2026-11-07", "2026-11-08"],
     ["yau-math-2026-public-review", "2026-11-13", "2026-11-19"],
     ["yau-math-2026-asia-public-review", "2026-11-17", "2026-11-23"],
+    ["yau-math-2026-north-america-public-review", "2026-11-19", "2026-11-25"],
     ["yau-math-2026-final", "2026-12-05", "2026-12-06"],
   ]) assert.deepEqual([dateById.get(id)?.date, dateById.get(id)?.endDate], [start, end], id);
   assert.equal(dateById.get("yau-math-2026-registration").status, "historical");
@@ -270,15 +271,15 @@ test("static Yau mathematics dates distinguish semifinal and global-finalist pub
   assert.match(listSource.note.en, /Published November 5, 2026/);
   const overseasSource = data.sources.find((record) => record.id === "research-yau-overseas-finalists-2026");
   assert.equal(overseasSource.url, "https://www.yau-awards.com/show-86-66.html");
-  assert.equal(overseasSource.verifiedAt, "2026-11-18");
-  assert.match(overseasSource.note.en, /Published November 17, 2026/);
-  assert.match(text, /11 teams across all subjects, including 2 mathematics teams/);
-  assert.match(text, /November 17–23 until 24:00 Beijing time/);
-  assert.match(text, /North American finalists remain pending/);
+  assert.equal(overseasSource.verifiedAt, "2026-11-19");
+  assert.match(overseasSource.note.en, /Updated November 19, 2026/);
+  assert.match(text, /Eleven Asian-region teams across all subjects, including two mathematics teams/);
+  assert.match(text, /North[\s\S]*American review runs[\s\S]*November 19[\s\S]*25[\s\S]*24:00[\s\S]*Beijing time/i);
   assert.match(text, /does not extend the mainland-China November 13–19 review window or reopen registration/);
   assert.doesNotMatch(text, /no 2026 global-finalist notice was found/);
   const northAmerica = yau.sections.find((section) => section.id === "global-finalists-2026").tables[0].rows.find((row) => row.cells[0].en.startsWith("North America"));
-  assert.equal(northAmerica.status, "pending");
+  assert.equal(northAmerica.status, undefined);
+  assert.match(northAmerica.cells[1].en, /4 teams/);
   assert.match(html, /https:\/\/www\.yau-awards\.com\/show-86-66\.html/);
   assert.equal(data.sources.find((record) => record.id === "research-yau-semifinals-2026").verifiedAt, "2026-11-02");
   assert.doesNotMatch(html, /href=["']https?:\/\/(?:www\.)?yau-awards\.science/);

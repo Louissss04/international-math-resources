@@ -728,7 +728,8 @@ test("keeps Yau 2026 Asian and mainland finalist review windows separate", async
   for (const pattern of [
     /11 teams across all subjects, including 2 mathematics teams/,
     /November 17–23 until 24:00 Beijing time/,
-    /North American finalists remain pending/,
+    /four North-American teams reached the global final/i,
+    /North[\s\S]*American review runs[\s\S]*November 19[\s\S]*25[\s\S]*24:00[\s\S]*Beijing time/i,
     /does not extend the mainland-China November 13–19 review window or reopen registration/,
     /not a mainland-China extension, late-entry or region-transfer route/,
   ]) assert.match(text, pattern);
@@ -737,6 +738,9 @@ test("keeps Yau 2026 Asian and mainland finalist review windows separate", async
   assert.ok(asiaMilestone, "missing Asian-region public-review milestone");
   assert.match(visibleText(asiaMilestone), /2026-11-17 — 2026-11-23/);
   assert.match(visibleText(asiaMilestone), /Asian region; Beijing time/);
+  const northAmericaMilestone = rows.find((row) => row.includes("2026 North-American Global-Finalist Public Review"));
+  assert.ok(northAmericaMilestone, "missing North-American public-review milestone");
+  assert.match(visibleText(northAmericaMilestone), /2026-11-19 — 2026-11-25/);
   const mainlandMilestone = rows.find((row) => row.includes("2026 Public Review of Global-Finalist Lists and Reports"));
   assert.match(visibleText(mainlandMilestone), /2026-11-13 — 2026-11-19/);
   assert.doesNotMatch(mainlandMilestone, /2026-11-23/);
