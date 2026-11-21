@@ -44,14 +44,15 @@ function mathOnlySat(): ProjectRecord {
       fact(base, "Registration"),
       revisedFact(base, "Format", "数学形式", "Math format", "两组各 35 分钟，共 44 题；第二组难度取决于第一组表现。", "Two 35-minute modules with 44 questions in total; Module 2 difficulty depends on Module 1 performance."),
       revisedFact(base, "Scoring", "数学评分", "Math scoring", "数学单项 200–800；没有适用于所有大学的统一及格线。", "Math is reported on a 200–800 scale; there is no universal university pass mark."),
-      fact(base, "International fees through December 2026"),
-      fact(base, "Spring 2027 fees"),
+      fact(base, "Current international registration fee"),
+      fact(base, "Additional fees through June 2027"),
       fact(base, "Device"),
       fact(base, "Score release"),
       fact(base, "Institutional policy"),
     ],
     sections: [
       section(base, "sat-registration-route"),
+      section(base, "sat-fee-update"),
       {
         ...format,
         title: t("数学部分结构", "Math section structure"),

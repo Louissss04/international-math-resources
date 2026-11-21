@@ -7,10 +7,60 @@ import { fileURLToPath } from "node:url";
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const outputDirectory = path.resolve(testDirectory, "../outputs/mathpath-static");
 
+test("static SAT confirms June 2027 additional fees while preserving source and date verification scope", async () => {
+  const data = await loadStaticData();
+  const sat = data.projects.find((project) => project.id === "sat");
+  assert.equal(sat.lastVerified, "2026-11-21");
+  const currentFee = sat.facts.find((fact) => fact.label.en === "Current international registration fee");
+  const additionalFees = sat.facts.find((fact) => fact.label.en === "Additional fees through June 2027");
+  assert.equal(currentFee.status, "confirmed");
+  assert.equal(additionalFees.status, "confirmed");
+  assert.match(currentFee.value.en, /US\$111/);
+  assert.match(currentFee.value.en, /base amounts are unchanged/);
+  assert.match(additionalFees.value.en, /late cancellation US\$44/);
+  assert.match(additionalFees.value.en, /covering spring 2027 sittings/);
+  assert.match(additionalFees.value.zh, /适用至 2027 年 6 月/);
+  assert.ok(!sat.facts.some((fact) => fact.label.en === "Spring 2027 fees"));
+  const sourceById = new Map(data.sources.map((source) => [source.id, source]));
+  assert.equal(sourceById.get("sat-international-fees").verifiedAt, "2026-11-21");
+  assert.equal(sourceById.get("sat-structure").verifiedAt, "2026-08-04");
+  assert.match(sourceById.get("sat-international-fees").note.en, /not a newly increased base amount/);
+  const dates = new Map(sat.dates.map((date) => [date.id, date]));
+  assert.equal(dates.get("sat-1-registration").status, "historical");
+  assert.equal(dates.get("sat-1-exam").status, "historical");
+  assert.equal(dates.get("sat-2-exam").status, "historical");
+  assert.equal(dates.get("sat-5-exam").date, "2026-12-05");
+  assert.equal(dates.get("sat-5-registration").date, "2026-11-20");
+  assert.match(dates.get("sat-5-registration").note.en, /2026-11-24/);
+  const text = visibleText(await readRoute("/assessments/sat", data));
+  for (const pattern of [
+    /Additional fees through June 2027/,
+    /US\$68 test fee plus a US\$43 international fee totals US\$111/,
+    /changing the test center US\$34; cancellation US\$34; late cancellation US\$44/,
+    /not a guarantee of bookable centers or remaining seats/,
+    /does not confirm bookable mainland-China seats/,
+    /not an official policy publication date/,
+  ]) assert.match(text, pattern);
+  assert.doesNotMatch(text, /International fees through December 2026|has not published spring 2027 fees/);
+});
+
+test("static NTU ties the Gaokao-category deadline to the current 2027 official PDF", async () => {
+  const data = await loadStaticData();
+  const guide = data.destinationGuides.find((record) => record.id === "destination-singapore-undergraduate-mathematics");
+  assert.equal(guide.lastVerified, "2026-11-21");
+  const source = data.sources.find((record) => record.id === "sg-ntu-international-minimum-subjects-2027");
+  assert.equal(source.verifiedAt, "2026-11-21");
+  assert.match(source.url, /emsr_intnl\.pdf/);
+  const text = visibleText(await readRoute("/destinations/singapore-undergraduate-mathematics-admissions", data));
+  assert.match(text, /explicitly lists 15 October 2026–19 March 2027 for the PRC Gao Kao category/);
+  assert.match(text, /no relaxation is inferred/);
+  assert.match(text, /a good senior-high advanced Mathematics grade/);
+});
+
 test("static NTU qualification branches retain optional-test and no-guarantee boundaries", async () => {
   const data = await loadStaticData();
   const guide = data.destinationGuides.find((record) => record.id === "destination-singapore-undergraduate-mathematics");
-  assert.equal(guide.lastVerified, "2026-11-10");
+  assert.equal(guide.lastVerified, "2026-11-21");
   const section = guide.sections.find((record) => record.id === "sg-ntu-current-gaokao-route");
   assert.equal(section.tables[0].rows.length, 3);
   const rows = section.tables[0].rows;
@@ -28,7 +78,7 @@ test("static NTU qualification branches retain optional-test and no-guarantee bo
   assert.equal(sourceById.get("sg-ntu-gaokao-2027").verifiedAt, "2026-11-10");
   assert.notEqual(sourceById.get("sg-nus-gaokao-2026").verifiedAt, "2026-11-10");
   const html = await readRoute("/destinations/singapore-undergraduate-mathematics-admissions", data);
-  assert.match(visibleText(html), /not evidence that criteria are unavailable/);
+  assert.match(visibleText(html), /not establish an extension, reopening or reduction in mathematics prerequisites/);
 });
 
 test("static AP China warnings distinguish the elapsed original deadline from a new policy", async () => {

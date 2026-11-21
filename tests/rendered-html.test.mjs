@@ -3,6 +3,35 @@ import test from "node:test";
 
 const staleDemoCopy = /codex-preview|Your site is taking shape|这是一个演示型规则引擎|正式版本可接入/i;
 
+test("SAT spring 2027 fee coverage is confirmed without implying new base prices or available seats", async () => {
+  const html = await renderHtml("/assessments/sat");
+  const text = visibleText(html);
+  for (const pattern of [
+    /Additional fees through June 2027/,
+    /US\$68 test fee plus a US\$43 international fee totals US\$111/,
+    /Select-center fee US\$24; late registration US\$38/,
+    /changing the test center US\$34; cancellation US\$34; late cancellation US\$44/,
+    /these base amounts are unchanged from this site's previous record/,
+    /including centers in Hong Kong and Macao/,
+    /does not confirm bookable mainland-China seats/,
+    /not a guarantee of bookable centers or remaining seats/,
+    /not an official policy publication date/,
+  ]) assert.match(text, pattern);
+  assert.match(html, /id="sat-fee-update"/);
+  assert.match(html, /satsuite\.collegeboard\.org\/sat\/registration\/international-testing\/fees/);
+  assert.doesNotMatch(text, /International fees through December 2026|has not published spring 2027 fees/);
+});
+
+test("NTU confirms the 2027 Gaokao-category window without lowering programme prerequisites", async () => {
+  const html = await renderHtml("/destinations/singapore-undergraduate-mathematics-admissions");
+  const text = visibleText(html);
+  assert.match(text, /explicitly lists 15 October 2026–19 March 2027 for the PRC Gao Kao category/);
+  assert.match(text, /not establish an extension, reopening or reduction in mathematics prerequisites/);
+  assert.match(text, /a good senior-high advanced Mathematics grade/);
+  assert.match(html, /id="sg-ntu-verification-history"/);
+  assert.match(html, /emsr_intnl\.pdf/);
+});
+
 test("NTU current Gaokao route separates case-by-case graduation assessment from pending results", async () => {
   const html = await renderHtml("/destinations/singapore-undergraduate-mathematics-admissions");
   const section = html.match(/<section\b[^>]*id="sg-ntu-current-gaokao-route"[^>]*>[\s\S]*?<\/section>/)?.[0];

@@ -389,6 +389,21 @@ export const ukSingaporeDestinationSources: SourceRecord[] = [
     ),
     verifiedAt: "2026-11-10",
   },
+  {
+    ...source(
+      "sg-ntu-international-minimum-subjects-2027",
+      "NTU 国际资格最低科目要求与申请期（2027 入学）",
+      "NTU international minimum subject requirements and application periods (2027 entry)",
+      "南洋理工大学招生办公室",
+      "NTU Office of Admissions",
+      "https://www.ntu.edu.sg/media/docs/default-source/undergraduate-admissions/msr/emsr_intnl.pdf",
+      "official",
+      "AY2027/2028 / July–August 2027 intake; international minimum subjects and qualification-specific application periods",
+      "文件注明信息截至 2026 年 11 月，申请期表适用于 2027 年 7／8 月入学；PRC Gao Kao 类别明确列出 2026-10-15 至 2027-03-19。本次为补充核验，不代表 11 月 21 日刚发布或修改政策。中央表的概括科目要求不替代 SPMS 专业页面的较具体数学先修要求。",
+      "The document states that its information is correct as at November 2026, and its application-period table covers the July/August 2027 intake. The PRC Gao Kao category explicitly lists 15 October 2026–19 March 2027. This is supplementary verification, not a claim that the document or policy was newly published or changed on November 21. Its general subject table does not replace the more specific mathematics prerequisites on the SPMS programme page.",
+    ),
+    verifiedAt: "2026-11-21",
+  },
   source(
     "sg-ntu-mathematical-sciences",
     "NTU Mathematical Sciences 科目要求",
@@ -880,9 +895,9 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
     fact(
       "NTU AY2027/28 申请周期",
       "NTU AY2027/28 application cycle",
-      "NTU 总览已发布 AY2027/28，国际资格申请组的总窗口为 2026-10-15 至 2027-03-19；具体资格可能采用不同截止日。",
-      "NTU has published its AY2027/28 overview, with a broad international-qualifications window from 15 October 2026 to 19 March 2027; qualification-specific closing dates may differ.",
-      ["sg-ntu-admission-guide-current"],
+      "NTU 总览已发布 AY2027/28，国际资格申请组的总窗口为 2026-10-15 至 2027-03-19；当前国际资格 PDF 另明确确认 PRC Gao Kao 类别采用同一申请期，其他资格的截止日可能不同。",
+      "NTU has published its AY2027/28 overview, with a broad international-qualifications window from 15 October 2026 to 19 March 2027. The current international-qualifications PDF separately confirms that exact period for the PRC Gao Kao category; other qualifications may close on different dates.",
+      ["sg-ntu-admission-guide-current", "sg-ntu-international-minimum-subjects-2027"],
       "confirmed",
     ),
   ],
@@ -1103,9 +1118,9 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
               [
                 ["申请入口", "Application route"],
                 ["通过 NUS 国际资格申请入口，选择实际高中资格。", "Use NUS International Qualifications and select the actual school qualification."],
-                ["通过 NTU 对应资格表格申请。就读高考课程但不参加高考、或自行参加 AP／SAT 的学生，NTU 仍要求使用高考类别。", "Use the NTU form for the relevant qualification. Students enrolled in the Gaokao curriculum who do not sit Gaokao or independently take AP/SAT must still use NTU's Gaokao category."],
+                ["通过 NTU 对应资格表格申请。AY2027/28 高考类别申请期已明确为 2026-10-15 至 2027-03-19。就读高考课程但不参加高考、或自行参加 AP／SAT 的学生，NTU 仍要求使用高考类别。", "Use the NTU form for the relevant qualification. The AY2027/28 Gaokao-category application period is explicitly 15 October 2026–19 March 2027. Students enrolled in the Gaokao curriculum who do not sit Gaokao or independently take AP/SAT must still use NTU's Gaokao category."],
               ],
-              ["sg-nus-international-qualifications-2026", "sg-ntu-admission-guide-current", "sg-ntu-gaokao-2027"],
+              ["sg-nus-international-qualifications-2026", "sg-ntu-admission-guide-current", "sg-ntu-gaokao-2027", "sg-ntu-international-minimum-subjects-2027"],
             ),
             row(
               [
@@ -1198,15 +1213,22 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
             row(
               [
                 ["NTU 2027 高考申请人", "NTU applicants sitting Gaokao in 2027"],
-                ["AY2027 起规则已预告", "Rule announced from AY2027"],
-                ["高考出分后 3 日内提交；入围者于 7 月面试。当前总览给出 2026-10-15 至 2027-03-19 的国际资格总窗口，具体专业截止日按申请表格核对。", "Submit results within three days of release; shortlisted applicants interview in July. The current overview gives a 15 October 2026–19 March 2027 broad international-qualifications window; verify the programme-specific deadline in the application table."],
-                ["总览仍将 PRC NCEE／高考课程标为 Open；本次已从总览找到可访问的当前高考专页。旧路径的 404 记录仅作历史，不代表细则缺失；具体专业要求另查对应页面。", "The overview still marks PRC NCEE / Gao Kao curriculum as Open. This check located a working current Gaokao page from that overview. The old-path 404 record is historical, not evidence that criteria are unavailable; programme requirements must still be checked separately."],
+                ["AY2027/2028；2027 年 7／8 月入学", "AY2027/2028; July/August 2027 intake"],
+                ["PRC Gao Kao 类别申请期为 2026-10-15 至 2027-03-19，已由当前国际资格 PDF 明确列出，不只是国际资格总窗口。应届生仍须在高考出分后 3 日内补交实分；入围者于 7 月面试。", "The current international-qualifications PDF explicitly lists 15 October 2026–19 March 2027 for the PRC Gao Kao category, not merely the broad international window. Current-year applicants must still submit actual Gaokao results within three days of release; shortlisted applicants interview in July."],
+                ["2026 年 11 月版文件与当前高考专页配合使用；专业科目要求另核。此次补充确认类别申请期，不代表延期、重新开放报名或降低数学先修要求。", "Use the November 2026 document alongside the current Gaokao page, and check programme-specific subject requirements separately. This addition confirms the category's application period; it does not establish an extension, reopening or reduction in mathematics prerequisites."],
               ],
-              ["sg-ntu-gaokao-2027", "sg-ntu-admission-guide-current", "sg-ntu-international-qualifications-2026"],
+              ["sg-ntu-gaokao-2027", "sg-ntu-admission-guide-current", "sg-ntu-international-minimum-subjects-2027"],
               "confirmed",
             ),
           ],
         },
+      ],
+    },
+    {
+      id: "sg-ntu-verification-history",
+      title: t("NTU 核验记录", "NTU Verification Record"),
+      paragraphs: [
+        t("2026-11-21：补充核验注明截至 2026 年 11 月的国际资格 PDF，确认 2027 年 7／8 月入学的高考类别申请期为 2026-10-15 至 2027-03-19；不是推算总窗口，也不宣称文件当日发布。中央表将 Mathematical Sciences 列为高中数学，但本页仍保留 SPMS 对其他国际资格“高中高阶数学取得良好成绩”的较具体要求，不据此推断放宽。", "21 November 2026: supplementary verification of the international-qualifications PDF, marked correct as at November 2026, confirmed 15 October 2026–19 March 2027 for the Gaokao category's July/August 2027 intake. These dates are not extrapolated from the broad window, and the document is not claimed to have been published that day. The central table lists senior-high Mathematics for Mathematical Sciences, but this guide retains SPMS's more specific requirement for a good senior-high advanced Mathematics grade for other international qualifications; no relaxation is inferred."),
       ],
     },
     {
@@ -1269,7 +1291,7 @@ const singaporeMathematicsAdmissionsGuide: DestinationGuideRecord = {
     "ib-dp-math-ai-hl",
     "ap-calculus-bc",
   ],
-  lastVerified: "2026-11-10",
+  lastVerified: "2026-11-21",
 };
 
 export const ukSingaporeDestinationGuides: DestinationGuideRecord[] = [
