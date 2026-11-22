@@ -3,6 +3,40 @@ import test from "node:test";
 
 const staleDemoCopy = /codex-preview|Your site is taking shape|这是一个演示型规则引擎|正式版本可接入/i;
 
+test("BMO2 distinguishes UK final invitations and future material release from China registration", async () => {
+  const html = await renderHtml("/competitions/bmo-2");
+  const text = visibleText(html);
+  for (const pattern of [
+    /around 100 qualifiers based on BMO1 results/,
+    /[Ii]nvitations are due through schools alongside BMO1 results on 9 December 2026/,
+    /not confirmation that invitations have been sent/,
+    /1 February 2027.*3 February/,
+    /future release date, not evidence that the current paper or solutions are already available/,
+    /discretionary school entry is not available/,
+    /informal sitting is not participation in the final/,
+    /do not establish China-partner results dates, registration access or eligibility/,
+    /21 January 2027, 17:00–20:30, with an 11 January entry deadline/,
+    /already recorded, not new policies in this update/,
+    /slightly over 100 UK-eligible students/,
+    /British citizenship or having completed at least three full years of full-time secondary education in the UK/,
+    /top-scoring students at UK schools who are not UK-eligible/,
+    /does not mean every international student may enter on a score alone/,
+    /Hilton London Metropole, 225 Edgware Road, London W2 1JU/,
+    /registration from 10:00 and arrival by 10:30, the exam at 11:00–14:30/,
+    /no official marks or certificates and mark schemes will not be made available/,
+    /not to discuss the paper with non-attendees or discuss or post it online until the organiser actually publishes it/,
+    /not a fixed permission to lift the embargo; wait for the actual official release/,
+    /expects results within two weeks of the final; this is not a fixed publication date/,
+  ]) assert.match(text, pattern);
+  assert.match(html, /id="bmo2-verification-history"/);
+  assert.match(html, /id="bmo2-final-paper-embargo"/);
+  assert.match(html, /drive\.google\.com\/file\/d\/1no83IifV0YxOTmZUl4bDG8A2nuK6ko7r\/view/);
+  assert.doesNotMatch(text, /still needs a current invitation or a discretionary school entry/);
+  const comparison = visibleText(await renderHtml("/competition-compare"));
+  assert.match(comparison, /Next published milestone/);
+  assert.doesNotMatch(comparison, /Next contest date/);
+});
+
 test("SAT spring 2027 fee coverage is confirmed without implying new base prices or available seats", async () => {
   const html = await renderHtml("/assessments/sat");
   const text = visibleText(html);

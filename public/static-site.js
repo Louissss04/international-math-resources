@@ -685,10 +685,10 @@
       body.push('<tr><th><span class="lang-zh">地区</span><span class="lang-en">Region</span></th>' + cells(function (record) { return localizedList(record.regions, regionLabels); }) + "</tr>");
       body.push('<tr><th><span class="lang-zh">费用</span><span class="lang-en">Cost</span></th>' + cells(function (record) { return localized(costLabels[record.costBand] || { zh: record.costBand, en: record.costBand }); }) + "</tr>");
       body.push('<tr><th><span class="lang-zh">适用周期</span><span class="lang-en">Cycle</span></th>' + cells(function (record) { return escapeHtml(record.cycle || "—"); }) + "</tr>");
-      var nextDateLabel = fixedTrack === "competition" ? '<span class="lang-zh">下一比赛日期</span><span class="lang-en">Next contest date</span>' : fixedTrack === "curriculum" ? '<span class="lang-zh">下一统考日期</span><span class="lang-en">Next subject-exam date</span>' : '<span class="lang-zh">下一考试日期</span><span class="lang-en">Next test date</span>';
+      var nextDateLabel = '<span class="lang-zh">下一已公布节点</span><span class="lang-en">Next published milestone</span>';
       body.push('<tr><th>' + nextDateLabel + '</th>' + cells(function (record) {
         var dates = (record.dates || []).filter(function (date) { return date.status === "confirmed" && date.date >= today(); }).sort(function (a, b) { return a.date.localeCompare(b.date); });
-        return escapeHtml(dates.length ? dates[0].date : "—");
+        return dates.length ? localized(dates[0].label) + " · " + escapeHtml(dates[0].date) : "—";
       }) + "</tr>");
       factLabels.forEach(function (key) {
         var sample;

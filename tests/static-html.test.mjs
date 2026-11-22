@@ -7,6 +7,66 @@ import { fileURLToPath } from "node:url";
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const outputDirectory = path.resolve(testDirectory, "../outputs/mathpath-static");
 
+test("static BMO2 preserves UK-only invitation and material dates without resolving the China conflict", async () => {
+  const data = await loadStaticData();
+  const comparison = visibleText(await readRoute("/competition-compare", data));
+  assert.match(comparison, /Next published milestone/);
+  assert.doesNotMatch(comparison, /Next contest date/);
+  const runtime = await readFile(path.join(outputDirectory, "assets/static-site.js"), "utf8");
+  assert.match(runtime, /Next published milestone/);
+  assert.match(runtime, /localized\(dates\[0\]\.label\)/);
+  const bmo2 = data.projects.find((project) => project.id === "bmo2");
+  assert.equal(bmo2.lastVerified, "2026-11-22");
+  assert.equal(bmo2.status, "conflict");
+  const invitation = bmo2.facts.find((fact) => fact.label.en === "UK final invitations");
+  assert.match(invitation.value.en, /around 100 qualifiers based on BMO1 results/);
+  assert.match(invitation.value.en, /current formal invitations determine entry/);
+  assert.ok(!bmo2.facts.some((fact) => fact.label.en === "Automatic entry"));
+  const dates = new Map(bmo2.dates.map((date) => [date.id, date]));
+  for (const [id, date] of [
+    ["bmo2-2027-invitations", "2026-12-09"],
+    ["bmo2-2027-school-paper", "2027-02-01"],
+    ["bmo2-2027-public-paper", "2027-02-03"],
+  ]) {
+    assert.equal(dates.get(id).date, date);
+    assert.equal(dates.get(id).timezone, "Europe/London");
+    assert.equal(dates.get(id).status, "confirmed");
+    assert.deepEqual(dates.get(id).sourceIds, ["ukmt-bmo2"]);
+    assert.match(dates.get(id).region.en, /UKMT/);
+  }
+  assert.equal(dates.get("bmo2-2027-cn").date, "2027-01-21");
+  assert.equal(dates.get("bmo2-2027-cn").status, "conflict");
+  assert.equal(dates.get("bmo2-2027-cn-register").date, "2027-01-11");
+  assert.equal(dates.get("bmo2-2027-upload").date, "TBD");
+  assert.equal(dates.get("bmo2-2027-upload").status, "pending");
+  assert.equal(dates.get("bmo2-2027-uk").time, "11:00–14:30");
+  assert.equal(dates.get("bmo2-2027-uk").timezone, "Europe/London");
+  assert.match(dates.get("bmo2-2027-uk").region.en, /Hilton London Metropole/);
+  for (const id of ["bmo2-2027-accommodation-reply", "bmo2-2027-final-acceptance"]) {
+    assert.equal(dates.get(id).date, "TBD");
+    assert.equal(dates.get(id).status, "pending");
+    assert.deepEqual(dates.get(id).sourceIds, ["ukmt-bmo-national-final-faq-2027"]);
+  }
+  const sourceById = new Map(data.sources.map((source) => [source.id, source]));
+  assert.equal(sourceById.get("ukmt-bmo2").verifiedAt, "2026-11-22");
+  assert.equal(sourceById.get("ukmt-bmo2-awards").verifiedAt, "2026-08-04");
+  assert.equal(sourceById.get("ukmt-bmo-national-final-faq-2027").verifiedAt, "2026-11-22");
+  assert.match(sourceById.get("ukmt-bmo-national-final-faq-2027").appliesTo, /version 1\.0, November 2026/);
+  const text = visibleText(await readRoute("/competitions/bmo-2", data));
+  assert.match(text, /not confirmation that invitations have been sent/);
+  assert.match(text, /discretionary school entry is not available/);
+  assert.match(text, /do not establish China-partner results dates, registration access or eligibility/);
+  assert.match(text, /slightly over 100 UK-eligible students/);
+  assert.match(text, /top-scoring students at UK schools who are not UK-eligible/);
+  assert.match(text, /British nationality is therefore not the sole route/);
+  assert.match(text, /no official marks or certificates and mark schemes will not be made available/);
+  assert.match(text, /not a fixed permission to lift the embargo; wait for the actual official release/);
+  assert.match(text, /exact deadline will be in the invitation/);
+  assert.match(text, /January 2027 without publishing an exact date/);
+  assert.match(text, /expects results within two weeks of the final; this is not a fixed publication date/);
+  assert.doesNotMatch(text, /still needs a current invitation or a discretionary school entry/);
+});
+
 test("static SAT confirms June 2027 additional fees while preserving source and date verification scope", async () => {
   const data = await loadStaticData();
   const sat = data.projects.find((project) => project.id === "sat");

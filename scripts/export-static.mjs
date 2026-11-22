@@ -687,7 +687,7 @@ function browserRuntime() {
         + `<tr><th>${localised({ zh: "地区", en: "Region" })}</th>${cells((record) => localisedList(record.regions, REGION_LABELS))}</tr>`
         + `<tr><th>${localised({ zh: "费用", en: "Cost" })}</th>${cells((record) => localised(COST_LABELS[record.costBand] || { zh: record.costBand, en: record.costBand }))}</tr>`
         + `<tr><th>${localised({ zh: "适用周期", en: "Cycle" })}</th>${cells((record) => escapeHtml(record.cycle))}</tr>`
-        + `<tr><th>${localised({ zh: "下一日期", en: "Next confirmed date" })}</th>${cells((record) => escapeHtml((record.dates || []).filter((date) => date.status === "confirmed" && date.date >= today()).sort((a, b) => a.date.localeCompare(b.date))[0]?.date || "—"))}</tr>`
+        + `<tr><th>${localised({ zh: "下一已公布节点", en: "Next published milestone" })}</th>${cells((record) => { const next = (record.dates || []).filter((date) => date.status === "confirmed" && date.date >= today()).sort((a, b) => a.date.localeCompare(b.date))[0]; return next ? `${localised(next.label)} · ${escapeHtml(next.date)}` : "—"; })}</tr>`
         + factLabels.map((label) => `<tr><th>${escapeHtml(label)}</th>${cells((record) => { const fact = (record.facts || []).find((item) => item.label.en === label); return fact ? localised(fact.value) : "—"; })}</tr>`).join("")
         + "</tbody>";
     };
