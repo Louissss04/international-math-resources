@@ -713,10 +713,11 @@ export const competitionSources: SourceRecord[] = [
     id: "cms-cmo",
     label: t("全国中学生数学冬令营（CMO）公告", "Chinese Mathematical Olympiad notices"),
     owner: t("中国数学会", "Chinese Mathematical Society"),
-    url: "https://www.cms.org.cn/Home/comp/comp/cid/13.html",
+    url: "https://www.cms.org.cn/competition/NationalMiddleSchoolMathematicsWinterCamp.html",
     kind: "official-archive",
-    verifiedAt: "2026-08-04",
+    verifiedAt: "2026-11-23",
     appliesTo: "CMO participant, award and training-team notices",
+    note: t("2026-11-23：原公告入口返回 404，现改用中国数学会官网菜单所列的全国中学生数学冬令营目录。本次仅核验并修复公告入口，不表示赛事取消、比赛日期或当届政策变化；核验日不是政策发布日期。", "23 November 2026: the old notices entry returned 404 and is replaced by the National Middle School Mathematics Winter Camp directory listed in the Chinese Mathematical Society's official menu. This only verifies and repairs the announcement entry point; it does not establish cancellation or a change to contest dates or current-cycle policy. The verification date is not a policy publication date."),
   },
   {
     id: "cmo-portal",
@@ -726,6 +727,16 @@ export const competitionSources: SourceRecord[] = [
     kind: "official",
     verifiedAt: "2026-08-04",
     appliesTo: "CMO current announcements",
+  },
+  {
+    id: "cms-cmo-2026-participant-notice",
+    label: t("2026 CMO（第 42 届冬令营）名单公示", "2026 CMO (42nd Winter Camp) participant-list notice"),
+    owner: t("中国数学会中学数学竞赛委员会", "Chinese Mathematical Society Secondary School Mathematics Competition Committee"),
+    url: "https://www.cms.org.cn/article/1526.html",
+    kind: "official-data",
+    verifiedAt: "2026-11-23",
+    appliesTo: "2026 CMO participant-list notice published on 14 October 2026; public-review window 14–21 October",
+    note: t("2026 年 10 月 14 日原公告确认当届联赛复评完成并确定第 42 届冬令营营员名单，名单须到中国数学会官方公众号查看。正文没有直接名单文件或公众号文章链接，本次未核验个人名单；也未列比赛日期、承办地、人数、数值资格线或 2026 奖牌／国家集训队名单。11 月 23 日是本次补充核验日，不是公告发布日期。", "The original notice dated 14 October 2026 confirms completion of the current National League review and determination of the 42nd Winter Camp participant roster, directing readers to the Society's official WeChat account for the list. The body provides no direct roster file or WeChat article link; individual names were not verified here. It also gives no contest dates, host, participant count, numerical qualifying cutoff or 2026 medal/training-team roster. November 23 is this supplementary verification date, not the notice's publication date."),
   },
   {
     id: "cms-cmo-2025-participants",
@@ -2804,16 +2815,23 @@ export const competitionProjects: ProjectRecord[] = [
     costBand: "varies",
     status: "pending",
     cycle: "2026",
-    lastVerified: LAST_VERIFIED,
+    lastVerified: "2026-11-23",
+    alerts: [{
+      title: t("2026 名单公示已确认，公示期已结束", "2026 participant notice verified; public-review window ended"),
+      body: t("中国数学会 2026 年 10 月 14 日原公告已确认联赛复评完成并确定当届营员名单，名单查看途径为学会官方公众号。10 月 14–21 日公示／申诉期已结束；本次补录既有公告，不是 11 月 23 日发布的新政策，也不是新报名或申诉开放通知。比赛日期和承办地仍未从本轮已核原文取得依据。", "The Society's original notice of 14 October 2026 confirms completion of the National League review and determination of the current participant roster, available through its official WeChat account. The October 14–21 public-review and appeal window has ended. This adds an existing notice, not a new policy published on November 23 or an open registration or appeal opportunity. The sources verified this round do not establish the contest dates or host."),
+      sourceIds: ["cms-cmo-2026-participant-notice"],
+    }],
     facts: [
       { label: t("参赛资格", "Entry"), value: t("参赛者主要由各省级代表队及当届其他官方渠道产生；不接受个人直接报名", "Entrants are selected mainly through provincial teams and other official routes for the year; direct individual entry is not available"), sourceIds: ["cms-cmo", "cmo-portal"] },
+      { label: t("2026 营员名单公告", "2026 participant-list notice"), value: t("10 月 14 日官方公告确认联赛复评完成并确定第 42 届冬令营营员名单，名单须到中国数学会官方公众号查看；本页未核验具体个人名单。", "The October 14 official notice confirms completion of the League review and determination of the 42nd Winter Camp participant roster, directing readers to the Society's official WeChat account; this page has not verified individual names."), sourceIds: ["cms-cmo-2026-participant-notice"] },
       { label: t("赛制", "Format"), value: t("两日，每日 3 题、4.5 小时；每题 21 分，总分 126", "Two days, three problems and 4.5 hours per day; 21 points per problem, 126 total"), sourceIds: ["cms-cmo"] },
       { label: t("作答形式", "Response format"), value: t("全部为证明题，按解题过程和论证完整度评分", "All problems require proofs and are marked for mathematical progress and completeness of argument"), sourceIds: ["cms-cmo"] },
       { label: t("奖项", "Awards"), value: t("一等奖（金牌）、二等奖（银牌）、三等奖（铜牌）", "First Prize (gold), Second Prize (silver) and Third Prize (bronze)"), sourceIds: ["cms-cmo-2024-awards", "cms-cmo-2025-awards"] },
       { label: t("国家集训队", "National training team"), value: t("近年公布 60 人名单，名单由官方单独发布", "Recent editions have published a 60-student roster in a separate official notice"), sourceIds: ["cms-cmo"] },
     ],
     dates: [
-      { id: "cmo-2026-date", label: t("2026 CMO 日期", "2026 CMO dates"), date: "TBD", region: t("中国", "China"), status: "pending", sourceIds: ["cms-cmo", "cmo-portal"], note: t("截至 2026 年 8 月 4 日，中国数学会尚未公布比赛日期、承办地和营员名单；官方冬令营栏目最新当届记录仍为 2025 CMO 名单与结果。", "As of 4 August 2026, the Chinese Mathematical Society had not published the dates, host location or participant roster; the latest current-edition entries in the official winter-camp archive remained the 2025 CMO roster and results.") },
+      { id: "cmo-2026-date", label: t("2026 CMO 日期（待补官方日期依据）", "2026 CMO dates — official date evidence pending"), date: "TBD", region: t("中国", "China"), status: "pending", sourceIds: ["cms-cmo-2026-participant-notice"], note: t("已核验的 2026 年 10 月 14 日名单公示确认当届营员名单已确定，但正文未列比赛日期或承办地，不能用公示日反推。TBD 仅表示本站待补日期依据，不表示 2026 名单尚未公布、比赛尚未举行或报名仍开放，也不能据此断言其他官方入口均未公布赛期。", "The verified participant notice of 14 October 2026 confirms that the current roster has been determined, but gives no contest dates or host; neither can be inferred from its publication date. TBD denotes missing date evidence on this site, not an unpublished 2026 roster, an unheld contest or open registration. It does not establish that all other official entries lack contest dates.") },
+      { id: "cmo-2026-participant-review", label: t("2026 营员名单公示／申诉期（已结束）", "2026 participant-list public-review / appeal window — ended"), date: "2026-10-14", endDate: "2026-10-21", region: t("中国", "China"), status: "historical", sourceIds: ["cms-cmo-2026-participant-notice"], note: t("原文仅列日期，未列具体截止时刻或时区。申诉仅限各赛区已报全国复核范围内的本人试卷；该公示／申诉期已经结束，不是新报名、资格申请或比赛日期。", "The notice gives dates only, without an exact deadline time or time zone. Appeals were limited to the student's own script already submitted by the regional committee for national review. This public-review / appeal window has ended; it is not new registration, an eligibility application or the contest dates.") },
     ],
     sections: [
       {
@@ -2821,6 +2839,8 @@ export const competitionProjects: ProjectRecord[] = [
         title: t("中国学生如何报名", "Registration for students in China"),
         bullets: [
           t("CMO 为入选制全国决赛，不设个人申请或公开报名。中国数学会在全国高中数学联赛复评后公布当届营员名单，学生通常通过本省代表队或当届其他官方渠道取得资格。", "CMO is a selected national final, with no individual application or open registration. After reviewing National League results, the Chinese Mathematical Society publishes the participant roster; students normally qualify through their provincial team or another official route for that year."),
+          t("2026 年 10 月 14 日原公告已确认当届名单确定，并指向中国数学会官方公众号查看；本页只核验该公告，没有核验公众号中的具体个人名单，不能据此判断某一学生是否入选。", "The original October 14, 2026 notice confirms that the current roster has been determined and directs readers to the Society's official WeChat account. This page verifies that notice only, not individual names in the WeChat roster, and cannot determine whether a particular student was selected."),
+          t("该公告的 10 月 14–21 日公示／申诉期已结束，且只受理各赛区已报全国复核范围内的本人试卷申诉；它不是新的报名入口或资格申请机会。", "The notice's October 14–21 public-review and appeal window has ended and applied only to the student's own script already submitted by the regional committee for national review; it is not a new registration route or eligibility application opportunity."),
           t("名单内学生按省队领队／当届组委会通知办理确认、缴费、行程和报到；未列入官方营员名单者不能自行向承办学校报名。", "Rostered students follow the provincial team leader's/current organising committee's notice for confirmation, payment, travel and check-in; a student outside the official roster cannot register directly with the host school."),
           t("2025 营员公示仅在本人提出成绩申诉时要求姓名、学校、年级和身份证号，这不等于统一报到证件清单。报到材料以当届组委会和省队通知为准；当届公告入口为中国数学会冬令营档案及 CMO 官网。", "The 2025 roster notice required name, school, year group and national ID number only for a student's own score appeal; this is not a universal check-in document list. Check-in materials follow the current organiser and provincial-team notice; current announcements appear in the Chinese Mathematical Society winter-camp archive and the CMO portal."),
         ],
@@ -2831,15 +2851,23 @@ export const competitionProjects: ProjectRecord[] = [
         tables: [{
           columns: [t("公开字段", "Published field"), t("公开情况", "Availability")],
           rows: [
-            { cells: [t("营员名单", "Participant roster"), t("每届由中国数学会或赛事官网公布", "Published for each edition by the Chinese Mathematical Society or the official event portal")], sourceIds: ["cms-cmo"] },
+            { cells: [t("营员名单", "Participant roster"), t("2026 年 10 月 14 日公告已确认当届名单确定，并指向学会官方公众号查看；本页未核验个人名单。", "The October 14, 2026 notice confirms determination of the current roster and directs readers to the Society's official WeChat account; this page has not verified individual names.")], sourceIds: ["cms-cmo-2026-participant-notice"] },
             { cells: [t("金银铜牌名单", "Medal rosters"), t("通常按奖项分类并列姓名、地区／学校及证书编号", "Usually grouped by award, with names, region/school and certificate numbers")], sourceIds: ["cms-cmo-2024-awards", "cms-cmo-2025-awards"] },
             { cells: [t("原始分与奖牌线", "Raw scores and medal cutoffs"), t("近年公共名单通常不提供完整原始成绩或统一临界分", "Recent public rosters generally do not provide complete raw scores or common medal cutoffs")], status: "historical", sourceIds: ["cms-cmo-2024-awards", "cms-cmo-2025-awards"] },
             { cells: [t("国家集训队名单", "National training-team roster"), t("由官方单独发布，不能依据金牌人数或非官方排名推算", "Published separately by the official organiser and cannot be inferred from medal counts or unofficial rankings")], sourceIds: ["cms-cmo"] },
           ],
         }],
       },
+      {
+        id: "cmo-verification-history",
+        title: t("公告与核验记录", "Notices and verification history"),
+        bullets: [
+          t("2026-11-23：原中国数学会冬令营公告入口 https://www.cms.org.cn/Home/comp/comp/cid/13.html 返回 404，现改为官网当前的全国中学生数学冬令营目录。此次仅修复官方公告入口，不把失效链接解释为赛事取消，不据此变更比赛日期或当届政策，也不将核验日当作政策发布日期；具体当届公告须另行核验。", "23 November 2026: the old Chinese Mathematical Society winter-camp notices entry, https://www.cms.org.cn/Home/comp/comp/cid/13.html, returned 404 and is replaced by the current official National Middle School Mathematics Winter Camp directory. This only repairs the official announcement entry point: a broken link does not establish event cancellation, change contest dates or current-cycle policy, or make the verification date a policy publication date. Specific current-cycle notices require separate verification."),
+          t("2026-11-23：另行补充核验并收录 2026-10-14 已发布的第 42 届冬令营名单公示，纠正此前只记录到 2025 名单的过时说明。原公告确认联赛复评及当届名单确定，指向学会官方公众号；公示／申诉期 10 月 14–21 日已结束。本次不是 11 月 23 日的新政策或新报名通知，未核验个人名单，也不从该正文推断未列的赛期、承办地、人数、数值资格线或 2026 奖牌／集训队名单。", "23 November 2026: separately verified and added the 42nd Winter Camp participant notice already published on 14 October 2026, correcting the outdated description that only recorded the 2025 roster. The original confirms the League review and determination of the current roster, referring readers to the Society's official WeChat account; its October 14–21 public-review and appeal window has ended. This is not a new November 23 policy or registration notice. Individual names were not verified, and no omitted contest dates, host, participant count, numerical cutoff or 2026 medal/training-team roster is inferred from that body."),
+        ],
+      },
     ],
-    sourceIds: ["cms-cmo", "cmo-portal", "cms-cmo-2025-participants", "cms-cmo-2024-awards", "cms-cmo-2025-awards"],
+    sourceIds: ["cms-cmo", "cms-cmo-2026-participant-notice", "cmo-portal", "cms-cmo-2025-participants", "cms-cmo-2024-awards", "cms-cmo-2025-awards"],
     relatedIds: ["china-league"],
     searchTerms: ["CMO", "中国数学奥林匹克", "全国中学生数学冬令营", "国家集训队", "金牌", "银牌", "铜牌"],
   },

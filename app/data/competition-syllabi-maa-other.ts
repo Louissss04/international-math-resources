@@ -348,10 +348,10 @@ export const maaOtherCompetitionSyllabi: AssessmentSyllabusRecord[] = [
         "Chinese Mathematical Society CMO Notice Archive",
         "中国数学会",
         "Chinese Mathematical Society",
-        "https://www.cms.org.cn/Home/comp/comp/cid/13.html",
+        "https://www.cms.org.cn/competition/NationalMiddleSchoolMathematicsWinterCamp.html",
         "webpage",
-        "截至 2026 年 8 月的公开档案",
-        "Public archive as of August 2026",
+        "当前公告目录（2026-11-23 修复入口；非考纲重核）",
+        "Current notice directory (entry repaired 23 November 2026; syllabus not reverified)",
       ),
       syllabusSource(
         "2025 年 CMO 营员名单公示",

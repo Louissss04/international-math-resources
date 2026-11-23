@@ -178,11 +178,11 @@ export const competitionLearningResources: LearningResourceRecord[] = [
     projectIds: ["cmo"],
     title: t("中国数学奥林匹克官方公告档案", "Official Chinese Mathematical Olympiad notice archive"),
     provider: t("中国数学会", "Chinese Mathematical Society"),
-    url: "https://www.cms.org.cn/Home/comp/comp/cid/13.html",
+    url: "https://www.cms.org.cn/competition/NationalMiddleSchoolMathematicsWinterCamp.html",
     kind: "results-and-exemplars",
     description: t("查阅 CMO 营员名单、获奖名单、集训队及当届公告。", "Review CMO participant rosters, award lists, training-team notices and current-cycle announcements."),
     access: "free",
-    note: t("截至核验日，中国数学会与 CMO 官方站未提供可直接打开的 CMO 试题、标准解答、大纲或竞赛规程；官方公开内容以通知、营员名单、获奖名单和集训队信息为主。", "As of verification, neither the Chinese Mathematical Society nor the official CMO site provides directly accessible CMO papers, official solutions, a syllabus or competition regulations; public material chiefly consists of notices, participant rosters, award lists and training-team information."),
+    note: t("2026-11-23 仅将返回 404 的旧目录替换为官网当前入口。2026-08-04 的材料检查记录以通知、营员名单、获奖名单和集训队信息为主，当时未找到可直接打开的试题、标准解答、大纲或竞赛规程；本轮未重新全面核验这些材料是否另有入口。", "On 23 November 2026, only the old directory returning 404 was replaced with the current official entry. The 4 August 2026 material check chiefly found notices, participant rosters, award lists and training-team information, without directly accessible papers, official solutions, a syllabus or regulations; this round did not comprehensively recheck whether those materials have other entry points."),
     verifiedAt: "2026-08-04",
   },
   {

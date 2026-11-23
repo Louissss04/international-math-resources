@@ -3,6 +3,30 @@ import test from "node:test";
 
 const staleDemoCopy = /codex-preview|Your site is taking shape|这是一个演示型规则引擎|正式版本可接入/i;
 
+test("CMO repairs its entry and adds the existing 2026 roster notice without reopening registration", async () => {
+  const html = await renderHtml("/competitions/cmo");
+  const text = visibleText(html);
+  assert.match(html, /href="https:\/\/www\.cms\.org\.cn\/competition\/NationalMiddleSchoolMathematicsWinterCamp\.html"/);
+  assert.doesNotMatch(html, /href="https:\/\/www\.cms\.org\.cn\/Home\/comp\/comp\/cid\/13\.html"/);
+  assert.match(html, /id="cmo-verification-history"/);
+  assert.match(text, /old Chinese Mathematical Society winter-camp notices entry.*returned 404/);
+  assert.match(text, /a broken link does not establish event cancellation/);
+  assert.match(text, /Specific current-cycle notices require separate verification/);
+  assert.match(text, /make the verification date a policy publication date/);
+  assert.match(html, /href="https:\/\/www\.cms\.org\.cn\/article\/1526\.html"/);
+  for (const pattern of [
+    /original notice of 14 October 2026 confirms completion of the National League review/,
+    /not a new policy published on November 23 or an open registration or appeal opportunity/,
+    /Society's official WeChat account/,
+    /not individual names in the WeChat roster/,
+    /student's own script already submitted by the regional committee for national review/,
+    /without an exact deadline time or time zone/,
+    /not an unpublished 2026 roster, an unheld contest or open registration/,
+    /does not establish that all other official entries lack contest dates/,
+  ]) assert.match(text, pattern);
+  assert.doesNotMatch(text, /latest current-edition entries.*remained the 2025 CMO roster|尚未公布比赛日期、承办地和营员名单/);
+});
+
 test("BMO2 distinguishes UK final invitations and future material release from China registration", async () => {
   const html = await renderHtml("/competitions/bmo-2");
   const text = visibleText(html);
