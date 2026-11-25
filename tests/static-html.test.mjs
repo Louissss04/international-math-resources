@@ -7,6 +7,38 @@ import { fileURLToPath } from "node:url";
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const outputDirectory = path.resolve(testDirectory, "../outputs/mathpath-static");
 
+test("static PRIMES preserves elapsed dates and routes withdrawn materials to current status", async () => {
+  const data = await loadStaticData();
+  const mit = data.projects.find((project) => project.id === "mit-primes");
+  const guide = data.projects.find((project) => project.id === "research-start");
+  assert.equal(mit.lastVerified, "2026-11-25");
+  assert.equal(guide.lastVerified, "2026-11-25");
+  const application = mit.dates.find((date) => date.id === "mit-primes-2027-application-deadline");
+  assert.equal(application.date, "2026-11-02");
+  assert.equal(application.status, "historical");
+  const recommendation = mit.dates.find((date) => date.id === "mit-primes-2027-recommendation-deadline");
+  assert.equal(recommendation.date, "2026-11-06");
+  assert.equal(recommendation.status, "conflict");
+  assert.match(recommendation.note.en, /does not permit late submission/);
+  for (const id of ["mit-primes-apply-2027", "research-mit-primes-apply"]) {
+    const source = data.sources.find((source) => source.id === id);
+    assert.equal(source.verifiedAt, "2026-11-25");
+    assert.equal(source.url, "https://math.mit.edu/research/highschool/primes/program/apply.html");
+  }
+  assert.equal(data.sources.find((source) => source.id === "research-mit-primes-faq").verifiedAt, "2026-08-05");
+  for (const route of ["/research/start", "/research/mit-primes"]) {
+    const html = await readRoute(route, data);
+    const text = visibleText(html);
+    assert.match(text, /placeholders/);
+    assert.match(text, /not a reopening announcement|not a new deadline, extension/);
+    assert.doesNotMatch(text, /The 2027 application is open and the entrance problem set is linked|2027 申请已开放，入口题可从官网取得|Meet November 6 and ask/);
+    assert.doesNotMatch(html, /href="https:\/\/math\.mit\.edu\/research\/highschool\/primes\/materials\/2027\/entpro27\.pdf"/);
+  }
+  const text = visibleText(await readRoute("/research/mit-primes", data));
+  assert.match(text, /official status explanation, not a problem download/);
+  assert.match(text, /old PDF.*not reverified|has not reverified the file/);
+});
+
 test("static CMO preserves the dated 2026 roster notice and ended review window without inferring contest dates", async () => {
   const data = await loadStaticData();
   const cmo = data.projects.find((project) => project.id === "cmo");

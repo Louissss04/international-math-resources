@@ -3,6 +3,24 @@ import test from "node:test";
 
 const staleDemoCopy = /codex-preview|Your site is taking shape|这是一个演示型规则引擎|正式版本可接入/i;
 
+test("PRIMES separates closed applications and withdrawn links from a new admissions round", async () => {
+  for (const route of ["/research/start", "/research/mit-primes"]) {
+    const html = await renderHtml(route);
+    const text = visibleText(html);
+    assert.match(text, /2027 application closed|2027 申请已.*截止/);
+    assert.match(text, /questionnaire and (?:2027 )?problem-set links/);
+    assert.match(text, /placeholders/);
+    assert.match(text, /not a reopening announcement|not a new deadline, extension/);
+    assert.match(text, /five days after the application deadline|five-days-after-deadline|five-day recommendation wording/);
+    assert.match(text, /U.S.-residency|U.S.-resident/);
+    assert.doesNotMatch(text, /The 2027 application is open and the entrance problem set is linked|2027 申请已开放，入口题可从官网取得|Meet November 6 and ask/);
+    assert.doesNotMatch(html, /href="https:\/\/math\.mit\.edu\/research\/highschool\/primes\/materials\/2027\/entpro27\.pdf"/);
+  }
+  const mit = visibleText(await renderHtml("/research/mit-primes"));
+  assert.match(mit, /official status explanation, not a problem download/);
+  assert.match(mit, /old PDF.*not reverified|has not reverified the file/);
+});
+
 test("CMO repairs its entry and adds the existing 2026 roster notice without reopening registration", async () => {
   const html = await renderHtml("/competitions/cmo");
   const text = visibleText(html);
