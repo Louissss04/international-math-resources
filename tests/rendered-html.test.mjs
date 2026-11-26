@@ -3,6 +3,22 @@ import test from "node:test";
 
 const staleDemoCopy = /codex-preview|Your site is taking shape|这是一个演示型规则引擎|正式版本可接入/i;
 
+test("Yau mathematics lists keep regional prizes separate from final places and global awards", async () => {
+  const html = await renderHtml("/research/yau-high-school-mathematics-award");
+  const text = visibleText(html);
+  assert.match(html, /href="https:\/\/www\.yau-awards\.com\/show-86-67\.html"/);
+  assert.match(html, /href="https:\/\/www\.yau-awards\.com\/show-86-68\.html"/);
+  assert.match(html, /id="mathematics-lists-2026-nov23"/);
+  assert.match(text, /12 First Prize; 17 Second Prize projects/);
+  assert.match(text, /not Gold, Silver, or Bronze awards at the global final/);
+  assert.match(text, /does not break down overseas regions/);
+  assert.match(text, /Do not treat 12 as the worldwide mathematics total/);
+  assert.match(text, /match their project number against the official original/);
+  assert.match(text, /their original review windows have now ended/);
+  assert.match(text, /not a new eligibility or registration policy issued on November 26/);
+  assert.doesNotMatch(text, /名单与论文仍处于公示期|The list and reports remain under public review/);
+});
+
 test("PRIMES separates closed applications and withdrawn links from a new admissions round", async () => {
   for (const route of ["/research/start", "/research/mit-primes"]) {
     const html = await renderHtml(route);
@@ -834,7 +850,7 @@ test("keeps Yau 2026 Asian and mainland finalist review windows separate", async
     /11 teams across all subjects, including 2 mathematics teams/,
     /November 17–23 until 24:00 Beijing time/,
     /four North-American teams reached the global final/i,
-    /North[\s\S]*American review runs[\s\S]*November 19[\s\S]*25[\s\S]*24:00[\s\S]*Beijing time/i,
+    /North[\s\S]*American review ran[\s\S]*November 19[\s\S]*25[\s\S]*24:00[\s\S]*Beijing time/i,
     /does not extend the mainland-China November 13–19 review window or reopen registration/,
     /not a mainland-China extension, late-entry or region-transfer route/,
   ]) assert.match(text, pattern);
