@@ -7,6 +7,96 @@ import { fileURLToPath } from "node:url";
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const outputDirectory = path.resolve(testDirectory, "../outputs/mathpath-static");
 
+test("static SUMaC preserves 2027 application, aid and conflict scopes alongside 2026 history", async () => {
+  const data = await loadStaticData();
+  const sumac = data.projects.find((project) => project.id === "sumac");
+  assert.ok(sumac, "SUMaC is missing from the static payload");
+  assert.equal(sumac.cycle, "2027");
+  assert.equal(sumac.status, "conflict");
+  assert.equal(sumac.lastVerified, "2026-11-27");
+  assert.ok(!sumac.eligibilityTags.includes("age-15-plus"), "an unconfirmed current age minimum must not remain a filter tag");
+  const eligibility = sumac.facts.find((fact) => fact.label.en === "2027 eligibility");
+  assert.match(eligibility.value.en, /Grade 10 or 11/);
+  assert.match(eligibility.value.en, /18 or older during the program cannot attend residential/);
+  assert.match(eligibility.value.en, /neither the old 2026 rule nor its absence establishes a lowered current age threshold/);
+
+  const application = sumac.dates.find((date) => date.id === "sumac-2027-application");
+  assert.equal(application.date, "2027-01-07");
+  assert.equal(application.time, "23:59");
+  assert.equal(application.timezone, "America/Los_Angeles");
+  assert.equal(application.status, "confirmed");
+  assert.deepEqual(application.sourceIds, ["sumac-admissions-2026", "sumac-application-questions-2027"]);
+  for (const [id, date] of [["sumac-2027-aid-pfs", "2027-01-14"], ["sumac-2027-aid-documents", "2027-01-21"]]) {
+    const aid = sumac.dates.find((item) => item.id === id);
+    assert.equal(aid.date, date);
+    assert.equal(aid.status, "confirmed");
+    assert.equal(aid.time, undefined, `${id} must not invent a cutoff time`);
+    assert.equal(aid.timezone, undefined, `${id} must not inherit the academic application time zone`);
+    assert.deepEqual(aid.sourceIds, ["sumac-financial-aid-2027"]);
+  }
+  for (const [id, date, endDate] of [
+    ["sumac-2027-online-1", "2027-06-14", "2027-07-02"],
+    ["sumac-2027-online-2", "2027-07-05", "2027-07-23"],
+    ["sumac-2027-residential", "2027-06-20", "2027-07-16"],
+  ]) {
+    const session = sumac.dates.find((item) => item.id === id);
+    assert.equal(session.date, date);
+    assert.equal(session.endDate, endDate);
+    assert.equal(session.status, "confirmed");
+  }
+  for (const [id, date, endDate] of [
+    ["sumac-2026-application", "2026-02-02"],
+    ["sumac-2026-aid-pfs", "2026-02-09"],
+    ["sumac-2026-aid-documents", "2026-02-16"],
+    ["sumac-2026-offer", "2026-04-17"],
+    ["sumac-2026-online-1", "2026-06-15", "2026-07-03"],
+    ["sumac-2026-online-2", "2026-07-06", "2026-07-24"],
+    ["sumac-2026-residential", "2026-06-21", "2026-07-17"],
+  ]) {
+    const historical = sumac.dates.find((item) => item.id === id);
+    assert.equal(historical.date, date);
+    assert.equal(historical.endDate, endDate);
+    assert.equal(historical.status, "historical");
+  }
+  const costs = sumac.sections.find((section) => section.id === "cost-aid-2027");
+  const rows = costs.tables.flatMap((table) => table.rows);
+  assert.match(rows.find((row) => row.cells[0].en === "Online tuition").cells[1].en, /US\$3,865/);
+  assert.match(rows.find((row) => row.cells[0].en === "Residential tuition").cells[1].en, /US\$9,220/);
+  const cohort = rows.find((row) => row.cells[0].en === "Online-cohort conflict");
+  assert.equal(cohort.status, "conflict");
+  assert.match(cohort.cells[1].en, /85 online students and the homepage states 64/);
+  const refund = rows.find((row) => row.cells[0].en === "Deposit-refund conflict");
+  assert.equal(refund.status, "conflict");
+  assert.match(refund.cells[1].en, /exception for insufficient aid/);
+  assert.match(refund.cells[1].en, /not refundable at any point/);
+  assert.match(refund.cells[1].en, /neither statement is assumed to override the other/);
+  assert.match(sumac.facts.find((fact) => fact.label.en === "2026 cost").value.en, /US\$3,750 online and US\$8,950 residential/);
+  const sourceById = new Map(data.sources.map((source) => [source.id, source]));
+  for (const [id, suffix] of [
+    ["sumac-tuition-2027", "sumac-tuition"],
+    ["sumac-financial-aid-2027", "sumac-financial-aid"],
+    ["sumac-application-questions-2027", "sumac-questions-application"],
+    ["sumac-international-2027", "sumac-questions-international-applicants"],
+  ]) {
+    assert.ok(sumac.sourceIds.includes(id));
+    assert.equal(sourceById.get(id).url, `https://sumac.spcs.stanford.edu/${suffix}`);
+    assert.equal(sourceById.get(id).verifiedAt, "2026-11-27");
+  }
+  const html = await readRoute("/summer/sumac", data);
+  const text = visibleText(html);
+  assert.match(text, /January 7, 2027 at 11:59 pm Pacific Time/);
+  assert.match(text, /PFS is due January 14 and documents January 21/);
+  assert.match(text, /aid body does not specify either precise cutoff time or time zone/);
+  assert.match(text, /2026 Formats and Schedules — Historical/);
+  assert.match(text, /2026 Cost and Aid — Historical/);
+  assert.match(text, /Obtain written clarification before payment/);
+  const faq = html.match(/<article\b[^>]*data-resource-id="sumac-application-questions"[^>]*>[\s\S]*?<\/article>/)?.[0];
+  assert.ok(faq, "static SUMaC current FAQ resource is missing");
+  assert.match(faq, /href="https:\/\/sumac\.spcs\.stanford\.edu\/sumac-questions-application"/);
+  assert.doesNotMatch(faq, /href="https:\/\/sumac\.spcs\.stanford\.edu\/questions-application"/);
+  assert.match(visibleText(faq), /old path was not read and is not deemed broken/);
+});
+
 test("static Yau mathematics aggregates cite dated originals without inventing global totals", async () => {
   const data = await loadStaticData();
   const yau = data.projects.find((project) => project.id === "yau-high-school-math-award");

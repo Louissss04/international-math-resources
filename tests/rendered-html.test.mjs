@@ -3,6 +3,53 @@ import test from "node:test";
 
 const staleDemoCopy = /codex-preview|Your site is taking shape|这是一个演示型规则引擎|正式版本可接入/i;
 
+test("SUMaC separates current 2027 deadlines and official conflicts from 2026 history", async () => {
+  const html = await renderHtml("/summer/sumac");
+  const text = visibleText(html);
+  assert.match(text, /Applications for 2027 are open until January 7, 2027 at 11:59 pm Pacific Time/);
+  assert.match(text, /2027-01-07 23:59/);
+  assert.match(text, /America\/Los_Angeles/);
+  for (const pattern of [
+    /2027-06-14\s*—\s*2027-07-02/,
+    /2027-07-05\s*—\s*2027-07-23/,
+    /2027-06-20\s*—\s*2027-07-16/,
+    /Online tuition is US\$3,865 and residential tuition US\$9,220/,
+    /PFS is due January 14 and documents January 21/,
+    /aid body does not specify either precise cutoff time or time zone/,
+    /academic application's 11:59 pm Pacific cutoff is not extrapolated/,
+    /Admissions states 85 online students and the homepage states 64/,
+    /deposit-refund exception for insufficient aid/,
+    /deposits are not refundable at any point/,
+    /Obtain written clarification before payment/,
+    /neither statement is assumed to override the other/,
+  ]) assert.match(text, pattern);
+
+  const dateRows = [...html.matchAll(/<tr\b[^>]*>[\s\S]*?<\/tr>/g)].map((match) => match[0]);
+  for (const date of ["2027-01-14", "2027-01-21"]) {
+    const row = dateRows.find((item) => item.includes(`dateTime="${date}"`) || item.includes(`datetime="${date}"`));
+    assert.ok(row, `SUMaC is missing the ${date} aid milestone`);
+    const time = row.match(/<time\b[^>]*>([\s\S]*?)<\/time>/)?.[1];
+    assert.equal(visibleText(time ?? ""), date, "aid milestones must not inherit the academic application time");
+    const cells = [...row.matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/g)];
+    assert.doesNotMatch(visibleText(cells[2]?.[1] ?? ""), /PT|Pacific|America\/Los_Angeles|太平洋/);
+  }
+  assert.match(text, /2026 Formats and Schedules — Historical/);
+  assert.match(text, /2026 Cost and Aid — Historical/);
+  assert.match(text, /2026-02-02 23:59/);
+  assert.match(text, /2026-04-17 23:59/);
+  assert.match(text, /The 2026 fee was US\$3,750 online and US\$8,950 residential/);
+  assert.match(text, /neither the old 2026 rule nor its absence establishes a lowered current age threshold/);
+  assert.match(text, /not evidence of lowered eligibility/);
+  for (const suffix of ["sumac-tuition", "sumac-financial-aid", "sumac-questions-application", "sumac-questions-international-applicants"]) {
+    assert.ok(html.includes(`href="https://sumac.spcs.stanford.edu/${suffix}"`));
+  }
+  const faq = html.match(/<article\b[^>]*data-resource-id="sumac-application-questions"[^>]*>[\s\S]*?<\/article>/)?.[0];
+  assert.ok(faq, "SUMaC current FAQ resource is missing");
+  assert.match(faq, /href="https:\/\/sumac\.spcs\.stanford\.edu\/sumac-questions-application"/);
+  assert.doesNotMatch(faq, /href="https:\/\/sumac\.spcs\.stanford\.edu\/questions-application"/);
+  assert.match(visibleText(faq), /old path was not read and is not deemed broken/);
+});
+
 test("Yau mathematics lists keep regional prizes separate from final places and global awards", async () => {
   const html = await renderHtml("/research/yau-high-school-mathematics-award");
   const text = visibleText(html);
