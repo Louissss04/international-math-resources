@@ -3,6 +3,48 @@ import test from "node:test";
 
 const staleDemoCopy = /codex-preview|Your site is taking shape|这是一个演示型规则引擎|正式版本可接入/i;
 
+test("AP Calculus AB identifies listed 2026 scoring materials without widening verification to BC or 2027", async () => {
+  const html = await renderHtml("/courses/ap-calculus-ab");
+  const scope = html.match(/<section\b[^>]*id="ap-calculus-ab-materials-2026-update"[^>]*>[\s\S]*?<\/section>/)?.[0];
+  assert.ok(scope, "the current AB course must expose its materials verification scope");
+  const text = visibleText(scope);
+  for (const pattern of [
+    /2026 section lists FRQs and Scoring Guidelines/,
+    /past-question practice and self-assessment/,
+    /does not list that year's sample responses, commentary or scoring statistics\/distributions/,
+    /without opening linked PDFs, the BC index or re-verifying the exam format/,
+    /check date is not a file publication date/,
+    /no conclusion is drawn about BC or 2027 materials/,
+  ]) assert.match(text, pattern);
+  assert.match(html, /href="https:\/\/apcentral\.collegeboard\.org\/courses\/ap-calculus-ab\/exam\/past-exam-questions"/);
+  assert.doesNotMatch(await renderHtml("/courses/ap-calculus-bc"), /id="ap-calculus-ab-materials-2026-update"/);
+
+  const resources = await renderHtml("/resources");
+  const card = resources.match(/<article\b[^>]*data-resource-id="lr-ap-calculus-ab-released-frq"[^>]*>[\s\S]*?<\/article>/)?.[0];
+  assert.ok(card, "the AB learning-resource card must retain the current index description");
+  assert.match(visibleText(card), /2026 FRQs and Scoring Guidelines/);
+  assert.match(visibleText(card), /Only the index was checked, not its linked PDFs/);
+  assert.match(visibleText(card), /2026 section lists no samples, commentary or statistics/);
+});
+
+test("HMMT adds the November 2026 materials directory while retaining historical archives and score boundaries", async () => {
+  const html = await renderHtml("/competitions/hmmt");
+  const text = visibleText(html);
+  assert.match(html, /href="https:\/\/www\.hmmt\.org\/www\/archive\/301"/);
+  assert.match(html, /href="https:\/\/www\.hmmt\.org\/www\/archive\/291"/);
+  for (const pattern of [
+    /November coverage is now recorded through 1998–2026/,
+    /problems and solutions for General, Theme, Team, Guts and Integration Bee/,
+    /Short\/Extended Results links were checked/,
+    /linked files and result bodies were not opened/,
+    /no score boundaries are derived/,
+    /does not claim a same-day release/,
+    /Official November 2025 complete archive/,
+    /Tournament dates on the homepage are unchanged/,
+    /detailed schedules, eligibility, registration, formats, older papers and score boundaries were not reverified/,
+  ]) assert.match(text, pattern);
+});
+
 test("SUMaC separates current 2027 deadlines and official conflicts from 2026 history", async () => {
   const html = await renderHtml("/summer/sumac");
   const text = visibleText(html);

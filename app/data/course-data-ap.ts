@@ -276,6 +276,14 @@ function projectSections(spec: ApSpec): ContentSection[] {
         t("大学自行决定是否把 AP 成绩用于申请、学分、分班或先修课认定，应查目标大学当届政策。", "Each university decides how AP is used for admission, credit, placement or prerequisites; the current institutional policy must be checked."),
       ],
     },
+    ...(spec.id === "ap-calculus-ab" ? [{
+      id: "ap-calculus-ab-materials-2026-update",
+      title: t("2026 材料补充与核验范围", "2026 Materials Update and Verification Scope"),
+      paragraphs: [
+        t("官方 AB 真题索引的 2026 栏已列 FRQ 与 Scoring Guidelines，可对照历年题自评；尚未列该年考生样卷、评语或评分统计／分布。", "The official AB index's 2026 section lists FRQs and Scoring Guidelines for past-question practice and self-assessment; it does not list that year's sample responses, commentary or scoring statistics/distributions."),
+        t("2026 年 11 月 28 日仅重读 AB 索引与 Prometric 中国报名流程，未打开链接 PDF、BC 索引或重新核验考试形式；不能把核验日当作文件发布日期，也不据此判断 BC 或 2027 材料状态。", "The 28 November 2026 check reread only the AB index and Prometric China timeline, without opening linked PDFs, the BC index or re-verifying the exam format. The check date is not a file publication date, and no conclusion is drawn about BC or 2027 materials."),
+      ],
+    }] : []),
   ];
 }
 
@@ -294,7 +302,7 @@ export const apCourseProjects: ProjectRecord[] = apSpecs.map((spec) => ({
   costBand: "varies",
   status: "confirmed",
   cycle: spec.cycle,
-  lastVerified: "2026-11-09",
+  lastVerified: spec.id === "ap-calculus-ab" ? "2026-11-28" : "2026-11-09",
   alerts: [{
     title: t("中国大陆 2027 AP 报名缴费已截止", "Mainland China 2027 AP registration and payment have closed"),
     body: t("原定全部科目确认与缴费已于 2026 年 11 月 9 日北京时间中午 12:00 截止；官方须知不接受截止后新增报名。已完成报名缴费者应于 12 月 1 日登录 My AP 核对科目与个人资料，考试订购确认截止为 2027 年 1 月 31 日。", "The original deadline for all subject confirmation and payment passed at 12:00 noon Beijing time on 9 November 2026; the official instructions do not accept new registrations after the deadline. Paid registrants should log in to My AP on 1 December to verify subjects and personal details; exam-order confirmation is due by 31 January 2027."),
@@ -369,7 +377,15 @@ function resource(
 
 export const apCourseLearningResources: LearningResourceRecord[] = apSpecs.flatMap((spec) => [
   resource(`lr-${spec.id}-ced`, spec.id, `${spec.title.zh} 课程与考试说明`, `${spec.title.en} Course and Exam Description`, spec.cedUrl, "official-guide", "现行官方课程框架、考试蓝图、样题和评分说明。", "Current official course framework, exam blueprint, sample questions and scoring guidance."),
-  resource(`lr-${spec.id}-released-frq`, spec.id, `${spec.title.zh} 已发布自由作答题`, `${spec.title.en} Released Free-Response Questions`, spec.archiveUrl, "past-papers", "官方公开的近年 FRQ、评分标准、考生样卷、评语和统计；公开内容随年度更新。", "Official recent FRQs, scoring guidelines, sample responses, commentary and statistics; public coverage changes as new years are added."),
+  {
+    ...resource(`lr-${spec.id}-released-frq`, spec.id, `${spec.title.zh} 已发布自由作答题`, `${spec.title.en} Released Free-Response Questions`, spec.archiveUrl, "past-papers",
+      spec.id === "ap-calculus-ab" ? "当前索引已列 2026 FRQ 与 Scoring Guidelines，可对照评分指南自评；较早年度另有样卷、评语及统计。" : "官方公开的近年 FRQ、评分标准、考生样卷、评语和统计；公开内容随年度更新。",
+      spec.id === "ap-calculus-ab" ? "The current index lists 2026 FRQs and Scoring Guidelines for practice and self-assessment; earlier years include samples, commentary and statistics." : "Official recent FRQs, scoring guidelines, sample responses, commentary and statistics; public coverage changes as new years are added."),
+    ...(spec.id === "ap-calculus-ab" ? {
+      verifiedAt: "2026-11-28",
+      note: t("本次只核对索引，未打开链接 PDF；2026 栏尚未列样卷、评语或统计，不据此判断 BC 或 2027 材料。", "Only the index was checked, not its linked PDFs; the 2026 section lists no samples, commentary or statistics. No conclusion is drawn about BC or 2027 materials."),
+    } : {}),
+  },
   resource(`lr-${spec.id}-exam-page`, spec.id, `${spec.title.zh} 考试与 Bluebook 练习入口`, `${spec.title.en} Exam and Bluebook Practice`, spec.examUrl, "practice-platform", "考试结构、计算器政策、Bluebook test preview 和考试资源入口。", "Exam format, calculator policy, Bluebook test preview and exam-resource links."),
 ]);
 

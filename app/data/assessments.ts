@@ -57,7 +57,7 @@ export const assessmentSources: SourceRecord[] = [
   source("ap-score-data", "AP 2026 成绩分布", "2026 AP Score Distributions", "College Board", "College Board", "https://apstudents.collegeboard.org/about-ap-scores/score-distributions", "official-data", "AP 2026 score distributions"),
   source("ap-ab-score-distributions", "AP Calculus AB 历年成绩分布", "Past AP Calculus AB Score Distributions", "College Board", "College Board", "https://apstudents.collegeboard.org/about-ap-scores/score-distributions/ap-calculus-ab", "official-data", "AP Calculus AB score distributions 2020-2026"),
   source("ap-bc-score-distributions", "AP Calculus BC 历年成绩分布", "Past AP Calculus BC Score Distributions", "College Board", "College Board", "https://apstudents.collegeboard.org/about-ap-scores/score-distributions/ap-calculus-bc", "official-data", "AP Calculus BC score distributions 2020-2026"),
-  source("ap-ab-past-questions", "AP Calculus AB 历年自由作答题", "AP Calculus AB Past Exam Questions", "College Board", "College Board", "https://apcentral.collegeboard.org/courses/ap-calculus-ab/exam/past-exam-questions", "official-archive", "AP Calculus AB released free-response materials"),
+  { ...source("ap-ab-past-questions", "AP Calculus AB 历年自由作答题", "AP Calculus AB Past Exam Questions", "College Board", "College Board", "https://apcentral.collegeboard.org/courses/ap-calculus-ab/exam/past-exam-questions", "official-archive", "AP Calculus AB released free-response materials; 2026 index entries", "2026-11-28 重读索引：2026 栏已列 FRQ 与 Scoring Guidelines，尚未列考生样卷、评语或评分统计／分布。本次没有打开链接 PDF，不以索引检查日期推定文件发布日期，也不核验 BC 或 2027 材料。", "Index reread on 28 November 2026: the 2026 section lists FRQs and Scoring Guidelines but no sample responses, commentary or scoring statistics/distributions. Linked PDFs were not opened; the check date is not a file publication date, and BC or 2027 materials were not verified."), verifiedAt: "2026-11-28" },
   source("ap-bc-past-questions", "AP Calculus BC 历年自由作答题", "AP Calculus BC Past Exam Questions", "College Board", "College Board", "https://apcentral.collegeboard.org/courses/ap-calculus-bc/exam/past-exam-questions", "official-archive", "AP Calculus BC released free-response materials"),
 
   source("uat-dates-2027", "UAT-UK 2027 入学关键日期", "UAT-UK Key Dates for 2027 Entry", "UAT-UK", "UAT-UK", "https://esat-tmua.ac.uk/deadlines/", "official", "TMUA and ESAT 2027 entry"),
@@ -349,7 +349,7 @@ const apProject: ProjectRecord = {
   costBand: "varies",
   status: "confirmed",
   cycle: "2026-27 course / May 2027 exam",
-  lastVerified: "2026-11-09",
+  lastVerified: "2026-11-28",
   alerts: [{
     title: t("中国大陆 2027 AP 报名缴费已截止", "Mainland China 2027 AP registration and payment have closed"),
     body: t("原定全部科目确认与缴费已于 2026 年 11 月 9 日北京时间中午 12:00 截止；官方须知不接受截止后新增报名。已完成报名缴费者应于 12 月 1 日登录 My AP 核对科目与个人资料，考试订购确认截止为 2027 年 1 月 31 日。", "The original deadline for all subject confirmation and payment passed at 12:00 noon Beijing time on 9 November 2026; the official instructions do not accept new registrations after the deadline. Paid registrants should log in to My AP on 1 December to verify subjects and personal details; exam-order confirmation is due by 31 January 2027."),
@@ -487,7 +487,7 @@ const apProject: ProjectRecord = {
           {
             cells: [
               t("AP Calculus AB", "AP Calculus AB"),
-              t("最近三年已发布的 FRQ；已完成发布的年度还提供 scoring guidelines、考生样卷与评语、scoring statistics／distributions。2026 页面目前已发布题目，评分材料尚在补充。", "Released FRQs from the three most recent years; completed releases also include scoring guidelines, sample responses with commentary, and scoring statistics/distributions. The 2026 page currently has the questions, with scoring materials still being added."),
+              t("当前 AB 索引的 2026 栏已列 Free-Response Questions 与 Scoring Guidelines，可用于历年题练习和对照评分；尚未列 2026 考生样卷、评语或评分统计／分布。2025 等较早年度另有配套资料。本次只核对索引，未打开链接 PDF，不据此判断 BC 或 2027 材料状态。", "The current AB index lists Free-Response Questions and Scoring Guidelines for 2026, supporting past-question practice and self-assessment. It does not list 2026 sample responses, commentary or scoring statistics/distributions. Earlier years such as 2025 have additional materials. Only the index was checked, not the linked PDFs; no conclusion is drawn about BC or 2027 materials."),
             ],
             sourceIds: ["ap-ab-past-questions"],
           },
@@ -500,6 +500,13 @@ const apProject: ProjectRecord = {
           },
         ],
       }],
+    },
+    {
+      id: "ap-verification-history",
+      title: t("更新范围与历史记录", "Update Scope and History"),
+      paragraphs: [
+        t("2026 年 11 月 28 日：本次补充 AB 2026 真题索引已列题目和评分指南；此前只明确题目已发布、评分材料待补充。没有可比的旧逐链接快照，不能称评分指南刚刚发布。本次仅重读 AB 索引与 Prometric 中国报名流程，未打开 PDF、BC 索引或重新核验考试形式；其他来源日期保持原记录。", "28 November 2026: added the AB 2026 index's listed questions and scoring guidelines, replacing the earlier description that only identified questions and left scoring materials pending. There is no earlier per-link snapshot to establish that the guidelines were newly published. This check reread only the AB index and Prometric China timeline, without opening PDFs, the BC index or re-verifying the exam format; other source dates remain as previously recorded."),
+      ],
     },
   ],
   sourceIds: ["ap-clarifications-2027", "ap-ab-exam", "ap-bc-exam", "ap-registration", "ap-china", "ap-china-registration-2027", "ap-china-timeline-2027", "ap-china-coordinator-handbook-2027", "ap-china-student-handbook-2027", "ap-score-data", "ap-ab-score-distributions", "ap-bc-score-distributions", "ap-ab-past-questions", "ap-bc-past-questions"],

@@ -16,6 +16,7 @@ const resource = (
   access: LearningResourceRecord["access"],
   noteZh?: string,
   noteEn?: string,
+  verifiedAt: string = VERIFIED_AT,
 ): LearningResourceRecord => ({
   id,
   projectIds,
@@ -26,7 +27,7 @@ const resource = (
   description: t(descriptionZh, descriptionEn),
   access,
   ...(noteZh && noteEn ? { note: t(noteZh, noteEn) } : {}),
-  verifiedAt: VERIFIED_AT,
+  verifiedAt,
 });
 
 export const assessmentLearningResources: LearningResourceRecord[] = [
@@ -118,9 +119,12 @@ export const assessmentLearningResources: LearningResourceRecord[] = [
     "College Board",
     "https://apcentral.collegeboard.org/courses/ap-calculus-ab/exam/past-exam-questions",
     "past-papers",
-    "下载近年 FRQ、评分标准、评分统计、考生样卷及评语。",
-    "Download recent FRQs, scoring guidelines, score statistics, sample responses and commentary.",
+    "当前索引的 2026 栏已列 FRQ 与 Scoring Guidelines；较早年度另有考生样卷、评语及统计，可按年份选取练习与评分资料。",
+    "The current index lists 2026 FRQs and Scoring Guidelines; earlier years also include sample responses, commentary and statistics for year-specific practice and scoring reference.",
     "free",
+    "可用评分指南对照自评。本次只核对索引，未打开链接 PDF；2026 栏尚未列样卷、评语或统计，不能据此判断 BC 或 2027 材料状态。",
+    "Use the scoring guidelines for self-assessment. Only the index was checked, not its linked PDFs. The 2026 section lists no samples, commentary or statistics; this does not establish the status of BC or 2027 materials.",
+    "2026-11-28",
   ),
   resource(
     "lr-ap-calculus-bc-frq",

@@ -7,6 +7,75 @@ import { fileURLToPath } from "node:url";
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const outputDirectory = path.resolve(testDirectory, "../outputs/mathpath-static");
 
+test("static AP AB records 2026 FRQ and scoring-guide index scope without refreshing unrelated courses or sources", async () => {
+  const data = await loadStaticData();
+  const ab = data.projects.find((project) => project.id === "ap-calculus-ab");
+  assert.equal(ab.lastVerified, "2026-11-28");
+  const scope = ab.sections.find((section) => section.id === "ap-calculus-ab-materials-2026-update");
+  assert.ok(scope);
+  const text = scope.paragraphs.map((paragraph) => paragraph.en).join(" ");
+  for (const pattern of [
+    /2026 section lists FRQs and Scoring Guidelines/,
+    /does not list that year's sample responses, commentary or scoring statistics\/distributions/,
+    /without opening linked PDFs, the BC index or re-verifying the exam format/,
+    /check date is not a file publication date/,
+    /no conclusion is drawn about BC or 2027 materials/,
+  ]) assert.match(text, pattern);
+  for (const id of ["ap-calculus-bc", "ap-precalculus", "ap-statistics"]) {
+    const project = data.projects.find((record) => record.id === id);
+    assert.equal(project.lastVerified, "2026-11-09", `${id} must not inherit the AB materials check date`);
+    assert.equal(project.sections.some((section) => section.id === scope.id), false);
+  }
+  const sourceById = new Map(data.sources.map((source) => [source.id, source]));
+  const abSource = sourceById.get("ap-ab-past-questions");
+  assert.equal(abSource.verifiedAt, "2026-11-28");
+  assert.equal(abSource.url, "https://apcentral.collegeboard.org/courses/ap-calculus-ab/exam/past-exam-questions");
+  assert.match(abSource.note.en, /Linked PDFs were not opened/);
+  assert.equal(sourceById.get("ap-bc-past-questions").verifiedAt, "2026-08-04");
+  assert.equal(sourceById.get("ap-calculus-ced-2026").verifiedAt, "2026-08-05");
+  const html = await readRoute("/courses/ap-calculus-ab", data);
+  assert.match(html, /id="ap-calculus-ab-materials-2026-update"/);
+  assert.match(visibleText(html), /2026 section lists FRQs and Scoring Guidelines/);
+  const resources = await readRoute("/resources", data);
+  const card = resources.match(/<article\b[^>]*data-resource-id="lr-ap-calculus-ab-released-frq"[^>]*>[\s\S]*?<\/article>/)?.[0];
+  assert.ok(card);
+  assert.match(visibleText(card), /2026 FRQs and Scoring Guidelines/);
+  assert.match(visibleText(card), /Only the index was checked, not its linked PDFs/);
+});
+
+test("static HMMT adds only the November 2026 directory inventory and preserves prior records", async () => {
+  const data = await loadStaticData();
+  const hmmt = data.projects.find((project) => project.id === "hmmt");
+  assert.equal(hmmt.lastVerified, "2026-11-28");
+  assert.ok(hmmt.sourceIds.includes("hmmt-november-2026-archive-301"));
+  const materials = hmmt.sections.find((section) => section.id === "official-materials");
+  assert.match(materials.bullets[0].en, /General, Theme, Team, Guts and Integration Bee/);
+  assert.match(materials.bullets[0].en, /short and extended results/);
+  assert.match(materials.bullets[0].en, /not PDF or result bodies/);
+  assert.match(materials.bullets[0].en, /no new award boundary is inferred/);
+  const history = hmmt.sections.find((section) => section.id === "hmmt-materials-verification-history");
+  assert.match(history.paragraphs[0].en, /not presented as a same-day organizer release/);
+  assert.match(history.paragraphs[0].en, /Tournament dates on the homepage are unchanged/);
+  const sourceById = new Map(data.sources.map((source) => [source.id, source]));
+  const directory = sourceById.get("hmmt-november-2026-archive-301");
+  assert.equal(directory.url, "https://www.hmmt.org/www/archive/301");
+  assert.equal(directory.verifiedAt, "2026-11-28");
+  assert.match(directory.note.en, /General, Theme, Team, Guts and Integration Bee/);
+  assert.match(directory.note.en, /short and extended results/i);
+  assert.match(directory.note.en, /not the PDFs or result bodies/);
+  assert.equal(sourceById.get("hmmt-schedule-season30").verifiedAt, "2026-11-04");
+  for (const id of ["hmmt-november-2026-friday-brochure", "hmmt-november-2026-tournament-brochure"]) {
+    assert.equal(sourceById.get(id).verifiedAt, "2026-11-04");
+  }
+  assert.ok(!data.thresholds.some((record) => record.sourceIds?.includes(directory.id)), "an unread result link must not become a score boundary");
+  const html = await readRoute("/competitions/hmmt", data);
+  assert.match(html, /href="https:\/\/www\.hmmt\.org\/www\/archive\/301"/);
+  assert.match(html, /href="https:\/\/www\.hmmt\.org\/www\/archive\/291"/);
+  assert.match(visibleText(html), /Official November 2025 complete archive/);
+  assert.match(visibleText(html), /November coverage is now recorded through 1998–2026/);
+  assert.match(visibleText(html), /no score boundaries are derived/);
+});
+
 test("static SUMaC preserves 2027 application, aid and conflict scopes alongside 2026 history", async () => {
   const data = await loadStaticData();
   const sumac = data.projects.find((project) => project.id === "sumac");
@@ -339,7 +408,7 @@ test("static AP China warnings distinguish the elapsed original deadline from a 
   const data = await loadStaticData();
   for (const id of ["ap-precalculus", "ap-calculus-ab", "ap-calculus-bc", "ap-statistics"]) {
     const project = data.projects.find((record) => record.id === id);
-    assert.equal(project.lastVerified, "2026-11-09");
+    assert.equal(project.lastVerified, id === "ap-calculus-ab" ? "2026-11-28" : "2026-11-09");
     const text = visibleText(await readRoute(`/courses/${id}`, data));
     assert.match(text, /报名缴费已截止|registration and payment have closed/i);
     assert.match(text, /12:00 noon Beijing time on 9 November 2026/);
@@ -449,7 +518,7 @@ test("static HiMCM and MidMCM pages expose the official Summary Sheet template",
 test("static HMMT November timetable preserves venues, EST and the February pending boundary", async () => {
   const data = await loadStaticData();
   const hmmt = data.projects.find((project) => project.id === "hmmt");
-  assert.equal(hmmt.lastVerified, "2026-11-04");
+  assert.equal(hmmt.lastVerified, "2026-11-28");
   assert.equal(hmmt.facts.find((fact) => fact.label.en === "November detailed timetable")?.status, "confirmed");
   assert.equal(hmmt.facts.find((fact) => fact.label.en === "February detailed timetable")?.status, "pending");
   const html = await readFile(path.join(outputDirectory, "competition-hmmt.html"), "utf8");

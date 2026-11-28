@@ -2,7 +2,6 @@ import { t, type PastPaperArchiveRecord } from "@/app/lib/types";
 
 const VERIFIED_AT = "2026-08-05";
 const AIME_VERIFIED_AT = "2026-08-29";
-const HMMT_VERIFIED_AT = "2026-08-11";
 const MAA = t("美国数学协会（MAA）", "Mathematical Association of America (MAA)");
 const HMMT = t(
   "哈佛—麻省理工数学竞赛（HMMT）",
@@ -143,8 +142,8 @@ export const maaOtherPastPaperArchives: PastPaperArchiveRecord[] = [
     projectId: "hmmt",
     availability: "official",
     summary: t(
-      "HMMT 官方档案免费提供各轮试题、解答与结果。总档案目前收录 November 1998–2025、February 2008–2026，以及 HMIC 2013–2026；官网另指定 November 2009、2011 与 February 2010、2013 作为判断两场比赛目标难度的代表样卷。",
-      "The official HMMT archive provides round-by-round problems, solutions, and results free of charge. It currently covers November 1998–2025, February 2008–2026, and HMIC 2013–2026. HMMT also identifies November 2009 and 2011 and February 2010 and 2013 as representative papers for judging the target difficulty of the two tournaments.",
+      "HMMT 总索引的 November 范围已补至 1998–2026；November 2026 目录列出 General、Theme、Team、Guts、Integration Bee 的试题与解答，以及简版和扩展成绩链接。February 2008–2026、HMIC 2013–2026，以及官网指定的 November 2009、2011 与 February 2010、2013 代表样卷保留此前记录。本次只核对总索引和 November 2026 目录，未读取其 PDF、成绩正文或重读旧年度材料。",
+      "The HMMT index's November coverage is now recorded through 1998–2026. The November 2026 directory lists problems and solutions for General, Theme, Team, Guts and Integration Bee, plus short and extended result links. The previously recorded February 2008–2026, HMIC 2013–2026, and HMMT's representative November 2009/2011 and February 2010/2013 papers are retained. This check read only the overall index and November 2026 directory, not their PDFs, result bodies or older materials.",
     ),
     links: [
       {
@@ -157,6 +156,18 @@ export const maaOtherPastPaperArchives: PastPaperArchiveRecord[] = [
         note: t(
           "按 November、February 和 Invitational 分类浏览；目前可追溯至 November 1998、February 2008 和 HMIC 2013。不同年份所保留的轮次与结果文件可能不同。",
           "Browse by November, February, and Invitational. The current archive reaches November 1998, February 2008, and HMIC 2013. The rounds and result files retained vary by year.",
+        ),
+      },
+      {
+        title: t("November 2026 官方试题、解答与成绩目录", "Official November 2026 problems, solutions and results directory"),
+        provider: HMMT,
+        url: "https://www.hmmt.org/www/archive/301",
+        authority: "official",
+        kind: "archive",
+        access: "free",
+        note: t(
+          "已核对当届目录中的 General、Theme、Team、Guts、Integration Bee 试题／解答和 Short／Extended Results 链接；未打开文件或成绩正文，不据此补写分数线。目录未给发布日期，本次补充不表示主办方当天刚发布。",
+          "The directory's General, Theme, Team, Guts and Integration Bee problem/solution links and Short/Extended Results links were checked. The linked files and result bodies were not opened, so no score boundaries are derived. No publication date is given; this addition does not claim a same-day release.",
         ),
       },
       {
@@ -247,7 +258,7 @@ export const maaOtherPastPaperArchives: PastPaperArchiveRecord[] = [
         ),
       },
     ],
-    lastVerified: HMMT_VERIFIED_AT,
+    lastVerified: "2026-11-28",
   },
   {
     id: "ppa-competition-china-league",
